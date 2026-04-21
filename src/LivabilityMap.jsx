@@ -14,8 +14,10 @@ import {
   zoneToGeoJSON,
   getAllZoneFeatures,
   computeScoreAtPoint,
+  isPointInCity,
 } from "./livabilityData";
 import { point as turfPoint, booleanPointInPolygon, centroid as turfCentroid, distance as turfDistance } from "@turf/turf";
+import { featureCollection as turfFeatureCollection } from '@turf/turf';
 import ScorePanel from "./ScorePanel";
 
 export default function LivabilityMap({ locate }) {
@@ -71,6 +73,17 @@ export default function LivabilityMap({ locate }) {
     map.on('click', async (e) => {
       // compute score for clicked point
       const { lat, lng } = e.latlng;
+      // only allow clicks within Littleton city limit approximation
+      try {
+        const allowed = isPointInCity(lat, lng);
+        if (!allowed) {
+          try { document.getElementById('__liv_map_debug').textContent = 'outside city limits'; } catch (e) {}
+          setSelectedZone(null);
+          return;
+        }
+      } catch (err) {
+        console.warn('isPointInCity check failed', err);
+      }
       try {
         document.getElementById('__liv_map_debug')?.setAttribute('data-last', 'computing');
       } catch (err) {}
@@ -97,6 +110,26 @@ export default function LivabilityMap({ locate }) {
     // create a marker but don't add yet
     markerRef.current = L.circleMarker(MAP_CENTER, { radius: 8, color: '#ffffff', weight:2, fillColor: '#2a9df4', fillOpacity: 0.9 });
 
+    // fetch city boundary relation from OSM and draw it (optional)
+    (async () => {
+      try {
+        // query OSM for Littleton admin boundary (by name and admin_level 8). This is a best-effort fetch.
+        const name = encodeURIComponent('Littleton');
+        const q = `https://nominatim.openstreetmap.org/search.php?q=${name}+CO&polygon_geojson=1&format=json&limit=1`;
+        const r = await fetch(q);
+        if (!r.ok) return;
+        const dat = await r.json();
+        if (!dat || dat.length === 0) return;
+        const geo = dat[0].geojson;
+        if (!geo) return;
+        const layer = L.geoJSON(geo, { style: { color: '#2a6', weight: 2, fillOpacity: 0.02 } }).addTo(map);
+        // store for debug
+        window.__liv_city_boundary = layer;
+      } catch (err) {
+        console.warn('Failed to fetch city boundary', err);
+      }
+    })();
+
     // indicate map ready
     try { document.getElementById('__liv_map_debug').textContent = 'map: ready'; } catch (e) {}
 
@@ -111,9 +144,20 @@ export default function LivabilityMap({ locate }) {
 
   // respond to external locate requests: { lat, lng, label }
   useEffect(() => {
-    if (!locate || !leafletMap.current || !geojsonLayer.current) return;
+    if (!locate || !leafletMap.current) return;
     const { lat, lng, label } = locate;
     const map = leafletMap.current;
+
+    // optionally prevent locating outside city
+    try {
+      if (!isPointInCity(lat, lng)) {
+        try { document.getElementById('__liv_map_debug').textContent = 'search: outside city limits'; } catch (e) {}
+        setSelectedZone(null);
+        return;
+      }
+    } catch (err) {
+      console.warn('isPointInCity failed during locate', err);
+    }
 
     // pan to location
     map.setView([lat, lng], Math.max(map.getZoom(), 14), { animate: true });
@@ -124,36 +168,22 @@ export default function LivabilityMap({ locate }) {
       if (!markerRef.current._map) markerRef.current.addTo(map);
     }
 
-    // find containing zone
-    const pt = turfPoint([lng, lat]);
-    const features = getAllZoneFeatures().features;
-    let found = null;
-    for (const f of features) {
-      if (booleanPointInPolygon(pt, f)) {
-        found = f;
-        break;
+    // compute score using OSM at the locate point
+    (async () => {
+      try {
+        document.getElementById('__liv_map_debug')?.setAttribute('data-last', 'computing-locate');
+      } catch (e) {}
+      const result = await computeScoreAtPoint(lat, lng).catch((err) => {
+        console.error('computeScoreAtPoint failed for locate', err);
+        return null;
+      });
+      if (!result) {
+        try { document.getElementById('__liv_map_debug').textContent = 'search: error fetching OSM'; } catch (e) {}
+        return;
       }
-    }
-
-    if (!found) {
-      // fallback: nearest feature by centroid distance
-      let nearest = null;
-      let minDist = Infinity;
-      for (const f of features) {
-        const c = turfCentroid(f);
-        const d = turfDistance(pt, c);
-        if (d < minDist) { minDist = d; nearest = f; }
-      }
-      found = nearest;
-      if (found) {
-        found.properties.notes = (found.properties.notes || '') + `\n(Nearest zone — point not inside any zone)`;
-      }
-    }
-
-    if (found) {
-      setSelectedZone(found.properties);
+      setSelectedZone(result);
       setClickPos({ lat, lng });
-    }
+    })();
 
   }, [locate]);
 

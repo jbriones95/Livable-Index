@@ -563,3 +563,17 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     zoneId: matched ? matched.properties.id : null,
   };
 }
+
+/**
+ * Check whether a point (lat,lng) falls within the union of our zone polygons.
+ * This serves as a pragmatic approximation of the Littleton city limits used for
+ * bounding selectable areas on the client.
+ */
+export function isPointInCity(lat, lng) {
+  const pt = turfPoint([lng, lat]);
+  const features = getAllZoneFeatures().features;
+  for (const f of features) {
+    if (booleanPointInPolygon(pt, f)) return true;
+  }
+  return false;
+}

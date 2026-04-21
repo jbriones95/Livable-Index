@@ -12,8 +12,9 @@ export default function AddressSearch({ onLocate }) {
     setLoading(true);
     try {
       // Use Nominatim (OpenStreetMap) for geocoding
-      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=1`;
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=1&addressdetails=1`;
       const res = await fetch(url, { headers: { 'Accept-Language': 'en' } });
+      if (!res.ok) throw new Error('Geocoding failed');
       const data = await res.json();
       if (!data || data.length === 0) {
         setError('Address not found');
