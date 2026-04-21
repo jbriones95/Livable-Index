@@ -468,6 +468,9 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
     // green space counters
     let greenCount = 0;
     let minGreenDist = Infinity;
+    // supermarket proximity counters
+    let supermarketCount = 0;
+    let minSupermarketDist = Infinity;
     for (const p of poiPoints) {
       const d = turfDistance(c, p, { units: 'kilometers' });
       if (d < minDist) minDist = d;
@@ -493,6 +496,12 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
         greenCount++;
         if (d < minGreenDist) minGreenDist = d;
       }
+
+      // detect supermarkets / grocery stores specifically
+      if (tags.shop === 'supermarket' || tags.shop === 'convenience' || tags.shop === 'grocery' || tags.amenity === 'supermarket' || tags.amenity === 'pharmacy') {
+        supermarketCount++;
+        if (d < minSupermarketDist) minSupermarketDist = d;
+      }
     }
 
     // Map weightedSum and minDist into walkability score (0-100)
@@ -503,8 +512,10 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
     const infraScore = Math.min(100, Math.round((Math.min(5, footwayCount) * 12) + (Math.min(5, cyclewayCount) * 10)));
     // green space influence: proximity to parks/trails
     const greenScore = Math.max(0, Math.round((1 - Math.min(minGreenDist, 2) / 2) * 100));
-    // combine: POIs (55%), distance (18%), infra (15%), green (12%)
-    const walkability = Math.round((poiScore * 0.55) + (distScore * 0.18) + (infraScore * 0.15) + (greenScore * 0.12));
+    // supermarket proximity score
+    const supermarketScore = Math.max(0, Math.round((1 - Math.min(minSupermarketDist, 2) / 2) * 100));
+    // combine: POIs (43%), supermarket proximity (12%), distance (18%), infra (15%), green (12%)
+    const walkability = Math.round((poiScore * 0.43) + (supermarketScore * 0.12) + (distScore * 0.18) + (infraScore * 0.15) + (greenScore * 0.12));
 
     // Transit score: count of public transport POIs (bus_stop, station) within 800m weighted
     let transitCount = 0;
@@ -522,11 +533,11 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
     cell.properties.scores.transit = transitScore;
     // boost greenSpace dimension using detected parks/trails
     cell.properties.scores.greenSpace = Math.round((cell.properties.scores.greenSpace * 0.6) + (Math.min(100, greenScore) * 0.4));
-    // bike score: combine cycleway infrastructure and proximity to trails/greenways
+    // bike score: combine cycleway infrastructure, supermarket proximity, and proximity to trails/greenways
     const bikeInfra = Math.min(100, Math.round(Math.min(6, cyclewayCount) * 16));
-    cell.properties.scores.bike = Math.round((cell.properties.scores.bike * 0.4) + (bikeInfra * 0.45) + (greenScore * 0.15));
+    cell.properties.scores.bike = Math.round((cell.properties.scores.bike * 0.4) + (bikeInfra * 0.35) + (greenScore * 0.15) + (supermarketScore * 0.10));
     cell.properties.composite = computeScore(cell.properties.scores);
-    cell.properties._osm = { poiCount, minDistKm: minDist, transitCount, greenCount, minGreenDistKm: minGreenDist };
+    cell.properties._osm = { poiCount, minDistKm: minDist, transitCount, greenCount, minGreenDistKm: minGreenDist, supermarketCount, minSupermarketDistKm: minSupermarketDist };
   }
 
   return grid;
@@ -606,6 +617,9 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   // green space counters for point scoring
   let greenCount = 0;
   let minGreenDist = Infinity;
+  // supermarket proximity counters for point scoring
+  let supermarketCount = 0;
+  let minSupermarketDist = Infinity;
 
   for (const p of poiPoints) {
     const d = turfDistance(pt, p, { units: 'kilometers' });
