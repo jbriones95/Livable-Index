@@ -290,6 +290,7 @@ export function getAllZoneFeatures() {
 
 // --- Grid generation for finer resolution scoring ---
 import { squareGrid, centroid as turfCentroid, point as turfPoint, booleanPointInPolygon, distance as turfDistance } from '@turf/turf';
+import { fetchOSM } from './overpass';
 
 /**
  * Generate a square grid over Littleton and assign each cell a livability score.
@@ -327,11 +328,71 @@ export function getGridFeatures(cellSizeKm = 0.2) {
       cell.properties.zoneId = matched.properties.id;
     }
 
-    // copy scores and computed composite
-    cell.properties.scores = matched.properties.scores;
-    cell.properties.composite = computeScore(matched.properties.scores);
+    // copy base scores from matched zone for non-walk/transit dims
+    const baseScores = matched.properties.scores;
+    const scores = { ...baseScores };
+    scores.walkability = baseScores.walkability; // will be adjusted below
+    scores.transit = baseScores.transit; // adjusted below
+
+    cell.properties.scores = scores;
+    cell.properties.composite = computeScore(scores);
     cell.properties.name = matched.properties.name;
     cell.properties.notes = matched.properties.notes;
+  }
+
+  return grid;
+}
+
+/**
+ * Enrich grid with OSM-derived metrics by fetching OSM data and computing POI counts and proximity.
+ * This is an async helper that fetches POI data and returns a grid with updated walkability and transit scores.
+ */
+export async function computeGridWithOSM(cellSizeKm = 0.2) {
+  const grid = getGridFeatures(cellSizeKm);
+  const bbox = [LITTLETON_BOUNDS.west, LITTLETON_BOUNDS.south, LITTLETON_BOUNDS.east, LITTLETON_BOUNDS.north];
+  const osm = await fetchOSM(bbox);
+
+  // Convert elements into points for simple proximity counts
+  const poiPoints = osm.map((el) => {
+    if (el.type === 'node') return turfPoint([el.lon, el.lat], el.tags || {});
+    // ways/relations have center
+    if (el.type === 'way' && el.center) return turfPoint([el.center.lon, el.center.lat], el.tags || {});
+    return null;
+  }).filter(Boolean);
+
+  // For each cell, compute POI count within 400m and nearest amenity distance
+  for (const cell of grid.features) {
+    const c = turfCentroid(cell);
+    let poiCount = 0;
+    let minDist = Infinity;
+    for (const p of poiPoints) {
+      const d = turfDistance(c, p, { units: 'kilometers' });
+      if (d < minDist) minDist = d;
+      if (d <= 0.4) poiCount++;
+    }
+
+    // Map poiCount and minDist into walkability score (0-100)
+    // heuristic: many POIs within 400m => high walkability; closer minDist => higher
+    const poiScore = Math.min(100, poiCount * 8); // each nearby POI adds up to 8 points, cap at 100
+    const distScore = Math.max(0, Math.round((1 - Math.min(minDist, 2) / 2) * 100));
+    const walkability = Math.round((poiScore * 0.7) + (distScore * 0.3));
+
+    // Transit score: count of public transport POIs (bus_stop, station) within 800m
+    let transitCount = 0;
+    for (const p of poiPoints) {
+      const d = turfDistance(c, p, { units: 'kilometers' });
+      if (d <= 0.8) {
+        const tags = p.properties || {};
+        if (tags.public_transport || tags.highway === 'bus_stop' || tags.railway === 'station' || tags.railway) transitCount++;
+      }
+    }
+    const transitScore = Math.min(100, transitCount * 15);
+
+    // overwrite scores
+    cell.properties.scores.walkability = walkability;
+    cell.properties.scores.transit = transitScore;
+    cell.properties.composite = computeScore(cell.properties.scores);
+    cell.properties._osm = { poiCount, minDistKm: minDist, transitCount };
   }
 
   return grid;
