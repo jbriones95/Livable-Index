@@ -27,6 +27,27 @@ export default function LivabilityMap({ locate }) {
 
   useEffect(() => {
     if (leafletMap.current) return; // already initialized
+    console.log('[LivabilityMap] initializing map');
+    // create a persistent debug badge in the page body to help diagnose lifecycle
+    let debugBadge = document.getElementById('__liv_map_debug');
+    if (!debugBadge) {
+      debugBadge = document.createElement('div');
+      debugBadge.id = '__liv_map_debug';
+      debugBadge.style.position = 'fixed';
+      debugBadge.style.left = '12px';
+      debugBadge.style.bottom = '12px';
+      debugBadge.style.zIndex = 999999;
+      debugBadge.style.background = 'rgba(0,0,0,0.6)';
+      debugBadge.style.color = '#fff';
+      debugBadge.style.padding = '8px 10px';
+      debugBadge.style.borderRadius = '8px';
+      debugBadge.style.fontSize = '12px';
+      debugBadge.style.fontFamily = 'monospace';
+      debugBadge.textContent = 'map: initializing';
+      document.body.appendChild(debugBadge);
+    } else {
+      debugBadge.textContent = 'map: initializing';
+    }
 
     const map = L.map(mapRef.current, {
       center: MAP_CENTER,
@@ -82,9 +103,15 @@ export default function LivabilityMap({ locate }) {
     // create a marker but don't add yet
     markerRef.current = L.circleMarker(MAP_CENTER, { radius: 8, color: '#ffffff', weight:2, fillColor: '#2a9df4', fillOpacity: 0.9 });
 
+    // indicate map ready
+    try { document.getElementById('__liv_map_debug').textContent = 'map: ready'; } catch (e) {}
+
     return () => {
-      map.remove();
+      console.log('[LivabilityMap] cleanup: removing map');
+      try { document.getElementById('__liv_map_debug').textContent = 'map: cleanup'; } catch (e) {}
+      try { map.remove(); } catch (err) { console.error('Error removing map', err); }
       leafletMap.current = null;
+      try { document.getElementById('__liv_map_debug').textContent = 'map: removed'; } catch (e) {}
     };
   }, []);
 
