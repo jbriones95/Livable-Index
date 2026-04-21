@@ -282,6 +282,37 @@ export function zoneToGeoJSON(zone) {
 }
 
 export function getAllZoneFeatures() {
+  // Prefer repository-provided official neighborhoods (ArcGIS export) when available.
+  // If the official neighborhoods have been fetched and cached on window, use them.
+  try {
+    if (typeof window !== 'undefined' && window.__liv_neighborhoods) {
+      return window.__liv_neighborhoods;
+    }
+  } catch (err) {}
+
+  // Kick off a background fetch of the authoritative ArcGIS neighborhood layer so
+  // future interactions use the exact polygons. We intentionally do this
+  // asynchronously and do not block the first caller; fall back to hardcoded ZONES.
+  (async () => {
+    try {
+      const url = 'https://services6.arcgis.com/lJUBf9F1fZJRB4zT/arcgis/rest/services/Neighborhood_Boundary/FeatureServer/70/query?where=1%3D1&outFields=*&outSR=4326&f=geojson';
+      const r = await fetch(url);
+      if (!r.ok) return;
+      const nb = await r.json();
+      if (nb && nb.type === 'FeatureCollection') {
+        // normalize name property
+        nb.features = nb.features.map((f) => {
+          f.properties = f.properties || {};
+          if (f.properties.Neighborho && !f.properties.name) f.properties.name = f.properties.Neighborho;
+          return f;
+        });
+        try { if (typeof window !== 'undefined') window.__liv_neighborhoods = nb; } catch (e) {}
+      }
+    } catch (err) {
+      console.warn('Failed to fetch neighborhoods', err && err.message);
+    }
+  })();
+
   return {
     type: "FeatureCollection",
     features: ZONES.map(zoneToGeoJSON),
