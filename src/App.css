@@ -47,6 +47,42 @@ body {
   font-style: italic;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.address-search {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.address-search input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #2a4a6a;
+  background: rgba(255,255,255,0.03);
+  color: #e8f6ff;
+  min-width: 220px;
+}
+
+.address-search button {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #2a4a6a;
+  background: #1a6fbf;
+  color: #fff;
+  cursor: pointer;
+}
+
+.search-error {
+  color: #ffb3b3;
+  font-size: 0.75rem;
+  margin-left: 8px;
+}
+
 /* Main area */
 .app-main {
   display: flex;
