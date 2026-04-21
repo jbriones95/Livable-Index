@@ -74,7 +74,15 @@ export default function LivabilityMap({ locate }) {
       try {
         document.getElementById('__liv_map_debug')?.setAttribute('data-last', 'computing');
       } catch (err) {}
-      const result = await computeScoreAtPoint(lat, lng);
+      const result = await computeScoreAtPoint(lat, lng).catch((err) => {
+        console.error('computeScoreAtPoint failed', err);
+        return null;
+      });
+      if (!result) {
+        // show a small user-facing error in the debug badge
+        try { document.getElementById('__liv_map_debug').textContent = 'map: error fetching OSM'; } catch (e) {}
+        return;
+      }
       setSelectedZone(result);
       setClickPos({ lat, lng });
       // place marker

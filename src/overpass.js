@@ -31,8 +31,18 @@ export async function fetchOSM(bbox) {
 out center;`; // ways will have a center
 
   const url = 'https://overpass-api.de/api/interpreter';
-  const res = await fetch(url, { method: 'POST', body: q, headers: {'Content-Type': 'text/plain'} });
-  if (!res.ok) throw new Error('Overpass query failed');
-  const data = await res.json();
-  return data.elements || [];
+  try {
+    const res = await fetch(url, { method: 'POST', body: q, headers: {'Content-Type': 'text/plain'} });
+    if (!res.ok) {
+      console.warn('Overpass returned non-OK:', res.status, res.statusText);
+      return [];
+    }
+    const data = await res.json();
+    return data.elements || [];
+  } catch (err) {
+    // Network errors, CORS, or timeouts may occur in browsers. Return empty array and
+    // let callers handle fallback behavior.
+    console.warn('Overpass fetch failed:', err && err.message);
+    return [];
+  }
 }
