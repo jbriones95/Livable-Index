@@ -299,24 +299,28 @@ export function poiWeight(tags) {
   const shop = (tags.shop || '').toLowerCase();
   const amenity = (tags.amenity || '').toLowerCase();
   const leisure = (tags.leisure || '').toLowerCase();
+  // Essential retail / groceries (supermarket, grocery, convenience, pharmacy)
+  const groceryShops = new Set(['supermarket', 'convenience', 'grocery', 'greengrocer', 'food_market', 'bodega', 'delicatessen', 'butcher', 'fishmonger']);
+  if (groceryShops.has(shop) || amenity === 'supermarket' || amenity === 'pharmacy') return 3.0;
 
-  // Essential retail (supermarket, convenience, pharmacy, bakery)
-  if (shop === 'supermarket' || shop === 'convenience' || shop === 'pharmacy' || shop === 'bakery' || amenity === 'supermarket') return 3.0;
-
-  // Fresh food / grocery alternatives
-  if (shop === 'greengrocer' || shop === 'butcher' || shop === 'fishmonger') return 2.5;
+  // Larger fresh food / specialized grocers
+  const freshShops = new Set(['greengrocer', 'butcher', 'fishmonger', 'organic']);
+  if (freshShops.has(shop)) return 2.5;
 
   // Cafes / coffee shops
-  if (amenity === 'cafe' || tags.cuisine === 'coffee_shop' || shop === 'coffee' || tags.shop === 'coffee') return 1.8;
+  if (amenity === 'cafe' || shop === 'coffee' || (tags.cuisine || '').toLowerCase().includes('coffee') || shop === 'tea_house') return 1.8;
+
+  // Eateries / restaurants
+  if (amenity === 'restaurant' || amenity === 'fast_food' || shop === 'food' || shop === 'bakery' || shop === 'delicatessen') return 1.6;
+
+  // Transit stops and stations are important
+  if (amenity === 'bus_station' || tags.highway === 'bus_stop' || amenity === 'bus_stop' || tags.railway === 'station' || tags.public_transport) return 2.5;
+
+  // leisure/tourism has lower weight for everyday errands
+  if (leisure || tags.tourism) return 0.8;
 
   // Generic shops (retail, boutique)
   if (shop && shop !== '') return 1.2;
-
-  // Transit stops and stations
-  if (amenity === 'bus_station' || tags.highway === 'bus_stop' || amenity === 'bus_stop' || tags.railway === 'station' || tags.public_transport) return 2.5;
-
-  // leisure/tourism has low weight for everyday walkability
-  if (leisure || tags.tourism) return 0.8;
 
   // default small weight
   return 0.6;

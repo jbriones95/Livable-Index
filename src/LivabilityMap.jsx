@@ -27,6 +27,8 @@ export default function LivabilityMap({ locate }) {
   const markerRef = useRef(null);
   const [selectedZone, setSelectedZone] = useState(null);
   const [clickPos, setClickPos] = useState(null);
+  const [computing, setComputing] = useState(false);
+  const lastComputeTs = useRef(0);
 
   useEffect(() => {
     if (leafletMap.current) return; // already initialized
@@ -73,6 +75,15 @@ export default function LivabilityMap({ locate }) {
     map.on('click', async (e) => {
       // compute score for clicked point
       const { lat, lng } = e.latlng;
+      // debounce: ignore clicks fired within 900ms of previous compute
+      const now = Date.now();
+      if (now - lastComputeTs.current < 900) {
+        try { document.getElementById('__liv_map_debug').textContent = 'debounced'; } catch (e) {}
+        return;
+      }
+      lastComputeTs.current = now;
+      if (computing) return; // safety
+      setComputing(true);
       // only allow clicks within Littleton city limit approximation
       try {
         const allowed = isPointInCity(lat, lng);
@@ -94,10 +105,12 @@ export default function LivabilityMap({ locate }) {
       if (!result) {
         // show a small user-facing error in the debug badge
         try { document.getElementById('__liv_map_debug').textContent = 'map: error fetching OSM'; } catch (e) {}
+        setComputing(false);
         return;
       }
       setSelectedZone(result);
       setClickPos({ lat, lng });
+      setComputing(false);
       // place marker
       if (markerRef.current) {
         markerRef.current.setLatLng([lat, lng]);
@@ -173,16 +186,19 @@ export default function LivabilityMap({ locate }) {
       try {
         document.getElementById('__liv_map_debug')?.setAttribute('data-last', 'computing-locate');
       } catch (e) {}
+      setComputing(true);
       const result = await computeScoreAtPoint(lat, lng).catch((err) => {
         console.error('computeScoreAtPoint failed for locate', err);
         return null;
       });
       if (!result) {
         try { document.getElementById('__liv_map_debug').textContent = 'search: error fetching OSM'; } catch (e) {}
+        setComputing(false);
         return;
       }
       setSelectedZone(result);
       setClickPos({ lat, lng });
+      setComputing(false);
     })();
 
   }, [locate]);
@@ -190,6 +206,12 @@ export default function LivabilityMap({ locate }) {
   return (
     <div className="map-wrapper">
       <div ref={mapRef} className="leaflet-container-map" />
+      {computing && (
+        <div className="map-loading-overlay" aria-hidden>
+          <div className="map-spinner" />
+          <div className="map-loading-text">Computing score...</div>
+        </div>
+      )}
       {selectedZone && (
         <ScorePanel zone={selectedZone} onClose={() => setSelectedZone(null)} />
       )}
