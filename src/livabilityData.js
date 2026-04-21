@@ -541,9 +541,18 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const zones = getAllZoneFeatures().features;
   const pt = turfPoint([lng, lat]);
   for (const z of zones) {
-    if (booleanPointInPolygon(pt, z)) {
-      matched = z;
-      break;
+    try {
+      if (!z || !z.geometry) continue; // skip invalid
+      if (booleanPointInPolygon(pt, z)) {
+        // ignore 'Outside of City' labeled polygons when matching
+        const nm = (z.properties && (z.properties.Neighborho || z.properties.name)) || '';
+        if (String(nm).toLowerCase().includes('outside')) continue;
+        matched = z;
+        break;
+      }
+    } catch (err) {
+      // If a polygon is invalid, skip it
+      continue;
     }
   }
   if (!matched) {
@@ -711,6 +720,11 @@ export function isPointInCity(lat, lng) {
   // 2) Check union of our defined zone polygons (more precise than the bbox)
   const features = getAllZoneFeatures().features;
   for (const f of features) {
+    // skip features with no geometry (some ArcGIS exports may include placeholders)
+    if (!f || !f.geometry) continue;
+    // skip 'Outside of City' polygons used for labeling the map
+    const name = (f.properties && (f.properties.Neighborho || f.properties.name)) || '';
+    if (String(name).toLowerCase().includes('outside')) continue;
     if (booleanPointInPolygon(pt, f)) return true;
   }
 
