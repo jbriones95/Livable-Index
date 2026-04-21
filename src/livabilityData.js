@@ -465,6 +465,9 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
     // walking infrastructure counters
     let footwayCount = 0;
     let cyclewayCount = 0;
+    // green space counters
+    let greenCount = 0;
+    let minGreenDist = Infinity;
     for (const p of poiPoints) {
       const d = turfDistance(c, p, { units: 'kilometers' });
       if (d < minDist) minDist = d;
@@ -479,6 +482,17 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
       const highway = (tags.highway || '').toLowerCase();
       if (highway === 'footway' || highway === 'pedestrian' || highway === 'path' || highway === 'steps' || tags.foot === 'yes') footwayCount++;
       if (tags.cycleway || (highway === 'cycleway')) cyclewayCount++;
+
+      // detect parks/green space/trails (leisure=park, landuse=recreation_ground, natural=wood)
+      const name = (tags.name || '').toLowerCase();
+      const isPark = (tags.leisure === 'park' || tags.landuse === 'recreation_ground' || tags.natural === 'wood');
+      const isHighline = name.includes('highline');
+      const isLeeGulch = name.includes('lee gulch') || name.includes('leegulch');
+      const isTrail = (highway === 'path' || highway === 'track' || tags.foot === 'yes');
+      if (isPark || isHighline || isLeeGulch || isTrail) {
+        greenCount++;
+        if (d < minGreenDist) minGreenDist = d;
+      }
     }
 
     // Map weightedSum and minDist into walkability score (0-100)
@@ -486,9 +500,11 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
     const poiScore = Math.min(100, Math.round(weightedSum * 10)); // slightly reduced scale
     const distScore = Math.max(0, Math.round((1 - Math.min(minDist, 2) / 2) * 100));
     // walking infrastructure score boosts the walkability when footways/cycleways are present
-    const infraScore = Math.min(100, Math.round((Math.min(5, footwayCount) * 12) + (Math.min(3, cyclewayCount) * 8)));
-    // combine: POIs (60%), distance (20%), infra (20%)
-    const walkability = Math.round((poiScore * 0.6) + (distScore * 0.2) + (infraScore * 0.2));
+    const infraScore = Math.min(100, Math.round((Math.min(5, footwayCount) * 12) + (Math.min(5, cyclewayCount) * 10)));
+    // green space influence: proximity to parks/trails
+    const greenScore = Math.max(0, Math.round((1 - Math.min(minGreenDist, 2) / 2) * 100));
+    // combine: POIs (55%), distance (18%), infra (15%), green (12%)
+    const walkability = Math.round((poiScore * 0.55) + (distScore * 0.18) + (infraScore * 0.15) + (greenScore * 0.12));
 
     // Transit score: count of public transport POIs (bus_stop, station) within 800m weighted
     let transitCount = 0;
@@ -504,8 +520,13 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
     // overwrite scores
     cell.properties.scores.walkability = walkability;
     cell.properties.scores.transit = transitScore;
+    // boost greenSpace dimension using detected parks/trails
+    cell.properties.scores.greenSpace = Math.round((cell.properties.scores.greenSpace * 0.6) + (Math.min(100, greenScore) * 0.4));
+    // bike score: combine cycleway infrastructure and proximity to trails/greenways
+    const bikeInfra = Math.min(100, Math.round(Math.min(6, cyclewayCount) * 16));
+    cell.properties.scores.bike = Math.round((cell.properties.scores.bike * 0.4) + (bikeInfra * 0.45) + (greenScore * 0.15));
     cell.properties.composite = computeScore(cell.properties.scores);
-    cell.properties._osm = { poiCount, minDistKm: minDist, transitCount };
+    cell.properties._osm = { poiCount, minDistKm: minDist, transitCount, greenCount, minGreenDistKm: minGreenDist };
   }
 
   return grid;
@@ -582,6 +603,9 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   // infra counters
   let footwayCount = 0;
   let cyclewayCount = 0;
+  // green space counters for point scoring
+  let greenCount = 0;
+  let minGreenDist = Infinity;
 
   for (const p of poiPoints) {
     const d = turfDistance(pt, p, { units: 'kilometers' });
@@ -621,6 +645,17 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     const highway = (tags.highway || '').toLowerCase();
     if (highway === 'footway' || highway === 'pedestrian' || highway === 'path' || tags.foot === 'yes') footwayCount++;
     if (tags.cycleway || highway === 'cycleway') cyclewayCount++;
+
+    // detect green spaces: parks, named trails like 'highline' or 'lee gulch', or informal trail tags
+    const pname = (tags.name || '').toLowerCase();
+    const isPark = (tags.leisure === 'park' || tags.landuse === 'recreation_ground' || tags.natural === 'wood');
+    const isHighline = pname.includes('highline');
+    const isLeeGulch = pname.includes('lee gulch') || pname.includes('leegulch');
+    const isTrail = (highway === 'path' || highway === 'track' || tags.foot === 'yes');
+    if (isPark || isHighline || isLeeGulch || isTrail) {
+      greenCount++;
+      if (d < minGreenDist) minGreenDist = d;
+    }
   }
 
   // Convert nearest distances to 0-100 accessibility scores using linear decay to maxRadius
@@ -648,9 +683,12 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
 
   // Infra boost: presence of footway/cycleway increases score (scaled)
   const infraScore = Math.min(100, Math.round(Math.min(5, footwayCount) * 12 + Math.min(5, cyclewayCount) * 8));
+  // green score based on proximity to park/trail
+  const greenScore = Math.max(0, Math.round((1 - Math.min(minGreenDist, 2) / 2) * 100));
 
-  // Final pedestrian/bike accessibility score: combine amenities and infra
-  const mobilityScore = Math.round(amenityComposite * 0.85 + infraScore * 0.15);
+  // Final pedestrian/bike accessibility score: combine amenities, infra and green access
+  // weights: amenities dominant, infra secondary, green tertiary
+  const mobilityScore = Math.round(amenityComposite * 0.78 + infraScore * 0.12 + greenScore * 0.10);
 
   // Transit score: scale by proximity and local transit count
   const transitScore = Math.min(100, Math.round((scoresByAmenity.transit * 0.6) + Math.min(100, counts.transit * 20) * 0.4));
@@ -671,6 +709,11 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     scores.walkability = mobilityScore;
   }
   scores.transit = transitScore;
+  // boost greenSpace dimension using detected parks/trails
+  scores.greenSpace = Math.round((scores.greenSpace || 0) * 0.6 + Math.min(100, greenScore) * 0.4);
+  // bike score: combine detected cycleway infrastructure and proximity to trails/greenways
+  const bikeInfra = Math.min(100, Math.round(Math.min(6, cyclewayCount) * 16));
+  scores.bike = Math.round(((scores.bike || 0) * 0.4) + (bikeInfra * 0.45) + (greenScore * 0.15));
   const composite = computeScore(scores);
 
   return {
@@ -678,7 +721,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     scores,
     composite,
     notes: matched ? matched.properties.notes : '',
-    _osm: { counts, nearestKm: nearest, infra: { footwayCount, cyclewayCount } },
+    _osm: { counts, nearestKm: nearest, infra: { footwayCount, cyclewayCount }, green: { greenCount, minGreenDistKm: minGreenDist } },
     zoneId: matched ? matched.properties.id : null,
   };
 }
