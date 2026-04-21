@@ -291,6 +291,7 @@ export function getAllZoneFeatures() {
 // --- Grid generation for finer resolution scoring ---
 import { squareGrid, centroid as turfCentroid, point as turfPoint, booleanPointInPolygon, distance as turfDistance } from '@turf/turf';
 import { fetchOSM } from './overpass';
+import { getWalkScore } from './walkscore';
 
 // Top-level helper to assign weight to a POI based on its tags. Used by multiple routines.
 export function poiWeight(tags) {
@@ -550,7 +551,21 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   }
   const transitScore = Math.min(100, Math.round(transitCount * 18));
 
-  scores.walkability = walkability;
+  // Optionally augment with Walk Score API if available (via proxy or VITE key)
+  let ws = null;
+  try {
+    ws = await getWalkScore(lat, lng);
+  } catch (err) {
+    console.warn('getWalkScore failed', err && err.message);
+  }
+
+  // If WalkScore returns a score, combine it with our computed walkability (average weighted)
+  if (ws && typeof ws.walkscore === 'number') {
+    // weight: 70% WalkScore, 30% our heuristic
+    scores.walkability = Math.round((ws.walkscore * 0.7) + (walkability * 0.3));
+  } else {
+    scores.walkability = walkability;
+  }
   scores.transit = transitScore;
   const composite = computeScore(scores);
 
@@ -598,7 +613,15 @@ export function isPointInCity(lat, lng) {
     console.warn('city boundary check failed', err && err.message);
   }
 
-  // 2) Fallback: quick bbox check against LITTLETON_BOUNDS (broad but inclusive)
+  // 2) Check union of our defined zone polygons (more precise than the bbox)
+  const features = getAllZoneFeatures().features;
+  for (const f of features) {
+    if (booleanPointInPolygon(pt, f)) return true;
+  }
+
+  // 3) Final fallback: quick bbox check against LITTLETON_BOUNDS (broad but inclusive)
+  // Keep this as the last resort to avoid incorrectly accepting points far outside the
+  // mapped zone polygons while still allowing some leniency when boundaries are missing.
   if (
     lat <= LITTLETON_BOUNDS.north &&
     lat >= LITTLETON_BOUNDS.south &&
@@ -608,10 +631,5 @@ export function isPointInCity(lat, lng) {
     return true;
   }
 
-  // 3) Final fallback: union of our defined zone polygons
-  const features = getAllZoneFeatures().features;
-  for (const f of features) {
-    if (booleanPointInPolygon(pt, f)) return true;
-  }
   return false;
 }
