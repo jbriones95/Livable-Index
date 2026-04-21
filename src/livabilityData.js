@@ -426,6 +426,9 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
     let poiCount = 0;
     let minDist = Infinity;
     let weightedSum = 0;
+    // walking infrastructure counters
+    let footwayCount = 0;
+    let cyclewayCount = 0;
     for (const p of poiPoints) {
       const d = turfDistance(c, p, { units: 'kilometers' });
       if (d < minDist) minDist = d;
@@ -435,14 +438,21 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
       const w = poiWeight(tags);
       const falloff = Math.max(0, 1 - (d / 1.0));
       weightedSum += w * falloff;
+
+      // detect walking infrastructure tags
+      const highway = (tags.highway || '').toLowerCase();
+      if (highway === 'footway' || highway === 'pedestrian' || highway === 'path' || highway === 'steps' || tags.foot === 'yes') footwayCount++;
+      if (tags.cycleway || (highway === 'cycleway')) cyclewayCount++;
     }
 
     // Map weightedSum and minDist into walkability score (0-100)
     // weightedSum scale: empirically, a few essential POIs nearby should produce a high score
-    const poiScore = Math.min(100, Math.round(weightedSum * 12)); // scale factor to map weightedSum to 0-100
+    const poiScore = Math.min(100, Math.round(weightedSum * 10)); // slightly reduced scale
     const distScore = Math.max(0, Math.round((1 - Math.min(minDist, 2) / 2) * 100));
-    // give more emphasis to weighted POIs vs raw distance
-    const walkability = Math.round((poiScore * 0.75) + (distScore * 0.25));
+    // walking infrastructure score boosts the walkability when footways/cycleways are present
+    const infraScore = Math.min(100, Math.round((Math.min(5, footwayCount) * 12) + (Math.min(3, cyclewayCount) * 8)));
+    // combine: POIs (60%), distance (20%), infra (20%)
+    const walkability = Math.round((poiScore * 0.6) + (distScore * 0.2) + (infraScore * 0.2));
 
     // Transit score: count of public transport POIs (bus_stop, station) within 800m weighted
     let transitCount = 0;
