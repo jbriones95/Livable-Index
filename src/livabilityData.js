@@ -352,41 +352,79 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
   const bbox = [LITTLETON_BOUNDS.west, LITTLETON_BOUNDS.south, LITTLETON_BOUNDS.east, LITTLETON_BOUNDS.north];
   const osm = await fetchOSM(bbox);
 
-  // Convert elements into points for simple proximity counts
+  // Convert elements into points for simple proximity counts. Keep tags for weighting.
   const poiPoints = osm.map((el) => {
-    if (el.type === 'node') return turfPoint([el.lon, el.lat], el.tags || {});
+    const tags = el.tags || {};
+    if (el.type === 'node') return turfPoint([el.lon, el.lat], tags);
     // ways/relations have center
-    if (el.type === 'way' && el.center) return turfPoint([el.center.lon, el.center.lat], el.tags || {});
+    if ((el.type === 'way' || el.type === 'relation') && el.center) return turfPoint([el.center.lon, el.center.lat], tags);
     return null;
   }).filter(Boolean);
+
+  // Helper: assign a weight to a POI based on OSM tags.
+  // Higher weight for supermarkets, convenience stores, pharmacies; medium for shops; lower for leisure/tourism.
+  function poiWeight(tags) {
+    if (!tags) return 0.5;
+    const shop = (tags.shop || '').toLowerCase();
+    const amenity = (tags.amenity || '').toLowerCase();
+    const leisure = (tags.leisure || '').toLowerCase();
+
+    // Essential retail (supermarket, convenience, pharmacy, bakery)
+    if (shop === 'supermarket' || shop === 'convenience' || shop === 'pharmacy' || shop === 'bakery' || amenity === 'supermarket') return 3.0;
+
+    // Fresh food / grocery alternatives
+    if (shop === 'greengrocer' || shop === 'butcher' || shop === 'fishmonger') return 2.5;
+
+    // Cafes / coffee shops
+    if (amenity === 'cafe' || tags.cuisine === 'coffee_shop' || shop === 'coffee' || tags.shop === 'coffee') return 1.8;
+
+    // Generic shops (retail, boutique)
+    if (shop && shop !== '') return 1.2;
+
+    // Transit stops and stations
+    if (amenity === 'bus_station' || tags.highway === 'bus_stop' || amenity === 'bus_stop' || tags.railway === 'station' || tags.public_transport) return 2.5;
+
+    // leisure/tourism has low weight for everyday walkability
+    if (leisure || tags.tourism) return 0.8;
+
+    // default small weight
+    return 0.6;
+  }
 
   // For each cell, compute POI count within 400m and nearest amenity distance
   for (const cell of grid.features) {
     const c = turfCentroid(cell);
     let poiCount = 0;
     let minDist = Infinity;
+    let weightedSum = 0;
     for (const p of poiPoints) {
       const d = turfDistance(c, p, { units: 'kilometers' });
       if (d < minDist) minDist = d;
       if (d <= 0.4) poiCount++;
+      // weighted contribution declines with distance (simple linear falloff to 1km)
+      const tags = p.properties || {};
+      const w = poiWeight(tags);
+      const falloff = Math.max(0, 1 - (d / 1.0));
+      weightedSum += w * falloff;
     }
 
-    // Map poiCount and minDist into walkability score (0-100)
-    // heuristic: many POIs within 400m => high walkability; closer minDist => higher
-    const poiScore = Math.min(100, poiCount * 8); // each nearby POI adds up to 8 points, cap at 100
+    // Map weightedSum and minDist into walkability score (0-100)
+    // weightedSum scale: empirically, a few essential POIs nearby should produce a high score
+    const poiScore = Math.min(100, Math.round(weightedSum * 12)); // scale factor to map weightedSum to 0-100
     const distScore = Math.max(0, Math.round((1 - Math.min(minDist, 2) / 2) * 100));
-    const walkability = Math.round((poiScore * 0.7) + (distScore * 0.3));
+    // give more emphasis to weighted POIs vs raw distance
+    const walkability = Math.round((poiScore * 0.75) + (distScore * 0.25));
 
-    // Transit score: count of public transport POIs (bus_stop, station) within 800m
+    // Transit score: count of public transport POIs (bus_stop, station) within 800m weighted
     let transitCount = 0;
     for (const p of poiPoints) {
       const d = turfDistance(c, p, { units: 'kilometers' });
       if (d <= 0.8) {
         const tags = p.properties || {};
-        if (tags.public_transport || tags.highway === 'bus_stop' || tags.railway === 'station' || tags.railway) transitCount++;
+        if (tags.public_transport || tags.highway === 'bus_stop' || tags.railway === 'station' || tags.railway) transitCount += poiWeight(tags);
       }
     }
-    const transitScore = Math.min(100, transitCount * 15);
+    const transitScore = Math.min(100, Math.round(transitCount * 18));
 
     // overwrite scores
     cell.properties.scores.walkability = walkability;
@@ -396,4 +434,93 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
   }
 
   return grid;
+}
+
+/**
+ * Compute a livability score at a single geographic point using nearby OSM POIs.
+ * Returns an object compatible with the zone properties used by the UI:
+ * { name, scores, composite, notes, _osm, zoneId }
+ */
+export async function computeScoreAtPoint(lat, lng, opts = {}) {
+  const radiusKm = opts.radiusKm ?? 1.0; // search radius
+  // build bbox around point
+  const latRad = (lat * Math.PI) / 180;
+  const deltaLat = radiusKm / 111; // approx degrees
+  const deltaLon = radiusKm / (111 * Math.cos(latRad));
+  const bbox = [lng - deltaLon, lat - deltaLat, lng + deltaLon, lat + deltaLat];
+
+  // fetch nearby OSM elements
+  const osm = await fetchOSM(bbox);
+
+  const poiPoints = osm.map((el) => {
+    const tags = el.tags || {};
+    if (el.type === 'node') return turfPoint([el.lon, el.lat], tags);
+    if ((el.type === 'way' || el.type === 'relation') && el.center) return turfPoint([el.center.lon, el.center.lat], tags);
+    return null;
+  }).filter(Boolean);
+
+  // Find nearest zone (to copy non-walk/transit dimensions)
+  let matched = null;
+  const zones = getAllZoneFeatures().features;
+  const pt = turfPoint([lng, lat]);
+  for (const z of zones) {
+    if (booleanPointInPolygon(pt, z)) {
+      matched = z;
+      break;
+    }
+  }
+  if (!matched) {
+    // nearest by centroid
+    let minD = Infinity;
+    for (const z of zones) {
+      const c = turfCentroid(z);
+      const d = turfDistance(pt, c, { units: 'kilometers' });
+      if (d < minD) { minD = d; matched = z; }
+    }
+  }
+
+  const base = matched ? matched.properties.scores : ZONES[0].scores;
+  const scores = { ...base };
+
+  // compute POI metrics similar to computeGridWithOSM
+  let poiCount = 0;
+  let minDist = Infinity;
+  let weightedSum = 0;
+  for (const p of poiPoints) {
+    const d = turfDistance(pt, p, { units: 'kilometers' });
+    if (d < minDist) minDist = d;
+    if (d <= 0.4) poiCount++;
+    const tags = p.properties || {};
+    const w = poiWeight(tags);
+    const falloff = Math.max(0, 1 - (d / 1.0));
+    weightedSum += w * falloff;
+  }
+
+  const poiScore = Math.min(100, Math.round(weightedSum * 12));
+  const distScore = Math.max(0, Math.round((1 - Math.min(minDist, 2) / 2) * 100));
+  const walkability = Math.round((poiScore * 0.75) + (distScore * 0.25));
+
+  // transit
+  let transitCount = 0;
+  for (const p of poiPoints) {
+    const d = turfDistance(pt, p, { units: 'kilometers' });
+    if (d <= 0.8) {
+      const tags = p.properties || {};
+      if (tags.public_transport || tags.highway === 'bus_stop' || tags.amenity === 'bus_station' || tags.railway) transitCount += poiWeight(tags);
+    }
+  }
+  const transitScore = Math.min(100, Math.round(transitCount * 18));
+
+  scores.walkability = walkability;
+  scores.transit = transitScore;
+  const composite = computeScore(scores);
+
+  return {
+    name: matched ? matched.properties.name : 'Local area',
+    scores,
+    composite,
+    notes: matched ? matched.properties.notes : '',
+    _osm: { poiCount, minDistKm: minDist, transitCount },
+    zoneId: matched ? matched.properties.id : null,
+  };
 }

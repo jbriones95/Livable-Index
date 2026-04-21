@@ -13,7 +13,7 @@ import {
   scoreToLabel,
   zoneToGeoJSON,
   getAllZoneFeatures,
-  getGridFeatures,
+  computeScoreAtPoint,
 } from "./livabilityData";
 import { point as turfPoint, booleanPointInPolygon, centroid as turfCentroid, distance as turfDistance } from "@turf/turf";
 import ScorePanel from "./ScorePanel";
@@ -64,42 +64,27 @@ export default function LivabilityMap({ locate }) {
       maxZoom: 19,
     }).addTo(map);
 
-    // Build grid features for a finer choropleth
-    const grid = getGridFeatures(0.2); // 200m squares
+    // Do not render the heavy grid client-side. Instead the map listens for clicks
+    // and we compute the score at the clicked point on demand.
+    geojsonLayer.current = null;
 
-    geojsonLayer.current = L.geoJSON(grid, {
-      style: (feature) => {
-        const score = feature.properties.composite;
-        return {
-          fillColor: scoreToColor(score),
-          fillOpacity: 0.55,
-          color: "#ffffff",
-          weight: 2,
-          opacity: 0.9,
-        };
-      },
-      onEachFeature: (feature, layer) => {
-        layer.on({
-          mouseover: (e) => {
-            e.target.setStyle({ fillOpacity: 0.75, weight: 3, color: "#333" });
-          },
-          mouseout: (e) => {
-            geojsonLayer.current.resetStyle(e.target);
-          },
-          click: (e) => {
-            L.DomEvent.stopPropagation(e);
-            setSelectedZone(feature.properties);
-            setClickPos({ lat: e.latlng.lat, lng: e.latlng.lng });
-          },
-        });
-      },
-    }).addTo(map);
-
-    // Click on map outside zones clears selection
-    map.on("click", () => {
-      setSelectedZone(null);
-      setClickPos(null);
+    map.on('click', async (e) => {
+      // compute score for clicked point
+      const { lat, lng } = e.latlng;
+      try {
+        document.getElementById('__liv_map_debug')?.setAttribute('data-last', 'computing');
+      } catch (err) {}
+      const result = await computeScoreAtPoint(lat, lng);
+      setSelectedZone(result);
+      setClickPos({ lat, lng });
+      // place marker
+      if (markerRef.current) {
+        markerRef.current.setLatLng([lat, lng]);
+        if (!markerRef.current._map) markerRef.current.addTo(map);
+      }
     });
+
+    // Click on map outside zones clears selection handled above via computeScoreAtPoint
 
     // create a marker but don't add yet
     markerRef.current = L.circleMarker(MAP_CENTER, { radius: 8, color: '#ffffff', weight:2, fillColor: '#2a9df4', fillOpacity: 0.9 });
