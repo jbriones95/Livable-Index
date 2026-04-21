@@ -292,6 +292,35 @@ export function getAllZoneFeatures() {
 import { squareGrid, centroid as turfCentroid, point as turfPoint, booleanPointInPolygon, distance as turfDistance } from '@turf/turf';
 import { fetchOSM } from './overpass';
 
+// Top-level helper to assign weight to a POI based on its tags. Used by multiple routines.
+export function poiWeight(tags) {
+  if (!tags) return 0.5;
+  const shop = (tags.shop || '').toLowerCase();
+  const amenity = (tags.amenity || '').toLowerCase();
+  const leisure = (tags.leisure || '').toLowerCase();
+
+  // Essential retail (supermarket, convenience, pharmacy, bakery)
+  if (shop === 'supermarket' || shop === 'convenience' || shop === 'pharmacy' || shop === 'bakery' || amenity === 'supermarket') return 3.0;
+
+  // Fresh food / grocery alternatives
+  if (shop === 'greengrocer' || shop === 'butcher' || shop === 'fishmonger') return 2.5;
+
+  // Cafes / coffee shops
+  if (amenity === 'cafe' || tags.cuisine === 'coffee_shop' || shop === 'coffee' || tags.shop === 'coffee') return 1.8;
+
+  // Generic shops (retail, boutique)
+  if (shop && shop !== '') return 1.2;
+
+  // Transit stops and stations
+  if (amenity === 'bus_station' || tags.highway === 'bus_stop' || amenity === 'bus_stop' || tags.railway === 'station' || tags.public_transport) return 2.5;
+
+  // leisure/tourism has low weight for everyday walkability
+  if (leisure || tags.tourism) return 0.8;
+
+  // default small weight
+  return 0.6;
+}
+
 /**
  * Generate a square grid over Littleton and assign each cell a livability score.
  * cellSizeKm: side length in kilometers (e.g., 0.2 = 200m)
