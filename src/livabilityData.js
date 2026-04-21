@@ -571,6 +571,44 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
  */
 export function isPointInCity(lat, lng) {
   const pt = turfPoint([lng, lat]);
+
+  // 1) If a city boundary layer was loaded into the map (window.__liv_city_boundary), use it.
+  try {
+    if (typeof window !== 'undefined' && window.__liv_city_boundary) {
+      const layer = window.__liv_city_boundary;
+      // Leaflet layer -> GeoJSON
+      if (typeof layer.toGeoJSON === 'function') {
+        const geo = layer.toGeoJSON();
+        if (geo) {
+          if (geo.type === 'FeatureCollection') {
+            for (const f of geo.features) {
+              if (booleanPointInPolygon(pt, f)) return true;
+            }
+          } else if (geo.type === 'Feature') {
+            if (booleanPointInPolygon(pt, geo)) return true;
+          } else if (geo.type === 'Polygon' || geo.type === 'MultiPolygon') {
+            const feature = { type: 'Feature', properties: {}, geometry: geo };
+            if (booleanPointInPolygon(pt, feature)) return true;
+          }
+        }
+      }
+    }
+  } catch (err) {
+    // if boundary check fails, continue to fallbacks
+    console.warn('city boundary check failed', err && err.message);
+  }
+
+  // 2) Fallback: quick bbox check against LITTLETON_BOUNDS (broad but inclusive)
+  if (
+    lat <= LITTLETON_BOUNDS.north &&
+    lat >= LITTLETON_BOUNDS.south &&
+    lng <= LITTLETON_BOUNDS.east &&
+    lng >= LITTLETON_BOUNDS.west
+  ) {
+    return true;
+  }
+
+  // 3) Final fallback: union of our defined zone polygons
   const features = getAllZoneFeatures().features;
   for (const f of features) {
     if (booleanPointInPolygon(pt, f)) return true;
