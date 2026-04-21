@@ -13,6 +13,7 @@ import {
   scoreToLabel,
   zoneToGeoJSON,
   getAllZoneFeatures,
+  getGridFeatures,
 } from "./livabilityData";
 import { point as turfPoint, booleanPointInPolygon, centroid as turfCentroid, distance as turfDistance } from "@turf/turf";
 import ScorePanel from "./ScorePanel";
