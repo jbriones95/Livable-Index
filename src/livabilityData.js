@@ -14,7 +14,7 @@
  *
  * Data here is approximated/synthesized from public knowledge of Littleton geography.
  * A production version would pull from OSM Overpass, Walk Score API, GTFS feeds, etc.
- */
+*/
 
 // Littleton, CO approximate bounding box
 export const LITTLETON_BOUNDS = {
@@ -286,4 +286,53 @@ export function getAllZoneFeatures() {
     type: "FeatureCollection",
     features: ZONES.map(zoneToGeoJSON),
   };
+}
+
+// --- Grid generation for finer resolution scoring ---
+import { squareGrid, centroid as turfCentroid, point as turfPoint, booleanPointInPolygon, distance as turfDistance } from '@turf/turf';
+
+/**
+ * Generate a square grid over Littleton and assign each cell a livability score.
+ * cellSizeKm: side length in kilometers (e.g., 0.2 = 200m)
+ */
+export function getGridFeatures(cellSizeKm = 0.2) {
+  const bbox = [LITTLETON_BOUNDS.west, LITTLETON_BOUNDS.south, LITTLETON_BOUNDS.east, LITTLETON_BOUNDS.north];
+  const grid = squareGrid(bbox, cellSizeKm, { units: 'kilometers' });
+
+  const zones = getAllZoneFeatures().features;
+
+  for (const cell of grid.features) {
+    const c = turfCentroid(cell);
+    let matched = null;
+    for (const z of zones) {
+      if (booleanPointInPolygon(c, z)) {
+        matched = z;
+        cell.properties.source = 'zone';
+        cell.properties.zoneId = z.properties.id;
+        break;
+      }
+    }
+
+    if (!matched) {
+      // find nearest zone by centroid distance
+      let nearest = null;
+      let minD = Infinity;
+      for (const z of zones) {
+        const zc = turfCentroid(z);
+        const d = turfDistance(c, zc, { units: 'kilometers' });
+        if (d < minD) { minD = d; nearest = z; }
+      }
+      matched = nearest;
+      cell.properties.source = 'nearest';
+      cell.properties.zoneId = matched.properties.id;
+    }
+
+    // copy scores and computed composite
+    cell.properties.scores = matched.properties.scores;
+    cell.properties.composite = computeScore(matched.properties.scores);
+    cell.properties.name = matched.properties.name;
+    cell.properties.notes = matched.properties.notes;
+  }
+
+  return grid;
 }

@@ -42,11 +42,10 @@ export default function LivabilityMap({ locate }) {
       maxZoom: 19,
     }).addTo(map);
 
-    // Build GeoJSON features for each zone
-    const features = ZONES.map(zoneToGeoJSON);
-    const featureCollection = { type: "FeatureCollection", features };
+    // Build grid features for a finer choropleth
+    const grid = getGridFeatures(0.2); // 200m squares
 
-    geojsonLayer.current = L.geoJSON(featureCollection, {
+    geojsonLayer.current = L.geoJSON(grid, {
       style: (feature) => {
         const score = feature.properties.composite;
         return {
