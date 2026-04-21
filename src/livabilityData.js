@@ -482,7 +482,9 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
  * { name, scores, composite, notes, _osm, zoneId }
  */
 export async function computeScoreAtPoint(lat, lng, opts = {}) {
-  const radiusKm = opts.radiusKm ?? 1.0; // search radius
+  // Mode controls search radius and perception (walk vs bike)
+  const mode = (opts.mode || 'walk'); // 'walk' or 'bike'
+  const radiusKm = opts.radiusKm ?? (mode === 'bike' ? 2.5 : 1.0); // search radius
   // build bbox around point
   const latRad = (lat * Math.PI) / 180;
   const deltaLat = radiusKm / 111; // approx degrees
@@ -522,34 +524,92 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const base = matched ? matched.properties.scores : ZONES[0].scores;
   const scores = { ...base };
 
-  // compute POI metrics similar to computeGridWithOSM
-  let poiCount = 0;
-  let minDist = Infinity;
-  let weightedSum = 0;
+  // compute distances to specific amenity categories (walking- or biking-accessible essentials)
+  const maxRadius = radiusKm; // kilometers
+  // nearest distances (km) initialized as Infinity
+  const nearest = {
+    transit: Infinity, // bus stop / light rail / station
+    coffee: Infinity, // cafe / coffee shop
+    eatery: Infinity, // restaurant / fast_food
+    supermarket: Infinity, // supermarket / convenience / pharmacy
+  };
+  const counts = { transit: 0, coffee: 0, eatery: 0, supermarket: 0 };
+
+  // infra counters
+  let footwayCount = 0;
+  let cyclewayCount = 0;
+
   for (const p of poiPoints) {
     const d = turfDistance(pt, p, { units: 'kilometers' });
-    if (d < minDist) minDist = d;
-    if (d <= 0.4) poiCount++;
     const tags = p.properties || {};
-    const w = poiWeight(tags);
-    const falloff = Math.max(0, 1 - (d / 1.0));
-    weightedSum += w * falloff;
-  }
 
-  const poiScore = Math.min(100, Math.round(weightedSum * 12));
-  const distScore = Math.max(0, Math.round((1 - Math.min(minDist, 2) / 2) * 100));
-  const walkability = Math.round((poiScore * 0.75) + (distScore * 0.25));
-
-  // transit
-  let transitCount = 0;
-  for (const p of poiPoints) {
-    const d = turfDistance(pt, p, { units: 'kilometers' });
-    if (d <= 0.8) {
-      const tags = p.properties || {};
-      if (tags.public_transport || tags.highway === 'bus_stop' || tags.amenity === 'bus_station' || tags.railway) transitCount += poiWeight(tags);
+    // transit
+    if (tags.public_transport || tags.highway === 'bus_stop' || tags.amenity === 'bus_station' || tags.railway === 'station' || tags.railway === 'tram_stop') {
+      if (d < nearest.transit) nearest.transit = d;
+      if (d <= maxRadius) counts.transit += 1;
     }
+
+    // coffee / cafe
+    if (tags.amenity === 'cafe' || tags.shop === 'coffee' || (tags.cuisine && tags.cuisine.includes('coffee'))) {
+      if (d < nearest.coffee) nearest.coffee = d;
+      if (d <= maxRadius) counts.coffee += 1;
+    }
+
+    // eatery / restaurant
+    if (tags.amenity === 'restaurant' || tags.amenity === 'fast_food' || tags.food || tags.shop === 'food') {
+      if (d < nearest.eatery) nearest.eatery = d;
+      if (d <= maxRadius) counts.eatery += 1;
+    }
+
+    // supermarket / convenience / pharmacy
+    if (
+      tags.shop === 'supermarket' ||
+      tags.shop === 'convenience' ||
+      tags.shop === 'greengrocer' ||
+      tags.amenity === 'pharmacy' ||
+      tags.amenity === 'supermarket'
+    ) {
+      if (d < nearest.supermarket) nearest.supermarket = d;
+      if (d <= maxRadius) counts.supermarket += 1;
+    }
+
+    // detect walking/cycling infrastructure
+    const highway = (tags.highway || '').toLowerCase();
+    if (highway === 'footway' || highway === 'pedestrian' || highway === 'path' || tags.foot === 'yes') footwayCount++;
+    if (tags.cycleway || highway === 'cycleway') cyclewayCount++;
   }
-  const transitScore = Math.min(100, Math.round(transitCount * 18));
+
+  // Convert nearest distances to 0-100 accessibility scores using linear decay to maxRadius
+  function distToScore(d, max) {
+    if (!isFinite(d)) return 0;
+    const capped = Math.min(d, max);
+    return Math.round((1 - capped / max) * 100);
+  }
+
+  const maxForScoring = mode === 'bike' ? Math.max(0.5, maxRadius) : Math.max(0.5, maxRadius);
+  const scoresByAmenity = {
+    transit: distToScore(nearest.transit, maxForScoring),
+    coffee: distToScore(nearest.coffee, maxForScoring),
+    eatery: distToScore(nearest.eatery, maxForScoring),
+    supermarket: distToScore(nearest.supermarket, maxForScoring),
+  };
+
+  // Compose walk/bike accessibility score from amenities
+  // Category weights (tunable): supermarket most important, then eatery, transit, coffee
+  const amenityWeights = { supermarket: 0.35, eatery: 0.25, transit: 0.25, coffee: 0.15 };
+  let amenityComposite = 0;
+  for (const k of Object.keys(amenityWeights)) {
+    amenityComposite += (scoresByAmenity[k] || 0) * amenityWeights[k];
+  }
+
+  // Infra boost: presence of footway/cycleway increases score (scaled)
+  const infraScore = Math.min(100, Math.round(Math.min(5, footwayCount) * 12 + Math.min(5, cyclewayCount) * 8));
+
+  // Final pedestrian/bike accessibility score: combine amenities and infra
+  const mobilityScore = Math.round(amenityComposite * 0.85 + infraScore * 0.15);
+
+  // Transit score: scale by proximity and local transit count
+  const transitScore = Math.min(100, Math.round((scoresByAmenity.transit * 0.6) + Math.min(100, counts.transit * 20) * 0.4));
 
   // Optionally augment with Walk Score API if available (via proxy or VITE key)
   let ws = null;
@@ -559,12 +619,12 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     console.warn('getWalkScore failed', err && err.message);
   }
 
-  // If WalkScore returns a score, combine it with our computed walkability (average weighted)
+  // If WalkScore returns a score, combine it with our computed mobilityScore (average weighted)
   if (ws && typeof ws.walkscore === 'number') {
     // weight: 70% WalkScore, 30% our heuristic
-    scores.walkability = Math.round((ws.walkscore * 0.7) + (walkability * 0.3));
+    scores.walkability = Math.round((ws.walkscore * 0.7) + (mobilityScore * 0.3));
   } else {
-    scores.walkability = walkability;
+    scores.walkability = mobilityScore;
   }
   scores.transit = transitScore;
   const composite = computeScore(scores);
@@ -574,7 +634,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     scores,
     composite,
     notes: matched ? matched.properties.notes : '',
-    _osm: { poiCount, minDistKm: minDist, transitCount },
+    _osm: { counts, nearestKm: nearest, infra: { footwayCount, cyclewayCount } },
     zoneId: matched ? matched.properties.id : null,
   };
 }
