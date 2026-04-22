@@ -4,6 +4,7 @@
 
 import fetch from 'node-fetch';
 import * as turf from '@turf/turf';
+import fs from 'fs/promises';
 
 const NB_URL = 'https://services6.arcgis.com/lJUBf9F1fZJRB4zT/arcgis/rest/services/Neighborhood_Boundary/FeatureServer/70/query?where=1%3D1&outFields=*&outSR=4326&f=geojson';
 const OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
@@ -115,10 +116,13 @@ async function main() {
     }
 
     results.push({ id: f.id, name, counts, minSuper, minGreen });
+    // polite pause to avoid Overpass rate limiting
+    await new Promise((res) => setTimeout(res, 3000));
   }
 
-  console.log('Done. Outputting JSON:');
-  console.log(JSON.stringify(results, null, 2));
+  console.log('Done. Writing results to tools/neighborhood_metrics.json');
+  await fs.writeFile('tools/neighborhood_metrics.json', JSON.stringify(results, null, 2), 'utf8');
+  console.log('Wrote tools/neighborhood_metrics.json');
 }
 
 main().catch((err) => { console.error(err); process.exit(2); });

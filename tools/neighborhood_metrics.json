@@ -1,0 +1,512 @@
+[
+  {
+    "id": 803,
+    "name": "Trailmark",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 804,
+    "name": "Heritage",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 805,
+    "name": "Ketring Park",
+    "counts": {
+      "supermarket": 3,
+      "cafe": 3,
+      "restaurant": 4,
+      "transit": 15,
+      "footway": 166,
+      "cycleway": 11,
+      "park": 10
+    },
+    "minSuper": 0.4616912209948523,
+    "minGreen": 0.7133153192385083
+  },
+  {
+    "id": 806,
+    "name": "Outside of City",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 1,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 807,
+    "name": "Sterne Park",
+    "counts": {
+      "supermarket": 1,
+      "cafe": 3,
+      "restaurant": 2,
+      "transit": 10,
+      "footway": 320,
+      "cycleway": 15,
+      "park": 9
+    },
+    "minSuper": 1.253751131845795,
+    "minGreen": 0.16560270038918593
+  },
+  {
+    "id": 808,
+    "name": "Downtown",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 5,
+      "restaurant": 23,
+      "transit": 10,
+      "footway": 610,
+      "cycleway": 7,
+      "park": 5
+    },
+    "minSuper": null,
+    "minGreen": 0.15105499043325063
+  },
+  {
+    "id": 809,
+    "name": "NE Littleton",
+    "counts": {
+      "supermarket": 3,
+      "cafe": 2,
+      "restaurant": 17,
+      "transit": 8,
+      "footway": 233,
+      "cycleway": 18,
+      "park": 9
+    },
+    "minSuper": 0.612255142805435,
+    "minGreen": 0.5007758608171153
+  },
+  {
+    "id": 810,
+    "name": "Centennial",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 811,
+    "name": "Outside of City",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 3,
+      "cycleway": 0,
+      "park": 1
+    },
+    "minSuper": null,
+    "minGreen": 0.5095451506341422
+  },
+  {
+    "id": 812,
+    "name": "Coventry",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 13,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 813,
+    "name": "The Hamlet at Columbine",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 2,
+      "cycleway": 1,
+      "park": 1
+    },
+    "minSuper": null,
+    "minGreen": 0.212281835536507
+  },
+  {
+    "id": 814,
+    "name": "Bow Mar South",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 9,
+      "cycleway": 0,
+      "park": 2
+    },
+    "minSuper": null,
+    "minGreen": 0.13112325315666265
+  },
+  {
+    "id": 815,
+    "name": "Aberdeen Village",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 816,
+    "name": "Sunset Heights",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 817,
+    "name": "Wolhurst landing",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 10,
+      "cycleway": 0,
+      "park": 1
+    },
+    "minSuper": null,
+    "minGreen": 0.9981887394470599
+  },
+  {
+    "id": 818,
+    "name": "Meadowbrook",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 6,
+      "cycleway": 3,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 819,
+    "name": "Overlook at Platte Valley",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 5,
+      "cycleway": 0,
+      "park": 1
+    },
+    "minSuper": null,
+    "minGreen": 0.5851292212179742
+  },
+  {
+    "id": 820,
+    "name": "The Polo Reserve - Pole Ridge Farms",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 11,
+      "cycleway": 6,
+      "park": 1
+    },
+    "minSuper": null,
+    "minGreen": 0.9250605959902456
+  },
+  {
+    "id": 821,
+    "name": "The Polo Reserve - The Sanctuary",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 822,
+    "name": "Littleton Village",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 1,
+      "restaurant": 2,
+      "transit": 0,
+      "footway": 32,
+      "cycleway": 0,
+      "park": 1
+    },
+    "minSuper": null,
+    "minGreen": 0.11516230543882702
+  },
+  {
+    "id": 823,
+    "name": "Cobblestone Village",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 824,
+    "name": "Kensington Ridge",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 825,
+    "name": "Oakbrook",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 827,
+    "name": "Southbridge",
+    "counts": {
+      "supermarket": 2,
+      "cafe": 1,
+      "restaurant": 5,
+      "transit": 3,
+      "footway": 87,
+      "cycleway": 13,
+      "park": 3
+    },
+    "minSuper": 1.0626257648854793,
+    "minGreen": 0.37959164351301106
+  },
+  {
+    "id": 828,
+    "name": "Southpark",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 1,
+      "transit": 0,
+      "footway": 1,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 829,
+    "name": "Southbridge",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 830,
+    "name": "Riverwalk",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 831,
+    "name": "Santa Fe Park",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 10,
+      "cycleway": 0,
+      "park": 1
+    },
+    "minSuper": null,
+    "minGreen": 0.6900327938539821
+  },
+  {
+    "id": 832,
+    "name": "Southpark",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 833,
+    "name": "Peninsula (Southpark 11 A,B,C)",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 834,
+    "name": "Southpark",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 835,
+    "name": "Southpark",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 0,
+      "cycleway": 0,
+      "park": 0
+    },
+    "minSuper": null,
+    "minGreen": null
+  },
+  {
+    "id": 836,
+    "name": "Southpark",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 1,
+      "cycleway": 1,
+      "park": 1
+    },
+    "minSuper": null,
+    "minGreen": 0.09567797975225152
+  },
+  {
+    "id": 837,
+    "name": "Southpark",
+    "counts": {
+      "supermarket": 0,
+      "cafe": 0,
+      "restaurant": 0,
+      "transit": 0,
+      "footway": 20,
+      "cycleway": 6,
+      "park": 5
+    },
+    "minSuper": null,
+    "minGreen": 0.08807830669349608
+  }
+]
