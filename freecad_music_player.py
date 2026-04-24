@@ -252,29 +252,36 @@ slot.translate(FreeCAD.Vector(
 body_feat.Shape = body_feat.Shape.cut(slot)
 
 # ============================================================
-# 13. HEADPHONE JACK (3.5 mm, bottom center)
+# 13. HEADPHONE JACK (3.5 mm, right side center)
 # ============================================================
+# Place the jack on the right side, centered vertically.
 jack = Part.makeCylinder(1.75, 3.0)
 jack.rotate(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0), 90)
-jack.translate(FreeCAD.Vector(0, -body_width / 2 - 0.5, body_thick / 2))
+jack.translate(FreeCAD.Vector(body_length / 2 + 0.5, 0, body_thick / 2))
 body_feat.Shape = body_feat.Shape.cut(jack)
 
+# Visible ring around the jack (slightly inset on right side)
 jack_ring = Part.makeCylinder(2.6, 0.5)
 jack_ring.rotate(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0), 90)
-jack_ring.translate(FreeCAD.Vector(0, -body_width / 2, body_thick / 2))
+jack_ring.translate(FreeCAD.Vector(body_length / 2, 0, body_thick / 2))
 doc.addObject("Part::Feature", "JackRing").Shape = jack_ring
 doc.ActiveObject.ViewObject.ShapeColor = (0.35, 0.35, 0.35)
 
 # ============================================================
-# 14. DATA / CHARGE PORT (bottom edge)
+# 14. USB-C PORT (rectangular slot, centered on bottom edge)
+# Approximate USB-C dimensions: ~8.5 x 2.6 mm
 # ============================================================
-port = Part.makeBox(10.0, 2.5, 2.5)
-port.translate(FreeCAD.Vector(-5.0, -body_width / 2 - 1.0, body_thick / 2 - 2.8))
+usb_width = 8.5
+usb_height = 2.6
+usb_depth = 3.0
+port = Part.makeBox(usb_width, usb_height, usb_depth)
+port.translate(FreeCAD.Vector(-usb_width / 2, -body_width / 2 - 1.0, body_thick / 2 - usb_depth / 2))
 body_feat.Shape = body_feat.Shape.cut(port)
 
-port_vis = Part.makeBox(10.0, 0.5, 2.5)
-port_vis.translate(FreeCAD.Vector(-5.0, -body_width / 2, body_thick / 2 - 2.8))
-doc.addObject("Part::Feature", "DataPort").Shape = port_vis
+# visible lip / recess for the port
+port_vis = Part.makeBox(usb_width, 0.5, usb_depth)
+port_vis.translate(FreeCAD.Vector(-usb_width / 2, -body_width / 2, body_thick / 2 - usb_depth / 2))
+doc.addObject("Part::Feature", "USBPort").Shape = port_vis
 doc.ActiveObject.ViewObject.ShapeColor = (0.28, 0.28, 0.28)
 
 # ============================================================
