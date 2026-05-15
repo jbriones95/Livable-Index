@@ -29,6 +29,7 @@ export default function LivabilityMap({ locate }) {
   const [clickPos, setClickPos] = useState(null);
   const [computing, setComputing] = useState(false);
   const lastComputeTs = useRef(0);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     if (leafletMap.current) return; // already initialized
@@ -204,7 +205,7 @@ export default function LivabilityMap({ locate }) {
   }, [locate]);
 
   return (
-    <div className="map-wrapper">
+    <div className="map-wrapper" ref={containerRef}>
       <div ref={mapRef} className="leaflet-container-map" />
       {computing && (
         <div className="map-loading-overlay" aria-hidden>
