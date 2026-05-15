@@ -5,32 +5,19 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #0f1923;
   color: #e8edf2;
-<<<<<<< HEAD
   /* Allow the page to scroll on mobile when the browser chrome changes size.
      Using min-height with the dynamic viewport unit avoids issues with
      100vh on mobile where the address bar affects layout. */
   min-height: 100dvh;
   overflow: auto;
-=======
-  /* Allow the page to scroll on mobile when the browser chrome changes size.
-     Using min-height with the dynamic viewport unit avoids issues with
-     100vh on mobile where the address bar affects layout. */
-  min-height: 100dvh;
-  overflow: auto;
->>>>>>> 5410f62 (Publish: enable GH Pages build/config and add trail/park proximity boosts + responsive improvements)
 }
 
 /* App layout */
 .app {
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
   /* Use min-height so the app can grow when content requires scrolling */
   min-height: 100dvh;
-=======
-  /* Use min-height so the app can grow when content requires scrolling */
-  min-height: 100dvh;
->>>>>>> 5410f62 (Publish: enable GH Pages build/config and add trail/park proximity boosts + responsive improvements)
 }
 
 /* Header */
@@ -86,11 +73,7 @@ body {
 }
 
 .address-search button {
-<<<<<<< HEAD
-  padding: 8px 10px;
-=======
   padding: 10px 12px; /* slightly larger touch target */
->>>>>>> 5410f62 (Publish: enable GH Pages build/config and add trail/park proximity boosts + responsive improvements)
   border-radius: 8px;
   border: 1px solid #2a4a6a;
   background: #1a6fbf;
@@ -345,15 +328,9 @@ body {
     bottom: 12px;
     top: auto;
     width: auto;
-<<<<<<< HEAD
     /* Use a dynamic unit to account for mobile browser chrome; leave space
        so the keyboard or address bar don't push content off-screen. */
     max-height: calc(100dvh - 120px);
-=======
-    /* Use a dynamic unit to account for mobile browser chrome; leave space
-       so the keyboard or address bar don't push content off-screen. */
-    max-height: calc(100dvh - 120px);
->>>>>>> 5410f62 (Publish: enable GH Pages build/config and add trail/park proximity boosts + responsive improvements)
     border-radius: 12px 12px 8px 8px;
     padding: 14px;
     animation: slideUp 0.22s ease-out;
@@ -363,11 +340,7 @@ body {
 }
 
 @media (max-width: 420px) {
-<<<<<<< HEAD
   .score-panel { padding: 12px; max-height: calc(100dvh - 96px); }
-=======
-  .score-panel { padding: 12px; max-height: calc(100dvh - 96px); }
->>>>>>> 5410f62 (Publish: enable GH Pages build/config and add trail/park proximity boosts + responsive improvements)
   .composite-score { min-width: 60px; }
   .score-number { font-size: 1.5rem; }
   .header-content h1 { font-size: 1.05rem; }
