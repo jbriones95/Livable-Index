@@ -1,4 +1,5 @@
 Deploying to GitHub Pages
+<<<<<<< HEAD
 ================================
 
 These steps add a minimal configuration to deploy the site to GitHub Pages using gh-pages.
@@ -28,3 +29,22 @@ Notes & troubleshooting
 - If the site 404s after deploy, check the repository Pages settings and make sure GitHub
   Pages is configured to serve from the gh-pages branch (gh-pages) and the correct folder (/).
 - Alternatively you can set the `base` field in vite.config.js manually to '/REPO_NAME/'.
+=======
+
+This project is configured to build with Vite and deploy the `dist` folder to GitHub Pages using the `gh-pages` package.
+
+Prerequisites
+- A GitHub repository for this project. Example repository URL: `https://github.com/USERNAME/REPO_NAME`.
+- The `gh-pages` devDependency is present in package.json.
+
+Common steps
+1. Install dependencies: `npm install`
+2. Build the app: `npm run build` (this runs `vite build`)
+3. Deploy: `npm run deploy` (this runs `gh-pages -d dist`)
+
+Notes
+- The Vite config sets `base` to a relative `./` path for production builds so the site works when served from a repository subpath (GitHub Pages project pages).
+- The package.json includes a `homepage` field set to `./` which helps some static asset resolvers.
+
+If you want me to create a deploy branch or run the deploy command, tell me which GitHub repo (USERNAME/REPO_NAME) and whether you want me to run the commands locally.
+>>>>>>> 5410f62 (Publish: enable GH Pages build/config and add trail/park proximity boosts + responsive improvements)

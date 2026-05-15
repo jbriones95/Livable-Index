@@ -75,11 +75,7 @@ export default function ScorePanel({ zone, onClose }) {
         ))}
       </div>
 
-      <div className="methodology-note">
-        Scores reflect urbanism priorities: walkability, transit access, bike
-        infrastructure, mixed land use, green space, housing density, and street
-        connectivity. Higher = more livable from an urbanist lens.
-      </div>
+      {/* methodology note intentionally removed per user request */}
     </div>
   );
 }
