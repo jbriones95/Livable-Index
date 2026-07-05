@@ -1,0 +1,20 @@
+{
+  "coffee": [
+    { "lat": 39.5722466, "lon": -104.9879769, "note": "7960 S Broadway" },
+    { "lat": 39.5823901, "lon": -105.0252290, "note": "7301 S Santa Fe Dr Ste 310" },
+    { "lat": 39.6032026, "lon": -105.0229385, "note": "6115 S Santa Fe Dr" },
+    { "lat": 39.6012170, "lon": -104.9880828, "note": "6504 S Broadway" },
+    { "lat": 39.6005510, "lon": -105.0223652, "note": "6399 S Santa Fe Dr" }
+  ],
+  "parks": [
+    { "lat": 39.57879, "lon": -104.99338, "note": "7900 S Ogden Way / Horseshoe Park (approx)" },
+    { "lat": 39.5787253, "lon": -105.0071743, "note": "7791 S Windermere St" },
+    { "lat": 39.58219, "lon": -105.01862, "note": "S Prince St & W Jackass Hill Rd / Jackass Hill Park" },
+    { "lat": 39.5786312, "lon": -105.0233734, "note": "1900 W Mineral Ave" },
+    { "lat": 39.5842020, "lon": -105.0042134, "note": "1312 W Geddes Ave" },
+    { "lat": 39.6011676, "lon": -105.0040984, "note": "Angeline's Little Creekway / 6364 S Sterne Pkwy" }
+  ],
+  "trailheads": [],
+  "medical": [],
+  "busStops": []
+}
