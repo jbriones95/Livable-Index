@@ -142,8 +142,14 @@ function haversineKm(lat1, lon1, lat2, lon2) {
 }
 
 function distToScore(d, max) {
+  // Match application logic: 100 inside threshold; for every full 200m beyond
+  // threshold subtract 10 points. Floor-based steps.
   if (!isFinite(d)) return 0;
-  return Math.round((1 - Math.min(d, max) / max) * 100);
+  if (d <= max) return 100;
+  const extraMeters = (d - max) * 1000;
+  const steps = Math.floor(extraMeters / 200);
+  const deduction = steps * 10;
+  return Math.max(0, 100 - deduction);
 }
 
 async function analyzePoint(lat, lon, opts = {}) {

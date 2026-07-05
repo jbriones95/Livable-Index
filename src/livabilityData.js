@@ -178,9 +178,8 @@ const MAX_DIST_KM = {
   coffee: 1.0,
   restaurant: 1.0,
   grocery: 1.5,
-  // separate trail vs park distances so we can compose the trailhead metric
-  trail: 2.0,
-  park: 2.0,
+  // trailhead distance (includes parks/trail access)
+  trailhead: 2.0,
   busStop: 0.8,
   healthcare: 2.0,
 };
@@ -195,19 +194,26 @@ const SUPPLEMENTAL_POINTS = {
     [-104.9880828, 39.6012170],   // 6504 S Broadway
     [-105.0223652, 39.6005510],   // 6399 S Santa Fe Dr
   ],
-  // User-provided parks (supplement OSM park points)
-  park: [
+  // Supplemental trailhead / park points (user-provided)
+  trailhead: [
     [-104.99338, 39.57879],       // 7900 S Ogden Way / Horseshoe Park area (approx)
     [-105.0071743, 39.5787253],   // 7791 S Windermere St
     [-105.01862, 39.58219],       // S Prince St & W Jackass Hill Rd / Jackass Hill Park
     [-105.0233734, 39.5786312],   // 1900 W Mineral Ave
     [-105.0042134, 39.5842020],   // 1312 W Geddes Ave
+    [-105.0040984, 39.6011676],   // Angeline's Little Creekway / Little Creek's Trailway (6364 S Sterne Pkwy)
   ],
 };
 
 function distToScore(d, max) {
+  // New rule: if within threshold -> 100. For every full 200m beyond the
+  // threshold, subtract 10 points (floor-based). Score floor is 0.
   if (!isFinite(d)) return 0;
-  return Math.round((1 - Math.min(d, max) / max) * 100);
+  if (d <= max) return 100;
+  const extraMeters = (d - max) * 1000;
+  const steps = Math.floor(extraMeters / 200); // full 200m steps beyond threshold
+  const deduction = steps * 10;
+  return Math.max(0, 100 - deduction);
 }
 
 function classifyOSM(tags) {
