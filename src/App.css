@@ -190,6 +190,21 @@ body {
   color: #d0e8f8;
   flex: 1;
   line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zone-address {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e0f0ff;
+}
+
+.zone-neighborhood {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #7a9ab8;
 }
 
 .composite-score {

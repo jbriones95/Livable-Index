@@ -13,7 +13,69 @@ export const MAP_CENTER = [39.6133, -105.0166];
 export const MAP_ZOOM = 13;
 
 export const ZONES = [
-  // ... (zones omitted here for brevity in this patch - kept in repo)
+  {
+    id: "downtown",
+    name: "Downtown Littleton",
+    bounds: [39.606, -105.022, 39.617, -105.010],
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    notes: "Historic Main Street core with shops, restaurants, light rail (C Line), and walkable blocks.",
+  },
+  {
+    id: "littleton_station",
+    name: "Littleton / Mineral Station Area",
+    bounds: [39.595, -105.017, 39.606, -105.005],
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    notes: "RTD light rail station hub. Good transit but still auto-oriented surroundings with TOD potential.",
+  },
+  {
+    id: "south_broadway_corridor",
+    name: "South Broadway Corridor",
+    bounds: [39.617, -105.020, 39.635, -105.012],
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    notes: "Commercial corridor transitioning to mixed-use. Improving bike lanes, bus service on Broadway.",
+  },
+  {
+    id: "arapahoe_community_college",
+    name: "ACC / Centennial Area",
+    bounds: [39.580, -105.010, 39.598, -104.993],
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    notes: "Suburban college campus area. Low density, car-dependent, limited transit, minimal pedestrian infrastructure.",
+  },
+  {
+    id: "western_residential",
+    name: "West Littleton Residential",
+    bounds: [39.608, -105.055, 39.635, -105.030],
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    notes: "Low-density single-family suburbs. Limited transit, cul-de-sac streets, car-dependent. Good green space access.",
+  },
+  {
+    id: "heritage_gulch",
+    name: "Heritage / Gulch Trail Area",
+    bounds: [39.620, -105.030, 39.640, -105.015],
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    notes: "Near the South Platte River trail and Highline Canal. Excellent off-road biking and green space, but auto-oriented for daily errands.",
+  },
+  {
+    id: "river_front",
+    name: "Riverfront / Sterne Park",
+    bounds: [39.610, -105.040, 39.625, -105.025],
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    notes: "South Platte River corridor. Outstanding trail system and parks. Minimal mixed use or transit.",
+  },
+  {
+    id: "east_littleton",
+    name: "East Littleton / Ketring",
+    bounds: [39.600, -105.005, 39.618, -104.985],
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    notes: "Mix of residential neighborhoods and parks including Ketring Park. Moderate connectivity, some bus access.",
+  },
+  {
+    id: "northeast_commercial",
+    name: "NE Commercial / Broadway & Belleview",
+    bounds: [39.630, -105.015, 39.645, -105.000],
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    notes: "Strip mall commercial zone near Englewood border. Bus routes present but pedestrian environment is poor.",
+  },
 ];
 
 export const WEIGHTS = {
@@ -237,11 +299,34 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   }
 
   const composite = computeScore(scores);
+  const neighborhood = matched ? matched.properties.name : null;
+
+  // Reverse geocode to get a readable address for the clicked point
+  let address = null;
+  try {
+    const rev = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&limit=1`,
+      { headers: { 'User-Agent': 'LivableIndex/1.0' } }
+    );
+    if (rev.ok) {
+      const revData = await rev.json();
+      if (revData && revData.display_name) {
+        const parts = revData.display_name.split(', ');
+        // Take the first 2-3 parts: e.g. "7330 S Broadway, Littleton"
+        address = parts.slice(0, Math.min(3, parts.length)).join(', ');
+      }
+    }
+  } catch (err) {
+    // reverse geocode failed – fall back to neighborhood name only
+  }
+
   return {
-    name: matched ? matched.properties.name : 'Local area',
+    name: address || neighborhood || 'Local area',
     scores,
     composite,
     notes: matched ? matched.properties.notes : '',
+    neighborhood,
+    address,
     _osm: { counts, nearestKm: nearest },
     zoneId: matched ? matched.properties.id : null,
   };

@@ -49,7 +49,12 @@ export default function ScorePanel({ zone, onClose }) {
       </button>
 
       <div className="panel-header">
-        <h2 className="zone-name">{zone.name}</h2>
+        <div className="zone-name">
+          <span className="zone-address">{zone.name}</span>
+          {zone.neighborhood && (
+            <span className="zone-neighborhood">{zone.neighborhood}</span>
+          )}
+        </div>
         <div className="composite-score" style={{ borderColor: color }}>
           <span className="score-number" style={{ color }}>
             {composite}
