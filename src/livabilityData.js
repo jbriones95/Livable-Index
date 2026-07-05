@@ -183,8 +183,8 @@ const MAX_DIST_KM = {
   healthcare: 2.0,
 };
 
-// Known coffee shops missing from OSM – coordinates from Nominatim geocoding.
-// Merged with OSM data during scoring so coffee proximity is accurate.
+// Known coffee shops and parks missing from OSM – coordinates from Nominatim geocoding.
+// Merged with OSM data during scoring so proximity calculations are accurate.
 const SUPPLEMENTAL_POINTS = {
   coffee: [
     [-104.9879769, 39.5722466],   // 7960 S Broadway
@@ -192,6 +192,13 @@ const SUPPLEMENTAL_POINTS = {
     [-105.0229385, 39.6032026],   // 6115 S Santa Fe Dr
     [-104.9880828, 39.6012170],   // 6504 S Broadway
     [-105.0223652, 39.6005510],   // 6399 S Santa Fe Dr
+  ],
+  trailhead: [
+    [-104.99338, 39.57879],       // 7900 S Ogden Way / Horseshoe Park area
+    [-105.0071743, 39.5787253],   // 7791 S Windermere St
+    [-105.01862, 39.58219],       // S Prince St & W Jackass Hill Rd / Jackass Hill Park
+    [-105.0233734, 39.5786312],   // 1900 W Mineral Ave
+    [-105.0042134, 39.5842020],   // 1312 W Geddes Ave
   ],
 };
 
@@ -216,8 +223,7 @@ function classifyOSM(tags) {
   if (a === 'restaurant') results.push('restaurant');
   if (s === 'supermarket' || s === 'convenience' || s === 'grocery' || s === 'greengrocer' || a === 'supermarket') results.push('grocery');
   if (h === 'bus_stop' || a === 'bus_station' || pt === 'platform' || pt === 'bus_stop' || pt === 'stop_position') results.push('busStop');
-  if (h === 'path' || h === 'track' || h === 'trailhead' || h === 'footway' || l === 'nature_reserve' || name.includes('trail')) results.push('trailhead');
-  if (l === 'park' && (h === 'path' || h === 'track' || h === 'trailhead' || h === 'footway' || foot === 'yes')) results.push('trailhead');
+  if (h === 'path' || h === 'track' || h === 'trailhead' || h === 'footway' || l === 'park' || l === 'nature_reserve' || name.includes('trail')) results.push('trailhead');
   if (a === 'hospital' || a === 'clinic' || a === 'doctors' || a === 'pharmacy' || a === 'dentist' || tags.healthcare) results.push('healthcare');
 
   return results;
