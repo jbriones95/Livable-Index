@@ -147,7 +147,8 @@ function distToScore(d, max) {
   if (!isFinite(d)) return 0;
   if (d <= max) return 100;
   const extraMeters = (d - max) * 1000;
-  const steps = Math.floor(extraMeters / 200);
+  // round up partial 200m intervals
+  const steps = Math.ceil(extraMeters / 200);
   const deduction = steps * 10;
   return Math.max(0, 100 - deduction);
 }
