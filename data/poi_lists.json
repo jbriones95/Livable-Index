@@ -1,29 +1,54 @@
 {
   "coffee": [
     {
-      "lat": 39.5722466,
-      "lon": -104.9879769,
-      "note": "7960 S Broadway"
+      "lat": 39.6148589,
+      "lon": -105.0160270,
+      "note": "5624 S Prince St, Littleton, CO 80120"
     },
     {
-      "lat": 39.5823901,
-      "lon": -105.025229,
-      "note": "7301 S Santa Fe Dr Ste 310"
+      "lat": 39.6124867,
+      "lon": -105.0175238,
+      "note": "2506 W Alamo Ave, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6005510,
+      "lon": -105.0223652,
+      "note": "6399 S Santa Fe Dr, Littleton, CO 80120"
     },
     {
       "lat": 39.6032026,
       "lon": -105.0229385,
-      "note": "6115 S Santa Fe Dr"
+      "note": "6115 S Santa Fe Dr, Littleton, CO 80120"
     },
     {
-      "lat": 39.601217,
+      "lat": 39.5862955,
+      "lon": -105.0239230,
+      "note": "7301 S Santa Fe Dr Ste 310, Littleton, CO 80120 (approx)"
+    },
+    {
+      "lat": 39.5833145,
+      "lon": -104.9882493,
+      "note": "7330 S Broadway, Littleton, CO 80122"
+    },
+    {
+      "lat": 39.5715438,
+      "lon": -104.9889619,
+      "note": "7961 S Broadway Ste A, Littleton, CO 80122 (approx)"
+    },
+    {
+      "lat": 39.6012170,
       "lon": -104.9880828,
-      "note": "6504 S Broadway"
+      "note": "6504 S Broadway, Littleton, CO 80121"
     },
     {
-      "lat": 39.600551,
-      "lon": -105.0223652,
-      "note": "6399 S Santa Fe Dr"
+      "lat": 39.6118882,
+      "lon": -104.9886631,
+      "note": "40 W Littleton Blvd Ste 211, Littleton, CO 80120 (approx)"
+    },
+    {
+      "lat": 39.6239450,
+      "lon": -104.9878770,
+      "note": "5100 S Broadway, Englewood, CO 80113"
     }
   ],
   "parks": [
