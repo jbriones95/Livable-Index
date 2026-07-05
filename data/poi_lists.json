@@ -3,51 +3,61 @@
     {
       "lat": 39.6148589,
       "lon": -105.0160270,
+      "name": "Mango Tree Coffee",
       "note": "5624 S Prince St, Littleton, CO 80120"
     },
     {
       "lat": 39.6124867,
       "lon": -105.0175238,
+      "name": "Dirt Coffee",
       "note": "2506 W Alamo Ave, Littleton, CO 80120"
     },
     {
       "lat": 39.6005510,
       "lon": -105.0223652,
+      "name": "Harold and Virginia Simpson Leadership Center",
       "note": "6399 S Santa Fe Dr, Littleton, CO 80120"
     },
     {
       "lat": 39.6032026,
       "lon": -105.0229385,
+      "name": "6115, South Santa Fe Drive, Littleton, Arapahoe County, Colorado, 80120, United States",
       "note": "6115 S Santa Fe Dr, Littleton, CO 80120"
     },
     {
       "lat": 39.5862955,
       "lon": -105.0239230,
+      "name": "claire's",
       "note": "7301 S Santa Fe Dr Ste 310, Littleton, CO 80120 (approx)"
     },
     {
       "lat": 39.5833145,
       "lon": -104.9882493,
+      "name": "South Broadway",
       "note": "7330 S Broadway, Littleton, CO 80122"
     },
     {
       "lat": 39.5715438,
       "lon": -104.9889619,
+      "name": "Black Rock Coffee",
       "note": "7961 S Broadway Ste A, Littleton, CO 80122 (approx)"
     },
     {
       "lat": 39.6012170,
       "lon": -104.9880828,
+      "name": "6500, South Broadway, Littleton, Arapahoe County, Colorado, 80121, United States",
       "note": "6504 S Broadway, Littleton, CO 80121"
     },
     {
       "lat": 39.6118882,
       "lon": -104.9886631,
+      "name": "Artemis Tea Coffee",
       "note": "40 W Littleton Blvd Ste 211, Littleton, CO 80120 (approx)"
     },
     {
       "lat": 39.6239450,
       "lon": -104.9878770,
+      "name": "South Broadway",
       "note": "5100 S Broadway, Englewood, CO 80113"
     }
   ],
@@ -575,31 +585,37 @@
     {
       "lat": 39.5820827,
       "lon": -104.9931225,
+      "name": "20 West Dry Creek Circle (Highline Professional Center)",
       "note": "20 W Dry Creek Cir, Littleton, CO 80120"
     },
     {
       "lat": 39.5813203,
       "lon": -104.9923109,
+      "name": "22 West Dry Creek Circle (Highline Professional Center)",
       "note": "22 W Dry Creek Cir, Littleton, CO 80120"
     },
     {
       "lat": 39.5809587,
       "lon": -104.9890993,
+      "name": "2 West Dry Creek Circle (Highline Professional Center)",
       "note": "2 W Dry Creek Cir Ste 230, Littleton, CO 80120 (approx)"
     },
     {
       "lat": 39.616801,
       "lon": -105.014086,
+      "name": "2200 West Berry Avenue (medical building)",
       "note": "2200 W Berry Ave, Littleton, CO 80120"
     },
     {
       "lat": 39.6227409,
       "lon": -104.990493,
+      "name": "Chuze Fitness",
       "note": "200 W Belleview Ave Ste 170, Englewood, CO 80110 (approx)"
     },
     {
       "lat": 39.6132573,
       "lon": -104.9951523,
+      "name": "609 West Littleton Boulevard",
       "note": "609 W Littleton Blvd #100, Littleton, CO 80120 (approx)"
     }
   ],
