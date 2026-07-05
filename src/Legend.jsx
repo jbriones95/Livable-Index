@@ -24,11 +24,12 @@ export default function Legend() {
       <div className="legend-dimensions">
         <h4>Proximity Factors</h4>
         <ul>
-          <li>Coffee Shop (20%)</li>
-          <li>Dinner Restaurant (20%)</li>
-          <li>Grocery Store (25%)</li>
-          <li>Trailhead Access (15%)</li>
+          <li>Coffee Shop (15%)</li>
+          <li>Dinner Restaurant (15%)</li>
+          <li>Grocery Store (20%)</li>
+          <li>Trailhead Access (10%)</li>
           <li>Bus Stop (20%)</li>
+          <li>Healthcare (20%)</li>
         </ul>
       </div>
     </div>

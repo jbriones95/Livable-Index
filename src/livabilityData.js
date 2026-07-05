@@ -1,8 +1,8 @@
 /**
  * Livability Index - Proximity-Based Scoring Model
  *
- * Score is 0–100, based on closeness to 5 amenity types:
- *   coffee shop, dinner restaurant, grocery store, trailhead, bus stop.
+ * Score is 0–100, based on closeness to 6 amenity types:
+ *   coffee shop, dinner restaurant, grocery store, trailhead, bus stop, healthcare.
  */
 
 export const LITTLETON_BOUNDS = {
@@ -17,11 +17,12 @@ export const ZONES = [
 ];
 
 export const WEIGHTS = {
-  coffee: 0.20,
-  restaurant: 0.20,
-  grocery: 0.25,
-  trailhead: 0.15,
+  coffee: 0.15,
+  restaurant: 0.15,
+  grocery: 0.20,
+  trailhead: 0.10,
   busStop: 0.20,
+  healthcare: 0.20,
 };
 
 export const DIMENSION_LABELS = {
@@ -30,6 +31,7 @@ export const DIMENSION_LABELS = {
   grocery: "Grocery Store",
   trailhead: "Trailhead Access",
   busStop: "Bus Stop",
+  healthcare: "Healthcare",
 };
 
 export function computeScore(scores) {
@@ -116,6 +118,7 @@ const MAX_DIST_KM = {
   grocery: 1.5,
   trailhead: 2.0,
   busStop: 0.8,
+  healthcare: 2.0,
 };
 
 function distToScore(d, max) {
@@ -141,13 +144,14 @@ function classifyOSM(tags) {
   if (h === 'bus_stop' || a === 'bus_station' || pt === 'platform' || pt === 'bus_stop' || pt === 'stop_position') results.push('busStop');
   if (h === 'path' || h === 'track' || h === 'trailhead' || h === 'footway' || l === 'nature_reserve' || name.includes('trail')) results.push('trailhead');
   if (l === 'park' && (h === 'path' || h === 'track' || h === 'trailhead' || h === 'footway' || foot === 'yes')) results.push('trailhead');
+  if (a === 'hospital' || a === 'clinic' || a === 'doctors' || a === 'pharmacy' || a === 'dentist' || tags.healthcare) results.push('healthcare');
 
   return results;
 }
 
 function nearestAndCounts(poiPoints, pt) {
-  const nearest = { coffee: Infinity, restaurant: Infinity, grocery: Infinity, trailhead: Infinity, busStop: Infinity };
-  const counts = { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0 };
+  const nearest = { coffee: Infinity, restaurant: Infinity, grocery: Infinity, trailhead: Infinity, busStop: Infinity, healthcare: Infinity };
+  const counts = { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 };
 
   for (const p of poiPoints) {
     const d = turfDistance(pt, p, { units: 'kilometers' });
