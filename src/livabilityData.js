@@ -196,6 +196,15 @@ const MAX_DIST_KM = {
 // Known coffee shops and parks missing from OSM – coordinates from Nominatim geocoding.
 // Merged with OSM data during scoring so proximity calculations are accurate.
 const SUPPLEMENTAL_POINTS = {
+  // Supplemental grocery locations (user-provided addresses geocoded)
+  grocery: [
+    [-104.9894468, 39.6131003], // 100 W Littleton Blvd
+    [-104.9885810, 39.6256084], // 5001 S Broadway
+    [-105.0062238, 39.6123386], // 1500 W Littleton Blvd (unit-agnostic)
+    [-105.0246978, 39.6259633], // 5050 S Federal Blvd
+    [-104.9885920, 39.5733500], // 7901 S Broadway
+    [-104.9918813, 39.5748722], // 181 W Mineral Ave
+  ],
   coffee: [
     [-104.9879769, 39.5722466],   // 7960 S Broadway
     [-105.0252290, 39.5823901],   // 7301 S Santa Fe Dr Ste 310
