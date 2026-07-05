@@ -57,7 +57,7 @@ function classifyOSM(tags = {}) {
   if (a === 'restaurant') results.push('restaurant');
   if (s === 'supermarket' || s === 'convenience' || s === 'grocery' || s === 'greengrocer' || a === 'supermarket') results.push('grocery');
   if (h === 'bus_stop' || a === 'bus_station' || pt === 'platform' || pt === 'bus_stop' || pt === 'stop_position') results.push('busStop');
-  if (h === 'path' || h === 'track' || h === 'trailhead' || h === 'footway' || l === 'park' || l === 'nature_reserve' || name.includes('trail')) results.push('trailhead');
+  if (h === 'path' || h === 'track' || h === 'trailhead' || h === 'footway' || l === 'park' || l === 'nature_reserve' || name.includes('trail')) results.push('nature');
   if (a === 'hospital' || a === 'clinic' || a === 'doctors' || a === 'pharmacy' || a === 'dentist' || tags.healthcare) results.push('healthcare');
 
   return results;
@@ -108,22 +108,22 @@ out center;`;
     const elements = (over && over.elements) || [];
     const classified = elements.map((el) => ({ id: el.id, type: el.type, tags: el.tags || {}, classification: classifyOSM(el.tags || {}), dist_m: el.center ? haversineKm(lat, lon, el.center.lat, el.center.lon) * 1000 : (el.lat ? haversineKm(lat, lon, el.lat, el.lon) * 1000 : null) }));
 
-    const hasTrail = classified.some((c) => c.classification.includes('trailhead'));
+    const hasNature = classified.some((c) => c.classification.includes('nature'));
     const details = classified.slice(0,5);
 
-    return { address: addr, geocoded: { lat, lon, display_name: loc.display_name }, found: hasTrail, details };
+    return { address: addr, geocoded: { lat, lon, display_name: loc.display_name }, found: hasNature, details };
   } catch (err) {
     return { address: addr, error: String(err) };
   }
 }
 
 (async () => {
-  console.log('Validating parks/trailheads (this will take ~12s)');
+  console.log('Validating parks/nature locations (this will take ~12s)');
   const results = [];
   for (const a of addresses) {
     const r = await checkAddress(a);
     results.push(r);
-    if (r.geocoded) console.log(`- ${a} => ${r.geocoded.display_name} @ ${r.geocoded.lat},${r.geocoded.lon} -> trailheadNearby: ${r.found}`);
+    if (r.geocoded) console.log(`- ${a} => ${r.geocoded.display_name} @ ${r.geocoded.lat},${r.geocoded.lon} -> natureNearby: ${r.found}`);
     else if (r.error) console.log(`- ${a} => error: ${r.error}`);
     else console.log(`- ${a} => no geocode result`);
   }

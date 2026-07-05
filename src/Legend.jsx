@@ -27,7 +27,7 @@ export default function Legend() {
           <li>Coffee Shop (15%)</li>
           <li>Dinner Restaurant (15%)</li>
           <li>Grocery Store (20%)</li>
-          <li>Trailhead Access (10%)</li>
+          <li>Nature Access (10%)</li>
           <li>Bus Stop (20%)</li>
           <li>Healthcare (20%)</li>
         </ul>

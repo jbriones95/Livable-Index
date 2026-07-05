@@ -2,7 +2,7 @@
  * Livability Index - Proximity-Based Scoring Model
  *
  * Score is 0–100, based on closeness to 6 amenity types:
- *   coffee shop, dinner restaurant, grocery store, trailhead, bus stop, healthcare.
+ *   coffee shop, dinner restaurant, grocery store, nature access, bus stop, healthcare.
  */
 
 export const LITTLETON_BOUNDS = {
@@ -78,11 +78,20 @@ export const ZONES = [
   },
 ];
 
+// Normalize legacy `trailhead` key to `nature` in zone scores so older
+// zone definitions continue to work after the rename.
+for (const z of ZONES) {
+  if (z && z.scores && Object.prototype.hasOwnProperty.call(z.scores, 'trailhead') && !Object.prototype.hasOwnProperty.call(z.scores, 'nature')) {
+    z.scores.nature = z.scores.trailhead;
+    delete z.scores.trailhead;
+  }
+}
+
 export const WEIGHTS = {
   coffee: 0.15,
   restaurant: 0.15,
   grocery: 0.20,
-  trailhead: 0.10,
+  nature: 0.10,
   busStop: 0.20,
   healthcare: 0.20,
 };
@@ -91,7 +100,7 @@ export const DIMENSION_LABELS = {
   coffee: "Coffee Shop",
   restaurant: "Dinner Restaurant",
   grocery: "Grocery Store",
-  trailhead: "Trailhead Access",
+  nature: "Nature Access",
   busStop: "Bus Stop",
   healthcare: "Healthcare",
 };
@@ -178,8 +187,8 @@ const MAX_DIST_KM = {
   coffee: 1.0,
   restaurant: 1.0,
   grocery: 1.5,
-  // trailhead distance (includes parks/trail access)
-  trailhead: 2.0,
+  // nature distance (includes parks/trail access)
+  nature: 2.0,
   busStop: 0.8,
   healthcare: 2.0,
 };
@@ -194,8 +203,8 @@ const SUPPLEMENTAL_POINTS = {
     [-104.9880828, 39.6012170],   // 6504 S Broadway
     [-105.0223652, 39.6005510],   // 6399 S Santa Fe Dr
   ],
-  // Supplemental trailhead / park points (user-provided)
-  trailhead: [
+  // Supplemental nature / park points (user-provided)
+  nature: [
     [-104.99338, 39.57879],       // 7900 S Ogden Way / Horseshoe Park area (approx)
     [-105.0071743, 39.5787253],   // 7791 S Windermere St
     [-105.01862, 39.58219],       // S Prince St & W Jackass Hill Rd / Jackass Hill Park
@@ -274,7 +283,7 @@ function classifyOSM(tags) {
     results.push('busStop');
   }
 
-  // Trailhead / park detection
+  // Nature / park detection
   if (
     ['path', 'track', 'trailhead', 'footway', 'pedestrian'].includes(h) ||
     l === 'park' ||
@@ -283,7 +292,7 @@ function classifyOSM(tags) {
     name.includes('trail') ||
     name.includes('park')
   ) {
-    results.push('trailhead');
+    results.push('nature');
   }
 
   // Healthcare
@@ -293,8 +302,8 @@ function classifyOSM(tags) {
 }
 
 function nearestAndCounts(poiPoints, pt) {
-  const nearest = { coffee: Infinity, restaurant: Infinity, grocery: Infinity, trailhead: Infinity, busStop: Infinity, healthcare: Infinity };
-  const counts = { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 };
+  const nearest = { coffee: Infinity, restaurant: Infinity, grocery: Infinity, nature: Infinity, busStop: Infinity, healthcare: Infinity };
+  const counts = { coffee: 0, restaurant: 0, grocery: 0, nature: 0, busStop: 0, healthcare: 0 };
 
   for (const p of poiPoints) {
     const d = turfDistance(pt, p, { units: 'kilometers' });

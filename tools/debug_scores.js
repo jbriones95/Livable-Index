@@ -48,7 +48,7 @@ const MAX_DIST_KM = {
   coffee: 1.0,
   restaurant: 1.0,
   grocery: 1.5,
-  trailhead: 2.0,
+  nature: 2.0,
   busStop: 0.8,
   healthcare: 2.0,
 };
@@ -57,7 +57,7 @@ const WEIGHTS = {
   coffee: 0.15,
   restaurant: 0.15,
   grocery: 0.20,
-  trailhead: 0.10,
+  nature: 0.10,
   busStop: 0.20,
   healthcare: 0.20,
 };
@@ -114,7 +114,7 @@ function classifyOSM(tags = {}) {
   )
     results.push('busStop');
 
-  // Trailhead / park: paths, footways, parks, nature_reserve
+  // Nature / park: paths, footways, parks, nature_reserve
   if (
     ['path', 'track', 'trailhead', 'footway', 'pedestrian'].includes(h) ||
     l === 'park' ||
@@ -123,7 +123,7 @@ function classifyOSM(tags = {}) {
     name.includes('trail') ||
     name.includes('park')
   )
-    results.push('trailhead');
+    results.push('nature');
 
   // Healthcare
   if (a === 'hospital' || a === 'clinic' || a === 'doctors' || a === 'pharmacy' || a === 'dentist' || tags.healthcare) results.push('healthcare');
@@ -173,8 +173,8 @@ async function analyzePoint(lat, lon, opts = {}) {
   }).filter(Boolean);
 
   const pt = [lat, lon];
-  const nearest = { coffee: Infinity, restaurant: Infinity, grocery: Infinity, trailhead: Infinity, busStop: Infinity, healthcare: Infinity };
-  const counts = { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 };
+  const nearest = { coffee: Infinity, restaurant: Infinity, grocery: Infinity, nature: Infinity, busStop: Infinity, healthcare: Infinity };
+  const counts = { coffee: 0, restaurant: 0, grocery: 0, nature: 0, busStop: 0, healthcare: 0 };
 
   for (const p of poiPoints) {
     const [plat, plon] = p.coords;

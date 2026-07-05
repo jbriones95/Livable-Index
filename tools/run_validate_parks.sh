@@ -69,7 +69,7 @@ PY
   <<<"$OVER")
 
   if [ "$COUNT" -gt 0 ]; then
-    echo "  -> Found $COUNT park/trailhead features nearby"
+    echo "  -> Found $COUNT park/nature features nearby"
     python3 - <<PY
 import sys,json
 try:
@@ -83,7 +83,7 @@ except Exception as e:
 PY
     <<<"$OVER"
   else
-    echo "  -> No park/trailhead features found within 100m"
+    echo "  -> No park/nature features found within 100m"
   fi
 
   sleep 1
