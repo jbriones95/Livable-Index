@@ -121,6 +121,17 @@ const MAX_DIST_KM = {
   healthcare: 2.0,
 };
 
+// Known coffee shops missing from OSM – coordinates from Nominatim geocoding.
+// Merged with OSM data during scoring so coffee proximity is accurate.
+const SUPPLEMENTAL_POINTS = {
+  coffee: [
+    [-104.9879769, 39.5722466],   // 7960 S Broadway
+    [-105.0252290, 39.5823901],   // 7301 S Santa Fe Dr Ste 310
+    [-105.0229385, 39.6032026],   // 6115 S Santa Fe Dr
+    [-104.9880828, 39.6012170],   // 6504 S Broadway
+  ],
+};
+
 function distToScore(d, max) {
   if (!isFinite(d)) return 0;
   return Math.round((1 - Math.min(d, max) / max) * 100);
@@ -162,6 +173,17 @@ function nearestAndCounts(poiPoints, pt) {
       if (d <= MAX_DIST_KM[cat]) counts[cat]++;
     }
   }
+
+  // Merge supplemental points (known locations missing from OSM)
+  for (const [cat, points] of Object.entries(SUPPLEMENTAL_POINTS)) {
+    for (const coords of points) {
+      const sp = turfPoint(coords);
+      const d = turfDistance(pt, sp, { units: 'kilometers' });
+      if (d < nearest[cat]) nearest[cat] = d;
+      if (d <= MAX_DIST_KM[cat]) counts[cat]++;
+    }
+  }
+
   return { nearest, counts };
 }
 
