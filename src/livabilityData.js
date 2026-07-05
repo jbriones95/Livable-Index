@@ -218,15 +218,40 @@ function classifyOSM(tags) {
   const h = (tags.highway || '').toLowerCase();
   const l = (tags.leisure || '').toLowerCase();
   const pt = tags.public_transport ? String(tags.public_transport).toLowerCase() : '';
-  const r = (tags.railway || '').toLowerCase();
   const name = (tags.name || '').toLowerCase();
   const foot = tags.foot ? String(tags.foot).toLowerCase() : '';
   const cuisine = tags.cuisine ? String(tags.cuisine).toLowerCase() : '';
 
-  if (a === 'cafe' || s === 'coffee' || s === 'tea_house' || cuisine.includes('coffee')) results.push('coffee');
-  if (a === 'restaurant') results.push('restaurant');
-  if (s === 'supermarket' || s === 'convenience' || s === 'grocery' || s === 'greengrocer' || a === 'supermarket') results.push('grocery');
-  // Include light-rail / tram / railway stops as transit points for busStop scoring
+  // broaden category matching to reduce false negatives
+  const r = (tags.railway || '').toLowerCase();
+
+  // Coffee: cafe/shop=coffee/name includes coffee
+  if (
+    a === 'cafe' ||
+    s.includes('coffee') ||
+    s === 'tea_house' ||
+    cuisine.includes('coffee') ||
+    name.includes('coffee')
+  ) {
+    results.push('coffee');
+  }
+
+  // Restaurant: include fast_food and food_court
+  if (a === 'restaurant' || a === 'fast_food' || a === 'food_court') results.push('restaurant');
+
+  // Grocery: supermarkets, convenience stores, markets
+  if (
+    s === 'supermarket' ||
+    s === 'grocery' ||
+    s === 'convenience' ||
+    s === 'greengrocer' ||
+    a === 'supermarket' ||
+    s.includes('market')
+  ) {
+    results.push('grocery');
+  }
+
+  // Transit: include bus stops and nearby railway/tram/light_rail stops
   if (
     h === 'bus_stop' ||
     a === 'bus_station' ||
@@ -236,10 +261,25 @@ function classifyOSM(tags) {
     r === 'station' ||
     r === 'tram_stop' ||
     r === 'halt' ||
-    r === 'light_rail'
-  )
+    r === 'light_rail' ||
+    r === 'subway'
+  ) {
     results.push('busStop');
-  if (h === 'path' || h === 'track' || h === 'trailhead' || h === 'footway' || l === 'park' || l === 'nature_reserve' || name.includes('trail')) results.push('trailhead');
+  }
+
+  // Trailhead / park detection
+  if (
+    ['path', 'track', 'trailhead', 'footway', 'pedestrian'].includes(h) ||
+    l === 'park' ||
+    l === 'nature_reserve' ||
+    l === 'recreation_ground' ||
+    name.includes('trail') ||
+    name.includes('park')
+  ) {
+    results.push('trailhead');
+  }
+
+  // Healthcare
   if (a === 'hospital' || a === 'clinic' || a === 'doctors' || a === 'pharmacy' || a === 'dentist' || tags.healthcare) results.push('healthcare');
 
   return results;
