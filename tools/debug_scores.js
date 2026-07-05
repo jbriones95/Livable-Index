@@ -50,7 +50,7 @@ const MAX_DIST_KM = {
   grocery: 1.5,
   nature: 2.0,
   busStop: 0.8,
-  healthcare: 2.0,
+  healthcare: 4.5,
 };
 
 const WEIGHTS = {
@@ -141,15 +141,17 @@ function haversineKm(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-function distToScore(d, max) {
-  // Match application logic: 100 inside threshold; for every full 200m beyond
-  // threshold subtract 10 points. Floor-based steps.
+function distToScore(d, max, key) {
+  // Match application logic: 100 inside threshold; apply stepped deductions.
+  // Default steps: 200m -> 10 points. Healthcare uses 500m -> 15 points.
   if (!isFinite(d)) return 0;
   if (d <= max) return 100;
   const extraMeters = (d - max) * 1000;
-  // round up partial 200m intervals
-  const steps = Math.ceil(extraMeters / 200);
-  const deduction = steps * 10;
+  const isHealthcare = key === 'healthcare';
+  const step = isHealthcare ? 500 : 200;
+  const perStep = isHealthcare ? 15 : 10;
+  const steps = Math.ceil(extraMeters / step);
+  const deduction = steps * perStep;
   return Math.max(0, 100 - deduction);
 }
 
@@ -189,7 +191,7 @@ async function analyzePoint(lat, lon, opts = {}) {
   // supplemental/trusted points not included here — consider adding if needed
 
   const scores = {};
-  for (const key of Object.keys(MAX_DIST_KM)) scores[key] = distToScore(nearest[key], MAX_DIST_KM[key]);
+  for (const key of Object.keys(MAX_DIST_KM)) scores[key] = distToScore(nearest[key], MAX_DIST_KM[key], key);
 
   const composite = Math.round(Object.entries(WEIGHTS).reduce((sum, [dim, weight]) => sum + (scores[dim] || 0) * weight, 0));
 

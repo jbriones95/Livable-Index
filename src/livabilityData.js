@@ -190,7 +190,7 @@ const MAX_DIST_KM = {
   // nature distance (includes parks/trail access)
   nature: 2.0,
   busStop: 0.8,
-  healthcare: 2.0,
+  healthcare: 4.5,
 };
 
 // Known coffee shops and parks missing from OSM – coordinates from Nominatim geocoding.
@@ -221,18 +221,28 @@ const SUPPLEMENTAL_POINTS = {
     [-105.0042134, 39.5842020],   // 1312 W Geddes Ave
     [-105.0040984, 39.6011676],   // Angeline's Little Creekway / Little Creek's Trailway (6364 S Sterne Pkwy)
   ],
+  medical: [
+    [-104.9858838, 39.5755567], // 7700 S Broadway (AdventHealth Littleton Hospital)
+    [-104.9931225, 39.5820827], // 20 W Dry Creek Cir
+    [-104.9923109, 39.5813203], // 22 W Dry Creek Cir
+    [-104.9890993, 39.5809587], // 2 W Dry Creek Cir (Ste 230 fallback)
+    [-105.0140860, 39.6168010], // 2200 W Berry Ave
+    [-104.9904930, 39.6227409], // 200 W Belleview Ave (Ste 170 fallback)
+    [-104.9951523, 39.6132573], // 609 W Littleton Blvd (unit fallback)
+  ],
 };
 
-function distToScore(d, max) {
-  // New rule: if within threshold -> 100. For every full 200m beyond the
-  // threshold, subtract 10 points (floor-based). Score floor is 0.
+function distToScore(d, max, opts = {}) {
+  // General rule: if within threshold -> 100. Beyond threshold apply stepped
+  // deductions. Defaults: stepMeters=200m, deduction=10 points per step.
+  // Healthcare overrides use stepMeters=500m and deduction=15 points.
   if (!isFinite(d)) return 0;
   if (d <= max) return 100;
+  const { stepMeters = 200, deduction = 10 } = opts;
   const extraMeters = (d - max) * 1000;
-  // round up partial 200m intervals so any partial 200m counts as a full step
-  const steps = Math.ceil(extraMeters / 200);
-  const deduction = steps * 10;
-  return Math.max(0, 100 - deduction);
+  const steps = Math.ceil(extraMeters / stepMeters);
+  const totalDeduction = steps * deduction;
+  return Math.max(0, 100 - totalDeduction);
 }
 
 function classifyOSM(tags) {
@@ -340,7 +350,11 @@ function nearestAndCounts(poiPoints, pt) {
 function computeScoresFromNearest(nearest) {
   const scores = {};
   for (const key of Object.keys(MAX_DIST_KM)) {
-    scores[key] = distToScore(nearest[key], MAX_DIST_KM[key]);
+    if (key === 'healthcare') {
+      scores[key] = distToScore(nearest[key], MAX_DIST_KM[key], { stepMeters: 500, deduction: 15 });
+    } else {
+      scores[key] = distToScore(nearest[key], MAX_DIST_KM[key], { stepMeters: 200, deduction: 10 });
+    }
   }
   return scores;
 }

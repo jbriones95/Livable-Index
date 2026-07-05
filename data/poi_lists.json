@@ -542,82 +542,40 @@
   ],
   "medical": [
     {
-      "lat": 39.641285,
-      "lon": -105.034208,
-      "name": "Colorado Mental Health Institute-Fort Logan",
-      "id": "node/358918705"
+      "lat": 39.5755567,
+      "lon": -104.9858838,
+      "name": "AdventHealth Littleton Hospital",
+      "note": "7700 S Broadway, Littleton, CO 80122"
     },
     {
-      "lat": 39.6246949,
-      "lon": -105.019975,
-      "name": "Walgreens",
-      "id": "node/598410286"
+      "lat": 39.5820827,
+      "lon": -104.9931225,
+      "note": "20 W Dry Creek Cir, Littleton, CO 80120"
     },
     {
-      "lat": 39.6245626,
-      "lon": -104.986719,
-      "name": "Walgreens",
-      "id": "node/2879385341"
+      "lat": 39.5813203,
+      "lon": -104.9923109,
+      "note": "22 W Dry Creek Cir, Littleton, CO 80120"
     },
     {
-      "lat": 39.6441544,
-      "lon": -105.006401,
-      "name": "Costco Pharmacy",
-      "id": "node/2884867788"
+      "lat": 39.5809587,
+      "lon": -104.9890993,
+      "note": "2 W Dry Creek Cir Ste 230, Littleton, CO 80120 (approx)"
     },
     {
-      "lat": 39.6085483,
-      "lon": -105.0363286,
-      "name": "Platte Canyon Dental Care",
-      "id": "node/5636366836"
+      "lat": 39.616801,
+      "lon": -105.014086,
+      "note": "2200 W Berry Ave, Littleton, CO 80120"
     },
     {
-      "lat": 39.5834695,
-      "lon": -104.9877341,
-      "name": "Dentists of Littleton",
-      "id": "node/11099631960"
+      "lat": 39.6227409,
+      "lon": -104.990493,
+      "note": "200 W Belleview Ave Ste 170, Englewood, CO 80110 (approx)"
     },
     {
-      "lat": 39.609928,
-      "lon": -104.9863915,
-      "name": "Orchard Creek Dentistry",
-      "id": "node/13285830799"
-    },
-    {
-      "lat": 39.6420774,
-      "lon": -105.0386624,
-      "name": "The Lighthouse",
-      "id": "way/1332100184"
-    },
-    {
-      "lat": 39.6418901,
-      "lon": -105.0391474,
-      "name": "Peer 1 Therapeutic Comunity",
-      "id": "way/1332100185"
-    },
-    {
-      "lat": 39.6417226,
-      "lon": -105.0395867,
-      "name": "The Haven Mother's House II",
-      "id": "way/1332100186"
-    },
-    {
-      "lat": 39.6415157,
-      "lon": -105.0399895,
-      "name": "The Haven Mother's House",
-      "id": "way/1332100187"
-    },
-    {
-      "lat": 39.6411071,
-      "lon": -105.0403855,
-      "name": "Peer 1 Therapeutic Comunity",
-      "id": "way/1332100188"
-    },
-    {
-      "lat": 39.6406857,
-      "lon": -105.0405574,
-      "name": "Outpatient Therapeutic Comunity",
-      "id": "way/1332100189"
+      "lat": 39.6132573,
+      "lon": -104.9951523,
+      "note": "609 W Littleton Blvd #100, Littleton, CO 80120 (approx)"
     }
   ],
   "busStops": [
