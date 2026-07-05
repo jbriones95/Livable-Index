@@ -1,0 +1,1220 @@
+{
+  "coffee": [
+    {
+      "lat": 39.6148589,
+      "lon": -105.0160270,
+      "name": "Mango Tree Coffee",
+      "note": "5624 S Prince St, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6124867,
+      "lon": -105.0175238,
+      "name": "Dirt Coffee",
+      "note": "2506 W Alamo Ave, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6005510,
+      "lon": -105.0223652,
+      "name": "Harold and Virginia Simpson Leadership Center",
+      "note": "6399 S Santa Fe Dr, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6032026,
+      "lon": -105.0229385,
+      "name": "6115, South Santa Fe Drive, Littleton, Arapahoe County, Colorado, 80120, United States",
+      "note": "6115 S Santa Fe Dr, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5862955,
+      "lon": -105.0239230,
+      "name": "claire's",
+      "note": "7301 S Santa Fe Dr Ste 310, Littleton, CO 80120 (approx)"
+    },
+    {
+      "lat": 39.5833145,
+      "lon": -104.9882493,
+      "name": "South Broadway",
+      "note": "7330 S Broadway, Littleton, CO 80122"
+    },
+    {
+      "lat": 39.5715438,
+      "lon": -104.9889619,
+      "name": "Black Rock Coffee",
+      "note": "7961 S Broadway Ste A, Littleton, CO 80122 (approx)"
+    },
+    {
+      "lat": 39.6012170,
+      "lon": -104.9880828,
+      "name": "6500, South Broadway, Littleton, Arapahoe County, Colorado, 80121, United States",
+      "note": "6504 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.6118882,
+      "lon": -104.9886631,
+      "name": "Artemis Tea Coffee",
+      "note": "40 W Littleton Blvd Ste 211, Littleton, CO 80120 (approx)"
+    },
+    {
+      "lat": 39.6239450,
+      "lon": -104.9878770,
+      "name": "South Broadway",
+      "note": "5100 S Broadway, Englewood, CO 80113"
+    }
+  ],
+  "grocery": [
+    {
+      "lat": 39.6131003,
+      "lon": -104.9894468,
+      "note": "100 W Littleton Blvd"
+    },
+    {
+      "lat": 39.6256084,
+      "lon": -104.9885810,
+      "note": "5001 S Broadway"
+    },
+    {
+      "lat": 39.6123386,
+      "lon": -105.0062238,
+      "note": "1500 W Littleton Blvd"
+    },
+    {
+      "lat": 39.6259633,
+      "lon": -105.0246978,
+      "note": "5050 S Federal Blvd"
+    },
+    {
+      "lat": 39.5733500,
+      "lon": -104.9885920,
+      "note": "7901 S Broadway"
+    },
+    {
+      "lat": 39.5748722,
+      "lon": -104.9918813,
+      "note": "181 W Mineral Ave"
+    }
+  ],
+  "parks": [
+    {
+      "lat": 39.57879,
+      "lon": -104.99338,
+      "note": "7900 S Ogden Way / Horseshoe Park (approx)"
+    },
+    {
+      "lat": 39.5787253,
+      "lon": -105.0071743,
+      "note": "7791 S Windermere St"
+    },
+    {
+      "lat": 39.58219,
+      "lon": -105.01862,
+      "note": "S Prince St & W Jackass Hill Rd / Jackass Hill Park"
+    },
+    {
+      "lat": 39.5786312,
+      "lon": -105.0233734,
+      "note": "1900 W Mineral Ave"
+    },
+    {
+      "lat": 39.584202,
+      "lon": -105.0042134,
+      "note": "1312 W Geddes Ave"
+    },
+    {
+      "lat": 39.6011676,
+      "lon": -105.0040984,
+      "note": "Angeline's Little Creekway / 6364 S Sterne Pkwy"
+    },
+    {
+      "lat": 39.6160989,
+      "lon": -104.9824819,
+      "name": "Brookridge Park",
+      "id": "node/358921494"
+    },
+    {
+      "lat": 39.6227843,
+      "lon": -105.0362888,
+      "name": "Harlow Park",
+      "id": "way/42704130"
+    },
+    {
+      "lat": 39.639495,
+      "lon": -105.0006915,
+      "name": "Jason Park",
+      "id": "way/49948392"
+    },
+    {
+      "lat": 39.6376282,
+      "lon": -105.04753,
+      "name": "Wolff And Quincy Park",
+      "id": "way/51474862"
+    },
+    {
+      "lat": 39.6144312,
+      "lon": -105.0291342,
+      "name": "Bowles Grove Park",
+      "id": "way/84816601"
+    },
+    {
+      "lat": 39.609623,
+      "lon": -105.0111875,
+      "name": "Sterne Park",
+      "id": "way/84816610"
+    },
+    {
+      "lat": 39.6347516,
+      "lon": -105.0395295,
+      "name": "Bow Mar Heights Park",
+      "id": "way/88608930"
+    },
+    {
+      "lat": 39.624746,
+      "lon": -105.0386441,
+      "name": "James A Taylor Park",
+      "id": "way/88609454"
+    },
+    {
+      "lat": 39.606974,
+      "lon": -105.0458864,
+      "name": "Hamlet Park",
+      "id": "way/88609912"
+    },
+    {
+      "lat": 39.5973845,
+      "lon": -105.0563322,
+      "name": null,
+      "id": "way/88625758"
+    },
+    {
+      "lat": 39.6168043,
+      "lon": -105.0333488,
+      "name": "Berry Park",
+      "id": "way/88780813"
+    },
+    {
+      "lat": 39.619242,
+      "lon": -105.0440101,
+      "name": "Cimarron Trail Park",
+      "id": "way/88780819"
+    },
+    {
+      "lat": 39.5812971,
+      "lon": -105.0527542,
+      "name": "Columbine Trail Park",
+      "id": "way/88981823"
+    },
+    {
+      "lat": 39.5822067,
+      "lon": -105.0511503,
+      "name": null,
+      "id": "way/88981930"
+    },
+    {
+      "lat": 39.5848134,
+      "lon": -105.053921,
+      "name": null,
+      "id": "way/88981931"
+    },
+    {
+      "lat": 39.5817643,
+      "lon": -105.0539586,
+      "name": null,
+      "id": "way/88981933"
+    },
+    {
+      "lat": 39.6158907,
+      "lon": -104.996091,
+      "name": "Powers Park",
+      "id": "way/108058209"
+    },
+    {
+      "lat": 39.6166201,
+      "lon": -104.9976373,
+      "name": null,
+      "id": "way/108059278"
+    },
+    {
+      "lat": 39.6068432,
+      "lon": -104.9991742,
+      "name": "Ketring Park",
+      "id": "way/108059406"
+    },
+    {
+      "lat": 39.6008173,
+      "lon": -104.9806283,
+      "name": "Milliken Park",
+      "id": "way/110025452"
+    },
+    {
+      "lat": 39.6117344,
+      "lon": -105.0393125,
+      "name": "Wynetka Ponds Park",
+      "id": "way/129602022"
+    },
+    {
+      "lat": 39.6058122,
+      "lon": -105.0033174,
+      "name": "Gallup Park",
+      "id": "way/155478160"
+    },
+    {
+      "lat": 39.6332114,
+      "lon": -105.019716,
+      "name": "Centennial Park",
+      "id": "way/181653345"
+    },
+    {
+      "lat": 39.6222595,
+      "lon": -105.0032614,
+      "name": "Cornerstone Park",
+      "id": "way/239957072"
+    },
+    {
+      "lat": 39.6286928,
+      "lon": -104.9814918,
+      "name": "Elsie Duncan Park",
+      "id": "way/284183621"
+    },
+    {
+      "lat": 39.6362393,
+      "lon": -104.9979685,
+      "name": "Rotolo Park",
+      "id": "way/284349544"
+    },
+    {
+      "lat": 39.6353166,
+      "lon": -104.996056,
+      "name": "Southwest Greenbelt",
+      "id": "way/284366771"
+    },
+    {
+      "lat": 39.6344686,
+      "lon": -104.9937427,
+      "name": null,
+      "id": "way/284366774"
+    },
+    {
+      "lat": 39.6339592,
+      "lon": -104.9916795,
+      "name": null,
+      "id": "way/284366779"
+    },
+    {
+      "lat": 39.6265444,
+      "lon": -105.0024943,
+      "name": "Belleview Park",
+      "id": "way/284377626"
+    },
+    {
+      "lat": 39.6428606,
+      "lon": -105.0014315,
+      "name": null,
+      "id": "way/285357775"
+    },
+    {
+      "lat": 39.6225318,
+      "lon": -104.9979874,
+      "name": "Progress Park",
+      "id": "way/368713533"
+    },
+    {
+      "lat": 39.6313295,
+      "lon": -105.014001,
+      "name": null,
+      "id": "way/461420520"
+    },
+    {
+      "lat": 39.6184852,
+      "lon": -105.0142153,
+      "name": "Geneva Park",
+      "id": "way/468571756"
+    },
+    {
+      "lat": 39.5974201,
+      "lon": -104.9999993,
+      "name": "Angeline Little Greenway",
+      "id": "way/473457220"
+    },
+    {
+      "lat": 39.593617,
+      "lon": -104.990669,
+      "name": "Little's Creek Park",
+      "id": "way/473675677"
+    },
+    {
+      "lat": 39.6173614,
+      "lon": -105.0096044,
+      "name": "Slaughterhouse Gulch Park",
+      "id": "way/477046279"
+    },
+    {
+      "lat": 39.6206478,
+      "lon": -105.0584241,
+      "name": "Mary's Meadow",
+      "id": "way/485376086"
+    },
+    {
+      "lat": 39.6131643,
+      "lon": -105.0149565,
+      "name": "Bega Park",
+      "id": "way/504891333"
+    },
+    {
+      "lat": 39.5889843,
+      "lon": -104.9947176,
+      "name": "Grandpa's Acres",
+      "id": "way/545590448"
+    },
+    {
+      "lat": 39.5821071,
+      "lon": -104.9961581,
+      "name": "Ivan Thomas Greenway",
+      "id": "way/545591172"
+    },
+    {
+      "lat": 39.5847007,
+      "lon": -104.9998453,
+      "name": "Carbone Park",
+      "id": "way/545592008"
+    },
+    {
+      "lat": 39.5900294,
+      "lon": -105.0042749,
+      "name": "Ashbaugh Park",
+      "id": "way/545592009"
+    },
+    {
+      "lat": 39.5971887,
+      "lon": -105.0184188,
+      "name": "Ridgewood Park Lower",
+      "id": "way/545592076"
+    },
+    {
+      "lat": 39.5957081,
+      "lon": -105.027306,
+      "name": "Reynolds Landing",
+      "id": "way/545592249"
+    },
+    {
+      "lat": 39.5874477,
+      "lon": -105.0178833,
+      "name": "Ridgeview Park",
+      "id": "way/545592734"
+    },
+    {
+      "lat": 39.6113986,
+      "lon": -104.9901528,
+      "name": "Ida Park",
+      "id": "way/545972405"
+    },
+    {
+      "lat": 39.6103325,
+      "lon": -104.9907942,
+      "name": "East Community Center Sports Field",
+      "id": "way/545972406"
+    },
+    {
+      "lat": 39.6096406,
+      "lon": -104.9905954,
+      "name": "East Community Center Campus",
+      "id": "way/545972408"
+    },
+    {
+      "lat": 39.6139434,
+      "lon": -104.991923,
+      "name": "Promise Park",
+      "id": "way/545972410"
+    },
+    {
+      "lat": 39.6143393,
+      "lon": -104.9911154,
+      "name": "Promise Park North",
+      "id": "way/545972411"
+    },
+    {
+      "lat": 39.6188612,
+      "lon": -105.0193142,
+      "name": null,
+      "id": "way/546973207"
+    },
+    {
+      "lat": 39.5823963,
+      "lon": -104.9839822,
+      "name": null,
+      "id": "way/546973955"
+    },
+    {
+      "lat": 39.5891914,
+      "lon": -104.9816409,
+      "name": null,
+      "id": "way/547161913"
+    },
+    {
+      "lat": 39.5954335,
+      "lon": -105.0154495,
+      "name": "Charley Emley Park",
+      "id": "way/562908273"
+    },
+    {
+      "lat": 39.5937555,
+      "lon": -105.0095626,
+      "name": "Ivan Thomas Greenbelt",
+      "id": "way/597916944"
+    },
+    {
+      "lat": 39.5919983,
+      "lon": -105.0079912,
+      "name": "Ivan Thomas Greenbelt",
+      "id": "way/597916945"
+    },
+    {
+      "lat": 39.6028783,
+      "lon": -105.0082623,
+      "name": null,
+      "id": "way/634066823"
+    },
+    {
+      "lat": 39.5972896,
+      "lon": -105.0406821,
+      "name": "Burning Tree Park North",
+      "id": "way/770758149"
+    },
+    {
+      "lat": 39.5949247,
+      "lon": -105.0410342,
+      "name": "Burning Tree Park and Pool",
+      "id": "way/770758150"
+    },
+    {
+      "lat": 39.594997,
+      "lon": -105.0439176,
+      "name": "Doral Park in Burning Tree",
+      "id": "way/770758151"
+    },
+    {
+      "lat": 39.6018045,
+      "lon": -105.0543455,
+      "name": "Racoon Hollar",
+      "id": "way/771127746"
+    },
+    {
+      "lat": 39.6408295,
+      "lon": -105.0374321,
+      "name": null,
+      "id": "way/780730325"
+    },
+    {
+      "lat": 39.6099183,
+      "lon": -104.9906074,
+      "name": "East Community Center Playground",
+      "id": "way/1049475418"
+    },
+    {
+      "lat": 39.6391244,
+      "lon": -105.0228851,
+      "name": "Chase Park",
+      "id": "way/1161237431"
+    },
+    {
+      "lat": 39.645056,
+      "lon": -105.0312437,
+      "name": null,
+      "id": "way/1161953032"
+    },
+    {
+      "lat": 39.6417627,
+      "lon": -105.0264825,
+      "name": null,
+      "id": "way/1161953042"
+    },
+    {
+      "lat": 39.6148123,
+      "lon": -105.0467374,
+      "name": null,
+      "id": "way/1162587899"
+    },
+    {
+      "lat": 39.5790066,
+      "lon": -105.0378954,
+      "name": "South Platte Park",
+      "id": "way/1229884129"
+    },
+    {
+      "lat": 39.5830381,
+      "lon": -105.0331221,
+      "name": "South Platte Park",
+      "id": "way/1229884130"
+    },
+    {
+      "lat": 39.5937643,
+      "lon": -105.034343,
+      "name": null,
+      "id": "way/1282535157"
+    },
+    {
+      "lat": 39.59122,
+      "lon": -105.0390433,
+      "name": null,
+      "id": "way/1282535158"
+    },
+    {
+      "lat": 39.5915903,
+      "lon": -105.0378173,
+      "name": null,
+      "id": "way/1282535159"
+    },
+    {
+      "lat": 39.6005666,
+      "lon": -105.003544,
+      "name": null,
+      "id": "way/1299295866"
+    },
+    {
+      "lat": 39.6109071,
+      "lon": -105.0554918,
+      "name": null,
+      "id": "way/1330712351"
+    },
+    {
+      "lat": 39.597555,
+      "lon": -105.0234873,
+      "name": "Lee Gulch Overlook & Trailhead",
+      "id": "way/1331492319"
+    },
+    {
+      "lat": 39.595014,
+      "lon": -105.0136533,
+      "name": "Ridgewood Park Upper",
+      "id": "relation/8039932"
+    }
+  ],
+  "trailheads": [
+    {
+      "lat": 39.619242,
+      "lon": -105.0440101,
+      "name": "Cimarron Trail Park",
+      "id": "way/88780819"
+    },
+    {
+      "lat": 39.5812971,
+      "lon": -105.0527542,
+      "name": "Columbine Trail Park",
+      "id": "way/88981823"
+    },
+    {
+      "lat": 39.597555,
+      "lon": -105.0234873,
+      "name": "Lee Gulch Overlook & Trailhead",
+      "id": "way/1331492319"
+    }
+  ],
+  "medical": [
+    {
+      "lat": 39.5755567,
+      "lon": -104.9858838,
+      "name": "AdventHealth Littleton Hospital",
+      "note": "7700 S Broadway, Littleton, CO 80122"
+    },
+    {
+      "lat": 39.5820827,
+      "lon": -104.9931225,
+      "name": "20 West Dry Creek Circle (Highline Professional Center)",
+      "note": "20 W Dry Creek Cir, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5813203,
+      "lon": -104.9923109,
+      "name": "22 West Dry Creek Circle (Highline Professional Center)",
+      "note": "22 W Dry Creek Cir, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5809587,
+      "lon": -104.9890993,
+      "name": "2 West Dry Creek Circle (Highline Professional Center)",
+      "note": "2 W Dry Creek Cir Ste 230, Littleton, CO 80120 (approx)"
+    },
+    {
+      "lat": 39.616801,
+      "lon": -105.014086,
+      "name": "2200 West Berry Avenue (medical building)",
+      "note": "2200 W Berry Ave, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6227409,
+      "lon": -104.990493,
+      "name": "Chuze Fitness",
+      "note": "200 W Belleview Ave Ste 170, Englewood, CO 80110 (approx)"
+    },
+    {
+      "lat": 39.6132573,
+      "lon": -104.9951523,
+      "name": "609 West Littleton Boulevard",
+      "note": "609 W Littleton Blvd #100, Littleton, CO 80120 (approx)"
+    }
+  ],
+  "busStops": [
+    {
+      "lat": 39.5801859,
+      "lon": -105.0249845,
+      "name": "Littleton - Mineral",
+      "id": "node/439647509"
+    },
+    {
+      "lat": 39.6119672,
+      "lon": -105.0148746,
+      "name": "Littleton Downtown",
+      "id": "node/439983297"
+    },
+    {
+      "lat": 39.642952,
+      "lon": -105.0048363,
+      "name": "Oxford - City of Sheridan",
+      "id": "node/442756974"
+    },
+    {
+      "lat": 39.6425993,
+      "lon": -105.034576,
+      "name": "S Lowell Blvd & W Oxford Ave",
+      "id": "node/912599844"
+    },
+    {
+      "lat": 39.6419366,
+      "lon": -104.9879383,
+      "name": "South Broadway & West Oxford Avenue",
+      "id": "node/2875714994"
+    },
+    {
+      "lat": 39.6426099,
+      "lon": -104.987605,
+      "name": "South Broadway & Oxford Avenue",
+      "id": "node/2875714998"
+    },
+    {
+      "lat": 39.6351993,
+      "lon": -104.987706,
+      "name": "South Broadway & Stanford Avenue",
+      "id": "node/2879314795"
+    },
+    {
+      "lat": 39.6346788,
+      "lon": -104.9880284,
+      "name": "South Broadway & West Stanford Avenue",
+      "id": "node/2879321313"
+    },
+    {
+      "lat": 39.6317372,
+      "lon": -104.987741,
+      "name": "South Broadway & Union Avenue",
+      "id": "node/2879321363"
+    },
+    {
+      "lat": 39.6382956,
+      "lon": -104.9879855,
+      "name": "South Broadway & West Quincy Avenue",
+      "id": "node/2879321373"
+    },
+    {
+      "lat": 39.6310473,
+      "lon": -104.988066,
+      "name": "South Broadway & West Union Avenue",
+      "id": "node/2879321411"
+    },
+    {
+      "lat": 39.6391549,
+      "lon": -104.987669,
+      "name": "South Broadway & Quincy Avenue",
+      "id": "node/2879321433"
+    },
+    {
+      "lat": 39.6231949,
+      "lon": -104.9881894,
+      "name": "South Broadway & West Belleview Avenue",
+      "id": "node/2879385343"
+    },
+    {
+      "lat": 39.6245832,
+      "lon": -104.987752,
+      "name": "South Broadway & Belleview Avenue",
+      "id": "node/2879385357"
+    },
+    {
+      "lat": 39.6273309,
+      "lon": -104.9881169,
+      "name": "South Broadway & West Chenango Avenue",
+      "id": "node/2879430824"
+    },
+    {
+      "lat": 39.6279072,
+      "lon": -104.987776,
+      "name": "South Broadway & Chenango Avenue",
+      "id": "node/2879430848"
+    },
+    {
+      "lat": 39.6426324,
+      "lon": -105.0005272,
+      "name": "S Kalamath St & W Oxford Ave",
+      "id": "node/2881062569"
+    },
+    {
+      "lat": 39.643426,
+      "lon": -105.004454,
+      "name": "Oxford - City of Sheridan",
+      "id": "node/2881062573"
+    },
+    {
+      "lat": 39.642085,
+      "lon": -105.003652,
+      "name": "W Oxford Ave & S Navajo St",
+      "id": "node/2881062585"
+    },
+    {
+      "lat": 39.6442991,
+      "lon": -105.0005326,
+      "name": "S Kalamath St & W Nassau Ave",
+      "id": "node/2881064169"
+    },
+    {
+      "lat": 39.6423337,
+      "lon": -105.0106847,
+      "name": "W Oxford Ave 2000 block",
+      "id": "node/2884573464"
+    },
+    {
+      "lat": 39.6423988,
+      "lon": -105.00712,
+      "name": "W Oxford Ave & S Santa Fe Dr",
+      "id": "node/2884839712"
+    },
+    {
+      "lat": 39.6420993,
+      "lon": -105.0077718,
+      "name": "W Oxford Ave & S Natches Ct",
+      "id": "node/2884839715"
+    },
+    {
+      "lat": 39.642153,
+      "lon": -105.0115215,
+      "name": "W Oxford Ave 2000 block",
+      "id": "node/2884839720"
+    },
+    {
+      "lat": 39.64238,
+      "lon": -105.0260578,
+      "name": "W Oxford Ave & S Federal Blvd",
+      "id": "node/2890244655"
+    },
+    {
+      "lat": 39.6423841,
+      "lon": -105.0198297,
+      "name": "W Oxford Ave & S Clay St",
+      "id": "node/2890244657"
+    },
+    {
+      "lat": 39.6423738,
+      "lon": -105.0235043,
+      "name": "W Oxford Ave & S Decatur St",
+      "id": "node/2890244659"
+    },
+    {
+      "lat": 39.6421797,
+      "lon": -105.020283,
+      "name": "W Oxford Ave & S Clay St",
+      "id": "node/2890244660"
+    },
+    {
+      "lat": 39.6421693,
+      "lon": -105.0224261,
+      "name": "W Oxford Ave & S Decatur St",
+      "id": "node/2890244662"
+    },
+    {
+      "lat": 39.64067,
+      "lon": -105.0300715,
+      "name": "S Irving St & W Oxford Ave",
+      "id": "node/2902232866"
+    },
+    {
+      "lat": 39.6407672,
+      "lon": -105.0298568,
+      "name": "S Irving St & W Oxford Ave",
+      "id": "node/2902232867"
+    },
+    {
+      "lat": 39.6421634,
+      "lon": -105.0247713,
+      "name": "W Oxford Ave & S Federal Blvd",
+      "id": "node/2902232870"
+    },
+    {
+      "lat": 39.6421304,
+      "lon": -105.0292453,
+      "name": "W Oxford Ave & S Hooker St",
+      "id": "node/2902232873"
+    },
+    {
+      "lat": 39.6423555,
+      "lon": -105.0291407,
+      "name": "W Oxford Ave & S Hooker St",
+      "id": "node/2902232874"
+    },
+    {
+      "lat": 39.6421819,
+      "lon": -105.0342638,
+      "name": "W Oxford Ave & S Lowell Blvd",
+      "id": "node/2902267155"
+    },
+    {
+      "lat": 39.6422254,
+      "lon": -105.0317236,
+      "name": "W Oxford Ave & S Knox Ct",
+      "id": "node/2902267173"
+    },
+    {
+      "lat": 39.6423431,
+      "lon": -105.0321286,
+      "name": "W Oxford Ave & S Knox Ct",
+      "id": "node/2902267175"
+    },
+    {
+      "lat": 39.5803792,
+      "lon": -104.988294,
+      "name": "South Broadway & Dry Creek Road",
+      "id": "node/5927893911"
+    },
+    {
+      "lat": 39.584279,
+      "lon": -104.988243,
+      "name": "South Broadway & Geddes Avenue",
+      "id": "node/5927893916"
+    },
+    {
+      "lat": 39.6125321,
+      "lon": -104.9882805,
+      "name": "South Broadway & West Littleton Boulevard",
+      "id": "node/6453061600"
+    },
+    {
+      "lat": 39.58588,
+      "lon": -104.988237,
+      "name": "South Broadway & West Fremont Place",
+      "id": "node/6584160761"
+    },
+    {
+      "lat": 39.588175,
+      "lon": -104.988202,
+      "name": "South Broadway & South Lincoln Way",
+      "id": "node/6584190220"
+    },
+    {
+      "lat": 39.5911049,
+      "lon": -104.988164,
+      "name": "South Broadway & West Ridge Road",
+      "id": "node/6584190221"
+    },
+    {
+      "lat": 39.5931388,
+      "lon": -104.988147,
+      "name": "South Broadway & West Sterne Parkway",
+      "id": "node/6584228500"
+    },
+    {
+      "lat": 39.5957244,
+      "lon": -104.9881,
+      "name": "South Broadway & East Arapahoe Road",
+      "id": "node/6584228501"
+    },
+    {
+      "lat": 39.5982448,
+      "lon": -104.988084,
+      "name": "South Broadway & Euclid Avenue",
+      "id": "node/6584244146"
+    },
+    {
+      "lat": 39.6000852,
+      "lon": -104.988044,
+      "name": "South Broadway & Panama Drive",
+      "id": "node/6584244147"
+    },
+    {
+      "lat": 39.6034166,
+      "lon": -104.987989,
+      "name": "South Broadway & Caley Avenue",
+      "id": "node/6584244148"
+    },
+    {
+      "lat": 39.6062733,
+      "lon": -104.9879639,
+      "name": "South Broadway & South Bannock Street",
+      "id": "node/6585277037"
+    },
+    {
+      "lat": 39.6101509,
+      "lon": -104.987903,
+      "name": "South Broadway & Orchard Road",
+      "id": "node/6585305584"
+    },
+    {
+      "lat": 39.6157785,
+      "lon": -104.98786,
+      "name": "South Broadway & Powers Avenue",
+      "id": "node/6585327497"
+    },
+    {
+      "lat": 39.6173203,
+      "lon": -104.987863,
+      "name": "South Broadway & West Rafferty Gardens Avenue",
+      "id": "node/6585327498"
+    },
+    {
+      "lat": 39.6135955,
+      "lon": -104.987871,
+      "name": "South Broadway & Littleton Boulevard",
+      "id": "node/6585362821"
+    },
+    {
+      "lat": 39.6217361,
+      "lon": -104.987823,
+      "name": "South Broadway & Centennial Avenue",
+      "id": "node/6585370207"
+    },
+    {
+      "lat": 39.6236691,
+      "lon": -105.0348427,
+      "name": null,
+      "id": "node/7087131321"
+    },
+    {
+      "lat": 39.6236815,
+      "lon": -105.0350733,
+      "name": null,
+      "id": "node/7087131322"
+    },
+    {
+      "lat": 39.6113089,
+      "lon": -105.0160291,
+      "name": "Gate D",
+      "id": "node/7089868724"
+    },
+    {
+      "lat": 39.6108093,
+      "lon": -105.0158621,
+      "name": "Gate B",
+      "id": "node/7089868725"
+    },
+    {
+      "lat": 39.6106105,
+      "lon": -105.0159862,
+      "name": "Gate A",
+      "id": "node/7089868726"
+    },
+    {
+      "lat": 39.6200844,
+      "lon": -105.0276195,
+      "name": null,
+      "id": "node/7102951136"
+    },
+    {
+      "lat": 39.6195198,
+      "lon": -105.0354028,
+      "name": null,
+      "id": "node/7223328163"
+    },
+    {
+      "lat": 39.6172631,
+      "lon": -105.0355651,
+      "name": null,
+      "id": "node/7223328176"
+    },
+    {
+      "lat": 39.6202,
+      "lon": -105.0354015,
+      "name": null,
+      "id": "node/7223331485"
+    },
+    {
+      "lat": 39.6171816,
+      "lon": -105.0279906,
+      "name": null,
+      "id": "node/7230854477"
+    },
+    {
+      "lat": 39.6172167,
+      "lon": -105.0276553,
+      "name": null,
+      "id": "node/7230854478"
+    },
+    {
+      "lat": 39.6196733,
+      "lon": -105.0279611,
+      "name": null,
+      "id": "node/7230854479"
+    },
+    {
+      "lat": 39.6125676,
+      "lon": -105.0152539,
+      "name": "Gate G",
+      "id": "node/7292804873"
+    },
+    {
+      "lat": 39.6109898,
+      "lon": -105.0157653,
+      "name": "Gate C",
+      "id": "node/7292994107"
+    },
+    {
+      "lat": 39.5981179,
+      "lon": -104.9884016,
+      "name": "South Broadway & Weaver Place",
+      "id": "node/7320866578"
+    },
+    {
+      "lat": 39.594801,
+      "lon": -104.9884447,
+      "name": "South Broadway & East Arapahoe Road",
+      "id": "node/7320866579"
+    },
+    {
+      "lat": 39.5925648,
+      "lon": -104.9884601,
+      "name": "South Broadway & West Sterne Parkway",
+      "id": "node/7320866580"
+    },
+    {
+      "lat": 39.5903922,
+      "lon": -104.988508,
+      "name": "South Broadway & West Ridge Road",
+      "id": "node/7320866581"
+    },
+    {
+      "lat": 39.621508,
+      "lon": -104.9881886,
+      "name": "South Broadway & West Centennial Avenue",
+      "id": "node/7320867027"
+    },
+    {
+      "lat": 39.618458,
+      "lon": -104.9882105,
+      "name": "South Broadway & West Rafferty Gardens Avenue",
+      "id": "node/7320867028"
+    },
+    {
+      "lat": 39.6163341,
+      "lon": -104.9882156,
+      "name": "South Broadway & West Powers Avenue",
+      "id": "node/7320867029"
+    },
+    {
+      "lat": 39.6085579,
+      "lon": -104.9882599,
+      "name": "South Broadway & West Broadmoor Drive",
+      "id": "node/7320867030"
+    },
+    {
+      "lat": 39.6032412,
+      "lon": -104.9883431,
+      "name": "South Broadway & West Fair Avenue",
+      "id": "node/7320871743"
+    },
+    {
+      "lat": 39.5879698,
+      "lon": -104.9885196,
+      "name": "South Broadway & West Davies Avenue",
+      "id": "node/7322050510"
+    },
+    {
+      "lat": 39.5858863,
+      "lon": -104.9885515,
+      "name": "South Broadway & West Fremont Place",
+      "id": "node/7322089606"
+    },
+    {
+      "lat": 39.5802272,
+      "lon": -104.9886276,
+      "name": "South Broadway & West Dry Creek Road",
+      "id": "node/7322112744"
+    },
+    {
+      "lat": 39.5831907,
+      "lon": -104.9885832,
+      "name": "South Broadway & West Fremont Avenue",
+      "id": "node/7322118947"
+    },
+    {
+      "lat": 39.5807588,
+      "lon": -105.026202,
+      "name": "Littleton / Mineral Gate C",
+      "id": "node/7365688346"
+    },
+    {
+      "lat": 39.5809624,
+      "lon": -105.026106,
+      "name": "Littleton / Mineral Gate B",
+      "id": "node/7365688347"
+    },
+    {
+      "lat": 39.5808869,
+      "lon": -105.025627,
+      "name": "Littleton / Mineral Gate D",
+      "id": "node/7365688348"
+    },
+    {
+      "lat": 39.6427023,
+      "lon": -105.0049661,
+      "name": "Oxford - City of Sheridan",
+      "id": "node/7382036671"
+    },
+    {
+      "lat": 39.6432411,
+      "lon": -105.0046682,
+      "name": "Oxford - City of Sheridan",
+      "id": "node/7382036672"
+    },
+    {
+      "lat": 39.6117489,
+      "lon": -105.0150583,
+      "name": "Littleton Downtown",
+      "id": "node/7382036676"
+    },
+    {
+      "lat": 39.6121661,
+      "lon": -105.0147135,
+      "name": "Littleton Downtown",
+      "id": "node/7382036677"
+    },
+    {
+      "lat": 39.5805518,
+      "lon": -105.0247904,
+      "name": "Littleton - Mineral",
+      "id": "node/7382036679"
+    },
+    {
+      "lat": 39.6235413,
+      "lon": -105.0256499,
+      "name": null,
+      "id": "node/10943407336"
+    },
+    {
+      "lat": 39.6220238,
+      "lon": -105.0270568,
+      "name": null,
+      "id": "node/10943407337"
+    },
+    {
+      "lat": 39.58084,
+      "lon": -105.0258953,
+      "name": "Littleton - Mineral Bus Station",
+      "id": "way/109390306"
+    },
+    {
+      "lat": 39.6121442,
+      "lon": -105.0148849,
+      "name": "Littleton Downtown",
+      "id": "way/504891334"
+    },
+    {
+      "lat": 39.5802829,
+      "lon": -105.024882,
+      "name": "Littleton - Mineral",
+      "id": "way/542275857"
+    }
+  ]
+}

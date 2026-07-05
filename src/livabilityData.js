@@ -193,44 +193,66 @@ const MAX_DIST_KM = {
   healthcare: 4.5,
 };
 
-// Known coffee shops and parks missing from OSM – coordinates from Nominatim geocoding.
-// Merged with OSM data during scoring so proximity calculations are accurate.
-const SUPPLEMENTAL_POINTS = {
-  // Supplemental grocery locations (user-provided addresses geocoded)
-  grocery: [
-    [-104.9894468, 39.6131003], // 100 W Littleton Blvd
-    [-104.9885810, 39.6256084], // 5001 S Broadway
-    [-105.0062238, 39.6123386], // 1500 W Littleton Blvd (unit-agnostic)
-    [-105.0246978, 39.6259633], // 5050 S Federal Blvd
-    [-104.9885920, 39.5733500], // 7901 S Broadway
-    [-104.9918813, 39.5748722], // 181 W Mineral Ave
-  ],
-  coffee: [
-    [-104.9879769, 39.5722466],   // 7960 S Broadway
-    [-105.0252290, 39.5823901],   // 7301 S Santa Fe Dr Ste 310
-    [-105.0229385, 39.6032026],   // 6115 S Santa Fe Dr
-    [-104.9880828, 39.6012170],   // 6504 S Broadway
-    [-105.0223652, 39.6005510],   // 6399 S Santa Fe Dr
-  ],
-  // Supplemental nature / park points (user-provided)
-  nature: [
-    [-104.99338, 39.57879],       // 7900 S Ogden Way / Horseshoe Park area (approx)
-    [-105.0071743, 39.5787253],   // 7791 S Windermere St
-    [-105.01862, 39.58219],       // S Prince St & W Jackass Hill Rd / Jackass Hill Park
-    [-105.0233734, 39.5786312],   // 1900 W Mineral Ave
-    [-105.0042134, 39.5842020],   // 1312 W Geddes Ave
-    [-105.0040984, 39.6011676],   // Angeline's Little Creekway / Little Creek's Trailway (6364 S Sterne Pkwy)
-  ],
-  medical: [
-    [-104.9858838, 39.5755567], // 7700 S Broadway (AdventHealth Littleton Hospital)
-    [-104.9931225, 39.5820827], // 20 W Dry Creek Cir
-    [-104.9923109, 39.5813203], // 22 W Dry Creek Cir
-    [-104.9890993, 39.5809587], // 2 W Dry Creek Cir (Ste 230 fallback)
-    [-105.0140860, 39.6168010], // 2200 W Berry Ave
-    [-104.9904930, 39.6227409], // 200 W Belleview Ave (Ste 170 fallback)
-    [-104.9951523, 39.6132573], // 609 W Littleton Blvd (unit fallback)
-  ],
-};
+// Load an editable unified POI list at runtime (dev-only fallback to built-in supplemental points)
+let SUPPLEMENTAL_POINTS = null;
+try {
+  // Attempt to load the editable JSON at build/runtime if available
+  // In the browser this will be undefined; Node/dev scripts can import via fs.
+  // eslint-disable-next-line import/no-dynamic-require
+  // Use a relative path from the built app root.
+  // If the file isn't present at runtime, fall back to the embedded arrays below.
+  // NOTE: bundlers may inline this at build-time; this pattern prefers runtime fetch when possible.
+  // For dev server in Node, require will work.
+  // @ts-ignore
+  const unified = typeof window === 'undefined' ? require('../data/unified_list.json') : null;
+  if (unified) {
+    SUPPLEMENTAL_POINTS = {
+      grocery: (unified.grocery || []).map((p) => [p.lon, p.lat]),
+      coffee: (unified.coffee || []).map((p) => [p.lon, p.lat]),
+      nature: (unified.parks || []).map((p) => [p.lon, p.lat]),
+      medical: (unified.medical || []).map((p) => [p.lon, p.lat]),
+    };
+  }
+} catch (e) {
+  // ignore; fallback to hard-coded list below
+}
+
+if (!SUPPLEMENTAL_POINTS) {
+  SUPPLEMENTAL_POINTS = {
+    grocery: [
+      [-104.9894468, 39.6131003], // 100 W Littleton Blvd
+      [-104.9885810, 39.6256084], // 5001 S Broadway
+      [-105.0062238, 39.6123386], // 1500 W Littleton Blvd (unit-agnostic)
+      [-105.0246978, 39.6259633], // 5050 S Federal Blvd
+      [-104.9885920, 39.5733500], // 7901 S Broadway
+      [-104.9918813, 39.5748722], // 181 W Mineral Ave
+    ],
+    coffee: [
+      [-104.9879769, 39.5722466],   // 7960 S Broadway
+      [-105.0252290, 39.5823901],   // 7301 S Santa Fe Dr Ste 310
+      [-105.0229385, 39.6032026],   // 6115 S Santa Fe Dr
+      [-104.9880828, 39.6012170],   // 6504 S Broadway
+      [-105.0223652, 39.6005510],   // 6399 S Santa Fe Dr
+    ],
+    nature: [
+      [-104.99338, 39.57879],       // 7900 S Ogden Way / Horseshoe Park area (approx)
+      [-105.0071743, 39.5787253],   // 7791 S Windermere St
+      [-105.01862, 39.58219],       // S Prince St & W Jackass Hill Rd / Jackass Hill Park
+      [-105.0233734, 39.5786312],   // 1900 W Mineral Ave
+      [-105.0042134, 39.5842020],   // 1312 W Geddes Ave
+      [-105.0040984, 39.6011676],   // Angeline's Little Creekway / Little Creek's Trailway (6364 S Sterne Pkwy)
+    ],
+    medical: [
+      [-104.9858838, 39.5755567], // 7700 S Broadway (AdventHealth Littleton Hospital)
+      [-104.9931225, 39.5820827], // 20 W Dry Creek Cir
+      [-104.9923109, 39.5813203], // 22 W Dry Creek Cir
+      [-104.9890993, 39.5809587], // 2 W Dry Creek Cir (Ste 230 fallback)
+      [-105.0140860, 39.6168010], // 2200 W Berry Ave
+      [-104.9904930, 39.6227409], // 200 W Belleview Ave (Ste 170 fallback)
+      [-104.9951523, 39.6132573], // 609 W Littleton Blvd (unit fallback)
+    ],
+  };
+}
 
 function distToScore(d, max, opts = {}) {
   // General rule: if within threshold -> 100. Beyond threshold apply stepped
