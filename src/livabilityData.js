@@ -199,15 +199,61 @@ const ROUTE_SERVICE = {
   baseUrl: 'https://router.project-osrm.org',
   walkingProfiles: ['walking', 'foot'],
   cyclingProfiles: ['cycling', 'bike'],
+  orsBaseUrl: 'https://api.openrouteservice.org',
 };
 
 const ROUTING_WEIGHTS = { walking: 0.6, biking: 0.4 };
 const routeCache = new Map();
 
-async function getRouteDistance(fromLon, fromLat, toLon, toLat, profiles = []) {
-  if (!profiles || profiles.length === 0) return null;
-  for (const profile of profiles) {
-    const key = `${profile}:${fromLon},${fromLat}->${toLon},${toLat}`;
+// Prefer OpenRouteService when an API key is provided via environment.
+const ORS_API_KEY = (typeof process !== 'undefined' && process.env && process.env.OPENROUTESERVICE_API_KEY)
+  || (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_ORS_API_KEY)
+  || null;
+
+const ORS_PROFILES = {
+  walking: ['foot-walking', 'foot-hiking'],
+  cycling: ['cycling-regular', 'cycling-road', 'cycling-mountain'],
+};
+
+async function getRouteDistance(fromLon, fromLat, toLon, toLat, modeOrProfiles = []) {
+  // modeOrProfiles may be a string 'walking'|'cycling' or an array of OSRM profile names.
+  let mode = null;
+  if (typeof modeOrProfiles === 'string') mode = modeOrProfiles;
+  else if (Array.isArray(modeOrProfiles) && modeOrProfiles.length > 0) {
+    const p0 = String(modeOrProfiles[0]).toLowerCase();
+    if (p0.includes('walk') || p0 === 'foot') mode = 'walking';
+    else mode = 'cycling';
+  } else {
+    mode = 'walking';
+  }
+
+  // Try OpenRouteService first when key is available
+  if (ORS_API_KEY) {
+    const candidates = ORS_PROFILES[mode] || [];
+    for (const prof of candidates) {
+      const key = `ors:${prof}:${fromLon},${fromLat}->${toLon},${toLat}`;
+      if (routeCache.has(key)) return routeCache.get(key);
+      const url = `${ROUTE_SERVICE.orsBaseUrl}/v2/directions/${prof}?start=${fromLon},${fromLat}&end=${toLon},${toLat}`;
+      try {
+        const res = await fetch(url, { headers: { Accept: 'application/json', Authorization: ORS_API_KEY } });
+        if (!res.ok) continue;
+        const data = await res.json();
+        if (data && data.routes && data.routes[0] && data.routes[0].summary && typeof data.routes[0].summary.distance === 'number') {
+          const km = data.routes[0].summary.distance / 1000;
+          routeCache.set(key, km);
+          return km;
+        }
+      } catch (err) {
+        continue;
+      }
+    }
+  }
+
+  // Fallback to OSRM profiles
+  const osrmProfiles = mode === 'walking' ? ROUTE_SERVICE.walkingProfiles : ROUTE_SERVICE.cyclingProfiles;
+  const tryProfiles = Array.isArray(modeOrProfiles) && modeOrProfiles.length > 0 ? modeOrProfiles : osrmProfiles;
+  for (const profile of tryProfiles) {
+    const key = `osrm:${profile}:${fromLon},${fromLat}->${toLon},${toLat}`;
     if (routeCache.has(key)) return routeCache.get(key);
     const url = `${ROUTE_SERVICE.baseUrl}/route/v1/${profile}/${fromLon},${fromLat};${toLon},${toLat}?overview=false&alternatives=false&steps=false`;
     try {
@@ -220,10 +266,10 @@ async function getRouteDistance(fromLon, fromLat, toLon, toLat, profiles = []) {
         return km;
       }
     } catch (err) {
-      // try next profile
       continue;
     }
   }
+
   return null;
 }
 
@@ -430,11 +476,11 @@ async function computeScoresFromNearest(nearest, opts = {}) {
     const coord = nearestCoords && nearestCoords[key]; // [lon, lat]
     if (useRouting && coord && ptCoords) {
       try {
-        const w = await getRouteDistance(ptCoords[0], ptCoords[1], coord[0], coord[1], ROUTE_SERVICE.walkingProfiles);
+        const w = await getRouteDistance(ptCoords[0], ptCoords[1], coord[0], coord[1], 'walking');
         if (typeof w === 'number') walkingKm[key] = w;
       } catch (e) {}
       try {
-        const b = await getRouteDistance(ptCoords[0], ptCoords[1], coord[0], coord[1], ROUTE_SERVICE.cyclingProfiles);
+        const b = await getRouteDistance(ptCoords[0], ptCoords[1], coord[0], coord[1], 'cycling');
         if (typeof b === 'number') bikingKm[key] = b;
       } catch (e) {}
     }

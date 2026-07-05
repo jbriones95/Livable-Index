@@ -71,18 +71,7 @@ export default function ScorePanel({ zone, onClose }) {
 
       <p className="zone-notes">{zone.notes}</p>
 
-      {zone._osm && (
-        <div className="osm-debug">
-          <h4>OSM Debug</h4>
-          <div className="osm-stats">
-            {Object.entries(zone._osm.counts || {}).map(([k, v]) => (
-              <div key={k} className="osm-stat">
-                <strong>{k}:</strong> {v} — nearest: {isFinite(zone._osm.nearestKm?.[k]) ? `${zone._osm.nearestKm[k].toFixed(3)} km` : '∞'}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* OSM debug removed from user UI */}
 
       {zone._routing && (
         <div className="routing-debug">
