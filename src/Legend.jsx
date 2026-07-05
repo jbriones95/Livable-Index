@@ -22,15 +22,13 @@ export default function Legend() {
         </div>
       ))}
       <div className="legend-dimensions">
-        <h4>Urbanism Factors</h4>
+        <h4>Proximity Factors</h4>
         <ul>
-          <li>Walkability (22%)</li>
-          <li>Transit Access (20%)</li>
-          <li>Mixed Land Use (18%)</li>
-          <li>Bike Infrastructure (13%)</li>
-          <li>Housing Density (10%)</li>
-          <li>Green Space (10%)</li>
-          <li>Street Connectivity (7%)</li>
+          <li>Coffee Shop (20%)</li>
+          <li>Dinner Restaurant (20%)</li>
+          <li>Grocery Store (25%)</li>
+          <li>Trailhead Access (15%)</li>
+          <li>Bus Stop (20%)</li>
         </ul>
       </div>
     </div>
