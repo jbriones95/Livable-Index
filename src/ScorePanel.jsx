@@ -51,6 +51,9 @@ export default function ScorePanel({ zone, onClose }) {
       <div className="panel-header">
         <div className="zone-name">
           <span className="zone-address">{zone.name}</span>
+          {zone.address && zone.address !== zone.name && (
+            <div className="zone-full-address">{zone.address}</div>
+          )}
           {zone.neighborhood && (
             <span className="zone-neighborhood">{zone.neighborhood}</span>
           )}

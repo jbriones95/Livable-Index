@@ -178,7 +178,9 @@ const MAX_DIST_KM = {
   coffee: 1.0,
   restaurant: 1.0,
   grocery: 1.5,
-  trailhead: 2.0,
+  // separate trail vs park distances so we can compose the trailhead metric
+  trail: 2.0,
+  park: 2.0,
   busStop: 0.8,
   healthcare: 2.0,
 };
@@ -193,8 +195,9 @@ const SUPPLEMENTAL_POINTS = {
     [-104.9880828, 39.6012170],   // 6504 S Broadway
     [-105.0223652, 39.6005510],   // 6399 S Santa Fe Dr
   ],
-  trailhead: [
-    [-104.99338, 39.57879],       // 7900 S Ogden Way / Horseshoe Park area
+  // User-provided parks (supplement OSM park points)
+  park: [
+    [-104.99338, 39.57879],       // 7900 S Ogden Way / Horseshoe Park area (approx)
     [-105.0071743, 39.5787253],   // 7791 S Windermere St
     [-105.01862, 39.58219],       // S Prince St & W Jackass Hill Rd / Jackass Hill Park
     [-105.0233734, 39.5786312],   // 1900 W Mineral Ave
@@ -215,6 +218,7 @@ function classifyOSM(tags) {
   const h = (tags.highway || '').toLowerCase();
   const l = (tags.leisure || '').toLowerCase();
   const pt = tags.public_transport ? String(tags.public_transport).toLowerCase() : '';
+  const r = (tags.railway || '').toLowerCase();
   const name = (tags.name || '').toLowerCase();
   const foot = tags.foot ? String(tags.foot).toLowerCase() : '';
   const cuisine = tags.cuisine ? String(tags.cuisine).toLowerCase() : '';
@@ -222,7 +226,19 @@ function classifyOSM(tags) {
   if (a === 'cafe' || s === 'coffee' || s === 'tea_house' || cuisine.includes('coffee')) results.push('coffee');
   if (a === 'restaurant') results.push('restaurant');
   if (s === 'supermarket' || s === 'convenience' || s === 'grocery' || s === 'greengrocer' || a === 'supermarket') results.push('grocery');
-  if (h === 'bus_stop' || a === 'bus_station' || pt === 'platform' || pt === 'bus_stop' || pt === 'stop_position') results.push('busStop');
+  // Include light-rail / tram / railway stops as transit points for busStop scoring
+  if (
+    h === 'bus_stop' ||
+    a === 'bus_station' ||
+    pt === 'platform' ||
+    pt === 'bus_stop' ||
+    pt === 'stop_position' ||
+    r === 'station' ||
+    r === 'tram_stop' ||
+    r === 'halt' ||
+    r === 'light_rail'
+  )
+    results.push('busStop');
   if (h === 'path' || h === 'track' || h === 'trailhead' || h === 'footway' || l === 'park' || l === 'nature_reserve' || name.includes('trail')) results.push('trailhead');
   if (a === 'hospital' || a === 'clinic' || a === 'doctors' || a === 'pharmacy' || a === 'dentist' || tags.healthcare) results.push('healthcare');
 

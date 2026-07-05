@@ -24,6 +24,10 @@ export async function fetchOSM(bbox) {
   node["highway"="bus_stop"](${s},${w},${n},${e});
   node["railway"="station"](${s},${w},${n},${e});
   way["railway"="station"](${s},${w},${n},${e});
+  node["railway"="tram_stop"](${s},${w},${n},${e});
+  way["railway"="tram_stop"](${s},${w},${n},${e});
+  node["railway"="halt"](${s},${w},${n},${e});
+  way["railway"="halt"](${s},${w},${n},${e});
   way["cycleway"](${s},${w},${n},${e});
   way["building"](${s},${w},${n},${e});
   // include highway/path features (footways, paths, pedestrian zones) to assess walking infrastructure
