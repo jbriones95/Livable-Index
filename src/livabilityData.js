@@ -193,6 +193,40 @@ const MAX_DIST_KM = {
   healthcare: 4.5,
 };
 
+// Routing configuration: try OSRM public endpoint with common profile fallbacks.
+// Walking is prioritized over biking in the combined score via `ROUTING_WEIGHTS`.
+const ROUTE_SERVICE = {
+  baseUrl: 'https://router.project-osrm.org',
+  walkingProfiles: ['walking', 'foot'],
+  cyclingProfiles: ['cycling', 'bike'],
+};
+
+const ROUTING_WEIGHTS = { walking: 0.6, biking: 0.4 };
+const routeCache = new Map();
+
+async function getRouteDistance(fromLon, fromLat, toLon, toLat, profiles = []) {
+  if (!profiles || profiles.length === 0) return null;
+  for (const profile of profiles) {
+    const key = `${profile}:${fromLon},${fromLat}->${toLon},${toLat}`;
+    if (routeCache.has(key)) return routeCache.get(key);
+    const url = `${ROUTE_SERVICE.baseUrl}/route/v1/${profile}/${fromLon},${fromLat};${toLon},${toLat}?overview=false&alternatives=false&steps=false`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) continue;
+      const data = await res.json();
+      if (data && data.routes && data.routes[0] && typeof data.routes[0].distance === 'number') {
+        const km = data.routes[0].distance / 1000;
+        routeCache.set(key, km);
+        return km;
+      }
+    } catch (err) {
+      // try next profile
+      continue;
+    }
+  }
+  return null;
+}
+
 // Load an editable unified POI list at runtime (dev-only fallback to built-in supplemental points)
 let SUPPLEMENTAL_POINTS = null;
 try {
@@ -343,15 +377,19 @@ function classifyOSM(tags) {
 }
 
 function nearestAndCounts(poiPoints, pt) {
-  const nearest = { coffee: Infinity, restaurant: Infinity, grocery: Infinity, nature: Infinity, busStop: Infinity, healthcare: Infinity };
-  const counts = { coffee: 0, restaurant: 0, grocery: 0, nature: 0, busStop: 0, healthcare: 0 };
+  const categories = ['coffee', 'restaurant', 'grocery', 'nature', 'busStop', 'healthcare'];
+  const nearest = {};
+  const nearestCoords = {};
+  const counts = {};
+  for (const c of categories) { nearest[c] = Infinity; nearestCoords[c] = null; counts[c] = 0; }
 
   for (const p of poiPoints) {
     const d = turfDistance(pt, p, { units: 'kilometers' });
     const tags = p.properties || {};
     const cats = classifyOSM(tags);
+    const coords = p.geometry && p.geometry.coordinates ? p.geometry.coordinates : null; // [lon, lat]
     for (const cat of cats) {
-      if (d < nearest[cat]) nearest[cat] = d;
+      if (d < nearest[cat]) { nearest[cat] = d; nearestCoords[cat] = coords; }
       if (d <= MAX_DIST_KM[cat]) counts[cat]++;
     }
   }
@@ -361,24 +399,61 @@ function nearestAndCounts(poiPoints, pt) {
     for (const coords of points) {
       const sp = turfPoint(coords);
       const d = turfDistance(pt, sp, { units: 'kilometers' });
-      if (d < nearest[cat]) nearest[cat] = d;
+      if (d < nearest[cat]) { nearest[cat] = d; nearestCoords[cat] = coords; }
       if (d <= MAX_DIST_KM[cat]) counts[cat]++;
     }
   }
 
-  return { nearest, counts };
+  return { nearest, counts, nearestCoords };
 }
 
-function computeScoresFromNearest(nearest) {
-  const scores = {};
-  for (const key of Object.keys(MAX_DIST_KM)) {
-    if (key === 'healthcare') {
-      scores[key] = distToScore(nearest[key], MAX_DIST_KM[key], { stepMeters: 500, deduction: 15 });
-    } else {
-      scores[key] = distToScore(nearest[key], MAX_DIST_KM[key], { stepMeters: 200, deduction: 10 });
-    }
+async function computeScoresFromNearest(nearest, opts = {}) {
+  const { nearestCoords = {}, pt = null, useRouting = false } = opts;
+  const walking = {};
+  const biking = {};
+  const walkingKm = {};
+  const bikingKm = {};
+  const combined = {};
+
+  // Accept pt either as turf point or coordinate array [lon, lat]
+  let ptCoords = null;
+  if (pt) {
+    if (Array.isArray(pt)) ptCoords = pt;
+    else if (pt.geometry && Array.isArray(pt.geometry.coordinates)) ptCoords = pt.geometry.coordinates;
   }
-  return scores;
+
+  for (const key of Object.keys(MAX_DIST_KM)) {
+    const crowKm = nearest[key];
+    walkingKm[key] = isFinite(crowKm) ? crowKm : Infinity;
+    bikingKm[key] = isFinite(crowKm) ? crowKm : Infinity;
+
+    const coord = nearestCoords && nearestCoords[key]; // [lon, lat]
+    if (useRouting && coord && ptCoords) {
+      try {
+        const w = await getRouteDistance(ptCoords[0], ptCoords[1], coord[0], coord[1], ROUTE_SERVICE.walkingProfiles);
+        if (typeof w === 'number') walkingKm[key] = w;
+      } catch (e) {}
+      try {
+        const b = await getRouteDistance(ptCoords[0], ptCoords[1], coord[0], coord[1], ROUTE_SERVICE.cyclingProfiles);
+        if (typeof b === 'number') bikingKm[key] = b;
+      } catch (e) {}
+    }
+
+    if (key === 'healthcare') {
+      walking[key] = distToScore(walkingKm[key], MAX_DIST_KM[key], { stepMeters: 500, deduction: 15 });
+      biking[key] = distToScore(bikingKm[key], MAX_DIST_KM[key], { stepMeters: 500, deduction: 15 });
+    } else {
+      walking[key] = distToScore(walkingKm[key], MAX_DIST_KM[key], { stepMeters: 200, deduction: 10 });
+      biking[key] = distToScore(bikingKm[key], MAX_DIST_KM[key], { stepMeters: 200, deduction: 10 });
+    }
+
+    const wScore = walking[key] || 0;
+    const bScore = biking[key] || 0;
+    const comb = (ROUTING_WEIGHTS.walking * wScore + ROUTING_WEIGHTS.biking * bScore) / (ROUTING_WEIGHTS.walking + ROUTING_WEIGHTS.biking);
+    combined[key] = Math.round(comb);
+  }
+
+  return { scores: combined, walking, biking, walkingKm, bikingKm };
 }
 
 export async function computeScoreAtPoint(lat, lng, opts = {}) {
@@ -397,8 +472,9 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   }).filter(Boolean);
 
   const pt = turfPoint([lng, lat]);
-  const { nearest, counts } = nearestAndCounts(poiPoints, pt);
-  const scores = computeScoresFromNearest(nearest);
+  const { nearest, counts, nearestCoords } = nearestAndCounts(poiPoints, pt);
+  const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt, useRouting: true });
+  const scores = scoring.scores;
 
   const zones = getAllZoneFeatures().features;
   let matched = null;
@@ -451,6 +527,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     neighborhood,
     address,
     _osm: { counts, nearestKm: nearest },
+    _routing: { walkingKm: scoring.walkingKm, bikingKm: scoring.bikingKm, walkingScores: scoring.walking, bikingScores: scoring.biking },
     zoneId: matched ? matched.properties.id : null,
   };
 }
@@ -495,11 +572,12 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
 
   for (const cell of grid.features) {
     const c = turfCentroid(cell);
-    const { nearest, counts } = nearestAndCounts(poiPoints, c);
-    const scores = computeScoresFromNearest(nearest);
-    cell.properties.scores = scores;
-    cell.properties.composite = computeScore(scores);
+    const { nearest, counts, nearestCoords } = nearestAndCounts(poiPoints, c);
+    const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt: c, useRouting: false });
+    cell.properties.scores = scoring.scores;
+    cell.properties.composite = computeScore(scoring.scores);
     cell.properties._osm = { counts, nearestKm: nearest };
+    cell.properties._routing = { walkingKm: scoring.walkingKm, bikingKm: scoring.bikingKm, walkingScores: scoring.walking, bikingScores: scoring.biking };
   }
 
   return grid;

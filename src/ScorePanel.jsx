@@ -84,6 +84,23 @@ export default function ScorePanel({ zone, onClose }) {
         </div>
       )}
 
+      {zone._routing && (
+        <div className="routing-debug">
+          <h4>Routing (walking / biking)</h4>
+          <div className="routing-stats">
+            {Object.entries(DIMENSION_LABELS).map(([k, label]) => (
+              <div key={k} className="routing-stat">
+                <strong>{label}:</strong>
+                <div className="routing-row">
+                  <span className="routing-walk">Walk: {isFinite(zone._routing.walkingKm?.[k]) ? `${zone._routing.walkingKm[k].toFixed(2)} km` : '—' } ({zone._routing.walkingScores?.[k] ?? '—'})</span>
+                  <span className="routing-bike">Bike: {isFinite(zone._routing.bikingKm?.[k]) ? `${zone._routing.bikingKm[k].toFixed(2)} km` : '—' } ({zone._routing.bikingScores?.[k] ?? '—'})</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       <h3 className="breakdown-title">Score Breakdown</h3>
       <div className="dimensions">
         {Object.entries(DIMENSION_LABELS).map(([key, label]) => (
