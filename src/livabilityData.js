@@ -213,11 +213,6 @@ const ROUTE_SERVICE = {
   walkingProfiles: ['walking', 'foot'],
   cyclingProfiles: ['cycling', 'bike'],
   orsBaseUrl: 'https://api.openrouteservice.org',
-  // Fallback OSRM endpoints in case the primary is rate-limited or down
-  fallbackEndpoints: [
-    'https://routing.openstreetmap.de',
-    'https://router.openstreetmap.de',
-  ],
 };
 
 const ROUTING_WEIGHTS = { walking: 0.6, biking: 0.4 };
@@ -270,21 +265,20 @@ async function getRouteDistance(fromLon, fromLat, toLon, toLat, modeOrProfiles =
     }
   }
 
-  // Fallback to OSRM profiles across multiple endpoints
+  // Fallback to OSRM profiles (single endpoint, retry once on failure)
   const osrmProfiles = mode === 'walking' ? ROUTE_SERVICE.walkingProfiles : ROUTE_SERVICE.cyclingProfiles;
   const tryProfiles = Array.isArray(modeOrProfiles) && modeOrProfiles.length > 0 ? modeOrProfiles : osrmProfiles;
-  const osrmEndpoints = [ROUTE_SERVICE.baseUrl, ...ROUTE_SERVICE.fallbackEndpoints];
-  for (const endpoint of osrmEndpoints) {
-    for (const profile of tryProfiles) {
-      const key = `osrm:${endpoint}:${profile}:${fromLon},${fromLat}->${toLon},${toLat}`;
-      if (routeCache.has(key)) return routeCache.get(key);
-      const url = `${endpoint}/route/v1/${profile}/${fromLon},${fromLat};${toLon},${toLat}?overview=false&alternatives=false&steps=false`;
+  for (const profile of tryProfiles) {
+    const key = `osrm:${profile}:${fromLon},${fromLat}->${toLon},${toLat}`;
+    if (routeCache.has(key)) return routeCache.get(key);
+    const url = `${ROUTE_SERVICE.baseUrl}/route/v1/${profile}/${fromLon},${fromLat};${toLon},${toLat}?overview=false&alternatives=false&steps=false`;
+    for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 5000);
         const res = await fetch(url, { signal: controller.signal });
         clearTimeout(timeout);
-        if (!res.ok) continue;
+        if (!res.ok) { await new Promise(r => setTimeout(r, 1000)); continue; }
         const data = await res.json();
         if (data && data.routes && data.routes[0] && typeof data.routes[0].distance === 'number') {
           const km = data.routes[0].distance / 1000;
@@ -292,6 +286,7 @@ async function getRouteDistance(fromLon, fromLat, toLon, toLat, modeOrProfiles =
           return km;
         }
       } catch (err) {
+        await new Promise(r => setTimeout(r, 1000));
         continue;
       }
     }
