@@ -6,6 +6,7 @@
  */
 
 import { squareGrid, centroid as turfCentroid, point as turfPoint, booleanPointInPolygon, distance as turfDistance } from '@turf/turf';
+import unifiedData from '../data/unified_list.json';
 
 export const LITTLETON_BOUNDS = {
   north: 39.645, south: 39.580, east: -104.980, west: -105.055,
@@ -285,76 +286,35 @@ async function getRouteDistance(fromLon, fromLat, toLon, toLat, modeOrProfiles =
   return null;
 }
 
-// Load an editable unified POI list at runtime (dev-only fallback to built-in supplemental points)
-// Load the editable unified POI list and derive supplemental point arrays.
-let SUPPLEMENTAL_POINTS = {};
-let SUPPLEMENTAL_POINT_OBJS = {}; // store full objects for building turf points
-try {
-  // @ts-ignore
-  const unified = typeof window === 'undefined' ? require('../data/unified_list.json') : null;
-  if (unified) {
-    // Map keys in unified_list.json to the internal categories used by scoring
-    const mapping = {
-      coffee: 'coffee',
-      restaurant: 'restaurant',
-      grocery: 'grocery',
-      parks: 'park',
-      trailheads: 'trail',
-      nature: 'trail',
-      medical: 'healthcare',
-      busStops: 'busStop',
-      busStop: 'busStop',
-    };
+// Build supplemental point arrays from the unified POI list (bundled at build time)
+const CATEGORY_MAPPING = {
+  coffee: 'coffee',
+  restaurant: 'restaurant',
+  grocery: 'grocery',
+  parks: 'park',
+  trailheads: 'trail',
+  nature: 'trail',
+  medical: 'healthcare',
+  busStops: 'busStop',
+  busStop: 'busStop',
+};
 
-    for (const [k, v] of Object.entries(unified)) {
-      const mapped = mapping[k] || k;
-      if (!Array.isArray(v)) continue;
-      SUPPLEMENTAL_POINTS[mapped] = (SUPPLEMENTAL_POINTS[mapped] || []).concat(
-        v.map((p) => [p.lon, p.lat])
-      );
-      SUPPLEMENTAL_POINT_OBJS[mapped] = (SUPPLEMENTAL_POINT_OBJS[mapped] || []).concat(
-        v.map((p) => ({ lon: p.lon, lat: p.lat, name: p.name || p.note || null, note: p.note || null }))
-      );
-    }
-  }
-} catch (e) {
-  SUPPLEMENTAL_POINTS = {};
-  SUPPLEMENTAL_POINT_OBJS = {};
+const SUPPLEMENTAL_POINTS = {};
+const SUPPLEMENTAL_POINT_OBJS = {};
+
+for (const [k, v] of Object.entries(unifiedData)) {
+  const mapped = CATEGORY_MAPPING[k] || k;
+  if (!Array.isArray(v)) continue;
+  SUPPLEMENTAL_POINTS[mapped] = (SUPPLEMENTAL_POINTS[mapped] || []).concat(
+    v.map((p) => [p.lon, p.lat])
+  );
+  SUPPLEMENTAL_POINT_OBJS[mapped] = (SUPPLEMENTAL_POINT_OBJS[mapped] || []).concat(
+    v.map((p) => ({ lon: p.lon, lat: p.lat, name: p.name || p.note || null, note: p.note || null }))
+  );
 }
 
-// In browser builds, attempt to fetch `data/unified_list.json` at runtime
-// so the unified list is authoritative even when `require` is unavailable.
-let _unifiedLoadPromise = null;
 function ensureUnifiedLoaded() {
-  if (Object.keys(SUPPLEMENTAL_POINT_OBJS || {}).length > 0) return Promise.resolve();
-  if (typeof window === 'undefined') return Promise.resolve();
-  if (_unifiedLoadPromise) return _unifiedLoadPromise;
-  _unifiedLoadPromise = fetch('data/unified_list.json').then((r) => {
-    if (!r.ok) return null;
-    return r.json();
-  }).then((unified) => {
-    if (!unified) return;
-    const mapping = {
-      coffee: 'coffee',
-      restaurant: 'restaurant',
-      grocery: 'grocery',
-      parks: 'park',
-      trailheads: 'trail',
-      nature: 'trail',
-      medical: 'healthcare',
-      busStops: 'busStop',
-      busStop: 'busStop',
-    };
-    for (const [k, v] of Object.entries(unified)) {
-      const mapped = mapping[k] || k;
-      if (!Array.isArray(v)) continue;
-      SUPPLEMENTAL_POINTS[mapped] = (SUPPLEMENTAL_POINTS[mapped] || []).concat(v.map((p) => [p.lon, p.lat]));
-      SUPPLEMENTAL_POINT_OBJS[mapped] = (SUPPLEMENTAL_POINT_OBJS[mapped] || []).concat(
-        v.map((p) => ({ lon: p.lon, lat: p.lat, name: p.name || p.note || null, note: p.note || null }))
-      );
-    }
-  }).catch(() => {});
-  return _unifiedLoadPromise;
+  return Promise.resolve();
 }
 
 function distToScore(d, max, opts = {}) {
