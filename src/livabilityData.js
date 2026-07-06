@@ -2,7 +2,7 @@
  * Livability Index - Proximity-Based Scoring Model
  *
  * Score is 0–100, based on closeness to 6 amenity types:
- *   coffee shop, dinner restaurant, grocery store, nature access, bus stop, healthcare.
+ *   coffee shop, dinner restaurant, grocery store, nature access, transit stop, healthcare.
  */
 
 export const LITTLETON_BOUNDS = {
@@ -101,7 +101,7 @@ export const DIMENSION_LABELS = {
   restaurant: "Dinner Restaurant",
   grocery: "Grocery Store",
   nature: "Nature Access",
-  busStop: "Bus Stop",
+  busStop: "Transit Stop",
   healthcare: "Healthcare",
 };
 
@@ -388,7 +388,7 @@ function classifyOSM(tags) {
     results.push('grocery');
   }
 
-  // Transit: include bus stops and nearby railway/tram/light_rail stops
+  // Transit: include bus and rail stops (bus_stop, tram_stop, station, light_rail, etc.)
   if (
     h === 'bus_stop' ||
     a === 'bus_station' ||
