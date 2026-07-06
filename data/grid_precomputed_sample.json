@@ -1,0 +1,5437 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "littleton_station",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Littleton / Mineral Station Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.05347281454898,
+              39.58102378726964
+            ],
+            [
+              -105.05347281454898,
+              39.59001699090689
+            ],
+            [
+              -105.04447961091174,
+              39.59001699090689
+            ],
+            [
+              -105.04447961091174,
+              39.58102378726964
+            ],
+            [
+              -105.05347281454898,
+              39.58102378726964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "river_front",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Riverfront / Sterne Park",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.05347281454898,
+              39.59001699090689
+            ],
+            [
+              -105.05347281454898,
+              39.599010194544135
+            ],
+            [
+              -105.04447961091174,
+              39.599010194544135
+            ],
+            [
+              -105.04447961091174,
+              39.59001699090689
+            ],
+            [
+              -105.05347281454898,
+              39.59001699090689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.05347281454898,
+              39.599010194544135
+            ],
+            [
+              -105.05347281454898,
+              39.60800339818138
+            ],
+            [
+              -105.04447961091174,
+              39.60800339818138
+            ],
+            [
+              -105.04447961091174,
+              39.599010194544135
+            ],
+            [
+              -105.05347281454898,
+              39.599010194544135
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.05347281454898,
+              39.60800339818138
+            ],
+            [
+              -105.05347281454898,
+              39.61699660181863
+            ],
+            [
+              -105.04447961091174,
+              39.61699660181863
+            ],
+            [
+              -105.04447961091174,
+              39.60800339818138
+            ],
+            [
+              -105.05347281454898,
+              39.60800339818138
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.05347281454898,
+              39.61699660181863
+            ],
+            [
+              -105.05347281454898,
+              39.62598980545587
+            ],
+            [
+              -105.04447961091174,
+              39.62598980545587
+            ],
+            [
+              -105.04447961091174,
+              39.61699660181863
+            ],
+            [
+              -105.05347281454898,
+              39.61699660181863
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.05347281454898,
+              39.62598980545587
+            ],
+            [
+              -105.05347281454898,
+              39.63498300909312
+            ],
+            [
+              -105.04447961091174,
+              39.63498300909312
+            ],
+            [
+              -105.04447961091174,
+              39.62598980545587
+            ],
+            [
+              -105.05347281454898,
+              39.62598980545587
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.05347281454898,
+              39.63498300909312
+            ],
+            [
+              -105.05347281454898,
+              39.643976212730365
+            ],
+            [
+              -105.04447961091174,
+              39.643976212730365
+            ],
+            [
+              -105.04447961091174,
+              39.63498300909312
+            ],
+            [
+              -105.05347281454898,
+              39.63498300909312
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "littleton_station",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Littleton / Mineral Station Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.04447961091174,
+              39.58102378726964
+            ],
+            [
+              -105.04447961091174,
+              39.59001699090689
+            ],
+            [
+              -105.03548640727449,
+              39.59001699090689
+            ],
+            [
+              -105.03548640727449,
+              39.58102378726964
+            ],
+            [
+              -105.04447961091174,
+              39.58102378726964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "littleton_station",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Littleton / Mineral Station Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.04447961091174,
+              39.59001699090689
+            ],
+            [
+              -105.04447961091174,
+              39.599010194544135
+            ],
+            [
+              -105.03548640727449,
+              39.599010194544135
+            ],
+            [
+              -105.03548640727449,
+              39.59001699090689
+            ],
+            [
+              -105.04447961091174,
+              39.59001699090689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "river_front",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Riverfront / Sterne Park",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.04447961091174,
+              39.599010194544135
+            ],
+            [
+              -105.04447961091174,
+              39.60800339818138
+            ],
+            [
+              -105.03548640727449,
+              39.60800339818138
+            ],
+            [
+              -105.03548640727449,
+              39.599010194544135
+            ],
+            [
+              -105.04447961091174,
+              39.599010194544135
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.04447961091174,
+              39.60800339818138
+            ],
+            [
+              -105.04447961091174,
+              39.61699660181863
+            ],
+            [
+              -105.03548640727449,
+              39.61699660181863
+            ],
+            [
+              -105.03548640727449,
+              39.60800339818138
+            ],
+            [
+              -105.04447961091174,
+              39.60800339818138
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.04447961091174,
+              39.61699660181863
+            ],
+            [
+              -105.04447961091174,
+              39.62598980545587
+            ],
+            [
+              -105.03548640727449,
+              39.62598980545587
+            ],
+            [
+              -105.03548640727449,
+              39.61699660181863
+            ],
+            [
+              -105.04447961091174,
+              39.61699660181863
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.04447961091174,
+              39.62598980545587
+            ],
+            [
+              -105.04447961091174,
+              39.63498300909312
+            ],
+            [
+              -105.03548640727449,
+              39.63498300909312
+            ],
+            [
+              -105.03548640727449,
+              39.62598980545587
+            ],
+            [
+              -105.04447961091174,
+              39.62598980545587
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "heritage_gulch",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Heritage / Gulch Trail Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.04447961091174,
+              39.63498300909312
+            ],
+            [
+              -105.04447961091174,
+              39.643976212730365
+            ],
+            [
+              -105.03548640727449,
+              39.643976212730365
+            ],
+            [
+              -105.03548640727449,
+              39.63498300909312
+            ],
+            [
+              -105.04447961091174,
+              39.63498300909312
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "littleton_station",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Littleton / Mineral Station Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.03548640727449,
+              39.58102378726964
+            ],
+            [
+              -105.03548640727449,
+              39.59001699090689
+            ],
+            [
+              -105.02649320363724,
+              39.59001699090689
+            ],
+            [
+              -105.02649320363724,
+              39.58102378726964
+            ],
+            [
+              -105.03548640727449,
+              39.58102378726964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "littleton_station",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Littleton / Mineral Station Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.03548640727449,
+              39.59001699090689
+            ],
+            [
+              -105.03548640727449,
+              39.599010194544135
+            ],
+            [
+              -105.02649320363724,
+              39.599010194544135
+            ],
+            [
+              -105.02649320363724,
+              39.59001699090689
+            ],
+            [
+              -105.03548640727449,
+              39.59001699090689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "river_front",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Riverfront / Sterne Park",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.03548640727449,
+              39.599010194544135
+            ],
+            [
+              -105.03548640727449,
+              39.60800339818138
+            ],
+            [
+              -105.02649320363724,
+              39.60800339818138
+            ],
+            [
+              -105.02649320363724,
+              39.599010194544135
+            ],
+            [
+              -105.03548640727449,
+              39.599010194544135
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.03548640727449,
+              39.60800339818138
+            ],
+            [
+              -105.03548640727449,
+              39.61699660181863
+            ],
+            [
+              -105.02649320363724,
+              39.61699660181863
+            ],
+            [
+              -105.02649320363724,
+              39.60800339818138
+            ],
+            [
+              -105.03548640727449,
+              39.60800339818138
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.03548640727449,
+              39.61699660181863
+            ],
+            [
+              -105.03548640727449,
+              39.62598980545587
+            ],
+            [
+              -105.02649320363724,
+              39.62598980545587
+            ],
+            [
+              -105.02649320363724,
+              39.61699660181863
+            ],
+            [
+              -105.03548640727449,
+              39.61699660181863
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "western_residential",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "West Littleton Residential",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.03548640727449,
+              39.62598980545587
+            ],
+            [
+              -105.03548640727449,
+              39.63498300909312
+            ],
+            [
+              -105.02649320363724,
+              39.63498300909312
+            ],
+            [
+              -105.02649320363724,
+              39.62598980545587
+            ],
+            [
+              -105.03548640727449,
+              39.62598980545587
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "heritage_gulch",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Heritage / Gulch Trail Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.03548640727449,
+              39.63498300909312
+            ],
+            [
+              -105.03548640727449,
+              39.643976212730365
+            ],
+            [
+              -105.02649320363724,
+              39.643976212730365
+            ],
+            [
+              -105.02649320363724,
+              39.63498300909312
+            ],
+            [
+              -105.03548640727449,
+              39.63498300909312
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "arapahoe_community_college",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "ACC / Centennial Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.02649320363724,
+              39.58102378726964
+            ],
+            [
+              -105.02649320363724,
+              39.59001699090689
+            ],
+            [
+              -105.0175,
+              39.59001699090689
+            ],
+            [
+              -105.0175,
+              39.58102378726964
+            ],
+            [
+              -105.02649320363724,
+              39.58102378726964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "littleton_station",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Littleton / Mineral Station Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.02649320363724,
+              39.59001699090689
+            ],
+            [
+              -105.02649320363724,
+              39.599010194544135
+            ],
+            [
+              -105.0175,
+              39.599010194544135
+            ],
+            [
+              -105.0175,
+              39.59001699090689
+            ],
+            [
+              -105.02649320363724,
+              39.59001699090689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "littleton_station",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Littleton / Mineral Station Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.02649320363724,
+              39.599010194544135
+            ],
+            [
+              -105.02649320363724,
+              39.60800339818138
+            ],
+            [
+              -105.0175,
+              39.60800339818138
+            ],
+            [
+              -105.0175,
+              39.599010194544135
+            ],
+            [
+              -105.02649320363724,
+              39.599010194544135
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "downtown",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Downtown Littleton",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.02649320363724,
+              39.60800339818138
+            ],
+            [
+              -105.02649320363724,
+              39.61699660181863
+            ],
+            [
+              -105.0175,
+              39.61699660181863
+            ],
+            [
+              -105.0175,
+              39.60800339818138
+            ],
+            [
+              -105.02649320363724,
+              39.60800339818138
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "heritage_gulch",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Heritage / Gulch Trail Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.02649320363724,
+              39.61699660181863
+            ],
+            [
+              -105.02649320363724,
+              39.62598980545587
+            ],
+            [
+              -105.0175,
+              39.62598980545587
+            ],
+            [
+              -105.0175,
+              39.61699660181863
+            ],
+            [
+              -105.02649320363724,
+              39.61699660181863
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "heritage_gulch",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Heritage / Gulch Trail Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.02649320363724,
+              39.62598980545587
+            ],
+            [
+              -105.02649320363724,
+              39.63498300909312
+            ],
+            [
+              -105.0175,
+              39.63498300909312
+            ],
+            [
+              -105.0175,
+              39.62598980545587
+            ],
+            [
+              -105.02649320363724,
+              39.62598980545587
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "heritage_gulch",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Heritage / Gulch Trail Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.02649320363724,
+              39.63498300909312
+            ],
+            [
+              -105.02649320363724,
+              39.643976212730365
+            ],
+            [
+              -105.0175,
+              39.643976212730365
+            ],
+            [
+              -105.0175,
+              39.63498300909312
+            ],
+            [
+              -105.02649320363724,
+              39.63498300909312
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "arapahoe_community_college",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "ACC / Centennial Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.0175,
+              39.58102378726964
+            ],
+            [
+              -105.0175,
+              39.59001699090689
+            ],
+            [
+              -105.00850679636275,
+              39.59001699090689
+            ],
+            [
+              -105.00850679636275,
+              39.58102378726964
+            ],
+            [
+              -105.0175,
+              39.58102378726964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "littleton_station",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Littleton / Mineral Station Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.0175,
+              39.59001699090689
+            ],
+            [
+              -105.0175,
+              39.599010194544135
+            ],
+            [
+              -105.00850679636275,
+              39.599010194544135
+            ],
+            [
+              -105.00850679636275,
+              39.59001699090689
+            ],
+            [
+              -105.0175,
+              39.59001699090689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "littleton_station",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Littleton / Mineral Station Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.0175,
+              39.599010194544135
+            ],
+            [
+              -105.0175,
+              39.60800339818138
+            ],
+            [
+              -105.00850679636275,
+              39.60800339818138
+            ],
+            [
+              -105.00850679636275,
+              39.599010194544135
+            ],
+            [
+              -105.0175,
+              39.599010194544135
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "downtown",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "Downtown Littleton",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.0175,
+              39.60800339818138
+            ],
+            [
+              -105.0175,
+              39.61699660181863
+            ],
+            [
+              -105.00850679636275,
+              39.61699660181863
+            ],
+            [
+              -105.00850679636275,
+              39.60800339818138
+            ],
+            [
+              -105.0175,
+              39.60800339818138
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "south_broadway_corridor",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "South Broadway Corridor",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.0175,
+              39.61699660181863
+            ],
+            [
+              -105.0175,
+              39.62598980545587
+            ],
+            [
+              -105.00850679636275,
+              39.62598980545587
+            ],
+            [
+              -105.00850679636275,
+              39.61699660181863
+            ],
+            [
+              -105.0175,
+              39.61699660181863
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "south_broadway_corridor",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "South Broadway Corridor",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.0175,
+              39.62598980545587
+            ],
+            [
+              -105.0175,
+              39.63498300909312
+            ],
+            [
+              -105.00850679636275,
+              39.63498300909312
+            ],
+            [
+              -105.00850679636275,
+              39.62598980545587
+            ],
+            [
+              -105.0175,
+              39.62598980545587
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "northeast_commercial",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "NE Commercial / Broadway & Belleview",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.0175,
+              39.63498300909312
+            ],
+            [
+              -105.0175,
+              39.643976212730365
+            ],
+            [
+              -105.00850679636275,
+              39.643976212730365
+            ],
+            [
+              -105.00850679636275,
+              39.63498300909312
+            ],
+            [
+              -105.0175,
+              39.63498300909312
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "arapahoe_community_college",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "ACC / Centennial Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.00850679636275,
+              39.58102378726964
+            ],
+            [
+              -105.00850679636275,
+              39.59001699090689
+            ],
+            [
+              -104.9995135927255,
+              39.59001699090689
+            ],
+            [
+              -104.9995135927255,
+              39.58102378726964
+            ],
+            [
+              -105.00850679636275,
+              39.58102378726964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "arapahoe_community_college",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "ACC / Centennial Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.00850679636275,
+              39.59001699090689
+            ],
+            [
+              -105.00850679636275,
+              39.599010194544135
+            ],
+            [
+              -104.9995135927255,
+              39.599010194544135
+            ],
+            [
+              -104.9995135927255,
+              39.59001699090689
+            ],
+            [
+              -105.00850679636275,
+              39.59001699090689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "east_littleton",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "East Littleton / Ketring",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.00850679636275,
+              39.599010194544135
+            ],
+            [
+              -105.00850679636275,
+              39.60800339818138
+            ],
+            [
+              -104.9995135927255,
+              39.60800339818138
+            ],
+            [
+              -104.9995135927255,
+              39.599010194544135
+            ],
+            [
+              -105.00850679636275,
+              39.599010194544135
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "east_littleton",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "East Littleton / Ketring",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.00850679636275,
+              39.60800339818138
+            ],
+            [
+              -105.00850679636275,
+              39.61699660181863
+            ],
+            [
+              -104.9995135927255,
+              39.61699660181863
+            ],
+            [
+              -104.9995135927255,
+              39.60800339818138
+            ],
+            [
+              -105.00850679636275,
+              39.60800339818138
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "south_broadway_corridor",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "South Broadway Corridor",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.00850679636275,
+              39.61699660181863
+            ],
+            [
+              -105.00850679636275,
+              39.62598980545587
+            ],
+            [
+              -104.9995135927255,
+              39.62598980545587
+            ],
+            [
+              -104.9995135927255,
+              39.61699660181863
+            ],
+            [
+              -105.00850679636275,
+              39.61699660181863
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "northeast_commercial",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "NE Commercial / Broadway & Belleview",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.00850679636275,
+              39.62598980545587
+            ],
+            [
+              -105.00850679636275,
+              39.63498300909312
+            ],
+            [
+              -104.9995135927255,
+              39.63498300909312
+            ],
+            [
+              -104.9995135927255,
+              39.62598980545587
+            ],
+            [
+              -105.00850679636275,
+              39.62598980545587
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "northeast_commercial",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "NE Commercial / Broadway & Belleview",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.00850679636275,
+              39.63498300909312
+            ],
+            [
+              -105.00850679636275,
+              39.643976212730365
+            ],
+            [
+              -104.9995135927255,
+              39.643976212730365
+            ],
+            [
+              -104.9995135927255,
+              39.63498300909312
+            ],
+            [
+              -105.00850679636275,
+              39.63498300909312
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "arapahoe_community_college",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "ACC / Centennial Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9995135927255,
+              39.58102378726964
+            ],
+            [
+              -104.9995135927255,
+              39.59001699090689
+            ],
+            [
+              -104.99052038908826,
+              39.59001699090689
+            ],
+            [
+              -104.99052038908826,
+              39.58102378726964
+            ],
+            [
+              -104.9995135927255,
+              39.58102378726964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "arapahoe_community_college",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "ACC / Centennial Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9995135927255,
+              39.59001699090689
+            ],
+            [
+              -104.9995135927255,
+              39.599010194544135
+            ],
+            [
+              -104.99052038908826,
+              39.599010194544135
+            ],
+            [
+              -104.99052038908826,
+              39.59001699090689
+            ],
+            [
+              -104.9995135927255,
+              39.59001699090689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "east_littleton",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "East Littleton / Ketring",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9995135927255,
+              39.599010194544135
+            ],
+            [
+              -104.9995135927255,
+              39.60800339818138
+            ],
+            [
+              -104.99052038908826,
+              39.60800339818138
+            ],
+            [
+              -104.99052038908826,
+              39.599010194544135
+            ],
+            [
+              -104.9995135927255,
+              39.599010194544135
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "east_littleton",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "East Littleton / Ketring",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9995135927255,
+              39.60800339818138
+            ],
+            [
+              -104.9995135927255,
+              39.61699660181863
+            ],
+            [
+              -104.99052038908826,
+              39.61699660181863
+            ],
+            [
+              -104.99052038908826,
+              39.60800339818138
+            ],
+            [
+              -104.9995135927255,
+              39.60800339818138
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "east_littleton",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "East Littleton / Ketring",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9995135927255,
+              39.61699660181863
+            ],
+            [
+              -104.9995135927255,
+              39.62598980545587
+            ],
+            [
+              -104.99052038908826,
+              39.62598980545587
+            ],
+            [
+              -104.99052038908826,
+              39.61699660181863
+            ],
+            [
+              -104.9995135927255,
+              39.61699660181863
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "northeast_commercial",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "NE Commercial / Broadway & Belleview",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9995135927255,
+              39.62598980545587
+            ],
+            [
+              -104.9995135927255,
+              39.63498300909312
+            ],
+            [
+              -104.99052038908826,
+              39.63498300909312
+            ],
+            [
+              -104.99052038908826,
+              39.62598980545587
+            ],
+            [
+              -104.9995135927255,
+              39.62598980545587
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "northeast_commercial",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "NE Commercial / Broadway & Belleview",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9995135927255,
+              39.63498300909312
+            ],
+            [
+              -104.9995135927255,
+              39.643976212730365
+            ],
+            [
+              -104.99052038908826,
+              39.643976212730365
+            ],
+            [
+              -104.99052038908826,
+              39.63498300909312
+            ],
+            [
+              -104.9995135927255,
+              39.63498300909312
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "arapahoe_community_college",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "ACC / Centennial Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.99052038908826,
+              39.58102378726964
+            ],
+            [
+              -104.99052038908826,
+              39.59001699090689
+            ],
+            [
+              -104.98152718545101,
+              39.59001699090689
+            ],
+            [
+              -104.98152718545101,
+              39.58102378726964
+            ],
+            [
+              -104.99052038908826,
+              39.58102378726964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "arapahoe_community_college",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "ACC / Centennial Area",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.99052038908826,
+              39.59001699090689
+            ],
+            [
+              -104.99052038908826,
+              39.599010194544135
+            ],
+            [
+              -104.98152718545101,
+              39.599010194544135
+            ],
+            [
+              -104.98152718545101,
+              39.59001699090689
+            ],
+            [
+              -104.99052038908826,
+              39.59001699090689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "east_littleton",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "East Littleton / Ketring",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.99052038908826,
+              39.599010194544135
+            ],
+            [
+              -104.99052038908826,
+              39.60800339818138
+            ],
+            [
+              -104.98152718545101,
+              39.60800339818138
+            ],
+            [
+              -104.98152718545101,
+              39.599010194544135
+            ],
+            [
+              -104.99052038908826,
+              39.599010194544135
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "zone",
+        "zoneId": "east_littleton",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "East Littleton / Ketring",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.99052038908826,
+              39.60800339818138
+            ],
+            [
+              -104.99052038908826,
+              39.61699660181863
+            ],
+            [
+              -104.98152718545101,
+              39.61699660181863
+            ],
+            [
+              -104.98152718545101,
+              39.60800339818138
+            ],
+            [
+              -104.99052038908826,
+              39.60800339818138
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "east_littleton",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "East Littleton / Ketring",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.99052038908826,
+              39.61699660181863
+            ],
+            [
+              -104.99052038908826,
+              39.62598980545587
+            ],
+            [
+              -104.98152718545101,
+              39.62598980545587
+            ],
+            [
+              -104.98152718545101,
+              39.61699660181863
+            ],
+            [
+              -104.99052038908826,
+              39.61699660181863
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "northeast_commercial",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "NE Commercial / Broadway & Belleview",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.99052038908826,
+              39.62598980545587
+            ],
+            [
+              -104.99052038908826,
+              39.63498300909312
+            ],
+            [
+              -104.98152718545101,
+              39.63498300909312
+            ],
+            [
+              -104.98152718545101,
+              39.62598980545587
+            ],
+            [
+              -104.99052038908826,
+              39.62598980545587
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "nearest",
+        "zoneId": "northeast_commercial",
+        "scores": {
+          "coffee": 0,
+          "restaurant": 0,
+          "grocery": 0,
+          "nature": 0,
+          "busStop": 0,
+          "healthcare": 0
+        },
+        "composite": 0,
+        "name": "NE Commercial / Broadway & Belleview",
+        "notes": "",
+        "_osm": {
+          "counts": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "nearestKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          }
+        },
+        "_routing": {
+          "walkingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "bikingKm": {
+            "coffee": null,
+            "restaurant": null,
+            "grocery": null,
+            "nature": null,
+            "busStop": null,
+            "healthcare": null
+          },
+          "walkingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          },
+          "bikingScores": {
+            "coffee": 0,
+            "restaurant": 0,
+            "grocery": 0,
+            "nature": 0,
+            "busStop": 0,
+            "healthcare": 0
+          }
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.99052038908826,
+              39.63498300909312
+            ],
+            [
+              -104.99052038908826,
+              39.643976212730365
+            ],
+            [
+              -104.98152718545101,
+              39.643976212730365
+            ],
+            [
+              -104.98152718545101,
+              39.63498300909312
+            ],
+            [
+              -104.99052038908826,
+              39.63498300909312
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
