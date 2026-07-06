@@ -59,6 +59,12 @@
       "lon": -104.987877,
       "name": "South Broadway",
       "note": "5100 S Broadway, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.609973,
+      "lon": -105.034876,
+      "name": "Enchanted Grounds",
+      "note": "3615 W Bowles Ave #5, Littleton, CO 80123"
     }
   ],
   "grocery": [
