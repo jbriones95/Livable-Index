@@ -181,7 +181,6 @@ export function getAllZoneFeatures() {
 }
 
 import { squareGrid, centroid as turfCentroid, point as turfPoint, booleanPointInPolygon, distance as turfDistance } from '@turf/turf';
-import { fetchOSM } from './overpass';
 
 const MAX_DIST_KM = {
   coffee: 1.0,
@@ -274,64 +273,40 @@ async function getRouteDistance(fromLon, fromLat, toLon, toLat, modeOrProfiles =
 }
 
 // Load an editable unified POI list at runtime (dev-only fallback to built-in supplemental points)
-let SUPPLEMENTAL_POINTS = null;
+// Load the editable unified POI list and derive supplemental point arrays.
+let SUPPLEMENTAL_POINTS = {};
+let SUPPLEMENTAL_POINT_OBJS = {}; // store full objects for building turf points
 try {
-  // Attempt to load the editable JSON at build/runtime if available
-  // In the browser this will be undefined; Node/dev scripts can import via fs.
-  // eslint-disable-next-line import/no-dynamic-require
-  // Use a relative path from the built app root.
-  // If the file isn't present at runtime, fall back to the embedded arrays below.
-  // NOTE: bundlers may inline this at build-time; this pattern prefers runtime fetch when possible.
-  // For dev server in Node, require will work.
   // @ts-ignore
   const unified = typeof window === 'undefined' ? require('../data/unified_list.json') : null;
   if (unified) {
-    SUPPLEMENTAL_POINTS = {
-      grocery: (unified.grocery || []).map((p) => [p.lon, p.lat]),
-      coffee: (unified.coffee || []).map((p) => [p.lon, p.lat]),
-      nature: (unified.parks || []).map((p) => [p.lon, p.lat]),
-      medical: (unified.medical || []).map((p) => [p.lon, p.lat]),
+    // Map keys in unified_list.json to the internal categories used by scoring
+    const mapping = {
+      coffee: 'coffee',
+      restaurant: 'restaurant',
+      grocery: 'grocery',
+      parks: 'nature',
+      trailheads: 'nature',
+      nature: 'nature',
+      medical: 'healthcare',
+      busStops: 'busStop',
+      busStop: 'busStop',
     };
+
+    for (const [k, v] of Object.entries(unified)) {
+      const mapped = mapping[k] || k;
+      if (!Array.isArray(v)) continue;
+      SUPPLEMENTAL_POINTS[mapped] = (SUPPLEMENTAL_POINTS[mapped] || []).concat(
+        v.map((p) => [p.lon, p.lat])
+      );
+      SUPPLEMENTAL_POINT_OBJS[mapped] = (SUPPLEMENTAL_POINT_OBJS[mapped] || []).concat(
+        v.map((p) => ({ lon: p.lon, lat: p.lat, name: p.name || p.note || null, note: p.note || null }))
+      );
+    }
   }
 } catch (e) {
-  // ignore; fallback to hard-coded list below
-}
-
-if (!SUPPLEMENTAL_POINTS) {
-  SUPPLEMENTAL_POINTS = {
-    grocery: [
-      [-104.9894468, 39.6131003], // 100 W Littleton Blvd
-      [-104.9885810, 39.6256084], // 5001 S Broadway
-      [-105.0062238, 39.6123386], // 1500 W Littleton Blvd (unit-agnostic)
-      [-105.0246978, 39.6259633], // 5050 S Federal Blvd
-      [-104.9885920, 39.5733500], // 7901 S Broadway
-      [-104.9918813, 39.5748722], // 181 W Mineral Ave
-    ],
-    coffee: [
-      [-104.9879769, 39.5722466],   // 7960 S Broadway
-      [-105.0252290, 39.5823901],   // 7301 S Santa Fe Dr Ste 310
-      [-105.0229385, 39.6032026],   // 6115 S Santa Fe Dr
-      [-104.9880828, 39.6012170],   // 6504 S Broadway
-      [-105.0223652, 39.6005510],   // 6399 S Santa Fe Dr
-    ],
-    nature: [
-      [-104.99338, 39.57879],       // 7900 S Ogden Way / Horseshoe Park area (approx)
-      [-105.0071743, 39.5787253],   // 7791 S Windermere St
-      [-105.01862, 39.58219],       // S Prince St & W Jackass Hill Rd / Jackass Hill Park
-      [-105.0233734, 39.5786312],   // 1900 W Mineral Ave
-      [-105.0042134, 39.5842020],   // 1312 W Geddes Ave
-      [-105.0040984, 39.6011676],   // Angeline's Little Creekway / Little Creek's Trailway (6364 S Sterne Pkwy)
-    ],
-    medical: [
-      [-104.9858838, 39.5755567], // 7700 S Broadway (AdventHealth Littleton Hospital)
-      [-104.9931225, 39.5820827], // 20 W Dry Creek Cir
-      [-104.9923109, 39.5813203], // 22 W Dry Creek Cir
-      [-104.9890993, 39.5809587], // 2 W Dry Creek Cir (Ste 230 fallback)
-      [-105.0140860, 39.6168010], // 2200 W Berry Ave
-      [-104.9904930, 39.6227409], // 200 W Belleview Ave (Ste 170 fallback)
-      [-104.9951523, 39.6132573], // 609 W Littleton Blvd (unit fallback)
-    ],
-  };
+  SUPPLEMENTAL_POINTS = {};
+  SUPPLEMENTAL_POINT_OBJS = {};
 }
 
 function distToScore(d, max, opts = {}) {
@@ -428,23 +403,28 @@ function nearestAndCounts(poiPoints, pt) {
   const nearestCoords = {};
   const counts = {};
   for (const c of categories) { nearest[c] = Infinity; nearestCoords[c] = null; counts[c] = 0; }
-
+  // Process any POI points (if supplied) — these might be turf points with `.properties`.
   for (const p of poiPoints) {
     const d = turfDistance(pt, p, { units: 'kilometers' });
-    const tags = p.properties || {};
-    const cats = classifyOSM(tags);
+    const props = p.properties || {};
+    // If point was created from the unified list we'll tag it with `category` in properties;
+    // prefer that to OSM classification.
+    const cats = props.category ? (Array.isArray(props.category) ? props.category : [props.category]) : classifyOSM(props);
     const coords = p.geometry && p.geometry.coordinates ? p.geometry.coordinates : null; // [lon, lat]
     for (const cat of cats) {
+      if (!Object.prototype.hasOwnProperty.call(nearest, cat)) continue;
       if (d < nearest[cat]) { nearest[cat] = d; nearestCoords[cat] = coords; }
       if (d <= MAX_DIST_KM[cat]) counts[cat]++;
     }
   }
 
-  // Merge supplemental points (known locations missing from OSM)
-  for (const [cat, points] of Object.entries(SUPPLEMENTAL_POINTS)) {
-    for (const coords of points) {
-      const sp = turfPoint(coords);
+  // Also include supplemental points derived from `data/unified_list.json`.
+  for (const [cat, points] of Object.entries(SUPPLEMENTAL_POINT_OBJS || {})) {
+    for (const obj of points) {
+      const coords = [obj.lon, obj.lat];
+      const sp = turfPoint(coords, { category: cat, name: obj.name, note: obj.note });
       const d = turfDistance(pt, sp, { units: 'kilometers' });
+      if (!Object.prototype.hasOwnProperty.call(nearest, cat)) continue;
       if (d < nearest[cat]) { nearest[cat] = d; nearestCoords[cat] = coords; }
       if (d <= MAX_DIST_KM[cat]) counts[cat]++;
     }
@@ -508,26 +488,10 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const deltaLat = radiusKm / 111;
   const deltaLon = radiusKm / (111 * Math.cos(latRad));
   const bbox = [lng - deltaLon, lat - deltaLat, lng + deltaLon, lat + deltaLat];
-  // Attempt to fetch nearby OSM POIs. Failures (network, CORS, rate-limit) are
-  // non-fatal: fall back to using `SUPPLEMENTAL_POINTS` so the UI still shows
-  // approximate scores instead of an error state.
-  let poiPoints = [];
-  let osmFetchFailed = false;
-  try {
-    const osm = await fetchOSM(bbox);
-    if (Array.isArray(osm) && osm.length > 0) {
-      poiPoints = osm.map((el) => {
-        const tags = el.tags || {};
-        if (el.type === 'node') return turfPoint([el.lon, el.lat], tags);
-        if ((el.type === 'way' || el.type === 'relation') && el.center) return turfPoint([el.center.lon, el.center.lat], tags);
-        return null;
-      }).filter(Boolean);
-    }
-  } catch (err) {
-    console.warn('computeScoreAtPoint: fetchOSM threw an exception', err && err.message);
-    osmFetchFailed = true;
-    poiPoints = [];
-  }
+  // Use unified POI list as authoritative source. Build no OSM points here;
+  // nearestAndCounts will incorporate `SUPPLEMENTAL_POINT_OBJS` derived from the unified list.
+  const poiPoints = [];
+  const osmFetchFailed = false;
 
   const pt = turfPoint([lng, lat]);
   const { nearest, counts, nearestCoords } = nearestAndCounts(poiPoints, pt);
@@ -620,14 +584,9 @@ export function getGridFeatures(cellSizeKm = 0.2) {
 export async function computeGridWithOSM(cellSizeKm = 0.2) {
   const grid = getGridFeatures(cellSizeKm);
   const bbox = [LITTLETON_BOUNDS.west, LITTLETON_BOUNDS.south, LITTLETON_BOUNDS.east, LITTLETON_BOUNDS.north];
-  const osm = await fetchOSM(bbox);
-
-  const poiPoints = osm.map((el) => {
-    const tags = el.tags || {};
-    if (el.type === 'node') return turfPoint([el.lon, el.lat], tags);
-    if ((el.type === 'way' || el.type === 'relation') && el.center) return turfPoint([el.center.lon, el.center.lat], tags);
-    return null;
-  }).filter(Boolean);
+  // Use unified POI list for grid scoring; do not call Overpass. poiPoints left empty
+  // because `nearestAndCounts` will include `SUPPLEMENTAL_POINT_OBJS` derived from the unified list.
+  const poiPoints = [];
 
   for (const cell of grid.features) {
     const c = turfCentroid(cell);
