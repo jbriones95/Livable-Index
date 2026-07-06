@@ -123,10 +123,10 @@ export function scoreToColor(score) {
 }
 
 export function scoreToGrade(score) {
-  if (score >= 80) return "A";
-  if (score >= 70) return "B";
-  if (score >= 55) return "C";
-  if (score >= 40) return "D";
+  if (score >= 75) return "A";
+  if (score >= 60) return "B";
+  if (score >= 48) return "C";
+  if (score >= 35) return "D";
   return "F";
 }
 
@@ -308,22 +308,14 @@ const CATEGORY_MAPPING = {
   busStop: 'busStop',
 };
 
-const SUPPLEMENTAL_POINTS = {};
 const SUPPLEMENTAL_POINT_OBJS = {};
 
 for (const [k, v] of Object.entries(unifiedData)) {
   const mapped = CATEGORY_MAPPING[k] || k;
   if (!Array.isArray(v)) continue;
-  SUPPLEMENTAL_POINTS[mapped] = (SUPPLEMENTAL_POINTS[mapped] || []).concat(
-    v.map((p) => [p.lon, p.lat])
-  );
   SUPPLEMENTAL_POINT_OBJS[mapped] = (SUPPLEMENTAL_POINT_OBJS[mapped] || []).concat(
     v.map((p) => ({ lon: p.lon, lat: p.lat, name: p.name || p.note || null, note: p.note || null }))
   );
-}
-
-function ensureUnifiedLoaded() {
-  return Promise.resolve();
 }
 
 function distToScore(d, max, opts = {}) {
@@ -514,7 +506,6 @@ function computeNatureComposite(trailScore, parkScore) {
 }
 
 export async function computeScoreAtPoint(lat, lng, opts = {}) {
-  await ensureUnifiedLoaded();
   const pt = turfPoint([lng, lat]);
   const { nearest, nearestCoords } = nearestAndCounts([], pt);
   const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt, useRouting: true });
@@ -524,10 +515,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     nature: computeNatureComposite(rawScores.trail ?? 0, rawScores.park ?? 0),
   };
 
-  const distances = {
-    ...nearest,
-    nature: isFinite(nearest.trail) ? nearest.trail : nearest.park,
-  };
+  const distances = { ...nearest };
 
   // Walking (5 km/h) and biking (15 km/h) time estimates in minutes
   const routing = {};
@@ -541,7 +529,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
       };
     }
   }
-  routing.nature = routing.trail || null;
+  routing.nature = routing.trail || routing.park || null;
 
   const zones = getAllZoneFeatures().features;
   let matched = null;
@@ -627,8 +615,6 @@ export function getGridFeatures(cellSizeKm = 0.2) {
 
 export async function computeGridWithOSM(cellSizeKm = 0.2) {
   const grid = getGridFeatures(cellSizeKm);
-  // POI data comes from SUPPLEMENTAL_POINT_OBJS via nearestAndCounts
-  await ensureUnifiedLoaded();
   for (const cell of grid.features) {
     const c = turfCentroid(cell);
     const { nearest, nearestCoords } = nearestAndCounts([], c);
@@ -639,10 +625,7 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
       nature: computeNatureComposite(rawScores.trail ?? 0, rawScores.park ?? 0),
     };
     cell.properties.composite = computeScore(cell.properties.scores);
-    cell.properties.distances = {
-      ...nearest,
-      nature: isFinite(nearest.trail) ? nearest.trail : nearest.park,
-    };
+    cell.properties.distances = { ...nearest };
   }
 
   return grid;

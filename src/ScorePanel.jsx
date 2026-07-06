@@ -26,13 +26,14 @@ function formatMiddle(key, distances, routing) {
     const trailStr = isFinite(trail) ? `trail ${formatDist(trail)}` : '';
     const parkStr = isFinite(park) ? `park ${formatDist(park)}` : '';
     parts.push([trailStr, parkStr].filter(Boolean).join(', '));
-    const rt = routing?.trail;
+    const rt = routing?.nature;
     if (rt && (rt.walk || rt.bike)) {
       parts.push(`walk ${formatTime(rt.walk)}`);
       parts.push(`bike ${formatTime(rt.bike)}`);
     }
   } else {
-    parts.push(formatDist(distances?.[key]));
+    const dist = distances?.[key];
+    parts.push(isFinite(dist) ? formatDist(dist) : 'N/A');
     const rt = routing?.[key];
     if (rt && (rt.walk || rt.bike)) {
       parts.push(`walk ${formatTime(rt.walk)}`);
@@ -78,9 +79,6 @@ export default function ScorePanel({ zone, onClose }) {
       <div className="panel-header">
         <div className="zone-name">
           <span className="zone-address">{zone.name}</span>
-          {zone.address && zone.address !== zone.name && (
-            <div className="zone-full-address">{zone.address}</div>
-          )}
           {zone.neighborhood && (
             <span className="zone-neighborhood">{zone.neighborhood}</span>
           )}

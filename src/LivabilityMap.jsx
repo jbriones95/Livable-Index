@@ -16,6 +16,7 @@ export default function LivabilityMap({ locate }) {
   const [selectedZone, setSelectedZone] = useState(null);
   const [computing, setComputing] = useState(false);
   const lastComputeTs = useRef(0);
+  const locateIdRef = useRef(0);
 
   useEffect(() => {
     if (leafletMap.current) return; // already initialized
@@ -134,12 +135,14 @@ export default function LivabilityMap({ locate }) {
     }
 
     // compute score using OSM at the locate point
+    const thisId = ++locateIdRef.current;
     (async () => {
       setComputing(true);
       const result = await computeScoreAtPoint(lat, lng).catch((err) => {
         console.error('computeScoreAtPoint failed for locate', err);
         return null;
       });
+      if (thisId !== locateIdRef.current) return; // stale
       if (!result) {
         setComputing(false);
         return;
