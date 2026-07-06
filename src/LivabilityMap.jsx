@@ -111,6 +111,11 @@ export default function LivabilityMap({ locate }) {
       }
       setSelectedZone(result);
       setClickPos({ lat, lng });
+      // If OSM fetch failed but we have fallback data, surface a clearer message
+      try {
+        if (result._errors && result._errors.osmFetchFailed) document.getElementById('__liv_map_debug').textContent = 'map: OSM unavailable — using fallback points';
+        else document.getElementById('__liv_map_debug').textContent = 'map: ready';
+      } catch (e) {}
       setComputing(false);
       // place marker
       if (markerRef.current) {
@@ -199,6 +204,10 @@ export default function LivabilityMap({ locate }) {
       }
       setSelectedZone(result);
       setClickPos({ lat, lng });
+      try {
+        if (result._errors && result._errors.osmFetchFailed) document.getElementById('__liv_map_debug').textContent = 'search: OSM unavailable — using fallback points';
+        else document.getElementById('__liv_map_debug').textContent = 'map: ready';
+      } catch (e) {}
       setComputing(false);
     })();
 

@@ -36,19 +36,29 @@ export async function fetchOSM(bbox) {
 );
 out center;`; // ways will have a center
 
-  const url = 'https://overpass-api.de/api/interpreter';
-  try {
-    const res = await fetch(url, { method: 'POST', body: q, headers: {'Content-Type': 'text/plain'} });
-    if (!res.ok) {
-      console.warn('Overpass returned non-OK:', res.status, res.statusText);
-      return [];
+  // Try multiple Overpass endpoints in case of rate limits, regional outages or CORS issues.
+  const endpoints = [
+    'https://overpass-api.de/api/interpreter',
+    'https://overpass.openstreetmap.fr/api/interpreter',
+    'https://overpass.kumi.systems/api/interpreter',
+  ];
+
+  for (const url of endpoints) {
+    try {
+      const res = await fetch(url, { method: 'POST', body: q, headers: { 'Content-Type': 'text/plain' } });
+      if (!res.ok) {
+        console.warn('Overpass returned non-OK from', url, res.status, res.statusText);
+        continue;
+      }
+      const data = await res.json();
+      return data.elements || [];
+    } catch (err) {
+      // Network errors, CORS, or timeouts may occur in browsers. Try the next endpoint.
+      console.warn('Overpass fetch failed from', url, err && err.message);
+      continue;
     }
-    const data = await res.json();
-    return data.elements || [];
-  } catch (err) {
-    // Network errors, CORS, or timeouts may occur in browsers. Return empty array and
-    // let callers handle fallback behavior.
-    console.warn('Overpass fetch failed:', err && err.message);
-    return [];
   }
+
+  // All endpoints failed — return empty array and let callers use fallback data.
+  return [];
 }

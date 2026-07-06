@@ -508,14 +508,26 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const deltaLat = radiusKm / 111;
   const deltaLon = radiusKm / (111 * Math.cos(latRad));
   const bbox = [lng - deltaLon, lat - deltaLat, lng + deltaLon, lat + deltaLat];
-  const osm = await fetchOSM(bbox);
-
-  const poiPoints = osm.map((el) => {
-    const tags = el.tags || {};
-    if (el.type === 'node') return turfPoint([el.lon, el.lat], tags);
-    if ((el.type === 'way' || el.type === 'relation') && el.center) return turfPoint([el.center.lon, el.center.lat], tags);
-    return null;
-  }).filter(Boolean);
+  // Attempt to fetch nearby OSM POIs. Failures (network, CORS, rate-limit) are
+  // non-fatal: fall back to using `SUPPLEMENTAL_POINTS` so the UI still shows
+  // approximate scores instead of an error state.
+  let poiPoints = [];
+  let osmFetchFailed = false;
+  try {
+    const osm = await fetchOSM(bbox);
+    if (Array.isArray(osm) && osm.length > 0) {
+      poiPoints = osm.map((el) => {
+        const tags = el.tags || {};
+        if (el.type === 'node') return turfPoint([el.lon, el.lat], tags);
+        if ((el.type === 'way' || el.type === 'relation') && el.center) return turfPoint([el.center.lon, el.center.lat], tags);
+        return null;
+      }).filter(Boolean);
+    }
+  } catch (err) {
+    console.warn('computeScoreAtPoint: fetchOSM threw an exception', err && err.message);
+    osmFetchFailed = true;
+    poiPoints = [];
+  }
 
   const pt = turfPoint([lng, lat]);
   const { nearest, counts, nearestCoords } = nearestAndCounts(poiPoints, pt);
@@ -573,6 +585,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     neighborhood,
     address,
     _osm: { counts, nearestKm: nearest },
+    _errors: { osmFetchFailed },
     _routing: { walkingKm: scoring.walkingKm, bikingKm: scoring.bikingKm, walkingScores: scoring.walking, bikingScores: scoring.biking },
     zoneId: matched ? matched.properties.id : null,
   };
