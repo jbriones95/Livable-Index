@@ -1,4 +1,4 @@
-import { scoreToColor, scoreToLabel } from "./livabilityData";
+import { scoreToColor } from "./livabilityData";
 
 const LEGEND_ITEMS = [
   { min: 75, max: 100, label: "Excellent (75–100)" },

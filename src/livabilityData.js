@@ -5,6 +5,8 @@
  *   coffee shop, dinner restaurant, grocery store, nature access, transit stop, healthcare.
  */
 
+import { squareGrid, centroid as turfCentroid, point as turfPoint, booleanPointInPolygon, distance as turfDistance } from '@turf/turf';
+
 export const LITTLETON_BOUNDS = {
   north: 39.645, south: 39.580, east: -104.980, west: -105.055,
 };
@@ -153,34 +155,36 @@ export function zoneToGeoJSON(zone) {
   };
 }
 
+let _neighborhoodFetch = null;
+
 export function getAllZoneFeatures() {
   try {
     if (typeof window !== 'undefined' && window.__liv_neighborhoods) return window.__liv_neighborhoods;
   } catch (e) {}
 
-  (async () => {
-    try {
-      const url = 'https://services6.arcgis.com/lJUBf9F1fZJRB4zT/arcgis/rest/services/Neighborhood_Boundary/FeatureServer/70/query?where=1%3D1&outFields=*&outSR=4326&f=geojson';
-      const r = await fetch(url);
-      if (!r.ok) return;
-      const nb = await r.json();
-      if (nb && nb.type === 'FeatureCollection') {
-        nb.features = nb.features.map((f) => {
-          f.properties = f.properties || {};
-          if (f.properties.Neighborho && !f.properties.name) f.properties.name = f.properties.Neighborho;
-          return f;
-        });
-        try { if (typeof window !== 'undefined') window.__liv_neighborhoods = nb; } catch (e) {}
+  if (!_neighborhoodFetch) {
+    _neighborhoodFetch = (async () => {
+      try {
+        const url = 'https://services6.arcgis.com/lJUBf9F1fZJRB4zT/arcgis/rest/services/Neighborhood_Boundary/FeatureServer/70/query?where=1%3D1&outFields=*&outSR=4326&f=geojson';
+        const r = await fetch(url);
+        if (!r.ok) return;
+        const nb = await r.json();
+        if (nb && nb.type === 'FeatureCollection') {
+          nb.features = nb.features.map((f) => {
+            f.properties = f.properties || {};
+            if (f.properties.Neighborho && !f.properties.name) f.properties.name = f.properties.Neighborho;
+            return f;
+          });
+          try { if (typeof window !== 'undefined') window.__liv_neighborhoods = nb; } catch (e) {}
+        }
+      } catch (err) {
+        console.warn('Failed to fetch neighborhoods', err && err.message);
       }
-    } catch (err) {
-      console.warn('Failed to fetch neighborhoods', err && err.message);
-    }
-  })();
+    })();
+  }
 
   return { type: 'FeatureCollection', features: ZONES.map(zoneToGeoJSON) };
 }
-
-import { squareGrid, centroid as turfCentroid, point as turfPoint, booleanPointInPolygon, distance as turfDistance } from '@turf/turf';
 
 // Named trails to detect for the trailhead portion of the nature composite (80% weight)
 const NAMED_TRAILS = [
@@ -542,18 +546,8 @@ function computeNatureComposite(trailScore, parkScore) {
 
 export async function computeScoreAtPoint(lat, lng, opts = {}) {
   await ensureUnifiedLoaded();
-  const radiusKm = opts.radiusKm ?? 1.5;
-  const latRad = (lat * Math.PI) / 180;
-  const deltaLat = radiusKm / 111;
-  const deltaLon = radiusKm / (111 * Math.cos(latRad));
-  const bbox = [lng - deltaLon, lat - deltaLat, lng + deltaLon, lat + deltaLat];
-  // Use unified POI list as authoritative source. Build no OSM points here;
-  // nearestAndCounts will incorporate `SUPPLEMENTAL_POINT_OBJS` derived from the unified list.
-  const poiPoints = [];
-  const osmFetchFailed = false;
-
   const pt = turfPoint([lng, lat]);
-  const { nearest, counts, nearestCoords } = nearestAndCounts(poiPoints, pt);
+  const { nearest, nearestCoords } = nearestAndCounts([], pt);
   const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt, useRouting: true });
   const rawScores = scoring.scores;
   const scores = {
@@ -611,14 +605,6 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     notes: matched ? matched.properties.notes : '',
     neighborhood,
     address,
-    _osm: { counts, nearestKm: nearest },
-    _errors: { osmFetchFailed },
-    _routing: {
-      walkingKm: { ...scoring.walkingKm, nature: computeNatureComposite(scoring.walkingKm.trail ?? Infinity, scoring.walkingKm.park ?? Infinity) },
-      bikingKm: { ...scoring.bikingKm, nature: computeNatureComposite(scoring.bikingKm.trail ?? Infinity, scoring.bikingKm.park ?? Infinity) },
-      walkingScores: { ...scoring.walking, nature: computeNatureComposite(scoring.walking.trail ?? 0, scoring.walking.park ?? 0) },
-      bikingScores: { ...scoring.biking, nature: computeNatureComposite(scoring.biking.trail ?? 0, scoring.biking.park ?? 0) },
-    },
     zoneId: matched ? matched.properties.id : null,
   };
 }
@@ -651,15 +637,11 @@ export function getGridFeatures(cellSizeKm = 0.2) {
 
 export async function computeGridWithOSM(cellSizeKm = 0.2) {
   const grid = getGridFeatures(cellSizeKm);
-  const bbox = [LITTLETON_BOUNDS.west, LITTLETON_BOUNDS.south, LITTLETON_BOUNDS.east, LITTLETON_BOUNDS.north];
-  // Use unified POI list for grid scoring; do not call Overpass. poiPoints left empty
-  // because `nearestAndCounts` will include `SUPPLEMENTAL_POINT_OBJS` derived from the unified list.
-  const poiPoints = [];
-
+  // POI data comes from SUPPLEMENTAL_POINT_OBJS via nearestAndCounts
   await ensureUnifiedLoaded();
   for (const cell of grid.features) {
     const c = turfCentroid(cell);
-    const { nearest, counts, nearestCoords } = nearestAndCounts(poiPoints, c);
+    const { nearest, nearestCoords } = nearestAndCounts([], c);
     const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt: c, useRouting: true });
     const rawScores = scoring.scores;
     cell.properties.scores = {
@@ -667,13 +649,6 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
       nature: computeNatureComposite(rawScores.trail ?? 0, rawScores.park ?? 0),
     };
     cell.properties.composite = computeScore(cell.properties.scores);
-    cell.properties._osm = { counts, nearestKm: nearest };
-    cell.properties._routing = {
-      walkingKm: { ...scoring.walkingKm, nature: computeNatureComposite(scoring.walkingKm.trail ?? Infinity, scoring.walkingKm.park ?? Infinity) },
-      bikingKm: { ...scoring.bikingKm, nature: computeNatureComposite(scoring.bikingKm.trail ?? Infinity, scoring.bikingKm.park ?? Infinity) },
-      walkingScores: { ...scoring.walking, nature: computeNatureComposite(scoring.walking.trail ?? 0, scoring.walking.park ?? 0) },
-      bikingScores: { ...scoring.biking, nature: computeNatureComposite(scoring.biking.trail ?? 0, scoring.biking.park ?? 0) },
-    };
   }
 
   return grid;

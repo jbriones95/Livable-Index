@@ -1,5 +1,4 @@
 import {
-  computeScore,
   scoreToColor,
   scoreToGrade,
   scoreToLabel,

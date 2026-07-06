@@ -4,31 +4,18 @@ import "leaflet/dist/leaflet.css";
 import {
   MAP_CENTER,
   MAP_ZOOM,
-  ZONES,
-  DIMENSION_LABELS,
-  WEIGHTS,
-  computeScore,
-  scoreToColor,
-  scoreToGrade,
-  scoreToLabel,
-  zoneToGeoJSON,
-  getAllZoneFeatures,
   computeScoreAtPoint,
   isPointInCity,
 } from "./livabilityData";
-import { point as turfPoint, booleanPointInPolygon, centroid as turfCentroid, distance as turfDistance } from "@turf/turf";
 import ScorePanel from "./ScorePanel";
 
 export default function LivabilityMap({ locate }) {
   const mapRef = useRef(null);
   const leafletMap = useRef(null);
-  const geojsonLayer = useRef(null);
   const markerRef = useRef(null);
   const [selectedZone, setSelectedZone] = useState(null);
-  const [clickPos, setClickPos] = useState(null);
   const [computing, setComputing] = useState(false);
   const lastComputeTs = useRef(0);
-  const containerRef = useRef(null);
 
   useEffect(() => {
     if (leafletMap.current) return; // already initialized
@@ -50,7 +37,6 @@ export default function LivabilityMap({ locate }) {
 
     // Do not render the heavy grid client-side. Instead the map listens for clicks
     // and we compute the score at the clicked point on demand.
-    geojsonLayer.current = null;
 
     map.on('click', async (e) => {
       // compute score for clicked point
@@ -82,7 +68,6 @@ export default function LivabilityMap({ locate }) {
         return;
       }
       setSelectedZone(result);
-      setClickPos({ lat, lng });
       setComputing(false);
       // place marker
       if (markerRef.current) {
@@ -126,13 +111,12 @@ export default function LivabilityMap({ locate }) {
   // respond to external locate requests: { lat, lng, label }
   useEffect(() => {
     if (!locate || !leafletMap.current) return;
-    const { lat, lng, label } = locate;
+    const { lat, lng } = locate;
     const map = leafletMap.current;
 
     // optionally prevent locating outside city
     try {
       if (!isPointInCity(lat, lng)) {
-        try { document.getElementById('__liv_map_debug').textContent = 'search: outside city limits'; } catch (e) {}
         setSelectedZone(null);
         return;
       }
@@ -161,14 +145,13 @@ export default function LivabilityMap({ locate }) {
         return;
       }
       setSelectedZone(result);
-      setClickPos({ lat, lng });
       setComputing(false);
     })();
 
   }, [locate]);
 
   return (
-    <div className="map-wrapper" ref={containerRef}>
+    <div className="map-wrapper">
       <div ref={mapRef} className="leaflet-container-map" />
       {computing && (
         <div className="map-loading-overlay" aria-hidden>
