@@ -1360,6 +1360,54 @@
       "lon": -105.081341,
       "name": "Asian Spice",
       "note": "7444 W Chatfield Ave Ste G, Littleton, CO 80128"
+    },
+    {
+      "lat": 39.619711,
+      "lon": -105.016383,
+      "name": "49th Food",
+      "note": "5350 S Santa Fe Dr F Suite, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.622812,
+      "lon": -105.018846,
+      "name": "Toast Fine",
+      "note": "2630 W Belleview Ave #100, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.619458,
+      "lon": -105.028599,
+      "name": "JP Nori Sushi",
+      "note": "5302 S Federal Cir, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.611115,
+      "lon": -105.036575,
+      "name": "Santiagos",
+      "note": "5826 S Lowell Blvd, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.608809,
+      "lon": -105.036769,
+      "name": "Colore",
+      "note": "5950 S Platte Canyon Rd # A1, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.622556,
+      "lon": -105.034662,
+      "name": "Walters",
+      "note": "5194 S Lowell Blvd, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.624251,
+      "lon": -105.025388,
+      "name": "Cheba Hut",
+      "note": "5098 S Federal Blvd Ste c, Englewood, CO 80110"
+    },
+    {
+      "lat": 39.624070,
+      "lon": -105.019860,
+      "name": "Freddy's",
+      "note": "2660 W Belleview Ave, Littleton, CO 80123"
     }
   ],
   "nature": [
