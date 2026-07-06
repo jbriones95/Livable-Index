@@ -90,10 +90,10 @@ for (const z of ZONES) {
 export const WEIGHTS = {
   coffee: 0.15,
   restaurant: 0.15,
-  grocery: 0.20,
-  nature: 0.10,
+  nature: 0.20,
+  healthcare: 0.10,
   busStop: 0.20,
-  healthcare: 0.20,
+  grocery: 0.20,
 };
 
 export const DIMENSION_LABELS = {
@@ -309,6 +309,41 @@ try {
   SUPPLEMENTAL_POINT_OBJS = {};
 }
 
+// In browser builds, attempt to fetch `data/unified_list.json` at runtime
+// so the unified list is authoritative even when `require` is unavailable.
+let _unifiedLoadPromise = null;
+function ensureUnifiedLoaded() {
+  if (Object.keys(SUPPLEMENTAL_POINT_OBJS || {}).length > 0) return Promise.resolve();
+  if (typeof window === 'undefined') return Promise.resolve();
+  if (_unifiedLoadPromise) return _unifiedLoadPromise;
+  _unifiedLoadPromise = fetch('/data/unified_list.json').then((r) => {
+    if (!r.ok) return null;
+    return r.json();
+  }).then((unified) => {
+    if (!unified) return;
+    const mapping = {
+      coffee: 'coffee',
+      restaurant: 'restaurant',
+      grocery: 'grocery',
+      parks: 'nature',
+      trailheads: 'nature',
+      nature: 'nature',
+      medical: 'healthcare',
+      busStops: 'busStop',
+      busStop: 'busStop',
+    };
+    for (const [k, v] of Object.entries(unified)) {
+      const mapped = mapping[k] || k;
+      if (!Array.isArray(v)) continue;
+      SUPPLEMENTAL_POINTS[mapped] = (SUPPLEMENTAL_POINTS[mapped] || []).concat(v.map((p) => [p.lon, p.lat]));
+      SUPPLEMENTAL_POINT_OBJS[mapped] = (SUPPLEMENTAL_POINT_OBJS[mapped] || []).concat(
+        v.map((p) => ({ lon: p.lon, lat: p.lat, name: p.name || p.note || null, note: p.note || null }))
+      );
+    }
+  }).catch(() => {});
+  return _unifiedLoadPromise;
+}
+
 function distToScore(d, max, opts = {}) {
   // General rule: if within threshold -> 100. Beyond threshold apply stepped
   // deductions. Defaults: stepMeters=200m, deduction=10 points per step.
@@ -483,6 +518,7 @@ async function computeScoresFromNearest(nearest, opts = {}) {
 }
 
 export async function computeScoreAtPoint(lat, lng, opts = {}) {
+  await ensureUnifiedLoaded();
   const radiusKm = opts.radiusKm ?? 1.5;
   const latRad = (lat * Math.PI) / 180;
   const deltaLat = radiusKm / 111;
@@ -588,10 +624,11 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
   // because `nearestAndCounts` will include `SUPPLEMENTAL_POINT_OBJS` derived from the unified list.
   const poiPoints = [];
 
+  await ensureUnifiedLoaded();
   for (const cell of grid.features) {
     const c = turfCentroid(cell);
     const { nearest, counts, nearestCoords } = nearestAndCounts(poiPoints, c);
-    const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt: c, useRouting: false });
+    const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt: c, useRouting: true });
     cell.properties.scores = scoring.scores;
     cell.properties.composite = computeScore(scoring.scores);
     cell.properties._osm = { counts, nearestKm: nearest };
