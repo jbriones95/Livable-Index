@@ -273,12 +273,22 @@ body {
 .dimension-label {
   font-size: 0.78rem;
   color: #c0d8f0;
+  flex: 1;
+}
+
+.dimension-distance {
+  font-size: 0.72rem;
+  color: #6a8aaa;
+  text-align: center;
+  margin: 0 8px;
+  white-space: nowrap;
 }
 
 .dimension-score {
   font-size: 0.82rem;
   font-weight: 700;
   color: #e8f0fa;
+  text-align: right;
 }
 
 .dimension-bar-bg {

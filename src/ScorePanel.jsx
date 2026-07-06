@@ -6,13 +6,20 @@ import {
   WEIGHTS,
 } from "./livabilityData";
 
-function DimensionBar({ label, score, weight }) {
+function formatDist(km) {
+  if (!isFinite(km)) return '';
+  if (km < 0.1) return `${Math.round(km * 1000)} m`;
+  return `${km.toFixed(2)} km`;
+}
+
+function DimensionBar({ label, score, weight, distance }) {
   const color = scoreToColor(score);
 
   return (
     <div className="dimension-row">
       <div className="dimension-header">
         <span className="dimension-label">{label}</span>
+        <span className="dimension-distance">{distance}</span>
         <span className="dimension-score">{score}</span>
       </div>
       <div className="dimension-bar-bg">
@@ -65,14 +72,27 @@ export default function ScorePanel({ zone, onClose }) {
 
       <h3 className="breakdown-title">Score Breakdown</h3>
       <div className="dimensions">
-        {Object.entries(DIMENSION_LABELS).map(([key, label]) => (
-          <DimensionBar
-            key={key}
-            label={label}
-            score={zone.scores[key] ?? 0}
-            weight={WEIGHTS[key]}
-          />
-        ))}
+        {Object.entries(DIMENSION_LABELS).map(([key, label]) => {
+          let distStr = '';
+          if (key === 'nature' && zone.distances) {
+            const trail = zone.distances.trail;
+            const park = zone.distances.park;
+            const trailStr = isFinite(trail) ? `trail ${formatDist(trail)}` : '';
+            const parkStr = isFinite(park) ? `park ${formatDist(park)}` : '';
+            distStr = [trailStr, parkStr].filter(Boolean).join(', ');
+          } else {
+            distStr = formatDist(zone.distances?.[key]);
+          }
+          return (
+            <DimensionBar
+              key={key}
+              label={label}
+              score={zone.scores[key] ?? 0}
+              weight={WEIGHTS[key]}
+              distance={distStr}
+            />
+          );
+        })}
       </div>
 
       {/* methodology note intentionally removed per user request */}

@@ -515,6 +515,11 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     nature: computeNatureComposite(rawScores.trail ?? 0, rawScores.park ?? 0),
   };
 
+  const distances = {
+    ...nearest,
+    nature: isFinite(nearest.trail) ? nearest.trail : nearest.park,
+  };
+
   const zones = getAllZoneFeatures().features;
   let matched = null;
   for (const z of zones) {
@@ -565,6 +570,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     notes: matched ? matched.properties.notes : '',
     neighborhood,
     address,
+    distances,
     zoneId: matched ? matched.properties.id : null,
   };
 }
@@ -609,6 +615,10 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
       nature: computeNatureComposite(rawScores.trail ?? 0, rawScores.park ?? 0),
     };
     cell.properties.composite = computeScore(cell.properties.scores);
+    cell.properties.distances = {
+      ...nearest,
+      nature: isFinite(nearest.trail) ? nearest.trail : nearest.park,
+    };
   }
 
   return grid;
