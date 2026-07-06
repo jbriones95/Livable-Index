@@ -628,7 +628,7 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
   for (const cell of grid.features) {
     const c = turfCentroid(cell);
     const { nearest, counts, nearestCoords } = nearestAndCounts(poiPoints, c);
-    const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt: c, useRouting: false });
+    const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt: c, useRouting: true });
     cell.properties.scores = scoring.scores;
     cell.properties.composite = computeScore(scoring.scores);
     cell.properties._osm = { counts, nearestKm: nearest };
