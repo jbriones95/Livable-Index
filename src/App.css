@@ -276,12 +276,15 @@ body {
   flex: 1;
 }
 
-.dimension-distance {
-  font-size: 0.72rem;
+.dimension-middle {
+  font-size: 0.68rem;
   color: #6a8aaa;
   text-align: center;
-  margin: 0 8px;
+  margin: 0 6px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
 }
 
 .dimension-score {

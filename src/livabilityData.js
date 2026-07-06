@@ -529,6 +529,20 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     nature: isFinite(nearest.trail) ? nearest.trail : nearest.park,
   };
 
+  // Walking (5 km/h) and biking (15 km/h) time estimates in minutes
+  const routing = {};
+  for (const key of Object.keys(scoring.walkingKm)) {
+    const walkKm = scoring.walkingKm[key];
+    const bikeKm = scoring.bikingKm[key];
+    if (isFinite(walkKm) && isFinite(bikeKm)) {
+      routing[key] = {
+        walk: Math.round(walkKm * 12),
+        bike: Math.round(bikeKm * 4),
+      };
+    }
+  }
+  routing.nature = routing.trail || null;
+
   const zones = getAllZoneFeatures().features;
   let matched = null;
   for (const z of zones) {
@@ -580,6 +594,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     neighborhood,
     address,
     distances,
+    routing,
     zoneId: matched ? matched.properties.id : null,
   };
 }

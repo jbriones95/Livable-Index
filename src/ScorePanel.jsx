@@ -12,14 +12,44 @@ function formatDist(km) {
   return `${km.toFixed(2)} km`;
 }
 
-function DimensionBar({ label, score, weight, distance }) {
+function formatTime(min) {
+  if (typeof min !== 'number' || !isFinite(min) || min < 1) return '';
+  if (min < 60) return `${min} min`;
+  return `${Math.floor(min / 60)}h ${min % 60}m`;
+}
+
+function formatMiddle(key, distances, routing) {
+  const parts = [];
+  if (key === 'nature' && distances) {
+    const trail = distances.trail;
+    const park = distances.park;
+    const trailStr = isFinite(trail) ? `trail ${formatDist(trail)}` : '';
+    const parkStr = isFinite(park) ? `park ${formatDist(park)}` : '';
+    parts.push([trailStr, parkStr].filter(Boolean).join(', '));
+    const rt = routing?.trail;
+    if (rt && (rt.walk || rt.bike)) {
+      parts.push(`walk ${formatTime(rt.walk)}`);
+      parts.push(`bike ${formatTime(rt.bike)}`);
+    }
+  } else {
+    parts.push(formatDist(distances?.[key]));
+    const rt = routing?.[key];
+    if (rt && (rt.walk || rt.bike)) {
+      parts.push(`walk ${formatTime(rt.walk)}`);
+      parts.push(`bike ${formatTime(rt.bike)}`);
+    }
+  }
+  return parts.filter(Boolean).join(' · ');
+}
+
+function DimensionBar({ label, score, weight, middle }) {
   const color = scoreToColor(score);
 
   return (
     <div className="dimension-row">
       <div className="dimension-header">
         <span className="dimension-label">{label}</span>
-        <span className="dimension-distance">{distance}</span>
+        <span className="dimension-middle">{middle}</span>
         <span className="dimension-score">{score}</span>
       </div>
       <div className="dimension-bar-bg">
@@ -68,34 +98,18 @@ export default function ScorePanel({ zone, onClose }) {
 
       <p className="zone-notes">{zone.notes}</p>
 
-      {/* Internal debug info intentionally not displayed */}
-
       <h3 className="breakdown-title">Score Breakdown</h3>
       <div className="dimensions">
-        {Object.entries(DIMENSION_LABELS).map(([key, label]) => {
-          let distStr = '';
-          if (key === 'nature' && zone.distances) {
-            const trail = zone.distances.trail;
-            const park = zone.distances.park;
-            const trailStr = isFinite(trail) ? `trail ${formatDist(trail)}` : '';
-            const parkStr = isFinite(park) ? `park ${formatDist(park)}` : '';
-            distStr = [trailStr, parkStr].filter(Boolean).join(', ');
-          } else {
-            distStr = formatDist(zone.distances?.[key]);
-          }
-          return (
-            <DimensionBar
-              key={key}
-              label={label}
-              score={zone.scores[key] ?? 0}
-              weight={WEIGHTS[key]}
-              distance={distStr}
-            />
-          );
-        })}
+        {Object.entries(DIMENSION_LABELS).map(([key, label]) => (
+          <DimensionBar
+            key={key}
+            label={label}
+            score={zone.scores[key] ?? 0}
+            weight={WEIGHTS[key]}
+            middle={formatMiddle(key, zone.distances, zone.routing)}
+          />
+        ))}
       </div>
-
-      {/* methodology note intentionally removed per user request */}
     </div>
   );
 }
