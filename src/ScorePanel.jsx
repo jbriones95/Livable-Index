@@ -8,16 +8,7 @@ import {
 } from "./livabilityData";
 
 function DimensionBar({ label, score, weight }) {
-  const color =
-    score >= 75
-      ? "#1a7f2e"
-      : score >= 60
-      ? "#5ab552"
-      : score >= 48
-      ? "#c8b020"
-      : score >= 35
-      ? "#e8a020"
-      : "#c0392b";
+  const color = scoreToColor(score);
 
   return (
     <div className="dimension-row">
@@ -71,24 +62,7 @@ export default function ScorePanel({ zone, onClose }) {
 
       <p className="zone-notes">{zone.notes}</p>
 
-      {/* OSM debug removed from user UI */}
-
-      {zone._routing && (
-        <div className="routing-debug">
-          <h4>Routing (walking / biking)</h4>
-          <div className="routing-stats">
-            {Object.entries(DIMENSION_LABELS).map(([k, label]) => (
-              <div key={k} className="routing-stat">
-                <strong>{label}:</strong>
-                <div className="routing-row">
-                  <span className="routing-walk">Walk: {isFinite(zone._routing.walkingKm?.[k]) ? `${zone._routing.walkingKm[k].toFixed(2)} km` : '—' } ({zone._routing.walkingScores?.[k] ?? '—'})</span>
-                  <span className="routing-bike">Bike: {isFinite(zone._routing.bikingKm?.[k]) ? `${zone._routing.bikingKm[k].toFixed(2)} km` : '—' } ({zone._routing.bikingScores?.[k] ?? '—'})</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Internal debug info intentionally not displayed */}
 
       <h3 className="breakdown-title">Score Breakdown</h3>
       <div className="dimensions">

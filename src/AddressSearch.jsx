@@ -13,7 +13,7 @@ export default function AddressSearch({ onLocate }) {
     try {
       // Use Nominatim (OpenStreetMap) for geocoding
       const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=1&addressdetails=1`;
-      const res = await fetch(url, { headers: { 'Accept-Language': 'en' } });
+      const res = await fetch(url, { headers: { 'Accept-Language': 'en', 'User-Agent': 'LivableIndex/1.0' } });
       if (!res.ok) throw new Error('Geocoding failed');
       const data = await res.json();
       if (!data || data.length === 0) {

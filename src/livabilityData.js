@@ -182,12 +182,21 @@ export function getAllZoneFeatures() {
 
 import { squareGrid, centroid as turfCentroid, point as turfPoint, booleanPointInPolygon, distance as turfDistance } from '@turf/turf';
 
+// Named trails to detect for the trailhead portion of the nature composite (80% weight)
+const NAMED_TRAILS = [
+  'highline canal',
+  'lee gulch trail',
+  'mary carter greenway trail',
+  'littleton community trail',
+];
+
 const MAX_DIST_KM = {
   coffee: 1.0,
   restaurant: 1.0,
   grocery: 1.5,
-  // nature distance (includes parks/trail access)
-  nature: 2.0,
+  // trail and park are combined into the nature composite score
+  trail: 2.0,
+  park: 2.0,
   busStop: 0.8,
   healthcare: 4.5,
 };
@@ -285,9 +294,9 @@ try {
       coffee: 'coffee',
       restaurant: 'restaurant',
       grocery: 'grocery',
-      parks: 'nature',
-      trailheads: 'nature',
-      nature: 'nature',
+      parks: 'park',
+      trailheads: 'trail',
+      nature: 'trail',
       medical: 'healthcare',
       busStops: 'busStop',
       busStop: 'busStop',
@@ -316,7 +325,7 @@ function ensureUnifiedLoaded() {
   if (Object.keys(SUPPLEMENTAL_POINT_OBJS || {}).length > 0) return Promise.resolve();
   if (typeof window === 'undefined') return Promise.resolve();
   if (_unifiedLoadPromise) return _unifiedLoadPromise;
-  _unifiedLoadPromise = fetch('/data/unified_list.json').then((r) => {
+  _unifiedLoadPromise = fetch('data/unified_list.json').then((r) => {
     if (!r.ok) return null;
     return r.json();
   }).then((unified) => {
@@ -325,9 +334,9 @@ function ensureUnifiedLoaded() {
       coffee: 'coffee',
       restaurant: 'restaurant',
       grocery: 'grocery',
-      parks: 'nature',
-      trailheads: 'nature',
-      nature: 'nature',
+      parks: 'park',
+      trailheads: 'trail',
+      nature: 'trail',
       medical: 'healthcare',
       busStops: 'busStop',
       busStop: 'busStop',
@@ -414,16 +423,23 @@ function classifyOSM(tags) {
     results.push('busStop');
   }
 
-  // Nature / park detection
+  // Trail detection: paths, tracks, footways, and named trails
   if (
     ['path', 'track', 'trailhead', 'footway', 'pedestrian'].includes(h) ||
+    name.includes('trail') ||
+    (name && NAMED_TRAILS.some(t => name.includes(t)))
+  ) {
+    results.push('trail');
+  }
+
+  // Park detection: leisure areas, parks, nature reserves, recreation grounds
+  if (
     l === 'park' ||
     l === 'nature_reserve' ||
     l === 'recreation_ground' ||
-    name.includes('trail') ||
     name.includes('park')
   ) {
-    results.push('nature');
+    results.push('park');
   }
 
   // Healthcare
@@ -433,7 +449,7 @@ function classifyOSM(tags) {
 }
 
 function nearestAndCounts(poiPoints, pt) {
-  const categories = ['coffee', 'restaurant', 'grocery', 'nature', 'busStop', 'healthcare'];
+  const categories = ['coffee', 'restaurant', 'grocery', 'trail', 'park', 'busStop', 'healthcare'];
   const nearest = {};
   const nearestCoords = {};
   const counts = {};
@@ -517,6 +533,13 @@ async function computeScoresFromNearest(nearest, opts = {}) {
   return { scores: combined, walking, biking, walkingKm, bikingKm };
 }
 
+// Combine trail (80%) and park (20%) scores into the nature dimension
+function computeNatureComposite(trailScore, parkScore) {
+  const t = typeof trailScore === 'number' && isFinite(trailScore) ? trailScore : 0;
+  const p = typeof parkScore === 'number' && isFinite(parkScore) ? parkScore : 0;
+  return Math.round(0.8 * t + 0.2 * p);
+}
+
 export async function computeScoreAtPoint(lat, lng, opts = {}) {
   await ensureUnifiedLoaded();
   const radiusKm = opts.radiusKm ?? 1.5;
@@ -532,7 +555,11 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const pt = turfPoint([lng, lat]);
   const { nearest, counts, nearestCoords } = nearestAndCounts(poiPoints, pt);
   const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt, useRouting: true });
-  const scores = scoring.scores;
+  const rawScores = scoring.scores;
+  const scores = {
+    ...rawScores,
+    nature: computeNatureComposite(rawScores.trail ?? 0, rawScores.park ?? 0),
+  };
 
   const zones = getAllZoneFeatures().features;
   let matched = null;
@@ -586,7 +613,12 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     address,
     _osm: { counts, nearestKm: nearest },
     _errors: { osmFetchFailed },
-    _routing: { walkingKm: scoring.walkingKm, bikingKm: scoring.bikingKm, walkingScores: scoring.walking, bikingScores: scoring.biking },
+    _routing: {
+      walkingKm: { ...scoring.walkingKm, nature: computeNatureComposite(scoring.walkingKm.trail ?? Infinity, scoring.walkingKm.park ?? Infinity) },
+      bikingKm: { ...scoring.bikingKm, nature: computeNatureComposite(scoring.bikingKm.trail ?? Infinity, scoring.bikingKm.park ?? Infinity) },
+      walkingScores: { ...scoring.walking, nature: computeNatureComposite(scoring.walking.trail ?? 0, scoring.walking.park ?? 0) },
+      bikingScores: { ...scoring.biking, nature: computeNatureComposite(scoring.biking.trail ?? 0, scoring.biking.park ?? 0) },
+    },
     zoneId: matched ? matched.properties.id : null,
   };
 }
@@ -629,10 +661,19 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
     const c = turfCentroid(cell);
     const { nearest, counts, nearestCoords } = nearestAndCounts(poiPoints, c);
     const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt: c, useRouting: true });
-    cell.properties.scores = scoring.scores;
-    cell.properties.composite = computeScore(scoring.scores);
+    const rawScores = scoring.scores;
+    cell.properties.scores = {
+      ...rawScores,
+      nature: computeNatureComposite(rawScores.trail ?? 0, rawScores.park ?? 0),
+    };
+    cell.properties.composite = computeScore(cell.properties.scores);
     cell.properties._osm = { counts, nearestKm: nearest };
-    cell.properties._routing = { walkingKm: scoring.walkingKm, bikingKm: scoring.bikingKm, walkingScores: scoring.walking, bikingScores: scoring.biking };
+    cell.properties._routing = {
+      walkingKm: { ...scoring.walkingKm, nature: computeNatureComposite(scoring.walkingKm.trail ?? Infinity, scoring.walkingKm.park ?? Infinity) },
+      bikingKm: { ...scoring.bikingKm, nature: computeNatureComposite(scoring.bikingKm.trail ?? Infinity, scoring.bikingKm.park ?? Infinity) },
+      walkingScores: { ...scoring.walking, nature: computeNatureComposite(scoring.walking.trail ?? 0, scoring.walking.park ?? 0) },
+      bikingScores: { ...scoring.biking, nature: computeNatureComposite(scoring.biking.trail ?? 0, scoring.biking.park ?? 0) },
+    };
   }
 
   return grid;

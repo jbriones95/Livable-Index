@@ -17,7 +17,6 @@ import {
   isPointInCity,
 } from "./livabilityData";
 import { point as turfPoint, booleanPointInPolygon, centroid as turfCentroid, distance as turfDistance } from "@turf/turf";
-import { featureCollection as turfFeatureCollection } from '@turf/turf';
 import ScorePanel from "./ScorePanel";
 
 export default function LivabilityMap({ locate }) {
@@ -34,26 +33,6 @@ export default function LivabilityMap({ locate }) {
   useEffect(() => {
     if (leafletMap.current) return; // already initialized
     console.log('[LivabilityMap] initializing map');
-    // create a persistent debug badge in the page body to help diagnose lifecycle
-    let debugBadge = document.getElementById('__liv_map_debug');
-    if (!debugBadge) {
-      debugBadge = document.createElement('div');
-      debugBadge.id = '__liv_map_debug';
-      debugBadge.style.position = 'fixed';
-      debugBadge.style.left = '12px';
-      debugBadge.style.bottom = '12px';
-      debugBadge.style.zIndex = 999999;
-      debugBadge.style.background = 'rgba(0,0,0,0.6)';
-      debugBadge.style.color = '#fff';
-      debugBadge.style.padding = '8px 10px';
-      debugBadge.style.borderRadius = '8px';
-      debugBadge.style.fontSize = '12px';
-      debugBadge.style.fontFamily = 'monospace';
-      debugBadge.textContent = 'map: initializing';
-      document.body.appendChild(debugBadge);
-    } else {
-      debugBadge.textContent = 'map: initializing';
-    }
 
     const map = L.map(mapRef.current, {
       center: MAP_CENTER,
@@ -79,7 +58,6 @@ export default function LivabilityMap({ locate }) {
       // debounce: ignore clicks fired within 900ms of previous compute
       const now = Date.now();
       if (now - lastComputeTs.current < 900) {
-        try { document.getElementById('__liv_map_debug').textContent = 'debounced'; } catch (e) {}
         return;
       }
       lastComputeTs.current = now;
@@ -89,33 +67,22 @@ export default function LivabilityMap({ locate }) {
       try {
         const allowed = isPointInCity(lat, lng);
         if (!allowed) {
-          try { document.getElementById('__liv_map_debug').textContent = 'outside city limits'; } catch (e) {}
           setSelectedZone(null);
           return;
         }
       } catch (err) {
         console.warn('isPointInCity check failed', err);
       }
-      try {
-        document.getElementById('__liv_map_debug')?.setAttribute('data-last', 'computing');
-      } catch (err) {}
       const result = await computeScoreAtPoint(lat, lng).catch((err) => {
         console.error('computeScoreAtPoint failed', err);
         return null;
       });
       if (!result) {
-        // show a small user-facing error in the debug badge
-        try { document.getElementById('__liv_map_debug').textContent = 'map: error fetching OSM'; } catch (e) {}
         setComputing(false);
         return;
       }
       setSelectedZone(result);
       setClickPos({ lat, lng });
-      // If OSM fetch failed but we have fallback data, surface a clearer message
-      try {
-        if (result._errors && result._errors.osmFetchFailed) document.getElementById('__liv_map_debug').textContent = 'map: OSM unavailable — using fallback points';
-        else document.getElementById('__liv_map_debug').textContent = 'map: ready';
-      } catch (e) {}
       setComputing(false);
       // place marker
       if (markerRef.current) {
@@ -149,15 +116,10 @@ export default function LivabilityMap({ locate }) {
       }
     })();
 
-    // indicate map ready
-    try { document.getElementById('__liv_map_debug').textContent = 'map: ready'; } catch (e) {}
-
     return () => {
       console.log('[LivabilityMap] cleanup: removing map');
-      try { document.getElementById('__liv_map_debug').textContent = 'map: cleanup'; } catch (e) {}
       try { map.remove(); } catch (err) { console.error('Error removing map', err); }
       leafletMap.current = null;
-      try { document.getElementById('__liv_map_debug').textContent = 'map: removed'; } catch (e) {}
     };
   }, []);
 
@@ -189,25 +151,17 @@ export default function LivabilityMap({ locate }) {
 
     // compute score using OSM at the locate point
     (async () => {
-      try {
-        document.getElementById('__liv_map_debug')?.setAttribute('data-last', 'computing-locate');
-      } catch (e) {}
       setComputing(true);
       const result = await computeScoreAtPoint(lat, lng).catch((err) => {
         console.error('computeScoreAtPoint failed for locate', err);
         return null;
       });
       if (!result) {
-        try { document.getElementById('__liv_map_debug').textContent = 'search: error fetching OSM'; } catch (e) {}
         setComputing(false);
         return;
       }
       setSelectedZone(result);
       setClickPos({ lat, lng });
-      try {
-        if (result._errors && result._errors.osmFetchFailed) document.getElementById('__liv_map_debug').textContent = 'search: OSM unavailable — using fallback points';
-        else document.getElementById('__liv_map_debug').textContent = 'map: ready';
-      } catch (e) {}
       setComputing(false);
     })();
 
