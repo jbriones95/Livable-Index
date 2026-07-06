@@ -1216,5 +1216,139 @@
       "name": "Littleton - Mineral",
       "id": "way/542275857"
     }
+  ],
+  "restaurant": [
+    {
+      "lat": 39.5803533,
+      "lon": -104.9892309,
+      "name": "Mannings",
+      "note": "51 W Dry Creek Ct, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5728139,
+      "lon": -104.9885967,
+      "name": "Ninja Sushi",
+      "note": "7923 S Broadway, Littleton, CO 80122"
+    },
+    {
+      "lat": 39.5662016,
+      "lon": -104.9895914,
+      "name": "Mi Cocina",
+      "note": "137 W County Line Rd, Littleton, CO 80129"
+    },
+    {
+      "lat": 39.5664201,
+      "lon": -104.9841213,
+      "name": "Haveli",
+      "note": "301 E County Line Rd, Littleton, CO 80122"
+    },
+    {
+      "lat": 39.5674392,
+      "lon": -104.9982354,
+      "name": "Celly’s Bar and Grill",
+      "note": "841 Southpark Dr, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5824945,
+      "lon": -105.0262190,
+      "name": "Panera",
+      "note": "7301 S Santa Fe Dr #730, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5936072,
+      "lon": -105.0250773,
+      "name": "Breck Brew",
+      "note": "2990 Brewery Ln, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6078006,
+      "lon": -105.0214588,
+      "name": "Platte River Bar and Grill",
+      "note": "5995 S Santa Fe Dr, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6139482,
+      "lon": -105.0186128,
+      "name": "Palenque",
+      "note": "2609 Main St, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6138080,
+      "lon": -105.0160350,
+      "name": "Pho Real",
+      "note": "2399 Main St, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6123386,
+      "lon": -105.0062238,
+      "name": "Santa Fe Grill",
+      "note": "1500 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6135645,
+      "lon": -105.0038911,
+      "name": "Gyro’s",
+      "note": "1399 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6132990,
+      "lon": -105.0018620,
+      "name": "Littleton Brewing Co",
+      "note": "1201 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6135381,
+      "lon": -104.9978888,
+      "name": "Cherry Cricket",
+      "note": "819 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6132630,
+      "lon": -104.9960550,
+      "name": "Latke Love",
+      "note": "699 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6132630,
+      "lon": -104.9960550,
+      "name": "Wild Ginger",
+      "note": "699 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6134151,
+      "lon": -104.9922798,
+      "name": "Pho Littleton",
+      "note": "389 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6133080,
+      "lon": -104.9881580,
+      "name": "Chipotle",
+      "note": "5699 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.6003284,
+      "lon": -104.9885410,
+      "name": "Mama Sol",
+      "note": "6439 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.5959087,
+      "lon": -104.9883753,
+      "name": "Castle Bar",
+      "note": "6657 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.6197240,
+      "lon": -104.9881260,
+      "name": "Dubbs Pub",
+      "note": "5301 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.6237760,
+      "lon": -105.0071290,
+      "name": "Mi Cocina 2",
+      "note": "1600 W Belleview Ave, Littleton, CO 80120"
+    }
   ]
 }
