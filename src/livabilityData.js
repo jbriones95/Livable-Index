@@ -196,13 +196,13 @@ const NAMED_TRAILS = [
 ];
 
 const MAX_DIST_KM = {
-  coffee: 1.0,
-  restaurant: 1.0,
-  grocery: 1.5,
+  coffee: 0.8,
+  restaurant: 0.8,
+  grocery: 1.0,
   // trail and park are combined into the nature composite score
   trail: 2.0,
   park: 2.0,
-  busStop: 0.8,
+  busStop: 0.5,
   healthcare: 4.5,
 };
 
@@ -226,7 +226,7 @@ const ROUTE_SERVICE = {
   orsBaseUrl: 'https://api.openrouteservice.org',
 };
 
-const ROUTING_WEIGHTS = { walking: 0.6, biking: 0.4 };
+const ROUTING_WEIGHTS = { walking: 0.8, biking: 0.2 };
 const routeCache = new Map();
 
 // Prefer OpenRouteService when an API key is provided via environment.
@@ -331,8 +331,8 @@ for (const [k, v] of Object.entries(unifiedData)) {
 
 function distToScore(d) {
   if (!isFinite(d)) return 0;
-  if (d <= 0.5) return 100;
-  const extraMeters = (d - 0.5) * 1000;
+  if (d <= 0.3) return 100;
+  const extraMeters = (d - 0.3) * 1000;
   const steps = Math.ceil(extraMeters / 100);
   return Math.max(0, 100 - steps * 10);
 }
