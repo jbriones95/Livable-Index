@@ -206,6 +206,17 @@ const MAX_DIST_KM = {
   healthcare: 4.5,
 };
 
+// How many candidate POIs (closest by crow-flies) to route per category
+const ROUTE_CANDIDATES = {
+  coffee: 5,
+  restaurant: 5,
+  grocery: 5,
+  trail: 5,
+  park: 5,
+  busStop: 5,
+  healthcare: 5,
+};
+
 // Routing configuration: try OSRM public endpoint with common profile fallbacks.
 // Walking is prioritized over biking in the combined score via `ROUTING_WEIGHTS`.
 const ROUTE_SERVICE = {
@@ -418,7 +429,10 @@ function nearestAndCounts(poiPoints, pt) {
   const nearest = {};
   const nearestCoords = {};
   const counts = {};
-  for (const c of categories) { nearest[c] = Infinity; nearestCoords[c] = null; counts[c] = 0; }
+  const candidates = {};
+  for (const c of categories) {
+    nearest[c] = Infinity; nearestCoords[c] = null; counts[c] = 0; candidates[c] = [];
+  }
   // Process any POI points (if supplied) — these might be turf points with `.properties`.
   for (const p of poiPoints) {
     const d = turfDistance(pt, p, { units: 'kilometers' });
@@ -431,6 +445,7 @@ function nearestAndCounts(poiPoints, pt) {
       if (!Object.prototype.hasOwnProperty.call(nearest, cat)) continue;
       if (d < nearest[cat]) { nearest[cat] = d; nearestCoords[cat] = coords; }
       if (d <= MAX_DIST_KM[cat]) counts[cat]++;
+      if (coords) candidates[cat].push({ coords, dist: d });
     }
   }
 
@@ -443,19 +458,21 @@ function nearestAndCounts(poiPoints, pt) {
       if (!Object.prototype.hasOwnProperty.call(nearest, cat)) continue;
       if (d < nearest[cat]) { nearest[cat] = d; nearestCoords[cat] = coords; }
       if (d <= MAX_DIST_KM[cat]) counts[cat]++;
+      candidates[cat].push({ coords, dist: d });
     }
   }
 
-  return { nearest, counts, nearestCoords };
+  return { nearest, counts, nearestCoords, candidates };
 }
 
 async function computeScoresFromNearest(nearest, opts = {}) {
-  const { nearestCoords = {}, pt = null, useRouting = false } = opts;
+  const { nearestCoords = {}, pt = null, useRouting = false, candidates = {} } = opts;
   const walking = {};
   const biking = {};
   const walkingKm = {};
   const bikingKm = {};
   const combined = {};
+  const usedCoords = {}; // [lon,lat] of the chosen candidate per category (for UI)
 
   // Accept pt either as turf point or coordinate array [lon, lat]
   let ptCoords = null;
@@ -468,17 +485,42 @@ async function computeScoresFromNearest(nearest, opts = {}) {
     const crowKm = nearest[key];
     walkingKm[key] = isFinite(crowKm) ? crowKm : Infinity;
     bikingKm[key] = isFinite(crowKm) ? crowKm : Infinity;
+    usedCoords[key] = null;
 
-    const coord = nearestCoords && nearestCoords[key]; // [lon, lat]
-    if (useRouting && coord && ptCoords) {
-      try {
-        const w = await getRouteDistance(ptCoords[0], ptCoords[1], coord[0], coord[1], 'walking');
-        if (typeof w === 'number') walkingKm[key] = w;
-      } catch (e) {}
-      try {
-        const b = await getRouteDistance(ptCoords[0], ptCoords[1], coord[0], coord[1], 'cycling');
-        if (typeof b === 'number') bikingKm[key] = b;
-      } catch (e) {}
+    const topCandidates = (candidates[key] || [])
+      .slice()
+      .sort((a, b) => a.dist - b.dist)
+      .slice(0, ROUTE_CANDIDATES[key] || 3);
+
+    if (useRouting && topCandidates.length > 0 && ptCoords) {
+      const walkResults = await Promise.all(
+        topCandidates.map(c =>
+          getRouteDistance(ptCoords[0], ptCoords[1], c.coords[0], c.coords[1], 'walking')
+            .catch(() => null)
+        )
+      );
+      for (let i = 0; i < walkResults.length; i++) {
+        const d = walkResults[i];
+        if (typeof d === 'number' && d < walkingKm[key]) {
+          walkingKm[key] = d;
+          usedCoords[key] = topCandidates[i].coords;
+        }
+      }
+
+      const bikeResults = await Promise.all(
+        topCandidates.map(c =>
+          getRouteDistance(ptCoords[0], ptCoords[1], c.coords[0], c.coords[1], 'cycling')
+            .catch(() => null)
+        )
+      );
+      for (let i = 0; i < bikeResults.length; i++) {
+        const d = bikeResults[i];
+        if (typeof d === 'number' && d < bikingKm[key]) {
+          bikingKm[key] = d;
+          // prefer walking candidate for UI coords, but fall back to biking
+          if (!usedCoords[key]) usedCoords[key] = topCandidates[i].coords;
+        }
+      }
     }
 
     if (key === 'healthcare') {
@@ -495,7 +537,7 @@ async function computeScoresFromNearest(nearest, opts = {}) {
     combined[key] = Math.round(comb);
   }
 
-  return { scores: combined, walking, biking, walkingKm, bikingKm };
+  return { scores: combined, walking, biking, walkingKm, bikingKm, usedCoords };
 }
 
 // Combine trail (80%) and park (20%) scores into the nature dimension
@@ -507,8 +549,8 @@ function computeNatureComposite(trailScore, parkScore) {
 
 export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const pt = turfPoint([lng, lat]);
-  const { nearest, nearestCoords } = nearestAndCounts([], pt);
-  const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt, useRouting: true });
+  const { nearest, nearestCoords, candidates } = nearestAndCounts([], pt);
+  const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt, useRouting: true, candidates });
   const rawScores = scoring.scores;
   const scores = {
     ...rawScores,
@@ -516,6 +558,12 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   };
 
   const distances = { ...nearest };
+  // Update distances to show routed walking distances (minimum across candidates)
+  for (const key of Object.keys(scoring.walkingKm)) {
+    if (isFinite(scoring.walkingKm[key])) {
+      distances[key] = scoring.walkingKm[key];
+    }
+  }
 
   // Walking (5 km/h) and biking (15 km/h) time estimates in minutes
   const routing = {};
@@ -617,8 +665,8 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
   const grid = getGridFeatures(cellSizeKm);
   for (const cell of grid.features) {
     const c = turfCentroid(cell);
-    const { nearest, nearestCoords } = nearestAndCounts([], c);
-    const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt: c, useRouting: true });
+    const { nearest, nearestCoords, candidates } = nearestAndCounts([], c);
+    const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt: c, useRouting: true, candidates });
     const rawScores = scoring.scores;
     cell.properties.scores = {
       ...rawScores,
