@@ -65,6 +65,12 @@
       "lon": -105.034876,
       "name": "Enchanted Grounds",
       "note": "3615 W Bowles Ave #5, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.612888,
+      "lon": -105.001761,
+      "name": "Lost Coffee",
+      "note": "1190 W Littleton Blvd, Littleton, CO 80120"
     }
   ],
   "grocery": [
