@@ -329,17 +329,12 @@ for (const [k, v] of Object.entries(unifiedData)) {
   );
 }
 
-function distToScore(d, max, opts = {}) {
-  // General rule: if within threshold -> 100. Beyond threshold apply stepped
-  // deductions. Defaults: stepMeters=200m, deduction=10 points per step.
-  // Healthcare overrides use stepMeters=500m and deduction=15 points.
+function distToScore(d) {
   if (!isFinite(d)) return 0;
-  if (d <= max) return 100;
-  const { stepMeters = 200, deduction = 10 } = opts;
-  const extraMeters = (d - max) * 1000;
-  const steps = Math.ceil(extraMeters / stepMeters);
-  const totalDeduction = steps * deduction;
-  return Math.max(0, 100 - totalDeduction);
+  if (d <= 0.5) return 100;
+  const extraMeters = (d - 0.5) * 1000;
+  const steps = Math.ceil(extraMeters / 100);
+  return Math.max(0, 100 - steps * 10);
 }
 
 function classifyOSM(tags) {
@@ -523,13 +518,8 @@ async function computeScoresFromNearest(nearest, opts = {}) {
       }
     }
 
-    if (key === 'healthcare') {
-      walking[key] = distToScore(walkingKm[key], MAX_DIST_KM[key], { stepMeters: 500, deduction: 15 });
-      biking[key] = distToScore(bikingKm[key], MAX_DIST_KM[key], { stepMeters: 500, deduction: 15 });
-    } else {
-      walking[key] = distToScore(walkingKm[key], MAX_DIST_KM[key], { stepMeters: 200, deduction: 10 });
-      biking[key] = distToScore(bikingKm[key], MAX_DIST_KM[key], { stepMeters: 200, deduction: 10 });
-    }
+    walking[key] = distToScore(walkingKm[key]);
+    biking[key] = distToScore(bikingKm[key]);
 
     const wScore = walking[key] || 0;
     const bScore = biking[key] || 0;
