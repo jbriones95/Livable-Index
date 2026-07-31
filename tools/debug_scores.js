@@ -174,7 +174,6 @@ async function analyzePoint(lat, lon, opts = {}) {
     return null;
   }).filter(Boolean);
 
-  const pt = [lat, lon];
   const nearest = { coffee: Infinity, restaurant: Infinity, grocery: Infinity, nature: Infinity, busStop: Infinity, healthcare: Infinity };
   const counts = { coffee: 0, restaurant: 0, grocery: 0, nature: 0, busStop: 0, healthcare: 0 };
 

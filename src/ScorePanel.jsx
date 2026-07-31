@@ -2,8 +2,9 @@ import {
   scoreToColor,
   scoreToGrade,
   scoreToLabel,
+  computeScore,
   DIMENSION_LABELS,
-  WEIGHTS,
+  WEIGHTS as DEFAULT_WEIGHTS,
 } from "./livabilityData";
 
 function formatDist(km) {
@@ -64,8 +65,9 @@ function DimensionBar({ label, score, weight, middle }) {
   );
 }
 
-export default function ScorePanel({ zone, onClose }) {
-  const composite = zone.composite;
+export default function ScorePanel({ zone, weights, onClose }) {
+  const activeWeights = weights || DEFAULT_WEIGHTS;
+  const composite = computeScore(zone.scores, activeWeights);
   const grade = scoreToGrade(composite);
   const label = scoreToLabel(composite);
   const color = scoreToColor(composite);
@@ -103,7 +105,7 @@ export default function ScorePanel({ zone, onClose }) {
             key={key}
             label={label}
             score={zone.scores[key] ?? 0}
-            weight={WEIGHTS[key]}
+            weight={activeWeights[key]}
             middle={formatMiddle(key, zone.distances, zone.routing)}
           />
         ))}

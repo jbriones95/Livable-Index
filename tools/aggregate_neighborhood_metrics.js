@@ -86,14 +86,11 @@ async function main() {
     let minSuper = Infinity;
     let minGreen = Infinity;
 
-    const poly = f.geometry;
     // for each point, if inside poly or near (<0.5km from poly), count
     for (const p of points) {
-      const d = turf.distance(turf.centroid(poly), p, { units: 'kilometers' });
       const tags = p.properties || {};
       const coords = p.geometry.coordinates;
       const pt = turf.point(coords);
-      const inside = turf.booleanPointInPolygon(pt, f);
       // measure distance to polygon (centroid fallback)
       const dist = turf.distance(pt, turf.centroid(f), { units: 'kilometers' });
       // categorize

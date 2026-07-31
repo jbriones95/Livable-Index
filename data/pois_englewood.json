@@ -1,0 +1,3102 @@
+{
+  "coffee": [
+    {
+      "lat": 39.623945,
+      "lon": -104.987877,
+      "name": "South Broadway",
+      "note": "5100 S Broadway, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.6388421,
+      "lon": -104.987431,
+      "name": "Starbucks",
+      "note": "4298 S Broadway, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.653291,
+      "lon": -104.987529,
+      "name": "Coffee at 3498 S Broadway",
+      "note": "3498 S Broadway, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.6532191,
+      "lon": -104.980109,
+      "name": "Coffee at 501 E Hampden Ave",
+      "note": "501 E Hampden Ave, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.653055,
+      "lon": -104.976905,
+      "name": "Coffee at 900 E Hampden Ave",
+      "note": "900 E Hampden Ave, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.652757,
+      "lon": -104.970951,
+      "name": "Coffee at 1400 E Hampden Ave",
+      "note": "1400 E Hampden Ave Unit 150, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.6549653,
+      "lon": -104.9969381,
+      "name": "Coffee at 871 Englewood Pkwy",
+      "note": "871 Englewood Pkwy, Englewood, CO 80110"
+    },
+    {
+      "lat": 39.6222204,
+      "lon": -104.987542,
+      "name": "Caribou Coffee",
+      "note": "Caribou Coffee, Centennial"
+    },
+    {
+      "lat": 39.6561756,
+      "lon": -104.9879775,
+      "name": "Cafe 180",
+      "note": "Cafe 180, Englewood"
+    },
+    {
+      "lat": 39.6539519,
+      "lon": -104.9607986,
+      "name": "Starbucks",
+      "note": "Starbucks, Englewood"
+    },
+    {
+      "lat": 39.65297,
+      "lon": -104.970703,
+      "name": "Caribou Coffee",
+      "note": "Caribou Coffee, Englewood"
+    },
+    {
+      "lat": 39.6495861,
+      "lon": -105.005575,
+      "name": "Starbucks",
+      "note": "Starbucks, Englewood"
+    },
+    {
+      "lat": 39.6524621,
+      "lon": -105.010345,
+      "name": "Strawberries Catering & Cafe",
+      "note": "Strawberries Catering & Cafe, Englewood"
+    },
+    {
+      "lat": 39.619867,
+      "lon": -105.0163726,
+      "name": "Lamar's Doughnuts",
+      "note": "Lamar's Doughnuts, Englewood"
+    },
+    {
+      "lat": 39.6731995,
+      "lon": -104.973673,
+      "name": "Green Giraffe Bar",
+      "note": "Green Giraffe Bar, Englewood"
+    },
+    {
+      "lat": 39.6228117,
+      "lon": -105.0188459,
+      "name": "Toast Fine Food & Coffee",
+      "note": "Toast Fine Food & Coffee, Englewood"
+    },
+    {
+      "lat": 39.6236822,
+      "lon": -104.9905539,
+      "name": "Atlas Coffee",
+      "note": "Atlas Coffee, Englewood"
+    },
+    {
+      "lat": 39.6532745,
+      "lon": -104.987416,
+      "name": "Mango Tree",
+      "note": "Mango Tree, Englewood"
+    },
+    {
+      "lat": 39.6527674,
+      "lon": -105.0132987,
+      "name": "Starbucks",
+      "note": "Starbucks, Englewood"
+    },
+    {
+      "lat": 39.6725836,
+      "lon": -104.9595589,
+      "name": "La Belle Rosette",
+      "note": "La Belle Rosette, Englewood"
+    },
+    {
+      "lat": 39.6552149,
+      "lon": -104.9874298,
+      "name": "That's Kava",
+      "note": "That's Kava, Englewood"
+    },
+    {
+      "lat": 39.6502452,
+      "lon": -105.0085737,
+      "name": "Mo Mo Tea",
+      "note": "Mo Mo Tea, Englewood"
+    },
+    {
+      "lat": 39.6720853,
+      "lon": -104.9732266,
+      "name": "lil Coffea",
+      "note": "lil Coffea, Englewood"
+    }
+  ],
+  "grocery": [
+    {
+      "lat": 39.6256084,
+      "lon": -104.988581,
+      "note": "5001 S Broadway"
+    },
+    {
+      "lat": 39.6333579,
+      "lon": -104.9873807,
+      "name": "Corner Store",
+      "note": "Corner Store, Centennial"
+    },
+    {
+      "lat": 39.6328713,
+      "lon": -104.988428,
+      "name": "7-Eleven",
+      "note": "7-Eleven, Centennial"
+    },
+    {
+      "lat": 39.624371,
+      "lon": -104.988367,
+      "name": "Sprouts Farmers Market",
+      "note": "Sprouts Farmers Market, Centennial"
+    },
+    {
+      "lat": 39.6571455,
+      "lon": -104.987155,
+      "name": "Conoco",
+      "note": "Conoco, Englewood"
+    },
+    {
+      "lat": 39.6536485,
+      "lon": -104.9605814,
+      "name": "King Soopers",
+      "note": "King Soopers, Englewood"
+    },
+    {
+      "lat": 39.6533933,
+      "lon": -104.972774,
+      "name": "7-Eleven",
+      "note": "7-Eleven, Englewood"
+    },
+    {
+      "lat": 39.653407,
+      "lon": -104.9825578,
+      "name": "Shell Food Mart",
+      "note": "Shell Food Mart, Englewood"
+    },
+    {
+      "lat": 39.6518885,
+      "lon": -104.984644,
+      "name": "Safeway",
+      "note": "Safeway, Englewood"
+    },
+    {
+      "lat": 39.6557787,
+      "lon": -104.9894708,
+      "name": "King Soopers",
+      "note": "King Soopers, Englewood"
+    },
+    {
+      "lat": 39.6561502,
+      "lon": -104.9948541,
+      "name": "Walmart Supercenter",
+      "note": "Walmart Supercenter, Englewood"
+    },
+    {
+      "lat": 39.6528918,
+      "lon": -104.9974041,
+      "name": "Stinker",
+      "note": "Stinker, Englewood"
+    },
+    {
+      "lat": 39.6500633,
+      "lon": -105.005546,
+      "name": "Target",
+      "note": "Target, Englewood"
+    }
+  ],
+  "park": [
+    {
+      "lat": 39.639495,
+      "lon": -105.0006915,
+      "name": "Jason Park",
+      "note": "Jason Park"
+    },
+    {
+      "lat": 39.6222595,
+      "lon": -105.0032614,
+      "name": "Cornerstone Park",
+      "note": "Cornerstone Park"
+    },
+    {
+      "lat": 39.6286928,
+      "lon": -104.9814918,
+      "name": "Elsie Duncan Park",
+      "note": "Elsie Duncan Park"
+    },
+    {
+      "lat": 39.6362393,
+      "lon": -104.9979685,
+      "name": "Rotolo Park",
+      "note": "Rotolo Park"
+    },
+    {
+      "lat": 39.6353166,
+      "lon": -104.996056,
+      "name": "Southwest Greenbelt",
+      "note": "Southwest Greenbelt"
+    },
+    {
+      "lat": 39.6344686,
+      "lon": -104.9937427,
+      "note": ""
+    },
+    {
+      "lat": 39.6339592,
+      "lon": -104.9916795,
+      "note": ""
+    },
+    {
+      "lat": 39.6265444,
+      "lon": -105.0024943,
+      "name": "Belleview Park",
+      "note": "Belleview Park"
+    },
+    {
+      "lat": 39.6428606,
+      "lon": -105.0014315,
+      "note": ""
+    },
+    {
+      "lat": 39.6225318,
+      "lon": -104.9979874,
+      "name": "Progress Park",
+      "note": "Progress Park"
+    },
+    {
+      "lat": 39.6313295,
+      "lon": -105.014001,
+      "note": ""
+    },
+    {
+      "lat": 39.6184852,
+      "lon": -105.0142153,
+      "name": "Geneva Park",
+      "note": "Geneva Park"
+    },
+    {
+      "lat": 39.6173614,
+      "lon": -105.0096044,
+      "name": "Slaughterhouse Gulch Park",
+      "note": "Slaughterhouse Gulch Park"
+    },
+    {
+      "lat": 39.6290614,
+      "lon": -104.9814997,
+      "name": "Elsie Duncan Dog Park",
+      "note": "Elsie Duncan Dog Park, Centennial"
+    },
+    {
+      "lat": 39.6266284,
+      "lon": -104.9645967,
+      "name": "Woody Hollow Park",
+      "note": "Woody Hollow Park, Centennial"
+    },
+    {
+      "lat": 39.6550552,
+      "lon": -104.989201,
+      "name": "Englewood Parkway & South Acoma Street",
+      "note": "Englewood Parkway & South Acoma Street, Englewood"
+    },
+    {
+      "lat": 39.6556984,
+      "lon": -104.993411,
+      "name": "South Elati Street & Englewood Parkway",
+      "note": "South Elati Street & Englewood Parkway, Englewood"
+    },
+    {
+      "lat": 39.6557111,
+      "lon": -104.993637,
+      "name": "South Elati Street & Englewood Parkway",
+      "note": "South Elati Street & Englewood Parkway, Englewood"
+    },
+    {
+      "lat": 39.6548396,
+      "lon": -104.989261,
+      "name": "Englewood Parkway & South Acoma Street",
+      "note": "Englewood Parkway & South Acoma Street, Englewood"
+    },
+    {
+      "lat": 39.6730939,
+      "lon": -104.9793011,
+      "name": "Harvard Gulch Park",
+      "note": "Harvard Gulch Park, Englewood"
+    },
+    {
+      "lat": 39.6703815,
+      "lon": -104.9846215,
+      "name": "City of Kunming Park",
+      "note": "City of Kunming Park, Englewood"
+    },
+    {
+      "lat": 39.6632194,
+      "lon": -104.981411,
+      "name": "Bates-Logan Park",
+      "note": "Bates-Logan Park, Englewood"
+    },
+    {
+      "lat": 39.6730862,
+      "lon": -104.9840314,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6594298,
+      "lon": -104.9723554,
+      "name": "Barde Park",
+      "note": "Barde Park, Englewood"
+    },
+    {
+      "lat": 39.6739515,
+      "lon": -104.9971451,
+      "name": "Grant - Frontier Park",
+      "note": "Grant - Frontier Park, Englewood"
+    },
+    {
+      "lat": 39.651279,
+      "lon": -104.9924087,
+      "name": "Miller Field",
+      "note": "Miller Field, Englewood"
+    },
+    {
+      "lat": 39.6594857,
+      "lon": -104.9961768,
+      "name": "Cushing Park",
+      "note": "Cushing Park, Englewood"
+    },
+    {
+      "lat": 39.663247,
+      "lon": -104.9714034,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6564767,
+      "lon": -104.9664648,
+      "name": "Packy Romans Park",
+      "note": "Packy Romans Park, Englewood"
+    },
+    {
+      "lat": 39.6705005,
+      "lon": -104.9620887,
+      "name": "De Boer Park",
+      "note": "De Boer Park, Englewood"
+    },
+    {
+      "lat": 39.6282205,
+      "lon": -105.0050913,
+      "name": "Englewood Unleashed Dog Park",
+      "note": "Englewood Unleashed Dog Park, Englewood"
+    },
+    {
+      "lat": 39.6551298,
+      "lon": -105.0106885,
+      "name": "Barnes Park",
+      "note": "Barnes Park, Englewood"
+    },
+    {
+      "lat": 39.6606845,
+      "lon": -104.9950812,
+      "name": "Depot Park",
+      "note": "Depot Park, Englewood"
+    },
+    {
+      "lat": 39.6549241,
+      "lon": -104.9982529,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6714696,
+      "lon": -104.9728863,
+      "name": "Harvard Gulch Mini Park",
+      "note": "Harvard Gulch Mini Park, Englewood"
+    },
+    {
+      "lat": 39.6694692,
+      "lon": -105.0133754,
+      "name": "Northwest Greenbelt Off-Leash Dog Park",
+      "note": "Northwest Greenbelt Off-Leash Dog Park, Englewood"
+    },
+    {
+      "lat": 39.6696266,
+      "lon": -105.0164963,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6661575,
+      "lon": -104.9787847,
+      "name": "Clarkson-Amherst Park",
+      "note": "Clarkson-Amherst Park, Englewood"
+    },
+    {
+      "lat": 39.6488986,
+      "lon": -104.9806636,
+      "name": "Hosanna Athletic Complex",
+      "note": "Hosanna Athletic Complex, Englewood"
+    },
+    {
+      "lat": 39.6702569,
+      "lon": -104.9611982,
+      "name": "Quasi Dog Park",
+      "note": "Quasi Dog Park, Englewood"
+    },
+    {
+      "lat": 39.625227,
+      "lon": -105.0027907,
+      "name": "Pirates Cove Water Park",
+      "note": "Pirates Cove Water Park, Englewood"
+    }
+  ],
+  "healthcare": [
+    {
+      "lat": 39.6227409,
+      "lon": -104.990493,
+      "name": "Chuze Fitness",
+      "note": "200 W Belleview Ave Ste 170, Englewood, CO 80110 (approx)"
+    },
+    {
+      "lat": 39.6245626,
+      "lon": -104.986719,
+      "name": "Walgreens",
+      "note": "Walgreens, Centennial"
+    },
+    {
+      "lat": 39.6508267,
+      "lon": -104.98261,
+      "name": "Office Bldg",
+      "note": "Office Bldg, Englewood"
+    },
+    {
+      "lat": 39.6539035,
+      "lon": -104.9605707,
+      "name": "King Soopers Pharmacy",
+      "note": "King Soopers Pharmacy, Englewood"
+    },
+    {
+      "lat": 39.6534896,
+      "lon": -104.9819758,
+      "name": "Walgreens",
+      "note": "Walgreens, Englewood"
+    },
+    {
+      "lat": 39.6533017,
+      "lon": -104.9784539,
+      "name": "Swedish Cancer Care Center",
+      "note": "Swedish Cancer Care Center, Englewood"
+    },
+    {
+      "lat": 39.6441544,
+      "lon": -105.006401,
+      "name": "Costco Pharmacy",
+      "note": "Costco Pharmacy, Englewood"
+    },
+    {
+      "lat": 39.6503698,
+      "lon": -105.006124,
+      "name": "CVS Pharmacy",
+      "note": "CVS Pharmacy, Englewood"
+    },
+    {
+      "lat": 39.646135,
+      "lon": -105.008041,
+      "name": "Pacific Dental Services",
+      "note": "Pacific Dental Services, Englewood"
+    },
+    {
+      "lat": 39.6702227,
+      "lon": -104.977472,
+      "name": "Foothills Family Practice",
+      "note": "Foothills Family Practice, Englewood"
+    },
+    {
+      "lat": 39.6701197,
+      "lon": -104.9779708,
+      "name": "Associates of Otolaryngology",
+      "note": "Associates of Otolaryngology, Englewood"
+    },
+    {
+      "lat": 39.6546795,
+      "lon": -104.996252,
+      "name": "City Center Dental Group",
+      "note": "City Center Dental Group, Englewood"
+    },
+    {
+      "lat": 39.6524972,
+      "lon": -104.9714738,
+      "name": "Kidney Stone Center",
+      "note": "Kidney Stone Center, Englewood"
+    },
+    {
+      "lat": 39.6523987,
+      "lon": -104.9714951,
+      "name": "Proactive Podiatry",
+      "note": "Proactive Podiatry, Englewood"
+    },
+    {
+      "lat": 39.6526503,
+      "lon": -104.9714657,
+      "name": "Cherry Hills Surgery Center",
+      "note": "Cherry Hills Surgery Center, Englewood"
+    },
+    {
+      "lat": 39.6523105,
+      "lon": -104.9714973,
+      "name": "Clarity Lazer Vision Center",
+      "note": "Clarity Lazer Vision Center, Englewood"
+    },
+    {
+      "lat": 39.6525634,
+      "lon": -104.9714936,
+      "name": "Mountain Midwifery Center",
+      "note": "Mountain Midwifery Center, Englewood"
+    },
+    {
+      "lat": 39.6535386,
+      "lon": -104.99859,
+      "name": "AFC Urgent Care",
+      "note": "AFC Urgent Care, Englewood"
+    },
+    {
+      "lat": 39.661516,
+      "lon": -104.9871412,
+      "name": "Walgreens",
+      "note": "Walgreens, Englewood"
+    },
+    {
+      "lat": 39.6559212,
+      "lon": -104.9954331,
+      "name": "Walmart Pharmacy",
+      "note": "Walmart Pharmacy, Englewood"
+    },
+    {
+      "lat": 39.6537058,
+      "lon": -104.9682956,
+      "name": "Sopris Smiles",
+      "note": "Sopris Smiles, Englewood"
+    },
+    {
+      "lat": 39.6547112,
+      "lon": -104.9886107,
+      "name": "Front Range Pharmacy",
+      "note": "Front Range Pharmacy, Englewood"
+    },
+    {
+      "lat": 39.6704359,
+      "lon": -104.9764729,
+      "name": "Porter Primary Care",
+      "note": "Porter Primary Care, Englewood"
+    },
+    {
+      "lat": 39.6493626,
+      "lon": -104.9785096,
+      "name": "MedNow Clinic",
+      "note": "MedNow Clinic, Englewood"
+    },
+    {
+      "lat": 39.6630059,
+      "lon": -104.9880235,
+      "name": "Kaiser Permanente",
+      "note": "Kaiser Permanente, Englewood"
+    },
+    {
+      "lat": 39.6662761,
+      "lon": -104.9871706,
+      "name": "Comfort Dental",
+      "note": "Comfort Dental, Englewood"
+    },
+    {
+      "lat": 39.6702325,
+      "lon": -104.9748089,
+      "name": "AdventHealth Porter Hospital",
+      "note": "AdventHealth Porter Hospital, Englewood"
+    },
+    {
+      "lat": 39.67053,
+      "lon": -104.9758544,
+      "name": "AdventHealth Porter ICU",
+      "note": "AdventHealth Porter ICU, Englewood"
+    },
+    {
+      "lat": 39.6699454,
+      "lon": -104.9758624,
+      "name": "AdventHealth Porter Hospital",
+      "note": "AdventHealth Porter Hospital, Englewood"
+    },
+    {
+      "lat": 39.6541545,
+      "lon": -104.980971,
+      "name": "Swedish Medical Center",
+      "note": "Swedish Medical Center, Englewood"
+    },
+    {
+      "lat": 39.6540609,
+      "lon": -104.9802372,
+      "name": "Swedish Medical Center",
+      "note": "Swedish Medical Center, Englewood"
+    },
+    {
+      "lat": 39.6540587,
+      "lon": -104.9783557,
+      "name": "Craig Hospital",
+      "note": "Craig Hospital, Englewood"
+    }
+  ],
+  "busStop": [
+    {
+      "lat": 39.642952,
+      "lon": -105.0048363,
+      "name": "Oxford - City of Sheridan",
+      "note": "Oxford - City of Sheridan"
+    },
+    {
+      "lat": 39.6419366,
+      "lon": -104.9879383,
+      "name": "South Broadway & West Oxford Avenue",
+      "note": "South Broadway & West Oxford Avenue"
+    },
+    {
+      "lat": 39.6426099,
+      "lon": -104.987605,
+      "name": "South Broadway & Oxford Avenue",
+      "note": "South Broadway & Oxford Avenue"
+    },
+    {
+      "lat": 39.6351993,
+      "lon": -104.987706,
+      "name": "South Broadway & Stanford Avenue",
+      "note": "South Broadway & Stanford Avenue"
+    },
+    {
+      "lat": 39.6346788,
+      "lon": -104.9880284,
+      "name": "South Broadway & West Stanford Avenue",
+      "note": "South Broadway & West Stanford Avenue"
+    },
+    {
+      "lat": 39.6317372,
+      "lon": -104.987741,
+      "name": "South Broadway & Union Avenue",
+      "note": "South Broadway & Union Avenue"
+    },
+    {
+      "lat": 39.6382956,
+      "lon": -104.9879855,
+      "name": "South Broadway & West Quincy Avenue",
+      "note": "South Broadway & West Quincy Avenue"
+    },
+    {
+      "lat": 39.6310473,
+      "lon": -104.988066,
+      "name": "South Broadway & West Union Avenue",
+      "note": "South Broadway & West Union Avenue"
+    },
+    {
+      "lat": 39.6391549,
+      "lon": -104.987669,
+      "name": "South Broadway & Quincy Avenue",
+      "note": "South Broadway & Quincy Avenue"
+    },
+    {
+      "lat": 39.6231949,
+      "lon": -104.9881894,
+      "name": "South Broadway & West Belleview Avenue",
+      "note": "South Broadway & West Belleview Avenue"
+    },
+    {
+      "lat": 39.6245832,
+      "lon": -104.987752,
+      "name": "South Broadway & Belleview Avenue",
+      "note": "South Broadway & Belleview Avenue"
+    },
+    {
+      "lat": 39.6273309,
+      "lon": -104.9881169,
+      "name": "South Broadway & West Chenango Avenue",
+      "note": "South Broadway & West Chenango Avenue"
+    },
+    {
+      "lat": 39.6279072,
+      "lon": -104.987776,
+      "name": "South Broadway & Chenango Avenue",
+      "note": "South Broadway & Chenango Avenue"
+    },
+    {
+      "lat": 39.6426324,
+      "lon": -105.0005272,
+      "name": "S Kalamath St & W Oxford Ave",
+      "note": "S Kalamath St & W Oxford Ave"
+    },
+    {
+      "lat": 39.643426,
+      "lon": -105.004454,
+      "name": "Oxford - City of Sheridan",
+      "note": "Oxford - City of Sheridan"
+    },
+    {
+      "lat": 39.642085,
+      "lon": -105.003652,
+      "name": "W Oxford Ave & S Navajo St",
+      "note": "W Oxford Ave & S Navajo St"
+    },
+    {
+      "lat": 39.6442991,
+      "lon": -105.0005326,
+      "name": "S Kalamath St & W Nassau Ave",
+      "note": "S Kalamath St & W Nassau Ave"
+    },
+    {
+      "lat": 39.6423337,
+      "lon": -105.0106847,
+      "name": "W Oxford Ave 2000 block",
+      "note": "W Oxford Ave 2000 block"
+    },
+    {
+      "lat": 39.6423988,
+      "lon": -105.00712,
+      "name": "W Oxford Ave & S Santa Fe Dr",
+      "note": "W Oxford Ave & S Santa Fe Dr"
+    },
+    {
+      "lat": 39.6420993,
+      "lon": -105.0077718,
+      "name": "W Oxford Ave & S Natches Ct",
+      "note": "W Oxford Ave & S Natches Ct"
+    },
+    {
+      "lat": 39.642153,
+      "lon": -105.0115215,
+      "name": "W Oxford Ave 2000 block",
+      "note": "W Oxford Ave 2000 block"
+    },
+    {
+      "lat": 39.6173203,
+      "lon": -104.987863,
+      "name": "South Broadway & West Rafferty Gardens Avenue",
+      "note": "South Broadway & West Rafferty Gardens Avenue"
+    },
+    {
+      "lat": 39.6217361,
+      "lon": -104.987823,
+      "name": "South Broadway & Centennial Avenue",
+      "note": "South Broadway & Centennial Avenue"
+    },
+    {
+      "lat": 39.621508,
+      "lon": -104.9881886,
+      "name": "South Broadway & West Centennial Avenue",
+      "note": "South Broadway & West Centennial Avenue"
+    },
+    {
+      "lat": 39.618458,
+      "lon": -104.9882105,
+      "name": "South Broadway & West Rafferty Gardens Avenue",
+      "note": "South Broadway & West Rafferty Gardens Avenue"
+    },
+    {
+      "lat": 39.6427023,
+      "lon": -105.0049661,
+      "name": "Oxford - City of Sheridan",
+      "note": "Oxford - City of Sheridan"
+    },
+    {
+      "lat": 39.6432411,
+      "lon": -105.0046682,
+      "name": "Oxford - City of Sheridan",
+      "note": "Oxford - City of Sheridan"
+    },
+    {
+      "lat": 39.655674,
+      "lon": -104.999613,
+      "name": "Englewood Gate C",
+      "note": "Englewood Gate C, Englewood"
+    },
+    {
+      "lat": 39.6555812,
+      "lon": -104.9999056,
+      "name": "Englewood",
+      "note": "Englewood, Englewood"
+    },
+    {
+      "lat": 39.6542205,
+      "lon": -104.9596722,
+      "name": "S University Blvd @ Girard Pl E",
+      "note": "S University Blvd @ Girard Pl E, Englewood"
+    },
+    {
+      "lat": 39.6675152,
+      "lon": -104.959016,
+      "name": "E Yale Ave & S University Blvd",
+      "note": "E Yale Ave & S University Blvd, Englewood"
+    },
+    {
+      "lat": 39.6673151,
+      "lon": -104.9595083,
+      "name": "S University Blvd & E Yale Ave",
+      "note": "S University Blvd & E Yale Ave, Englewood"
+    },
+    {
+      "lat": 39.6683033,
+      "lon": -104.9592924,
+      "name": "S University Blvd & E Yale Ave",
+      "note": "S University Blvd & E Yale Ave, Englewood"
+    },
+    {
+      "lat": 39.6675901,
+      "lon": -104.966081,
+      "name": "E Yale Ave & S Williams St",
+      "note": "E Yale Ave & S Williams St, Englewood"
+    },
+    {
+      "lat": 39.6675782,
+      "lon": -104.9629562,
+      "name": "E Yale Ave & S Vine St",
+      "note": "E Yale Ave & S Vine St, Englewood"
+    },
+    {
+      "lat": 39.6676922,
+      "lon": -104.9632888,
+      "name": "E Yale Ave & S Vine St",
+      "note": "E Yale Ave & S Vine St, Englewood"
+    },
+    {
+      "lat": 39.6677108,
+      "lon": -104.9668723,
+      "name": "E Yale Ave & S Williams St",
+      "note": "E Yale Ave & S Williams St, Englewood"
+    },
+    {
+      "lat": 39.6676034,
+      "lon": -104.969667,
+      "name": "E Yale Ave & S Humboldt St",
+      "note": "E Yale Ave & S Humboldt St, Englewood"
+    },
+    {
+      "lat": 39.6676183,
+      "lon": -104.973213,
+      "name": "E Yale Ave & S Downing St",
+      "note": "E Yale Ave & S Downing St, Englewood"
+    },
+    {
+      "lat": 39.6677314,
+      "lon": -104.970353,
+      "name": "E Yale Ave & S Humboldt St",
+      "note": "E Yale Ave & S Humboldt St, Englewood"
+    },
+    {
+      "lat": 39.6677686,
+      "lon": -104.974079,
+      "name": "E Yale Ave & S Downing St",
+      "note": "E Yale Ave & S Downing St, Englewood"
+    },
+    {
+      "lat": 39.6709111,
+      "lon": -104.9735621,
+      "name": "S Downing St & E Harvard Ave",
+      "note": "S Downing St & E Harvard Ave, Englewood"
+    },
+    {
+      "lat": 39.6677459,
+      "lon": -104.9866214,
+      "name": "E Yale Ave & S Lincoln St",
+      "note": "E Yale Ave & S Lincoln St, Englewood"
+    },
+    {
+      "lat": 39.6680148,
+      "lon": -104.973409,
+      "name": "S Downing St & E Yale Ave",
+      "note": "S Downing St & E Yale Ave, Englewood"
+    },
+    {
+      "lat": 39.6677748,
+      "lon": -104.977992,
+      "name": "E Yale Ave & S Clarkson St",
+      "note": "E Yale Ave & S Clarkson St, Englewood"
+    },
+    {
+      "lat": 39.6673494,
+      "lon": -104.973596,
+      "name": "S Downing St & E Yale Ave",
+      "note": "S Downing St & E Yale Ave, Englewood"
+    },
+    {
+      "lat": 39.6711629,
+      "lon": -104.973401,
+      "name": "S Downing St & E Harvard Ave",
+      "note": "S Downing St & E Harvard Ave, Englewood"
+    },
+    {
+      "lat": 39.6679214,
+      "lon": -104.98745,
+      "name": "South Broadway & Yale Avenue",
+      "note": "South Broadway & Yale Avenue, Englewood"
+    },
+    {
+      "lat": 39.6676199,
+      "lon": -104.986836,
+      "name": "E Yale Ave & S Broadway",
+      "note": "E Yale Ave & S Broadway, Englewood"
+    },
+    {
+      "lat": 39.667271,
+      "lon": -104.9877801,
+      "name": "South Broadway & West Yale Avenue",
+      "note": "South Broadway & West Yale Avenue, Englewood"
+    },
+    {
+      "lat": 39.6677686,
+      "lon": -104.9833223,
+      "name": "E Yale Ave & S Logan St",
+      "note": "E Yale Ave & S Logan St, Englewood"
+    },
+    {
+      "lat": 39.6676282,
+      "lon": -104.977874,
+      "name": "E Yale Ave & S Clarkson St",
+      "note": "E Yale Ave & S Clarkson St, Englewood"
+    },
+    {
+      "lat": 39.6676385,
+      "lon": -104.982523,
+      "name": "E Yale Ave & S Logan St",
+      "note": "E Yale Ave & S Logan St, Englewood"
+    },
+    {
+      "lat": 39.6534429,
+      "lon": -104.973484,
+      "name": "S Downing St & E Hampden Ave",
+      "note": "S Downing St & E Hampden Ave, Englewood"
+    },
+    {
+      "lat": 39.6532178,
+      "lon": -104.973935,
+      "name": "E Hampden Ave & S Downing St",
+      "note": "E Hampden Ave & S Downing St, Englewood"
+    },
+    {
+      "lat": 39.6511939,
+      "lon": -104.9730126,
+      "name": "E Jefferson Ave & S Downing St",
+      "note": "E Jefferson Ave & S Downing St, Englewood"
+    },
+    {
+      "lat": 39.6533479,
+      "lon": -104.9680534,
+      "name": "E Hampden Ave & S Gilpin St",
+      "note": "E Hampden Ave & S Gilpin St, Englewood"
+    },
+    {
+      "lat": 39.6527366,
+      "lon": -104.973686,
+      "name": "S Downing St & E Hampden Ave",
+      "note": "S Downing St & E Hampden Ave, Englewood"
+    },
+    {
+      "lat": 39.6530505,
+      "lon": -104.9672487,
+      "name": "E Hampden Ave & S Gilpin St",
+      "note": "E Hampden Ave & S Gilpin St, Englewood"
+    },
+    {
+      "lat": 39.6638501,
+      "lon": -104.973616,
+      "name": "S Downing St & E Bates Ave",
+      "note": "S Downing St & E Bates Ave, Englewood"
+    },
+    {
+      "lat": 39.6624667,
+      "lon": -104.973391,
+      "name": "S Downing St & E Cornell Ave",
+      "note": "S Downing St & E Cornell Ave, Englewood"
+    },
+    {
+      "lat": 39.6565384,
+      "lon": -104.973632,
+      "name": "S Downing St & E Floyd Ave",
+      "note": "S Downing St & E Floyd Ave, Englewood"
+    },
+    {
+      "lat": 39.6603337,
+      "lon": -104.973393,
+      "name": "S Downing St & E Dartmouth Ave",
+      "note": "S Downing St & E Dartmouth Ave, Englewood"
+    },
+    {
+      "lat": 39.660119,
+      "lon": -104.97361,
+      "name": "S Downing St & E Dartmouth Ave",
+      "note": "S Downing St & E Dartmouth Ave, Englewood"
+    },
+    {
+      "lat": 39.6570195,
+      "lon": -104.973431,
+      "name": "S Downing St & E Floyd Ave",
+      "note": "S Downing St & E Floyd Ave, Englewood"
+    },
+    {
+      "lat": 39.6620124,
+      "lon": -104.973597,
+      "name": "S Downing St & E Cornell Ave",
+      "note": "S Downing St & E Cornell Ave, Englewood"
+    },
+    {
+      "lat": 39.6539158,
+      "lon": -104.974823,
+      "name": "S Corona St & E Girard Ave",
+      "note": "S Corona St & E Girard Ave, Englewood"
+    },
+    {
+      "lat": 39.6643374,
+      "lon": -104.973393,
+      "name": "S Downing St & E Bates Ave",
+      "note": "S Downing St & E Bates Ave, Englewood"
+    },
+    {
+      "lat": 39.6530477,
+      "lon": -104.977939,
+      "name": "E Hampden Ave & S Clarkson St",
+      "note": "E Hampden Ave & S Clarkson St, Englewood"
+    },
+    {
+      "lat": 39.6532191,
+      "lon": -104.980109,
+      "name": "E Hampden Ave & S Pearl St",
+      "note": "E Hampden Ave & S Pearl St, Englewood"
+    },
+    {
+      "lat": 39.6539563,
+      "lon": -104.978153,
+      "name": "Craig Hospital",
+      "note": "Craig Hospital, Englewood"
+    },
+    {
+      "lat": 39.6530786,
+      "lon": -104.981439,
+      "name": "E Hampden Ave & S Pennsylvania St",
+      "note": "E Hampden Ave & S Pennsylvania St, Englewood"
+    },
+    {
+      "lat": 39.6601223,
+      "lon": -104.987782,
+      "name": "South Broadway & West Dartmouth Avenue",
+      "note": "South Broadway & West Dartmouth Avenue, Englewood"
+    },
+    {
+      "lat": 39.6562319,
+      "lon": -104.987495,
+      "name": "South Broadway & Floyd Avenue",
+      "note": "South Broadway & Floyd Avenue, Englewood"
+    },
+    {
+      "lat": 39.6532253,
+      "lon": -104.9856477,
+      "name": "E Hampden Ave & S Sherman St",
+      "note": "E Hampden Ave & S Sherman St, Englewood"
+    },
+    {
+      "lat": 39.6455572,
+      "lon": -104.9879169,
+      "name": "South Broadway & West Mansfield Avenue",
+      "note": "South Broadway & West Mansfield Avenue, Englewood"
+    },
+    {
+      "lat": 39.6607996,
+      "lon": -104.987479,
+      "name": "South Broadway & Dartmouth Avenue",
+      "note": "South Broadway & Dartmouth Avenue, Englewood"
+    },
+    {
+      "lat": 39.6559697,
+      "lon": -104.987796,
+      "name": "South Broadway & West Floyd Avenue",
+      "note": "South Broadway & West Floyd Avenue, Englewood"
+    },
+    {
+      "lat": 39.6530539,
+      "lon": -104.976439,
+      "name": "E Hampden Ave & S Emerson St",
+      "note": "E Hampden Ave & S Emerson St, Englewood"
+    },
+    {
+      "lat": 39.6548856,
+      "lon": -104.9859508,
+      "name": "E Girard Ave & S Lincoln St",
+      "note": "E Girard Ave & S Lincoln St, Englewood"
+    },
+    {
+      "lat": 39.6533946,
+      "lon": -104.987485,
+      "name": "South Broadway & Hampden Avenue",
+      "note": "South Broadway & Hampden Avenue, Englewood"
+    },
+    {
+      "lat": 39.6499809,
+      "lon": -104.987525,
+      "name": "South Broadway & Kenyon Avenue",
+      "note": "South Broadway & Kenyon Avenue, Englewood"
+    },
+    {
+      "lat": 39.6528122,
+      "lon": -104.98779,
+      "name": "South Broadway & West Hampden Avenue",
+      "note": "South Broadway & West Hampden Avenue, Englewood"
+    },
+    {
+      "lat": 39.6491611,
+      "lon": -104.9878606,
+      "name": "South Broadway & West Kenyon Avenue",
+      "note": "South Broadway & West Kenyon Avenue, Englewood"
+    },
+    {
+      "lat": 39.653089,
+      "lon": -104.9849262,
+      "name": "E Hampden Ave & S Sherman St",
+      "note": "E Hampden Ave & S Sherman St, Englewood"
+    },
+    {
+      "lat": 39.6532108,
+      "lon": -104.9820026,
+      "name": "E Hampden Ave & S Pennsylvania St",
+      "note": "E Hampden Ave & S Pennsylvania St, Englewood"
+    },
+    {
+      "lat": 39.6550487,
+      "lon": -104.9866562,
+      "name": "E Girard Ave & S Lincoln St",
+      "note": "E Girard Ave & S Lincoln St, Englewood"
+    },
+    {
+      "lat": 39.6579893,
+      "lon": -104.987463,
+      "name": "South Broadway & Eastman Avenue",
+      "note": "South Broadway & Eastman Avenue, Englewood"
+    },
+    {
+      "lat": 39.6460694,
+      "lon": -104.987557,
+      "name": "South Broadway & Mansfield Avenue",
+      "note": "South Broadway & Mansfield Avenue, Englewood"
+    },
+    {
+      "lat": 39.6545242,
+      "lon": -104.9862942,
+      "name": "S Lincoln St & E Girard Ave",
+      "note": "S Lincoln St & E Girard Ave, Englewood"
+    },
+    {
+      "lat": 39.6549021,
+      "lon": -104.977762,
+      "name": "E Girard Ave & S Clarkson St",
+      "note": "E Girard Ave & S Clarkson St, Englewood"
+    },
+    {
+      "lat": 39.6494974,
+      "lon": -104.9940095,
+      "name": "W Kenyon Ave & S Elati St",
+      "note": "W Kenyon Ave & S Elati St, Englewood"
+    },
+    {
+      "lat": 39.6517257,
+      "lon": -104.9934703,
+      "name": "S Elati St & W Ithaca Ave",
+      "note": "S Elati St & W Ithaca Ave, Englewood"
+    },
+    {
+      "lat": 39.6493559,
+      "lon": -104.9988616,
+      "name": "W Kenyon Ave & S Jason St",
+      "note": "W Kenyon Ave & S Jason St, Englewood"
+    },
+    {
+      "lat": 39.6493405,
+      "lon": -104.9940498,
+      "name": "W Kenyon Ave & S Elati St",
+      "note": "W Kenyon Ave & S Elati St, Englewood"
+    },
+    {
+      "lat": 39.6516617,
+      "lon": -104.9936822,
+      "name": "S Elati St & W Ithaca Ave",
+      "note": "S Elati St & W Ithaca Ave, Englewood"
+    },
+    {
+      "lat": 39.6473351,
+      "lon": -105.0006882,
+      "name": "S Kalamath St & W Lehigh Ave",
+      "note": "S Kalamath St & W Lehigh Ave, Englewood"
+    },
+    {
+      "lat": 39.6495119,
+      "lon": -104.9989447,
+      "name": "W Kenyon Ave & S Inca St",
+      "note": "W Kenyon Ave & S Inca St, Englewood"
+    },
+    {
+      "lat": 39.6478349,
+      "lon": -105.0004897,
+      "name": "S Kalamath St & W Lehigh Ave",
+      "note": "S Kalamath St & W Lehigh Ave, Englewood"
+    },
+    {
+      "lat": 39.6638709,
+      "lon": -104.987771,
+      "name": "South Broadway & West Bates Avenue",
+      "note": "South Broadway & West Bates Avenue, Englewood"
+    },
+    {
+      "lat": 39.6550552,
+      "lon": -104.989201,
+      "name": "Englewood Parkway & South Acoma Street",
+      "note": "Englewood Parkway & South Acoma Street, Englewood"
+    },
+    {
+      "lat": 39.6556984,
+      "lon": -104.993411,
+      "name": "South Elati Street & Englewood Parkway",
+      "note": "South Elati Street & Englewood Parkway, Englewood"
+    },
+    {
+      "lat": 39.6533042,
+      "lon": -104.9613422,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6543714,
+      "lon": -104.9593738,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6530246,
+      "lon": -104.9611841,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6530598,
+      "lon": -104.9802707,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6561829,
+      "lon": -104.999425,
+      "name": "Englewood Gate F",
+      "note": "Englewood Gate F, Englewood"
+    },
+    {
+      "lat": 39.656559,
+      "lon": -104.99926,
+      "name": "Englewood Gate H",
+      "note": "Englewood Gate H, Englewood"
+    },
+    {
+      "lat": 39.6563399,
+      "lon": -104.999345,
+      "name": "Englewood Gate G",
+      "note": "Englewood Gate G, Englewood"
+    },
+    {
+      "lat": 39.6558345,
+      "lon": -104.999566,
+      "name": "Englewood Gate D",
+      "note": "Englewood Gate D, Englewood"
+    },
+    {
+      "lat": 39.6552631,
+      "lon": -104.999621,
+      "name": "Englewood Gate A",
+      "note": "Englewood Gate A, Englewood"
+    },
+    {
+      "lat": 39.6560279,
+      "lon": -104.999485,
+      "name": "Englewood Gate E",
+      "note": "Englewood Gate E, Englewood"
+    },
+    {
+      "lat": 39.6554295,
+      "lon": -104.999647,
+      "name": "Englewood Gate B",
+      "note": "Englewood Gate B, Englewood"
+    },
+    {
+      "lat": 39.6557111,
+      "lon": -104.993637,
+      "name": "South Elati Street & Englewood Parkway",
+      "note": "South Elati Street & Englewood Parkway, Englewood"
+    },
+    {
+      "lat": 39.6548396,
+      "lon": -104.989261,
+      "name": "Englewood Parkway & South Acoma Street",
+      "note": "Englewood Parkway & South Acoma Street, Englewood"
+    },
+    {
+      "lat": 39.6646461,
+      "lon": -104.987454,
+      "name": "South Broadway & Bates Avenue",
+      "note": "South Broadway & Bates Avenue, Englewood"
+    },
+    {
+      "lat": 39.6715594,
+      "lon": -104.987466,
+      "name": "South Broadway & Harvard Avenue",
+      "note": "South Broadway & Harvard Avenue, Englewood"
+    },
+    {
+      "lat": 39.6710608,
+      "lon": -104.98773,
+      "name": "South Broadway & West Harvard Avenue",
+      "note": "South Broadway & West Harvard Avenue, Englewood"
+    },
+    {
+      "lat": 39.6553891,
+      "lon": -105.0000762,
+      "name": "Englewood",
+      "note": "Englewood, Englewood"
+    },
+    {
+      "lat": 39.6559832,
+      "lon": -104.9997304,
+      "name": "Englewood",
+      "note": "Englewood, Englewood"
+    },
+    {
+      "lat": 39.6689652,
+      "lon": -104.9953596,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6686105,
+      "lon": -104.9955226,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6580449,
+      "lon": -104.9989638,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6559159,
+      "lon": -104.9997579,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6532742,
+      "lon": -105.0009141,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6487748,
+      "lon": -105.002574,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6421928,
+      "lon": -105.0050696,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6241388,
+      "lon": -105.0104162,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6263108,
+      "lon": -105.0098329,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6307287,
+      "lon": -105.0085447,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6372763,
+      "lon": -105.0065096,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6371664,
+      "lon": -105.0066245,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6483087,
+      "lon": -105.0028153,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6421874,
+      "lon": -105.0051629,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6601644,
+      "lon": -104.9980243,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6610542,
+      "lon": -104.9976709,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6640966,
+      "lon": -104.9957158,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6664971,
+      "lon": -104.994262,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.666438,
+      "lon": -104.9944311,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6663815,
+      "lon": -104.9945997,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6665143,
+      "lon": -104.9944619,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6663293,
+      "lon": -104.9948142,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6664792,
+      "lon": -104.9946517,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6662264,
+      "lon": -104.9950419,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6663894,
+      "lon": -104.9948576,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.666534,
+      "lon": -104.9949759,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6658748,
+      "lon": -104.9954626,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6697711,
+      "lon": -104.9946353,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6701412,
+      "lon": -104.9933987,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6681854,
+      "lon": -104.9933652,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6691934,
+      "lon": -104.9938312,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6691866,
+      "lon": -104.9938786,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6694746,
+      "lon": -104.9939775,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6695506,
+      "lon": -104.9940298,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6693423,
+      "lon": -104.9939827,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6702622,
+      "lon": -104.9943254,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6691761,
+      "lon": -104.994131,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6686876,
+      "lon": -104.9940787,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.667743,
+      "lon": -104.9938238,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6678594,
+      "lon": -104.9939048,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6679759,
+      "lon": -104.9939887,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6678684,
+      "lon": -104.9940509,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.668119,
+      "lon": -104.9941241,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6680122,
+      "lon": -104.9941975,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6683533,
+      "lon": -104.9942817,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6681036,
+      "lon": -104.9943504,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6682556,
+      "lon": -104.9944479,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6684565,
+      "lon": -104.9944941,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6674615,
+      "lon": -104.994848,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6675733,
+      "lon": -104.9950578,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6675676,
+      "lon": -104.9949668,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6680751,
+      "lon": -104.9952558,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6678328,
+      "lon": -104.9952677,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6679015,
+      "lon": -104.9951606,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6677447,
+      "lon": -104.995059,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6679341,
+      "lon": -104.9950895,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6681728,
+      "lon": -104.9951897,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6510806,
+      "lon": -105.0017279,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6673893,
+      "lon": -104.994642,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6671543,
+      "lon": -104.9945677,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6671415,
+      "lon": -104.9944852,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6671793,
+      "lon": -104.9943835,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6671657,
+      "lon": -104.9942959,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6671523,
+      "lon": -104.9942099,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6671386,
+      "lon": -104.9941214,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6671248,
+      "lon": -104.9940328,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6671115,
+      "lon": -104.9939474,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6601657,
+      "lon": -104.9980818,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6582107,
+      "lon": -104.9988199,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6555595,
+      "lon": -104.9999938,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.654273,
+      "lon": -105.0004511,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6540859,
+      "lon": -105.0006,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.643519,
+      "lon": -105.0045703,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6418257,
+      "lon": -105.0053001,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6188284,
+      "lon": -105.0121128,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6182553,
+      "lon": -105.0125098,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.628517,
+      "lon": -105.0091991,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6285278,
+      "lon": -105.0092519,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    }
+  ],
+  "restaurant": [
+    {
+      "lat": 39.619724,
+      "lon": -104.988126,
+      "name": "Dubbs Pub",
+      "note": "5301 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.623776,
+      "lon": -105.007129,
+      "name": "Mi Cocina 2",
+      "note": "1600 W Belleview Ave, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.619711,
+      "lon": -105.016383,
+      "name": "49th Food",
+      "note": "5350 S Santa Fe Dr F Suite, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.622812,
+      "lon": -105.018846,
+      "name": "Toast Fine",
+      "note": "2630 W Belleview Ave #100, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.6229477,
+      "lon": -104.98841,
+      "name": "Wendy's",
+      "note": "Wendy's, Centennial"
+    },
+    {
+      "lat": 39.6237637,
+      "lon": -104.98882,
+      "name": "Del Taco",
+      "note": "Del Taco, Centennial"
+    },
+    {
+      "lat": 39.6237204,
+      "lon": -104.9873507,
+      "name": "McDonald's",
+      "note": "McDonald's, Centennial"
+    },
+    {
+      "lat": 39.6231563,
+      "lon": -104.987413,
+      "name": "Black-eyed Pea",
+      "note": "Black-eyed Pea, Centennial"
+    },
+    {
+      "lat": 39.6224415,
+      "lon": -104.987551,
+      "name": "Qdoba",
+      "note": "Qdoba, Centennial"
+    },
+    {
+      "lat": 39.6223237,
+      "lon": -104.987543,
+      "name": "Papa John's",
+      "note": "Papa John's, Centennial"
+    },
+    {
+      "lat": 39.6273583,
+      "lon": -104.9884121,
+      "name": "Burger King",
+      "note": "Burger King, Centennial"
+    },
+    {
+      "lat": 39.6696219,
+      "lon": -104.9873726,
+      "name": "Vintage Himalayan",
+      "note": "Vintage Himalayan, Englewood"
+    },
+    {
+      "lat": 39.6638261,
+      "lon": -104.9881691,
+      "name": "Breakfast On Broadway",
+      "note": "Breakfast On Broadway, Englewood"
+    },
+    {
+      "lat": 39.662641,
+      "lon": -104.9872733,
+      "name": "Panda Express",
+      "note": "Panda Express, Englewood"
+    },
+    {
+      "lat": 39.6504453,
+      "lon": -105.0084181,
+      "name": "Subway",
+      "note": "Subway, Englewood"
+    },
+    {
+      "lat": 39.6499768,
+      "lon": -105.0088506,
+      "name": "Pho 4 U",
+      "note": "Pho 4 U, Englewood"
+    },
+    {
+      "lat": 39.6566584,
+      "lon": -104.9882,
+      "name": "Spicy Basil",
+      "note": "Spicy Basil, Englewood"
+    },
+    {
+      "lat": 39.6726335,
+      "lon": -104.973179,
+      "name": "John Holly's Asian Bistro",
+      "note": "John Holly's Asian Bistro, Englewood"
+    },
+    {
+      "lat": 39.6199208,
+      "lon": -105.0163794,
+      "name": "The Lost Cajun",
+      "note": "The Lost Cajun, Englewood"
+    },
+    {
+      "lat": 39.6197885,
+      "lon": -105.0163779,
+      "name": "Wing Slingers",
+      "note": "Wing Slingers, Englewood"
+    },
+    {
+      "lat": 39.6195469,
+      "lon": -105.0163607,
+      "name": "Piccino Wood Oven Pizza",
+      "note": "Piccino Wood Oven Pizza, Englewood"
+    },
+    {
+      "lat": 39.6196585,
+      "lon": -105.016696,
+      "name": "Panda Express",
+      "note": "Panda Express, Englewood"
+    },
+    {
+      "lat": 39.6534677,
+      "lon": -104.992169,
+      "name": "Chipotle",
+      "note": "Chipotle, Englewood"
+    },
+    {
+      "lat": 39.6535098,
+      "lon": -104.9984556,
+      "name": "Tokyo Joe's",
+      "note": "Tokyo Joe's, Englewood"
+    },
+    {
+      "lat": 39.6545736,
+      "lon": -104.960646,
+      "name": "Modern Market",
+      "note": "Modern Market, Englewood"
+    },
+    {
+      "lat": 39.6544632,
+      "lon": -104.9600035,
+      "name": "Little Man Ice Cream",
+      "note": "Little Man Ice Cream, Englewood"
+    },
+    {
+      "lat": 39.6544657,
+      "lon": -104.9597903,
+      "name": "Osteria Alberico",
+      "note": "Osteria Alberico, Englewood"
+    },
+    {
+      "lat": 39.6727951,
+      "lon": -104.9598145,
+      "name": "The Pioneer",
+      "note": "The Pioneer, Englewood"
+    },
+    {
+      "lat": 39.6732806,
+      "lon": -104.973083,
+      "name": "Little India",
+      "note": "Little India, Englewood"
+    },
+    {
+      "lat": 39.653379,
+      "lon": -104.9739734,
+      "name": "Cochino Taco",
+      "note": "Cochino Taco, Englewood"
+    },
+    {
+      "lat": 39.6529597,
+      "lon": -104.973323,
+      "name": "Undici",
+      "note": "Undici, Englewood"
+    },
+    {
+      "lat": 39.6533582,
+      "lon": -104.97324,
+      "name": "Bangkok Cafe",
+      "note": "Bangkok Cafe, Englewood"
+    },
+    {
+      "lat": 39.6528709,
+      "lon": -104.9708134,
+      "name": "Pino's Place",
+      "note": "Pino's Place, Englewood"
+    },
+    {
+      "lat": 39.6526987,
+      "lon": -104.9710128,
+      "name": "South Philly Cheese Steaks",
+      "note": "South Philly Cheese Steaks, Englewood"
+    },
+    {
+      "lat": 39.6530125,
+      "lon": -104.981468,
+      "name": "Taste of Thailand",
+      "note": "Taste of Thailand, Englewood"
+    },
+    {
+      "lat": 39.6420246,
+      "lon": -104.987335,
+      "name": "Pizza Hut",
+      "note": "Pizza Hut, Englewood"
+    },
+    {
+      "lat": 39.6483026,
+      "lon": -105.007796,
+      "name": "Panera Bread",
+      "note": "Panera Bread, Englewood"
+    },
+    {
+      "lat": 39.6432272,
+      "lon": -105.012473,
+      "name": "The Broken Tee Grill",
+      "note": "The Broken Tee Grill, Englewood"
+    },
+    {
+      "lat": 39.6724054,
+      "lon": -104.973846,
+      "name": "Denver Beer Company",
+      "note": "Denver Beer Company, Englewood"
+    },
+    {
+      "lat": 39.652757,
+      "lon": -104.970951,
+      "name": "Cherry Hills Sushi Co",
+      "note": "Cherry Hills Sushi Co, Englewood"
+    },
+    {
+      "lat": 39.6195288,
+      "lon": -105.016689,
+      "name": "Bruegger's Bagels",
+      "note": "Bruegger's Bagels, Englewood"
+    },
+    {
+      "lat": 39.6733663,
+      "lon": -104.973802,
+      "name": "Roaming Buffalo Bar-B-Que",
+      "note": "Roaming Buffalo Bar-B-Que, Englewood"
+    },
+    {
+      "lat": 39.623248,
+      "lon": -105.0186498,
+      "name": "The Pint Room",
+      "note": "The Pint Room, Englewood"
+    },
+    {
+      "lat": 39.653846,
+      "lon": -104.9878374,
+      "name": "Zomo",
+      "note": "Zomo, Englewood"
+    },
+    {
+      "lat": 39.6535205,
+      "lon": -104.9738,
+      "name": "Bosphorus Turkish Restaurant",
+      "note": "Bosphorus Turkish Restaurant, Englewood"
+    },
+    {
+      "lat": 39.6535301,
+      "lon": -104.998763,
+      "name": "Jamba",
+      "note": "Jamba, Englewood"
+    },
+    {
+      "lat": 39.653418,
+      "lon": -104.987863,
+      "name": "fellow traveler",
+      "note": "fellow traveler, Englewood"
+    },
+    {
+      "lat": 39.6675719,
+      "lon": -104.987431,
+      "name": "Colore",
+      "note": "Colore, Englewood"
+    },
+    {
+      "lat": 39.6539303,
+      "lon": -104.9874387,
+      "name": "Catrina's Mexican Food",
+      "note": "Catrina's Mexican Food, Englewood"
+    },
+    {
+      "lat": 39.6538493,
+      "lon": -104.9874428,
+      "name": "Breakfast Queen",
+      "note": "Breakfast Queen, Englewood"
+    },
+    {
+      "lat": 39.6547074,
+      "lon": -104.987863,
+      "name": "One Barrel American Bistro & Wine Bar",
+      "note": "One Barrel American Bistro & Wine Bar, Englewood"
+    },
+    {
+      "lat": 39.6566607,
+      "lon": -104.9878833,
+      "name": "The Whiskey Biscuit",
+      "note": "The Whiskey Biscuit, Englewood"
+    },
+    {
+      "lat": 39.6438848,
+      "lon": -104.9881949,
+      "name": "Asuka Ramen",
+      "note": "Asuka Ramen, Englewood"
+    },
+    {
+      "lat": 39.6635043,
+      "lon": -104.9870855,
+      "name": "Miyako Ra-men Spot",
+      "note": "Miyako Ra-men Spot, Englewood"
+    },
+    {
+      "lat": 39.6237382,
+      "lon": -104.9905493,
+      "name": "C Burger",
+      "note": "C Burger, Englewood"
+    },
+    {
+      "lat": 39.6722209,
+      "lon": -104.9596891,
+      "name": "Blackjack Pizza & Salads",
+      "note": "Blackjack Pizza & Salads, Englewood"
+    },
+    {
+      "lat": 39.6723248,
+      "lon": -104.9596975,
+      "name": "Banh Mi Station",
+      "note": "Banh Mi Station, Englewood"
+    },
+    {
+      "lat": 39.652109,
+      "lon": -104.9945711,
+      "name": "Bistro King Asian Restaurant",
+      "note": "Bistro King Asian Restaurant, Englewood"
+    },
+    {
+      "lat": 39.6530759,
+      "lon": -105.018594,
+      "name": "Home Cafe",
+      "note": "Home Cafe, Englewood"
+    }
+  ],
+  "trail": [
+    {
+      "lat": 39.6249622,
+      "lon": -104.9715842,
+      "name": "Recreational Trail",
+      "note": "Recreational Trail, Centennial"
+    },
+    {
+      "lat": 39.61791,
+      "lon": -104.9847181,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.6207844,
+      "lon": -104.9887368,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.6207788,
+      "lon": -104.9891984,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.6207442,
+      "lon": -104.9896524,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.6211056,
+      "lon": -104.9915132,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.640603,
+      "lon": -104.9784252,
+      "name": "Clarkson St MUP",
+      "note": "Clarkson St MUP, Centennial"
+    },
+    {
+      "lat": 39.6235209,
+      "lon": -104.9785226,
+      "name": "Clarkson Multi-Use Path",
+      "note": "Clarkson Multi-Use Path, Centennial"
+    },
+    {
+      "lat": 39.6350228,
+      "lon": -104.9726334,
+      "name": "East Stanford Avenue",
+      "note": "East Stanford Avenue, Centennial"
+    },
+    {
+      "lat": 39.617392,
+      "lon": -104.9651415,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.6191927,
+      "lon": -104.9692565,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.6283956,
+      "lon": -104.9785255,
+      "name": "Clarkson Multi-Use Path",
+      "note": "Clarkson Multi-Use Path, Centennial"
+    },
+    {
+      "lat": 39.6180804,
+      "lon": -104.9786022,
+      "name": "Clarkson Multi-Use Path",
+      "note": "Clarkson Multi-Use Path, Centennial"
+    },
+    {
+      "lat": 39.6198392,
+      "lon": -104.9785579,
+      "name": "Clarkson Multi-Use Path",
+      "note": "Clarkson Multi-Use Path, Centennial"
+    },
+    {
+      "lat": 39.6341642,
+      "lon": -104.9870021,
+      "name": "470 Trail",
+      "note": "470 Trail, Centennial"
+    },
+    {
+      "lat": 39.6310677,
+      "lon": -105.0167169,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6353769,
+      "lon": -105.0184162,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6513027,
+      "lon": -105.0078987,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6516095,
+      "lon": -105.0081228,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.671062,
+      "lon": -105.000528,
+      "name": "South Platte River Trail",
+      "note": "South Platte River Trail, Englewood"
+    },
+    {
+      "lat": 39.6308565,
+      "lon": -105.0150412,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6240553,
+      "lon": -105.0004385,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6289805,
+      "lon": -105.007091,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6283592,
+      "lon": -105.005323,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6292459,
+      "lon": -105.0092049,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6291639,
+      "lon": -105.0080653,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6291588,
+      "lon": -105.0100388,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6292065,
+      "lon": -105.0095951,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6307854,
+      "lon": -105.0146365,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6299324,
+      "lon": -105.0122747,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6595923,
+      "lon": -105.0032779,
+      "name": "Little Dry Creek Trail",
+      "note": "Little Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6597623,
+      "lon": -105.0030387,
+      "name": "Little Dry Creek Trail",
+      "note": "Little Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6599063,
+      "lon": -105.0027587,
+      "name": "Little Dry Creek Trail",
+      "note": "Little Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6511361,
+      "lon": -104.9844738,
+      "name": "Little Dry Creek Trail",
+      "note": "Little Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.665865,
+      "lon": -104.976863,
+      "name": "East Amherst Avenue",
+      "note": "East Amherst Avenue, Englewood"
+    },
+    {
+      "lat": 39.6502975,
+      "lon": -105.0141162,
+      "name": "Bear Creek Trail",
+      "note": "Bear Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6508181,
+      "lon": -105.011835,
+      "name": "Bear Creek Trail",
+      "note": "Bear Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6508338,
+      "lon": -105.0153538,
+      "name": "Bear Creek Trail",
+      "note": "Bear Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6505394,
+      "lon": -105.0147489,
+      "name": "Bear Creek Trail",
+      "note": "Bear Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6228162,
+      "lon": -104.9990565,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6213117,
+      "lon": -104.9927933,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.621752,
+      "lon": -104.9935419,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6395994,
+      "lon": -105.0169355,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6437032,
+      "lon": -105.0150853,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6475401,
+      "lon": -105.0111559,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6277434,
+      "lon": -105.0034814,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6250623,
+      "lon": -105.0164858,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.630451,
+      "lon": -105.0142731,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6306395,
+      "lon": -105.0141306,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6705194,
+      "lon": -104.9611733,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6600976,
+      "lon": -104.9970832,
+      "name": "Little Dry Creek Trail",
+      "note": "Little Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6514636,
+      "lon": -105.0089239,
+      "name": "Bear Creek Trail",
+      "note": "Bear Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6697327,
+      "lon": -105.0158456,
+      "name": "West Harvard Gulch Trail",
+      "note": "West Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6708817,
+      "lon": -104.9629249,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6707978,
+      "lon": -104.9617712,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6711612,
+      "lon": -104.9652835,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6706481,
+      "lon": -104.9617826,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6216498,
+      "lon": -105.0006136,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6216388,
+      "lon": -105.0027437,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6215143,
+      "lon": -105.0015815,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6218447,
+      "lon": -105.0007581,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6224181,
+      "lon": -105.0012239,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6223677,
+      "lon": -105.0059649,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6211095,
+      "lon": -105.0040915,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6205961,
+      "lon": -105.0059715,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6231305,
+      "lon": -105.0036904,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6687932,
+      "lon": -104.9590113,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6694321,
+      "lon": -104.9604245,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6712268,
+      "lon": -104.9653514,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.671283,
+      "lon": -104.9653507,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6713836,
+      "lon": -104.9688256,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.654182,
+      "lon": -104.9782785,
+      "name": "Sky Bridge",
+      "note": "Sky Bridge, Englewood"
+    },
+    {
+      "lat": 39.6259399,
+      "lon": -105.0017281,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6525631,
+      "lon": -105.0073461,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6439697,
+      "lon": -105.014443,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6739364,
+      "lon": -104.9600347,
+      "name": "South University Boulevard Sidwalk for Newman Center",
+      "note": "South University Boulevard Sidwalk for Newman Center, Englewood"
+    },
+    {
+      "lat": 39.6211977,
+      "lon": -105.0066152,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6218826,
+      "lon": -104.9964817,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6216845,
+      "lon": -104.9976345,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.622276,
+      "lon": -104.9952447,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6221679,
+      "lon": -104.9945724,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6307831,
+      "lon": -105.0140594,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6189501,
+      "lon": -105.0105803,
+      "name": "Littleton Community Trail",
+      "note": "Littleton Community Trail, Englewood"
+    },
+    {
+      "lat": 39.6173713,
+      "lon": -105.0105632,
+      "name": "Littleton Community Trail",
+      "note": "Littleton Community Trail, Englewood"
+    },
+    {
+      "lat": 39.6172187,
+      "lon": -105.0107135,
+      "name": "Littleton Community Trail",
+      "note": "Littleton Community Trail, Englewood"
+    },
+    {
+      "lat": 39.6598818,
+      "lon": -104.997987,
+      "name": "Little Dry Creek Trail",
+      "note": "Little Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.659995,
+      "lon": -104.9988784,
+      "name": "Little Dry Creek Trail",
+      "note": "Little Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.643217,
+      "lon": -105.0145998,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.643471,
+      "lon": -105.0145269,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6427997,
+      "lon": -105.0147266,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6611924,
+      "lon": -104.9770187,
+      "name": "South Emerson Street",
+      "note": "South Emerson Street, Englewood"
+    },
+    {
+      "lat": 39.6600669,
+      "lon": -105.0008641,
+      "name": "Little Dry Creek Trail",
+      "note": "Little Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6599164,
+      "lon": -105.0026333,
+      "name": "Little Dry Creek Trail",
+      "note": "Little Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6678795,
+      "lon": -105.0047859,
+      "name": "West Harvard Gulch Trail",
+      "note": "West Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6683401,
+      "lon": -105.0062791,
+      "name": "West Harvard Gulch Trail",
+      "note": "West Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6699628,
+      "lon": -105.0182485,
+      "name": "West Harvard Gulch Trail",
+      "note": "West Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6698566,
+      "lon": -105.0170925,
+      "name": "West Harvard Gulch Trail",
+      "note": "West Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6694988,
+      "lon": -105.0133769,
+      "name": "West Harvard Gulch Trail",
+      "note": "West Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6691384,
+      "lon": -105.0098614,
+      "name": "West Harvard Gulch Trail",
+      "note": "West Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6687017,
+      "lon": -105.0075328,
+      "name": "West Harvard Gulch Trail",
+      "note": "West Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6700054,
+      "lon": -105.0188655,
+      "name": "West Harvard Gulch Trail",
+      "note": "West Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6366744,
+      "lon": -105.0158637,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6308939,
+      "lon": -105.0140629,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6597619,
+      "lon": -104.9972779,
+      "name": "Little Dry Creek Trail",
+      "note": "Little Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6714223,
+      "lon": -104.9728845,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6707383,
+      "lon": -104.9617964,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.669118,
+      "lon": -104.9598029,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6689043,
+      "lon": -104.9594315,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6711029,
+      "lon": -104.9644329,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6710618,
+      "lon": -104.9641135,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.6711322,
+      "lon": -104.9652158,
+      "name": "East Harvard Gulch Trail",
+      "note": "East Harvard Gulch Trail, Englewood"
+    },
+    {
+      "lat": 39.617167,
+      "lon": -105.0093183,
+      "name": "Littleton Community Trail",
+      "note": "Littleton Community Trail, Englewood"
+    },
+    {
+      "lat": 39.6210381,
+      "lon": -104.9922074,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6565301,
+      "lon": -105.004807,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6437852,
+      "lon": -105.0146047,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6439718,
+      "lon": -105.0145364,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6602841,
+      "lon": -105.003922,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6642171,
+      "lon": -105.0041296,
+      "name": "South Platte River Trail",
+      "note": "South Platte River Trail, Englewood"
+    },
+    {
+      "lat": 39.6211121,
+      "lon": -104.9924662,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6211625,
+      "lon": -104.9925092,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    }
+  ],
+  "schools": [
+    {
+      "lat": 39.6339991,
+      "lon": -104.9860623,
+      "name": "Cherrelyn Elementary School",
+      "note": "Cherrelyn Elementary School, Centennial"
+    },
+    {
+      "lat": 39.6188766,
+      "lon": -104.9830375,
+      "name": "Field Elementary School",
+      "note": "Field Elementary School, Centennial"
+    },
+    {
+      "lat": 39.6265522,
+      "lon": -104.9824278,
+      "name": "All Souls Catholic School",
+      "note": "All Souls Catholic School, Centennial"
+    },
+    {
+      "lat": 39.6267713,
+      "lon": -104.9909183,
+      "name": "Colorado's Finest",
+      "note": "Colorado's Finest, Centennial"
+    },
+    {
+      "lat": 39.6335141,
+      "lon": -104.9610979,
+      "name": "Saint Mary's Academy",
+      "note": "Saint Mary's Academy, Centennial"
+    },
+    {
+      "lat": 39.633822,
+      "lon": -104.9607468,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.6332608,
+      "lon": -104.9606035,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.633365,
+      "lon": -104.961483,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.6338274,
+      "lon": -104.9614914,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.6344007,
+      "lon": -104.961448,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.6338638,
+      "lon": -104.9860993,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.6565718,
+      "lon": -104.9859737,
+      "name": "Saint Louis Catholic School",
+      "note": "Saint Louis Catholic School, Englewood"
+    },
+    {
+      "lat": 39.6465619,
+      "lon": -104.981741,
+      "name": "Englewood High School",
+      "note": "Englewood High School, Englewood"
+    },
+    {
+      "lat": 39.6555133,
+      "lon": -104.9860823,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6462095,
+      "lon": -104.9966568,
+      "name": "Englewood Early Childhood Education (ECE) Program at Maddox",
+      "note": "Englewood Early Childhood Education (ECE) Program at Maddox, Englewood"
+    },
+    {
+      "lat": 39.6565627,
+      "lon": -104.9855285,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6734714,
+      "lon": -104.9627056,
+      "name": "Seeley G Mudd Science Building",
+      "note": "Seeley G Mudd Science Building, Englewood"
+    },
+    {
+      "lat": 39.6727784,
+      "lon": -104.9625956,
+      "name": "Physics Building",
+      "note": "Physics Building, Englewood"
+    },
+    {
+      "lat": 39.6733943,
+      "lon": -104.9603475,
+      "name": "Knudson Hall",
+      "note": "Knudson Hall, Englewood"
+    },
+    {
+      "lat": 39.6714776,
+      "lon": -104.9614303,
+      "name": "Mass Communications",
+      "note": "Mass Communications, Englewood"
+    },
+    {
+      "lat": 39.6720572,
+      "lon": -104.9614069,
+      "name": "Metallurgy Building",
+      "note": "Metallurgy Building, Englewood"
+    },
+    {
+      "lat": 39.6663589,
+      "lon": -104.9608262,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6668418,
+      "lon": -104.9612014,
+      "name": "Saint Anne's Episcopal School",
+      "note": "Saint Anne's Episcopal School, Englewood"
+    },
+    {
+      "lat": 39.6694399,
+      "lon": -104.977596,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6685139,
+      "lon": -104.9769672,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6565716,
+      "lon": -104.986114,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6471912,
+      "lon": -104.9809977,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6467057,
+      "lon": -104.99678,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6322094,
+      "lon": -104.9937509,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.626733,
+      "lon": -104.9912207,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.673862,
+      "lon": -104.9615058,
+      "name": "Engineering and Computer Science Building",
+      "note": "Engineering and Computer Science Building, Englewood"
+    },
+    {
+      "lat": 39.6728989,
+      "lon": -104.9614275,
+      "name": "Academic Office Annex",
+      "note": "Academic Office Annex, Englewood"
+    },
+    {
+      "lat": 39.6725252,
+      "lon": -104.9614716,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6726263,
+      "lon": -104.9637854,
+      "name": "Facilities Service Center",
+      "note": "Facilities Service Center, Englewood"
+    },
+    {
+      "lat": 39.6721019,
+      "lon": -104.9626018,
+      "name": "Ammi Hyde Building",
+      "note": "Ammi Hyde Building, Englewood"
+    },
+    {
+      "lat": 39.6731949,
+      "lon": -104.9608636,
+      "name": "Rose Cottage",
+      "note": "Rose Cottage, Englewood"
+    },
+    {
+      "lat": 39.6732023,
+      "lon": -104.9620915,
+      "name": "Wesley Hall",
+      "note": "Wesley Hall, Englewood"
+    },
+    {
+      "lat": 39.6471408,
+      "lon": -104.9967793,
+      "name": "Maddox Early Childhood Education Center",
+      "note": "Maddox Early Childhood Education Center, Englewood"
+    },
+    {
+      "lat": 39.6469525,
+      "lon": -104.9818672,
+      "name": "Englwood High School",
+      "note": "Englwood High School, Englewood"
+    },
+    {
+      "lat": 39.6597278,
+      "lon": -104.9929329,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.6595267,
+      "lon": -104.992932,
+      "name": "Bishop Elementary School",
+      "note": "Bishop Elementary School, Englewood"
+    },
+    {
+      "lat": 39.6462893,
+      "lon": -104.9967053,
+      "note": "Englewood"
+    }
+  ]
+}

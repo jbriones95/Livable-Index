@@ -1,0 +1,2819 @@
+{
+  "coffee": [
+    {
+      "lat": 39.6148589,
+      "lon": -105.016027,
+      "name": "Mango Tree Coffee",
+      "note": "5624 S Prince St, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6124867,
+      "lon": -105.0175238,
+      "name": "Dirt Coffee",
+      "note": "2506 W Alamo Ave, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.600551,
+      "lon": -105.0223652,
+      "name": "Harold and Virginia Simpson Leadership Center",
+      "note": "6399 S Santa Fe Dr, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6032026,
+      "lon": -105.0229385,
+      "name": "6115, South Santa Fe Drive, Littleton, Arapahoe County, Colorado, 80120, United States",
+      "note": "6115 S Santa Fe Dr, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5862955,
+      "lon": -105.023923,
+      "name": "claire's",
+      "note": "7301 S Santa Fe Dr Ste 310, Littleton, CO 80120 (approx)"
+    },
+    {
+      "lat": 39.5833145,
+      "lon": -104.9882493,
+      "name": "South Broadway",
+      "note": "7330 S Broadway, Littleton, CO 80122"
+    },
+    {
+      "lat": 39.5715438,
+      "lon": -104.9889619,
+      "name": "Black Rock Coffee",
+      "note": "7961 S Broadway Ste A, Littleton, CO 80122 (approx)"
+    },
+    {
+      "lat": 39.601217,
+      "lon": -104.9880828,
+      "name": "6500, South Broadway, Littleton, Arapahoe County, Colorado, 80121, United States",
+      "note": "6504 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.6118882,
+      "lon": -104.9886631,
+      "name": "Artemis Tea Coffee",
+      "note": "40 W Littleton Blvd Ste 211, Littleton, CO 80120 (approx)"
+    },
+    {
+      "lat": 39.623945,
+      "lon": -104.987877,
+      "name": "South Broadway",
+      "note": "5100 S Broadway, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.609973,
+      "lon": -105.034876,
+      "name": "Enchanted Grounds",
+      "note": "3615 W Bowles Ave #5, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.612888,
+      "lon": -105.001761,
+      "name": "Lost Coffee",
+      "note": "1190 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6388421,
+      "lon": -104.987431,
+      "name": "Starbucks",
+      "note": "4298 S Broadway, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.6222204,
+      "lon": -104.987542,
+      "name": "Caribou Coffee",
+      "note": "Caribou Coffee, Centennial"
+    },
+    {
+      "lat": 39.6009307,
+      "lon": -104.9860438,
+      "name": "Atlas Coffee",
+      "note": "Atlas Coffee, Centennial"
+    },
+    {
+      "lat": 39.619867,
+      "lon": -105.0163726,
+      "name": "Lamar's Doughnuts",
+      "note": "Lamar's Doughnuts, Englewood"
+    },
+    {
+      "lat": 39.6228117,
+      "lon": -105.0188459,
+      "name": "Toast Fine Food & Coffee",
+      "note": "Toast Fine Food & Coffee, Englewood"
+    },
+    {
+      "lat": 39.6236822,
+      "lon": -104.9905539,
+      "name": "Atlas Coffee",
+      "note": "Atlas Coffee, Englewood"
+    }
+  ],
+  "grocery": [
+    {
+      "lat": 39.6131003,
+      "lon": -104.9894468,
+      "note": "100 W Littleton Blvd"
+    },
+    {
+      "lat": 39.6256084,
+      "lon": -104.988581,
+      "note": "5001 S Broadway"
+    },
+    {
+      "lat": 39.6123386,
+      "lon": -105.0062238,
+      "note": "1500 W Littleton Blvd"
+    },
+    {
+      "lat": 39.6259633,
+      "lon": -105.0246978,
+      "note": "5050 S Federal Blvd"
+    },
+    {
+      "lat": 39.57335,
+      "lon": -104.988592,
+      "note": "7901 S Broadway"
+    },
+    {
+      "lat": 39.5748722,
+      "lon": -104.9918813,
+      "note": "181 W Mineral Ave"
+    },
+    {
+      "lat": 39.6121539,
+      "lon": -104.989793,
+      "name": "King Soopers",
+      "note": "King Soopers, Centennial"
+    },
+    {
+      "lat": 39.6333579,
+      "lon": -104.9873807,
+      "name": "Corner Store",
+      "note": "Corner Store, Centennial"
+    },
+    {
+      "lat": 39.6328713,
+      "lon": -104.988428,
+      "name": "7-Eleven",
+      "note": "7-Eleven, Centennial"
+    },
+    {
+      "lat": 39.624371,
+      "lon": -104.988367,
+      "name": "Sprouts Farmers Market",
+      "note": "Sprouts Farmers Market, Centennial"
+    },
+    {
+      "lat": 39.5803026,
+      "lon": -104.9878322,
+      "name": "Sinclair",
+      "note": "Sinclair, Centennial"
+    },
+    {
+      "lat": 39.5991485,
+      "lon": -104.9889646,
+      "name": "Mobil Mart",
+      "note": "Mobil Mart, Centennial"
+    }
+  ],
+  "park": [
+    {
+      "lat": 39.57879,
+      "lon": -104.99338,
+      "note": "7900 S Ogden Way / Horseshoe Park (approx)"
+    },
+    {
+      "lat": 39.5787253,
+      "lon": -105.0071743,
+      "note": "7791 S Windermere St"
+    },
+    {
+      "lat": 39.58219,
+      "lon": -105.01862,
+      "note": "S Prince St & W Jackass Hill Rd / Jackass Hill Park"
+    },
+    {
+      "lat": 39.5786312,
+      "lon": -105.0233734,
+      "note": "1900 W Mineral Ave"
+    },
+    {
+      "lat": 39.584202,
+      "lon": -105.0042134,
+      "note": "1312 W Geddes Ave"
+    },
+    {
+      "lat": 39.6011676,
+      "lon": -105.0040984,
+      "note": "Angeline's Little Creekway / 6364 S Sterne Pkwy"
+    },
+    {
+      "lat": 39.6160989,
+      "lon": -104.9824819,
+      "name": "Brookridge Park",
+      "note": "Brookridge Park"
+    },
+    {
+      "lat": 39.6227843,
+      "lon": -105.0362888,
+      "name": "Harlow Park",
+      "note": "Harlow Park"
+    },
+    {
+      "lat": 39.639495,
+      "lon": -105.0006915,
+      "name": "Jason Park",
+      "note": "Jason Park"
+    },
+    {
+      "lat": 39.6376282,
+      "lon": -105.04753,
+      "name": "Wolff And Quincy Park",
+      "note": "Wolff And Quincy Park"
+    },
+    {
+      "lat": 39.6144312,
+      "lon": -105.0291342,
+      "name": "Bowles Grove Park",
+      "note": "Bowles Grove Park"
+    },
+    {
+      "lat": 39.609623,
+      "lon": -105.0111875,
+      "name": "Sterne Park",
+      "note": "Sterne Park"
+    },
+    {
+      "lat": 39.6347516,
+      "lon": -105.0395295,
+      "name": "Bow Mar Heights Park",
+      "note": "Bow Mar Heights Park"
+    },
+    {
+      "lat": 39.624746,
+      "lon": -105.0386441,
+      "name": "James A Taylor Park",
+      "note": "James A Taylor Park"
+    },
+    {
+      "lat": 39.606974,
+      "lon": -105.0458864,
+      "name": "Hamlet Park",
+      "note": "Hamlet Park"
+    },
+    {
+      "lat": 39.5973845,
+      "lon": -105.0563322,
+      "note": ""
+    },
+    {
+      "lat": 39.6168043,
+      "lon": -105.0333488,
+      "name": "Berry Park",
+      "note": "Berry Park"
+    },
+    {
+      "lat": 39.619242,
+      "lon": -105.0440101,
+      "name": "Cimarron Trail Park",
+      "note": "Cimarron Trail Park"
+    },
+    {
+      "lat": 39.5812971,
+      "lon": -105.0527542,
+      "name": "Columbine Trail Park",
+      "note": "Columbine Trail Park"
+    },
+    {
+      "lat": 39.5822067,
+      "lon": -105.0511503,
+      "note": ""
+    },
+    {
+      "lat": 39.5848134,
+      "lon": -105.053921,
+      "note": ""
+    },
+    {
+      "lat": 39.5817643,
+      "lon": -105.0539586,
+      "note": ""
+    },
+    {
+      "lat": 39.6158907,
+      "lon": -104.996091,
+      "name": "Powers Park",
+      "note": "Powers Park"
+    },
+    {
+      "lat": 39.6166201,
+      "lon": -104.9976373,
+      "note": ""
+    },
+    {
+      "lat": 39.6068432,
+      "lon": -104.9991742,
+      "name": "Ketring Park",
+      "note": "Ketring Park"
+    },
+    {
+      "lat": 39.6008173,
+      "lon": -104.9806283,
+      "name": "Milliken Park",
+      "note": "Milliken Park"
+    },
+    {
+      "lat": 39.6117344,
+      "lon": -105.0393125,
+      "name": "Wynetka Ponds Park",
+      "note": "Wynetka Ponds Park"
+    },
+    {
+      "lat": 39.6058122,
+      "lon": -105.0033174,
+      "name": "Gallup Park",
+      "note": "Gallup Park"
+    },
+    {
+      "lat": 39.6332114,
+      "lon": -105.019716,
+      "name": "Centennial Park",
+      "note": "Centennial Park"
+    },
+    {
+      "lat": 39.6222595,
+      "lon": -105.0032614,
+      "name": "Cornerstone Park",
+      "note": "Cornerstone Park"
+    },
+    {
+      "lat": 39.6286928,
+      "lon": -104.9814918,
+      "name": "Elsie Duncan Park",
+      "note": "Elsie Duncan Park"
+    },
+    {
+      "lat": 39.6362393,
+      "lon": -104.9979685,
+      "name": "Rotolo Park",
+      "note": "Rotolo Park"
+    },
+    {
+      "lat": 39.6353166,
+      "lon": -104.996056,
+      "name": "Southwest Greenbelt",
+      "note": "Southwest Greenbelt"
+    },
+    {
+      "lat": 39.6344686,
+      "lon": -104.9937427,
+      "note": ""
+    },
+    {
+      "lat": 39.6339592,
+      "lon": -104.9916795,
+      "note": ""
+    },
+    {
+      "lat": 39.6265444,
+      "lon": -105.0024943,
+      "name": "Belleview Park",
+      "note": "Belleview Park"
+    },
+    {
+      "lat": 39.6428606,
+      "lon": -105.0014315,
+      "note": ""
+    },
+    {
+      "lat": 39.6225318,
+      "lon": -104.9979874,
+      "name": "Progress Park",
+      "note": "Progress Park"
+    },
+    {
+      "lat": 39.6313295,
+      "lon": -105.014001,
+      "note": ""
+    },
+    {
+      "lat": 39.6184852,
+      "lon": -105.0142153,
+      "name": "Geneva Park",
+      "note": "Geneva Park"
+    },
+    {
+      "lat": 39.5974201,
+      "lon": -104.9999993,
+      "name": "Angeline Little Greenway",
+      "note": "Angeline Little Greenway"
+    },
+    {
+      "lat": 39.593617,
+      "lon": -104.990669,
+      "name": "Little's Creek Park",
+      "note": "Little's Creek Park"
+    },
+    {
+      "lat": 39.6173614,
+      "lon": -105.0096044,
+      "name": "Slaughterhouse Gulch Park",
+      "note": "Slaughterhouse Gulch Park"
+    },
+    {
+      "lat": 39.6206478,
+      "lon": -105.0584241,
+      "name": "Mary's Meadow",
+      "note": "Mary's Meadow"
+    },
+    {
+      "lat": 39.6131643,
+      "lon": -105.0149565,
+      "name": "Bega Park",
+      "note": "Bega Park"
+    },
+    {
+      "lat": 39.5889843,
+      "lon": -104.9947176,
+      "name": "Grandpa's Acres",
+      "note": "Grandpa's Acres"
+    },
+    {
+      "lat": 39.5821071,
+      "lon": -104.9961581,
+      "name": "Ivan Thomas Greenway",
+      "note": "Ivan Thomas Greenway"
+    },
+    {
+      "lat": 39.5847007,
+      "lon": -104.9998453,
+      "name": "Carbone Park",
+      "note": "Carbone Park"
+    },
+    {
+      "lat": 39.5900294,
+      "lon": -105.0042749,
+      "name": "Ashbaugh Park",
+      "note": "Ashbaugh Park"
+    },
+    {
+      "lat": 39.5971887,
+      "lon": -105.0184188,
+      "name": "Ridgewood Park Lower",
+      "note": "Ridgewood Park Lower"
+    },
+    {
+      "lat": 39.5957081,
+      "lon": -105.027306,
+      "name": "Reynolds Landing",
+      "note": "Reynolds Landing"
+    },
+    {
+      "lat": 39.5874477,
+      "lon": -105.0178833,
+      "name": "Ridgeview Park",
+      "note": "Ridgeview Park"
+    },
+    {
+      "lat": 39.6113986,
+      "lon": -104.9901528,
+      "name": "Ida Park",
+      "note": "Ida Park"
+    },
+    {
+      "lat": 39.6103325,
+      "lon": -104.9907942,
+      "name": "East Community Center Sports Field",
+      "note": "East Community Center Sports Field"
+    },
+    {
+      "lat": 39.6096406,
+      "lon": -104.9905954,
+      "name": "East Community Center Campus",
+      "note": "East Community Center Campus"
+    },
+    {
+      "lat": 39.6139434,
+      "lon": -104.991923,
+      "name": "Promise Park",
+      "note": "Promise Park"
+    },
+    {
+      "lat": 39.6143393,
+      "lon": -104.9911154,
+      "name": "Promise Park North",
+      "note": "Promise Park North"
+    },
+    {
+      "lat": 39.6188612,
+      "lon": -105.0193142,
+      "note": ""
+    },
+    {
+      "lat": 39.5823963,
+      "lon": -104.9839822,
+      "note": ""
+    },
+    {
+      "lat": 39.5891914,
+      "lon": -104.9816409,
+      "note": ""
+    },
+    {
+      "lat": 39.5954335,
+      "lon": -105.0154495,
+      "name": "Charley Emley Park",
+      "note": "Charley Emley Park"
+    },
+    {
+      "lat": 39.5937555,
+      "lon": -105.0095626,
+      "name": "Ivan Thomas Greenbelt",
+      "note": "Ivan Thomas Greenbelt"
+    },
+    {
+      "lat": 39.5919983,
+      "lon": -105.0079912,
+      "name": "Ivan Thomas Greenbelt",
+      "note": "Ivan Thomas Greenbelt"
+    },
+    {
+      "lat": 39.6028783,
+      "lon": -105.0082623,
+      "note": ""
+    },
+    {
+      "lat": 39.5972896,
+      "lon": -105.0406821,
+      "name": "Burning Tree Park North",
+      "note": "Burning Tree Park North"
+    },
+    {
+      "lat": 39.5949247,
+      "lon": -105.0410342,
+      "name": "Burning Tree Park and Pool",
+      "note": "Burning Tree Park and Pool"
+    },
+    {
+      "lat": 39.594997,
+      "lon": -105.0439176,
+      "name": "Doral Park in Burning Tree",
+      "note": "Doral Park in Burning Tree"
+    },
+    {
+      "lat": 39.6018045,
+      "lon": -105.0543455,
+      "name": "Racoon Hollar",
+      "note": "Racoon Hollar"
+    },
+    {
+      "lat": 39.6408295,
+      "lon": -105.0374321,
+      "note": ""
+    },
+    {
+      "lat": 39.6099183,
+      "lon": -104.9906074,
+      "name": "East Community Center Playground",
+      "note": "East Community Center Playground"
+    },
+    {
+      "lat": 39.6391244,
+      "lon": -105.0228851,
+      "name": "Chase Park",
+      "note": "Chase Park"
+    },
+    {
+      "lat": 39.645056,
+      "lon": -105.0312437,
+      "note": ""
+    },
+    {
+      "lat": 39.6417627,
+      "lon": -105.0264825,
+      "note": ""
+    },
+    {
+      "lat": 39.6148123,
+      "lon": -105.0467374,
+      "note": ""
+    },
+    {
+      "lat": 39.5790066,
+      "lon": -105.0378954,
+      "name": "South Platte Park",
+      "note": "South Platte Park"
+    },
+    {
+      "lat": 39.5830381,
+      "lon": -105.0331221,
+      "name": "South Platte Park",
+      "note": "South Platte Park"
+    },
+    {
+      "lat": 39.5937643,
+      "lon": -105.034343,
+      "note": ""
+    },
+    {
+      "lat": 39.59122,
+      "lon": -105.0390433,
+      "note": ""
+    },
+    {
+      "lat": 39.5915903,
+      "lon": -105.0378173,
+      "note": ""
+    },
+    {
+      "lat": 39.6005666,
+      "lon": -105.003544,
+      "note": ""
+    },
+    {
+      "lat": 39.6109071,
+      "lon": -105.0554918,
+      "note": ""
+    },
+    {
+      "lat": 39.597555,
+      "lon": -105.0234873,
+      "name": "Lee Gulch Overlook & Trailhead",
+      "note": "Lee Gulch Overlook & Trailhead"
+    },
+    {
+      "lat": 39.595014,
+      "lon": -105.0136533,
+      "name": "Ridgewood Park Upper",
+      "note": "Ridgewood Park Upper"
+    },
+    {
+      "lat": 39.6099,
+      "lon": -104.9765,
+      "name": "Horsemans Park",
+      "note": "Horsemans Park, Centennial"
+    },
+    {
+      "lat": 39.5684489,
+      "lon": -104.988397,
+      "name": "South Broadway & Southpark Drive",
+      "note": "South Broadway & Southpark Drive, Centennial"
+    },
+    {
+      "lat": 39.5931388,
+      "lon": -104.988147,
+      "name": "South Broadway & West Sterne Parkway",
+      "note": "South Broadway & West Sterne Parkway, Centennial"
+    },
+    {
+      "lat": 39.5925648,
+      "lon": -104.9884601,
+      "name": "South Broadway & West Sterne Parkway",
+      "note": "South Broadway & West Sterne Parkway, Centennial"
+    },
+    {
+      "lat": 39.5676303,
+      "lon": -104.9887168,
+      "name": "South Broadway & Southpark Drive",
+      "note": "South Broadway & Southpark Drive, Centennial"
+    },
+    {
+      "lat": 39.58332,
+      "lon": -104.9729222,
+      "name": "Clarkson Park Path",
+      "note": "Clarkson Park Path, Centennial"
+    },
+    {
+      "lat": 39.5755968,
+      "lon": -104.9776284,
+      "name": "Puma Park",
+      "note": "Puma Park, Centennial"
+    },
+    {
+      "lat": 39.5832422,
+      "lon": -104.9730121,
+      "name": "Clarkson Park",
+      "note": "Clarkson Park, Centennial"
+    },
+    {
+      "lat": 39.6290614,
+      "lon": -104.9814997,
+      "name": "Elsie Duncan Dog Park",
+      "note": "Elsie Duncan Dog Park, Centennial"
+    },
+    {
+      "lat": 39.6282205,
+      "lon": -105.0050913,
+      "name": "Englewood Unleashed Dog Park",
+      "note": "Englewood Unleashed Dog Park, Englewood"
+    },
+    {
+      "lat": 39.625227,
+      "lon": -105.0027907,
+      "name": "Pirates Cove Water Park",
+      "note": "Pirates Cove Water Park, Englewood"
+    }
+  ],
+  "trail": [
+    {
+      "lat": 39.619242,
+      "lon": -105.0440101,
+      "name": "Cimarron Trail Park",
+      "note": "Cimarron Trail Park"
+    },
+    {
+      "lat": 39.5812971,
+      "lon": -105.0527542,
+      "name": "Columbine Trail Park",
+      "note": "Columbine Trail Park"
+    },
+    {
+      "lat": 39.597555,
+      "lon": -105.0234873,
+      "name": "Lee Gulch Overlook & Trailhead",
+      "note": "Lee Gulch Overlook & Trailhead"
+    },
+    {
+      "lat": 39.58394444444445,
+      "lon": -104.99341666666666,
+      "note": "39°35'02.2\"N 104°59'36.3\"W"
+    },
+    {
+      "lat": 39.58961111111111,
+      "lon": -104.99338888888889,
+      "note": "39°35'22.6\"N 104°59'36.2\"W"
+    },
+    {
+      "lat": 39.590583333333335,
+      "lon": -104.9885,
+      "note": "39°35'26.1\"N 104°59'18.6\"W"
+    },
+    {
+      "lat": 39.57619444444445,
+      "lon": -104.98866666666667,
+      "note": "39°34'34.3\"N 104°59'19.2\"W"
+    },
+    {
+      "lat": 39.58047222222223,
+      "lon": -104.99775,
+      "note": "39°34'49.7\"N 104°59'51.9\"W"
+    },
+    {
+      "lat": 39.58419444444445,
+      "lon": -105.00369444444445,
+      "note": "39°35'03.1\"N 105°00'13.3\"W"
+    },
+    {
+      "lat": 39.58241666666667,
+      "lon": -105.00716666666666,
+      "note": "39°34'56.7\"N 105°00'25.8\"W"
+    },
+    {
+      "lat": 39.58066666666667,
+      "lon": -105.01,
+      "note": "39°34'50.4\"N 105°00'36.0\"W"
+    },
+    {
+      "lat": 39.58075,
+      "lon": -105.01647222222222,
+      "note": "39°34'50.7\"N 105°00'59.3\"W"
+    },
+    {
+      "lat": 39.57338888888889,
+      "lon": -105.01072222222223,
+      "note": "39°34'24.2\"N 105°00'38.6\"W"
+    },
+    {
+      "lat": 39.5765,
+      "lon": -105.01069444444444,
+      "note": "39°34'35.4\"N 105°00'38.5\"W"
+    },
+    {
+      "lat": 39.57830555555556,
+      "lon": -105.02133333333333,
+      "note": "39°34'41.9\"N 105°01'16.8\"W"
+    },
+    {
+      "lat": 39.57402777777778,
+      "lon": -105.0205,
+      "note": "39°34'26.5\"N 105°01'13.8\"W"
+    },
+    {
+      "lat": 39.574361111111116,
+      "lon": -105.01658333333333,
+      "note": "39°34'27.7\"N 105°00'59.7\"W"
+    },
+    {
+      "lat": 39.57219444444445,
+      "lon": -105.01069444444444,
+      "note": "39°34'19.9\"N 105°00'38.5\"W"
+    },
+    {
+      "lat": 39.569472222222224,
+      "lon": -105.00691666666667,
+      "note": "39°34'10.1\"N 105°00'24.9\"W"
+    },
+    {
+      "lat": 39.56436111111111,
+      "lon": -104.99741666666667,
+      "note": "39°33'51.7\"N 104°59'50.7\"W"
+    },
+    {
+      "lat": 39.583222222222226,
+      "lon": -104.99775,
+      "note": "39°34'59.6\"N 104°59'51.9\"W"
+    },
+    {
+      "lat": 39.58416666666667,
+      "lon": -105.00116666666666,
+      "note": "39°35'03.0\"N 105°00'04.2\"W"
+    },
+    {
+      "lat": 39.587583333333335,
+      "lon": -105.00236111111111,
+      "note": "39°35'15.3\"N 105°00'08.5\"W"
+    },
+    {
+      "lat": 39.58605555555556,
+      "lon": -105.00030555555556,
+      "note": "39°35'09.8\"N 105°00'01.1\"W"
+    },
+    {
+      "lat": 39.58797222222223,
+      "lon": -105.00375,
+      "note": "39°35'16.7\"N 105°00'13.5\"W"
+    },
+    {
+      "lat": 39.58986111111111,
+      "lon": -105.00238888888889,
+      "note": "39°35'23.5\"N 105°00'08.6\"W"
+    },
+    {
+      "lat": 39.59166666666667,
+      "lon": -105.007,
+      "note": "39°35'30.0\"N 105°00'25.2\"W"
+    },
+    {
+      "lat": 39.59363888888889,
+      "lon": -105.01147222222222,
+      "note": "39°35'37.1\"N 105°00'41.3\"W"
+    },
+    {
+      "lat": 39.59627777777778,
+      "lon": -105.01422222222222,
+      "note": "39°35'46.6\"N 105°00'51.2\"W"
+    },
+    {
+      "lat": 39.59575,
+      "lon": -105.01625,
+      "note": "39°35'44.7\"N 105°00'58.5\"W"
+    },
+    {
+      "lat": 39.59780555555556,
+      "lon": -105.01833333333333,
+      "note": "39°35'52.1\"N 105°01'06.0\"W"
+    },
+    {
+      "lat": 39.60205555555556,
+      "lon": -105.01938888888888,
+      "note": "39°36'07.4\"N 105°01'09.8\"W"
+    },
+    {
+      "lat": 39.60791666666667,
+      "lon": -105.01633333333334,
+      "note": "39°36'28.5\"N 105°00'58.8\"W"
+    },
+    {
+      "lat": 39.580333333333336,
+      "lon": -105.02905555555556,
+      "note": "39°34'49.2\"N 105°01'44.6\"W"
+    },
+    {
+      "lat": 39.58375,
+      "lon": -105.02877777777778,
+      "note": "39°35'01.5\"N 105°01'43.6\"W"
+    },
+    {
+      "lat": 39.59122222222222,
+      "lon": -105.02533333333334,
+      "note": "39°35'28.4\"N 105°01'31.2\"W"
+    },
+    {
+      "lat": 39.59741666666667,
+      "lon": -105.02211111111112,
+      "note": "39°35'50.7\"N 105°01'19.6\"W"
+    },
+    {
+      "lat": 39.60016666666667,
+      "lon": -105.0235,
+      "note": "39°36'00.6\"N 105°01'24.6\"W"
+    },
+    {
+      "lat": 39.60602777777778,
+      "lon": -105.02225,
+      "note": "39°36'21.7\"N 105°01'20.1\"W"
+    },
+    {
+      "lat": 39.60788888888889,
+      "lon": -105.0098888888889,
+      "note": "39°36'28.4\"N 105°00'35.6\"W"
+    },
+    {
+      "lat": 39.61102777777778,
+      "lon": -105.01036111111111,
+      "note": "39°36'39.7\"N 105°00'37.3\"W"
+    },
+    {
+      "lat": 39.6249622,
+      "lon": -104.9715842,
+      "name": "Recreational Trail",
+      "note": "Recreational Trail, Centennial"
+    },
+    {
+      "lat": 39.5790682,
+      "lon": -104.990416,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.5786188,
+      "lon": -104.9898284,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.5773818,
+      "lon": -104.9893829,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.61791,
+      "lon": -104.9847181,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.6207844,
+      "lon": -104.9887368,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.6207788,
+      "lon": -104.9891984,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.6207442,
+      "lon": -104.9896524,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.6211056,
+      "lon": -104.9915132,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.5692714,
+      "lon": -104.9729095,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.640603,
+      "lon": -104.9784252,
+      "name": "Clarkson St MUP",
+      "note": "Clarkson St MUP, Centennial"
+    },
+    {
+      "lat": 39.6235209,
+      "lon": -104.9785226,
+      "name": "Clarkson Multi-Use Path",
+      "note": "Clarkson Multi-Use Path, Centennial"
+    },
+    {
+      "lat": 39.571887,
+      "lon": -104.9748031,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.573786,
+      "lon": -104.976691,
+      "name": "Bridge to Powell Middle School",
+      "note": "Bridge to Powell Middle School, Centennial"
+    },
+    {
+      "lat": 39.58332,
+      "lon": -104.9729222,
+      "name": "Clarkson Park Path",
+      "note": "Clarkson Park Path, Centennial"
+    },
+    {
+      "lat": 39.5773902,
+      "lon": -104.9844414,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.5753522,
+      "lon": -104.9781351,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.6350228,
+      "lon": -104.9726334,
+      "name": "East Stanford Avenue",
+      "note": "East Stanford Avenue, Centennial"
+    },
+    {
+      "lat": 39.5648312,
+      "lon": -104.9751417,
+      "name": "C-470 Trail",
+      "note": "C-470 Trail, Centennial"
+    },
+    {
+      "lat": 39.5762117,
+      "lon": -104.9884758,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.5906938,
+      "lon": -104.9883315,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.5872591,
+      "lon": -104.9915173,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.5924572,
+      "lon": -104.9848572,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.5943938,
+      "lon": -104.9882918,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.6027751,
+      "lon": -104.9881483,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.5998887,
+      "lon": -104.988963,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.6019673,
+      "lon": -104.9763637,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.5767891,
+      "lon": -104.9805457,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.5766677,
+      "lon": -104.9806057,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.6283956,
+      "lon": -104.9785255,
+      "name": "Clarkson Multi-Use Path",
+      "note": "Clarkson Multi-Use Path, Centennial"
+    },
+    {
+      "lat": 39.6180804,
+      "lon": -104.9786022,
+      "name": "Clarkson Multi-Use Path",
+      "note": "Clarkson Multi-Use Path, Centennial"
+    },
+    {
+      "lat": 39.6198392,
+      "lon": -104.9785579,
+      "name": "Clarkson Multi-Use Path",
+      "note": "Clarkson Multi-Use Path, Centennial"
+    },
+    {
+      "lat": 39.6168457,
+      "lon": -104.9786182,
+      "name": "Clarkson Multi-Use Path",
+      "note": "Clarkson Multi-Use Path, Centennial"
+    },
+    {
+      "lat": 39.5629106,
+      "lon": -104.9929317,
+      "name": "C-470 Trail",
+      "note": "C-470 Trail, Centennial"
+    },
+    {
+      "lat": 39.5651339,
+      "lon": -104.9880575,
+      "name": "C-470 Trail",
+      "note": "C-470 Trail, Centennial"
+    },
+    {
+      "lat": 39.5649731,
+      "lon": -104.9883413,
+      "name": "C-470 Trail",
+      "note": "C-470 Trail, Centennial"
+    },
+    {
+      "lat": 39.5649202,
+      "lon": -104.9886696,
+      "name": "C-470 Trail",
+      "note": "C-470 Trail, Centennial"
+    },
+    {
+      "lat": 39.5956609,
+      "lon": -104.9889603,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.5685498,
+      "lon": -104.9718367,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.5969466,
+      "lon": -104.9894837,
+      "name": "High Line Canal Trail",
+      "note": "High Line Canal Trail, Centennial"
+    },
+    {
+      "lat": 39.5766689,
+      "lon": -104.980757,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.576668,
+      "lon": -104.9806876,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.576215,
+      "lon": -104.9882233,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.6341642,
+      "lon": -104.9870021,
+      "name": "470 Trail",
+      "note": "470 Trail, Centennial"
+    },
+    {
+      "lat": 39.6034844,
+      "lon": -104.9783606,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Centennial"
+    },
+    {
+      "lat": 39.5834587,
+      "lon": -104.998042,
+      "name": "Lee Gulch Trail",
+      "note": "Lee Gulch Trail, Centennial"
+    },
+    {
+      "lat": 39.6310677,
+      "lon": -105.0167169,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6353769,
+      "lon": -105.0184162,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6308565,
+      "lon": -105.0150412,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6240553,
+      "lon": -105.0004385,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6289805,
+      "lon": -105.007091,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6283592,
+      "lon": -105.005323,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6292459,
+      "lon": -105.0092049,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6291639,
+      "lon": -105.0080653,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6291588,
+      "lon": -105.0100388,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6292065,
+      "lon": -105.0095951,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6307854,
+      "lon": -105.0146365,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6299324,
+      "lon": -105.0122747,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6228162,
+      "lon": -104.9990565,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6213117,
+      "lon": -104.9927933,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.621752,
+      "lon": -104.9935419,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6395994,
+      "lon": -105.0169355,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6437032,
+      "lon": -105.0150853,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6277434,
+      "lon": -105.0034814,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6250623,
+      "lon": -105.0164858,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.630451,
+      "lon": -105.0142731,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6306395,
+      "lon": -105.0141306,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6216498,
+      "lon": -105.0006136,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6216388,
+      "lon": -105.0027437,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6215143,
+      "lon": -105.0015815,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6218447,
+      "lon": -105.0007581,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6224181,
+      "lon": -105.0012239,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6223677,
+      "lon": -105.0059649,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6211095,
+      "lon": -105.0040915,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6205961,
+      "lon": -105.0059715,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6231305,
+      "lon": -105.0036904,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6259399,
+      "lon": -105.0017281,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6439697,
+      "lon": -105.014443,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6211977,
+      "lon": -105.0066152,
+      "name": "Loop Trail",
+      "note": "Loop Trail, Englewood"
+    },
+    {
+      "lat": 39.6218826,
+      "lon": -104.9964817,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6216845,
+      "lon": -104.9976345,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.622276,
+      "lon": -104.9952447,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6221679,
+      "lon": -104.9945724,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6307831,
+      "lon": -105.0140594,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6189501,
+      "lon": -105.0105803,
+      "name": "Littleton Community Trail",
+      "note": "Littleton Community Trail, Englewood"
+    },
+    {
+      "lat": 39.6173713,
+      "lon": -105.0105632,
+      "name": "Littleton Community Trail",
+      "note": "Littleton Community Trail, Englewood"
+    },
+    {
+      "lat": 39.6172187,
+      "lon": -105.0107135,
+      "name": "Littleton Community Trail",
+      "note": "Littleton Community Trail, Englewood"
+    },
+    {
+      "lat": 39.6153131,
+      "lon": -105.0120884,
+      "name": "Littleton Community Trail",
+      "note": "Littleton Community Trail, Englewood"
+    },
+    {
+      "lat": 39.643217,
+      "lon": -105.0145998,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.643471,
+      "lon": -105.0145269,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6427997,
+      "lon": -105.0147266,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6209797,
+      "lon": -105.0202604,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6170556,
+      "lon": -105.0203244,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6366744,
+      "lon": -105.0158637,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6308939,
+      "lon": -105.0140629,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.617167,
+      "lon": -105.0093183,
+      "name": "Littleton Community Trail",
+      "note": "Littleton Community Trail, Englewood"
+    },
+    {
+      "lat": 39.6210381,
+      "lon": -104.9922074,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6437852,
+      "lon": -105.0146047,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6439718,
+      "lon": -105.0145364,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    },
+    {
+      "lat": 39.6211121,
+      "lon": -104.9924662,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6211625,
+      "lon": -104.9925092,
+      "name": "Big Dry Creek Trail",
+      "note": "Big Dry Creek Trail, Englewood"
+    },
+    {
+      "lat": 39.6135645,
+      "lon": -105.0234057,
+      "name": "Mary Carter Greenway Trail",
+      "note": "Mary Carter Greenway Trail, Englewood"
+    }
+  ],
+  "healthcare": [
+    {
+      "lat": 39.5755567,
+      "lon": -104.9858838,
+      "name": "AdventHealth Littleton Hospital",
+      "note": "7700 S Broadway, Littleton, CO 80122"
+    },
+    {
+      "lat": 39.5820827,
+      "lon": -104.9931225,
+      "name": "20 West Dry Creek Circle (Highline Professional Center)",
+      "note": "20 W Dry Creek Cir, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5813203,
+      "lon": -104.9923109,
+      "name": "22 West Dry Creek Circle (Highline Professional Center)",
+      "note": "22 W Dry Creek Cir, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5809587,
+      "lon": -104.9890993,
+      "name": "2 West Dry Creek Circle (Highline Professional Center)",
+      "note": "2 W Dry Creek Cir Ste 230, Littleton, CO 80120 (approx)"
+    },
+    {
+      "lat": 39.616801,
+      "lon": -105.014086,
+      "name": "2200 West Berry Avenue (medical building)",
+      "note": "2200 W Berry Ave, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6227409,
+      "lon": -104.990493,
+      "name": "Chuze Fitness",
+      "note": "200 W Belleview Ave Ste 170, Englewood, CO 80110 (approx)"
+    },
+    {
+      "lat": 39.6132573,
+      "lon": -104.9951523,
+      "name": "609 West Littleton Boulevard",
+      "note": "609 W Littleton Blvd #100, Littleton, CO 80120 (approx)"
+    },
+    {
+      "lat": 39.6245626,
+      "lon": -104.986719,
+      "name": "Walgreens",
+      "note": "Walgreens, Centennial"
+    },
+    {
+      "lat": 39.5742571,
+      "lon": -104.9890177,
+      "name": "Comfort Dental",
+      "note": "Comfort Dental, Centennial"
+    },
+    {
+      "lat": 39.5834695,
+      "lon": -104.9877341,
+      "name": "Dentists of Littleton",
+      "note": "Dentists of Littleton, Centennial"
+    },
+    {
+      "lat": 39.567457,
+      "lon": -104.9890094,
+      "name": "Planned Parenthood",
+      "note": "Planned Parenthood, Centennial"
+    },
+    {
+      "lat": 39.609928,
+      "lon": -104.9863915,
+      "name": "Orchard Creek Dentistry",
+      "note": "Orchard Creek Dentistry, Centennial"
+    },
+    {
+      "lat": 39.5773409,
+      "lon": -104.9870114,
+      "name": "Morris Family Dentistry",
+      "note": "Morris Family Dentistry, Centennial"
+    },
+    {
+      "lat": 39.5748717,
+      "lon": -104.9880861,
+      "name": "Southbridge Dentistry",
+      "note": "Southbridge Dentistry, Centennial"
+    },
+    {
+      "lat": 39.5772882,
+      "lon": -104.9870932,
+      "name": "Arapahoe Medical Plaza I",
+      "note": "Arapahoe Medical Plaza I, Centennial"
+    },
+    {
+      "lat": 39.5762658,
+      "lon": -104.9860914,
+      "name": "AdventHealth Littleton Hospital",
+      "note": "AdventHealth Littleton Hospital, Centennial"
+    },
+    {
+      "lat": 39.5753567,
+      "lon": -104.9855266,
+      "name": "Arapahoe Medical Plaza III",
+      "note": "Arapahoe Medical Plaza III, Centennial"
+    },
+    {
+      "lat": 39.5753873,
+      "lon": -104.9864086,
+      "name": "Arapahoe Medical Plaza II",
+      "note": "Arapahoe Medical Plaza II, Centennial"
+    },
+    {
+      "lat": 39.5758126,
+      "lon": -104.9860355,
+      "name": "AdventHealth Littleton Hospital",
+      "note": "AdventHealth Littleton Hospital, Centennial"
+    },
+    {
+      "lat": 39.5767757,
+      "lon": -104.9867644,
+      "name": "SurgiCenter",
+      "note": "SurgiCenter, Centennial"
+    },
+    {
+      "lat": 39.6441544,
+      "lon": -105.006401,
+      "name": "Costco Pharmacy",
+      "note": "Costco Pharmacy, Englewood"
+    }
+  ],
+  "busStop": [
+    {
+      "lat": 39.5801859,
+      "lon": -105.0249845,
+      "name": "Littleton - Mineral",
+      "note": "Littleton - Mineral"
+    },
+    {
+      "lat": 39.6119672,
+      "lon": -105.0148746,
+      "name": "Littleton Downtown",
+      "note": "Littleton Downtown"
+    },
+    {
+      "lat": 39.642952,
+      "lon": -105.0048363,
+      "name": "Oxford - City of Sheridan",
+      "note": "Oxford - City of Sheridan"
+    },
+    {
+      "lat": 39.6425993,
+      "lon": -105.034576,
+      "name": "S Lowell Blvd & W Oxford Ave",
+      "note": "S Lowell Blvd & W Oxford Ave"
+    },
+    {
+      "lat": 39.6419366,
+      "lon": -104.9879383,
+      "name": "South Broadway & West Oxford Avenue",
+      "note": "South Broadway & West Oxford Avenue"
+    },
+    {
+      "lat": 39.6426099,
+      "lon": -104.987605,
+      "name": "South Broadway & Oxford Avenue",
+      "note": "South Broadway & Oxford Avenue"
+    },
+    {
+      "lat": 39.6351993,
+      "lon": -104.987706,
+      "name": "South Broadway & Stanford Avenue",
+      "note": "South Broadway & Stanford Avenue"
+    },
+    {
+      "lat": 39.6346788,
+      "lon": -104.9880284,
+      "name": "South Broadway & West Stanford Avenue",
+      "note": "South Broadway & West Stanford Avenue"
+    },
+    {
+      "lat": 39.6317372,
+      "lon": -104.987741,
+      "name": "South Broadway & Union Avenue",
+      "note": "South Broadway & Union Avenue"
+    },
+    {
+      "lat": 39.6382956,
+      "lon": -104.9879855,
+      "name": "South Broadway & West Quincy Avenue",
+      "note": "South Broadway & West Quincy Avenue"
+    },
+    {
+      "lat": 39.6310473,
+      "lon": -104.988066,
+      "name": "South Broadway & West Union Avenue",
+      "note": "South Broadway & West Union Avenue"
+    },
+    {
+      "lat": 39.6391549,
+      "lon": -104.987669,
+      "name": "South Broadway & Quincy Avenue",
+      "note": "South Broadway & Quincy Avenue"
+    },
+    {
+      "lat": 39.6231949,
+      "lon": -104.9881894,
+      "name": "South Broadway & West Belleview Avenue",
+      "note": "South Broadway & West Belleview Avenue"
+    },
+    {
+      "lat": 39.6245832,
+      "lon": -104.987752,
+      "name": "South Broadway & Belleview Avenue",
+      "note": "South Broadway & Belleview Avenue"
+    },
+    {
+      "lat": 39.6273309,
+      "lon": -104.9881169,
+      "name": "South Broadway & West Chenango Avenue",
+      "note": "South Broadway & West Chenango Avenue"
+    },
+    {
+      "lat": 39.6279072,
+      "lon": -104.987776,
+      "name": "South Broadway & Chenango Avenue",
+      "note": "South Broadway & Chenango Avenue"
+    },
+    {
+      "lat": 39.6426324,
+      "lon": -105.0005272,
+      "name": "S Kalamath St & W Oxford Ave",
+      "note": "S Kalamath St & W Oxford Ave"
+    },
+    {
+      "lat": 39.643426,
+      "lon": -105.004454,
+      "name": "Oxford - City of Sheridan",
+      "note": "Oxford - City of Sheridan"
+    },
+    {
+      "lat": 39.642085,
+      "lon": -105.003652,
+      "name": "W Oxford Ave & S Navajo St",
+      "note": "W Oxford Ave & S Navajo St"
+    },
+    {
+      "lat": 39.6442991,
+      "lon": -105.0005326,
+      "name": "S Kalamath St & W Nassau Ave",
+      "note": "S Kalamath St & W Nassau Ave"
+    },
+    {
+      "lat": 39.6423337,
+      "lon": -105.0106847,
+      "name": "W Oxford Ave 2000 block",
+      "note": "W Oxford Ave 2000 block"
+    },
+    {
+      "lat": 39.6423988,
+      "lon": -105.00712,
+      "name": "W Oxford Ave & S Santa Fe Dr",
+      "note": "W Oxford Ave & S Santa Fe Dr"
+    },
+    {
+      "lat": 39.6420993,
+      "lon": -105.0077718,
+      "name": "W Oxford Ave & S Natches Ct",
+      "note": "W Oxford Ave & S Natches Ct"
+    },
+    {
+      "lat": 39.642153,
+      "lon": -105.0115215,
+      "name": "W Oxford Ave 2000 block",
+      "note": "W Oxford Ave 2000 block"
+    },
+    {
+      "lat": 39.64238,
+      "lon": -105.0260578,
+      "name": "W Oxford Ave & S Federal Blvd",
+      "note": "W Oxford Ave & S Federal Blvd"
+    },
+    {
+      "lat": 39.6423841,
+      "lon": -105.0198297,
+      "name": "W Oxford Ave & S Clay St",
+      "note": "W Oxford Ave & S Clay St"
+    },
+    {
+      "lat": 39.6423738,
+      "lon": -105.0235043,
+      "name": "W Oxford Ave & S Decatur St",
+      "note": "W Oxford Ave & S Decatur St"
+    },
+    {
+      "lat": 39.6421797,
+      "lon": -105.020283,
+      "name": "W Oxford Ave & S Clay St",
+      "note": "W Oxford Ave & S Clay St"
+    },
+    {
+      "lat": 39.6421693,
+      "lon": -105.0224261,
+      "name": "W Oxford Ave & S Decatur St",
+      "note": "W Oxford Ave & S Decatur St"
+    },
+    {
+      "lat": 39.64067,
+      "lon": -105.0300715,
+      "name": "S Irving St & W Oxford Ave",
+      "note": "S Irving St & W Oxford Ave"
+    },
+    {
+      "lat": 39.6407672,
+      "lon": -105.0298568,
+      "name": "S Irving St & W Oxford Ave",
+      "note": "S Irving St & W Oxford Ave"
+    },
+    {
+      "lat": 39.6421634,
+      "lon": -105.0247713,
+      "name": "W Oxford Ave & S Federal Blvd",
+      "note": "W Oxford Ave & S Federal Blvd"
+    },
+    {
+      "lat": 39.6421304,
+      "lon": -105.0292453,
+      "name": "W Oxford Ave & S Hooker St",
+      "note": "W Oxford Ave & S Hooker St"
+    },
+    {
+      "lat": 39.6423555,
+      "lon": -105.0291407,
+      "name": "W Oxford Ave & S Hooker St",
+      "note": "W Oxford Ave & S Hooker St"
+    },
+    {
+      "lat": 39.6421819,
+      "lon": -105.0342638,
+      "name": "W Oxford Ave & S Lowell Blvd",
+      "note": "W Oxford Ave & S Lowell Blvd"
+    },
+    {
+      "lat": 39.6422254,
+      "lon": -105.0317236,
+      "name": "W Oxford Ave & S Knox Ct",
+      "note": "W Oxford Ave & S Knox Ct"
+    },
+    {
+      "lat": 39.6423431,
+      "lon": -105.0321286,
+      "name": "W Oxford Ave & S Knox Ct",
+      "note": "W Oxford Ave & S Knox Ct"
+    },
+    {
+      "lat": 39.5803792,
+      "lon": -104.988294,
+      "name": "South Broadway & Dry Creek Road",
+      "note": "South Broadway & Dry Creek Road"
+    },
+    {
+      "lat": 39.584279,
+      "lon": -104.988243,
+      "name": "South Broadway & Geddes Avenue",
+      "note": "South Broadway & Geddes Avenue"
+    },
+    {
+      "lat": 39.6125321,
+      "lon": -104.9882805,
+      "name": "South Broadway & West Littleton Boulevard",
+      "note": "South Broadway & West Littleton Boulevard"
+    },
+    {
+      "lat": 39.58588,
+      "lon": -104.988237,
+      "name": "South Broadway & West Fremont Place",
+      "note": "South Broadway & West Fremont Place"
+    },
+    {
+      "lat": 39.588175,
+      "lon": -104.988202,
+      "name": "South Broadway & South Lincoln Way",
+      "note": "South Broadway & South Lincoln Way"
+    },
+    {
+      "lat": 39.5911049,
+      "lon": -104.988164,
+      "name": "South Broadway & West Ridge Road",
+      "note": "South Broadway & West Ridge Road"
+    },
+    {
+      "lat": 39.5931388,
+      "lon": -104.988147,
+      "name": "South Broadway & West Sterne Parkway",
+      "note": "South Broadway & West Sterne Parkway"
+    },
+    {
+      "lat": 39.5957244,
+      "lon": -104.9881,
+      "name": "South Broadway & East Arapahoe Road",
+      "note": "South Broadway & East Arapahoe Road"
+    },
+    {
+      "lat": 39.5982448,
+      "lon": -104.988084,
+      "name": "South Broadway & Euclid Avenue",
+      "note": "South Broadway & Euclid Avenue"
+    },
+    {
+      "lat": 39.6000852,
+      "lon": -104.988044,
+      "name": "South Broadway & Panama Drive",
+      "note": "South Broadway & Panama Drive"
+    },
+    {
+      "lat": 39.6034166,
+      "lon": -104.987989,
+      "name": "South Broadway & Caley Avenue",
+      "note": "South Broadway & Caley Avenue"
+    },
+    {
+      "lat": 39.6062733,
+      "lon": -104.9879639,
+      "name": "South Broadway & South Bannock Street",
+      "note": "South Broadway & South Bannock Street"
+    },
+    {
+      "lat": 39.6101509,
+      "lon": -104.987903,
+      "name": "South Broadway & Orchard Road",
+      "note": "South Broadway & Orchard Road"
+    },
+    {
+      "lat": 39.6157785,
+      "lon": -104.98786,
+      "name": "South Broadway & Powers Avenue",
+      "note": "South Broadway & Powers Avenue"
+    },
+    {
+      "lat": 39.6173203,
+      "lon": -104.987863,
+      "name": "South Broadway & West Rafferty Gardens Avenue",
+      "note": "South Broadway & West Rafferty Gardens Avenue"
+    },
+    {
+      "lat": 39.6135955,
+      "lon": -104.987871,
+      "name": "South Broadway & Littleton Boulevard",
+      "note": "South Broadway & Littleton Boulevard"
+    },
+    {
+      "lat": 39.6217361,
+      "lon": -104.987823,
+      "name": "South Broadway & Centennial Avenue",
+      "note": "South Broadway & Centennial Avenue"
+    },
+    {
+      "lat": 39.6236691,
+      "lon": -105.0348427,
+      "note": ""
+    },
+    {
+      "lat": 39.6236815,
+      "lon": -105.0350733,
+      "note": ""
+    },
+    {
+      "lat": 39.6113089,
+      "lon": -105.0160291,
+      "name": "Gate D",
+      "note": "Gate D"
+    },
+    {
+      "lat": 39.6108093,
+      "lon": -105.0158621,
+      "name": "Gate B",
+      "note": "Gate B"
+    },
+    {
+      "lat": 39.6106105,
+      "lon": -105.0159862,
+      "name": "Gate A",
+      "note": "Gate A"
+    },
+    {
+      "lat": 39.6200844,
+      "lon": -105.0276195,
+      "note": ""
+    },
+    {
+      "lat": 39.6195198,
+      "lon": -105.0354028,
+      "note": ""
+    },
+    {
+      "lat": 39.6172631,
+      "lon": -105.0355651,
+      "note": ""
+    },
+    {
+      "lat": 39.6202,
+      "lon": -105.0354015,
+      "note": ""
+    },
+    {
+      "lat": 39.6171816,
+      "lon": -105.0279906,
+      "note": ""
+    },
+    {
+      "lat": 39.6172167,
+      "lon": -105.0276553,
+      "note": ""
+    },
+    {
+      "lat": 39.6196733,
+      "lon": -105.0279611,
+      "note": ""
+    },
+    {
+      "lat": 39.6125676,
+      "lon": -105.0152539,
+      "name": "Gate G",
+      "note": "Gate G"
+    },
+    {
+      "lat": 39.6109898,
+      "lon": -105.0157653,
+      "name": "Gate C",
+      "note": "Gate C"
+    },
+    {
+      "lat": 39.5981179,
+      "lon": -104.9884016,
+      "name": "South Broadway & Weaver Place",
+      "note": "South Broadway & Weaver Place"
+    },
+    {
+      "lat": 39.594801,
+      "lon": -104.9884447,
+      "name": "South Broadway & East Arapahoe Road",
+      "note": "South Broadway & East Arapahoe Road"
+    },
+    {
+      "lat": 39.5925648,
+      "lon": -104.9884601,
+      "name": "South Broadway & West Sterne Parkway",
+      "note": "South Broadway & West Sterne Parkway"
+    },
+    {
+      "lat": 39.5903922,
+      "lon": -104.988508,
+      "name": "South Broadway & West Ridge Road",
+      "note": "South Broadway & West Ridge Road"
+    },
+    {
+      "lat": 39.621508,
+      "lon": -104.9881886,
+      "name": "South Broadway & West Centennial Avenue",
+      "note": "South Broadway & West Centennial Avenue"
+    },
+    {
+      "lat": 39.618458,
+      "lon": -104.9882105,
+      "name": "South Broadway & West Rafferty Gardens Avenue",
+      "note": "South Broadway & West Rafferty Gardens Avenue"
+    },
+    {
+      "lat": 39.6163341,
+      "lon": -104.9882156,
+      "name": "South Broadway & West Powers Avenue",
+      "note": "South Broadway & West Powers Avenue"
+    },
+    {
+      "lat": 39.6085579,
+      "lon": -104.9882599,
+      "name": "South Broadway & West Broadmoor Drive",
+      "note": "South Broadway & West Broadmoor Drive"
+    },
+    {
+      "lat": 39.6032412,
+      "lon": -104.9883431,
+      "name": "South Broadway & West Fair Avenue",
+      "note": "South Broadway & West Fair Avenue"
+    },
+    {
+      "lat": 39.5879698,
+      "lon": -104.9885196,
+      "name": "South Broadway & West Davies Avenue",
+      "note": "South Broadway & West Davies Avenue"
+    },
+    {
+      "lat": 39.5858863,
+      "lon": -104.9885515,
+      "name": "South Broadway & West Fremont Place",
+      "note": "South Broadway & West Fremont Place"
+    },
+    {
+      "lat": 39.5802272,
+      "lon": -104.9886276,
+      "name": "South Broadway & West Dry Creek Road",
+      "note": "South Broadway & West Dry Creek Road"
+    },
+    {
+      "lat": 39.5831907,
+      "lon": -104.9885832,
+      "name": "South Broadway & West Fremont Avenue",
+      "note": "South Broadway & West Fremont Avenue"
+    },
+    {
+      "lat": 39.5807588,
+      "lon": -105.026202,
+      "name": "Littleton / Mineral Gate C",
+      "note": "Littleton / Mineral Gate C"
+    },
+    {
+      "lat": 39.5809624,
+      "lon": -105.026106,
+      "name": "Littleton / Mineral Gate B",
+      "note": "Littleton / Mineral Gate B"
+    },
+    {
+      "lat": 39.5808869,
+      "lon": -105.025627,
+      "name": "Littleton / Mineral Gate D",
+      "note": "Littleton / Mineral Gate D"
+    },
+    {
+      "lat": 39.6427023,
+      "lon": -105.0049661,
+      "name": "Oxford - City of Sheridan",
+      "note": "Oxford - City of Sheridan"
+    },
+    {
+      "lat": 39.6432411,
+      "lon": -105.0046682,
+      "name": "Oxford - City of Sheridan",
+      "note": "Oxford - City of Sheridan"
+    },
+    {
+      "lat": 39.6117489,
+      "lon": -105.0150583,
+      "name": "Littleton Downtown",
+      "note": "Littleton Downtown"
+    },
+    {
+      "lat": 39.6121661,
+      "lon": -105.0147135,
+      "name": "Littleton Downtown",
+      "note": "Littleton Downtown"
+    },
+    {
+      "lat": 39.5805518,
+      "lon": -105.0247904,
+      "name": "Littleton - Mineral",
+      "note": "Littleton - Mineral"
+    },
+    {
+      "lat": 39.6235413,
+      "lon": -105.0256499,
+      "note": ""
+    },
+    {
+      "lat": 39.6220238,
+      "lon": -105.0270568,
+      "note": ""
+    },
+    {
+      "lat": 39.58084,
+      "lon": -105.0258953,
+      "name": "Littleton - Mineral Bus Station",
+      "note": "Littleton - Mineral Bus Station"
+    },
+    {
+      "lat": 39.6121442,
+      "lon": -105.0148849,
+      "name": "Littleton Downtown",
+      "note": "Littleton Downtown"
+    },
+    {
+      "lat": 39.5802829,
+      "lon": -105.024882,
+      "name": "Littleton - Mineral",
+      "note": "Littleton - Mineral"
+    },
+    {
+      "lat": 39.5733269,
+      "lon": -104.987622,
+      "name": "E Mineral Ave & S Broadway",
+      "note": "E Mineral Ave & S Broadway, Centennial"
+    },
+    {
+      "lat": 39.5736308,
+      "lon": -104.9889914,
+      "name": "W Mineral Ave & S Broadway",
+      "note": "W Mineral Ave & S Broadway, Centennial"
+    },
+    {
+      "lat": 39.5657689,
+      "lon": -104.988352,
+      "name": "South Broadway & County Line Road",
+      "note": "South Broadway & County Line Road, Centennial"
+    },
+    {
+      "lat": 39.5684489,
+      "lon": -104.988397,
+      "name": "South Broadway & Southpark Drive",
+      "note": "South Broadway & Southpark Drive, Centennial"
+    },
+    {
+      "lat": 39.5711506,
+      "lon": -104.988355,
+      "name": "South Broadway & South Grant Way",
+      "note": "South Broadway & South Grant Way, Centennial"
+    },
+    {
+      "lat": 39.5738398,
+      "lon": -104.988343,
+      "name": "South Broadway & Mineral Avenue",
+      "note": "South Broadway & Mineral Avenue, Centennial"
+    },
+    {
+      "lat": 39.5756808,
+      "lon": -104.988321,
+      "name": "South Broadway & Jamison Avenue",
+      "note": "South Broadway & Jamison Avenue, Centennial"
+    },
+    {
+      "lat": 39.5758356,
+      "lon": -104.9886553,
+      "name": "South Broadway & West Jamison Avenue",
+      "note": "South Broadway & West Jamison Avenue, Centennial"
+    },
+    {
+      "lat": 39.5729329,
+      "lon": -104.9886681,
+      "name": "South Broadway & West Mineral Avenue",
+      "note": "South Broadway & West Mineral Avenue, Centennial"
+    },
+    {
+      "lat": 39.57058,
+      "lon": -104.9886895,
+      "name": "South Broadway & South Grant Way",
+      "note": "South Broadway & South Grant Way, Centennial"
+    },
+    {
+      "lat": 39.5676303,
+      "lon": -104.9887168,
+      "name": "South Broadway & Southpark Drive",
+      "note": "South Broadway & Southpark Drive, Centennial"
+    },
+    {
+      "lat": 39.6455572,
+      "lon": -104.9879169,
+      "name": "South Broadway & West Mansfield Avenue",
+      "note": "South Broadway & West Mansfield Avenue, Englewood"
+    },
+    {
+      "lat": 39.6421928,
+      "lon": -105.0050696,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6241388,
+      "lon": -105.0104162,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6263108,
+      "lon": -105.0098329,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6307287,
+      "lon": -105.0085447,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6372763,
+      "lon": -105.0065096,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6371664,
+      "lon": -105.0066245,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6421874,
+      "lon": -105.0051629,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.643519,
+      "lon": -105.0045703,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6418257,
+      "lon": -105.0053001,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6188284,
+      "lon": -105.0121128,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6182553,
+      "lon": -105.0125098,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.628517,
+      "lon": -105.0091991,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    },
+    {
+      "lat": 39.6285278,
+      "lon": -105.0092519,
+      "name": "RTD D Line",
+      "note": "RTD D Line, Englewood"
+    }
+  ],
+  "restaurant": [
+    {
+      "lat": 39.5803533,
+      "lon": -104.9892309,
+      "name": "Mannings",
+      "note": "51 W Dry Creek Ct, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5728139,
+      "lon": -104.9885967,
+      "name": "Ninja Sushi",
+      "note": "7923 S Broadway, Littleton, CO 80122"
+    },
+    {
+      "lat": 39.5662016,
+      "lon": -104.9895914,
+      "name": "Mi Cocina",
+      "note": "137 W County Line Rd, Littleton, CO 80129"
+    },
+    {
+      "lat": 39.5664201,
+      "lon": -104.9841213,
+      "name": "Haveli",
+      "note": "301 E County Line Rd, Littleton, CO 80122"
+    },
+    {
+      "lat": 39.5674392,
+      "lon": -104.9982354,
+      "name": "Celly’s Bar and Grill",
+      "note": "841 Southpark Dr, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5824945,
+      "lon": -105.026219,
+      "name": "Panera",
+      "note": "7301 S Santa Fe Dr #730, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.5936072,
+      "lon": -105.0250773,
+      "name": "Breck Brew",
+      "note": "2990 Brewery Ln, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6078006,
+      "lon": -105.0214588,
+      "name": "Platte River Bar and Grill",
+      "note": "5995 S Santa Fe Dr, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6139482,
+      "lon": -105.0186128,
+      "name": "Palenque",
+      "note": "2609 Main St, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.613808,
+      "lon": -105.016035,
+      "name": "Pho Real",
+      "note": "2399 Main St, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6123386,
+      "lon": -105.0062238,
+      "name": "Santa Fe Grill",
+      "note": "1500 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6135645,
+      "lon": -105.0038911,
+      "name": "Gyro’s",
+      "note": "1399 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.613299,
+      "lon": -105.001862,
+      "name": "Littleton Brewing Co",
+      "note": "1201 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6135381,
+      "lon": -104.9978888,
+      "name": "Cherry Cricket",
+      "note": "819 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.613263,
+      "lon": -104.996055,
+      "name": "Latke Love",
+      "note": "699 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.6134151,
+      "lon": -104.9922798,
+      "name": "Pho Littleton",
+      "note": "389 W Littleton Blvd, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.613308,
+      "lon": -104.988158,
+      "name": "Chipotle",
+      "note": "5699 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.6003284,
+      "lon": -104.988541,
+      "name": "Mama Sol",
+      "note": "6439 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.5959087,
+      "lon": -104.9883753,
+      "name": "Castle Bar",
+      "note": "6657 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.619724,
+      "lon": -104.988126,
+      "name": "Dubbs Pub",
+      "note": "5301 S Broadway, Littleton, CO 80121"
+    },
+    {
+      "lat": 39.623776,
+      "lon": -105.007129,
+      "name": "Mi Cocina 2",
+      "note": "1600 W Belleview Ave, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.619711,
+      "lon": -105.016383,
+      "name": "49th Food",
+      "note": "5350 S Santa Fe Dr F Suite, Littleton, CO 80120"
+    },
+    {
+      "lat": 39.622812,
+      "lon": -105.018846,
+      "name": "Toast Fine",
+      "note": "2630 W Belleview Ave #100, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.619458,
+      "lon": -105.028599,
+      "name": "JP Nori Sushi",
+      "note": "5302 S Federal Cir, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.611115,
+      "lon": -105.036575,
+      "name": "Santiagos",
+      "note": "5826 S Lowell Blvd, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.608809,
+      "lon": -105.036769,
+      "name": "Colore",
+      "note": "5950 S Platte Canyon Rd # A1, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.622556,
+      "lon": -105.034662,
+      "name": "Walters",
+      "note": "5194 S Lowell Blvd, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.624251,
+      "lon": -105.025388,
+      "name": "Cheba Hut",
+      "note": "5098 S Federal Blvd Ste c, Englewood, CO 80110"
+    },
+    {
+      "lat": 39.62407,
+      "lon": -105.01986,
+      "name": "Freddy's",
+      "note": "2660 W Belleview Ave, Littleton, CO 80123"
+    },
+    {
+      "lat": 39.6229477,
+      "lon": -104.98841,
+      "name": "Wendy's",
+      "note": "Wendy's, Centennial"
+    },
+    {
+      "lat": 39.6237637,
+      "lon": -104.98882,
+      "name": "Del Taco",
+      "note": "Del Taco, Centennial"
+    },
+    {
+      "lat": 39.6237204,
+      "lon": -104.9873507,
+      "name": "McDonald's",
+      "note": "McDonald's, Centennial"
+    },
+    {
+      "lat": 39.6231563,
+      "lon": -104.987413,
+      "name": "Black-eyed Pea",
+      "note": "Black-eyed Pea, Centennial"
+    },
+    {
+      "lat": 39.6224415,
+      "lon": -104.987551,
+      "name": "Qdoba",
+      "note": "Qdoba, Centennial"
+    },
+    {
+      "lat": 39.6223237,
+      "lon": -104.987543,
+      "name": "Papa John's",
+      "note": "Papa John's, Centennial"
+    },
+    {
+      "lat": 39.575387,
+      "lon": -104.9898093,
+      "name": "The Shack",
+      "note": "The Shack, Centennial"
+    },
+    {
+      "lat": 39.6273583,
+      "lon": -104.9884121,
+      "name": "Burger King",
+      "note": "Burger King, Centennial"
+    },
+    {
+      "lat": 39.5711298,
+      "lon": -104.9879102,
+      "name": "Wendy's",
+      "note": "Wendy's, Centennial"
+    },
+    {
+      "lat": 39.5704749,
+      "lon": -104.9890597,
+      "name": "McDonald's",
+      "note": "McDonald's, Centennial"
+    },
+    {
+      "lat": 39.5745803,
+      "lon": -104.9890265,
+      "name": "Sunflower Asian Cafe",
+      "note": "Sunflower Asian Cafe, Centennial"
+    },
+    {
+      "lat": 39.5744766,
+      "lon": -104.9890265,
+      "name": "Jimmy John's",
+      "note": "Jimmy John's, Centennial"
+    },
+    {
+      "lat": 39.5744209,
+      "lon": -104.989024,
+      "name": "Domino's",
+      "note": "Domino's, Centennial"
+    },
+    {
+      "lat": 39.6160335,
+      "lon": -104.988352,
+      "name": "Sipp Soda Bar",
+      "note": "Sipp Soda Bar, Centennial"
+    },
+    {
+      "lat": 39.5960183,
+      "lon": -104.9886602,
+      "name": "Pho Broadway",
+      "note": "Pho Broadway, Centennial"
+    },
+    {
+      "lat": 39.5948003,
+      "lon": -104.9879302,
+      "name": "Wang's",
+      "note": "Wang's, Centennial"
+    },
+    {
+      "lat": 39.6199208,
+      "lon": -105.0163794,
+      "name": "The Lost Cajun",
+      "note": "The Lost Cajun, Englewood"
+    },
+    {
+      "lat": 39.6197885,
+      "lon": -105.0163779,
+      "name": "Wing Slingers",
+      "note": "Wing Slingers, Englewood"
+    },
+    {
+      "lat": 39.6195469,
+      "lon": -105.0163607,
+      "name": "Piccino Wood Oven Pizza",
+      "note": "Piccino Wood Oven Pizza, Englewood"
+    },
+    {
+      "lat": 39.6196585,
+      "lon": -105.016696,
+      "name": "Panda Express",
+      "note": "Panda Express, Englewood"
+    },
+    {
+      "lat": 39.6420246,
+      "lon": -104.987335,
+      "name": "Pizza Hut",
+      "note": "Pizza Hut, Englewood"
+    },
+    {
+      "lat": 39.6432272,
+      "lon": -105.012473,
+      "name": "The Broken Tee Grill",
+      "note": "The Broken Tee Grill, Englewood"
+    },
+    {
+      "lat": 39.6195288,
+      "lon": -105.016689,
+      "name": "Bruegger's Bagels",
+      "note": "Bruegger's Bagels, Englewood"
+    },
+    {
+      "lat": 39.623248,
+      "lon": -105.0186498,
+      "name": "The Pint Room",
+      "note": "The Pint Room, Englewood"
+    },
+    {
+      "lat": 39.6438848,
+      "lon": -104.9881949,
+      "name": "Asuka Ramen",
+      "note": "Asuka Ramen, Englewood"
+    },
+    {
+      "lat": 39.6237382,
+      "lon": -104.9905493,
+      "name": "C Burger",
+      "note": "C Burger, Englewood"
+    }
+  ],
+  "schools": [
+    {
+      "lat": 39.5916547,
+      "lon": -104.9760931,
+      "name": "Gilpin School",
+      "note": "Gilpin School, Centennial"
+    },
+    {
+      "lat": 39.6339991,
+      "lon": -104.9860623,
+      "name": "Cherrelyn Elementary School",
+      "note": "Cherrelyn Elementary School, Centennial"
+    },
+    {
+      "lat": 39.5880436,
+      "lon": -104.9819266,
+      "name": "Hopkins Elementary School",
+      "note": "Hopkins Elementary School, Centennial"
+    },
+    {
+      "lat": 39.6188766,
+      "lon": -104.9830375,
+      "name": "Field Elementary School",
+      "note": "Field Elementary School, Centennial"
+    },
+    {
+      "lat": 39.5903,
+      "lon": -104.9704,
+      "name": "Twain Elementary School",
+      "note": "Twain Elementary School, Centennial"
+    },
+    {
+      "lat": 39.5904536,
+      "lon": -104.9870869,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.6141231,
+      "lon": -104.9843794,
+      "name": "Littleton High School",
+      "note": "Littleton High School, Centennial"
+    },
+    {
+      "lat": 39.6141561,
+      "lon": -104.9850016,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.6265522,
+      "lon": -104.9824278,
+      "name": "All Souls Catholic School",
+      "note": "All Souls Catholic School, Centennial"
+    },
+    {
+      "lat": 39.6267713,
+      "lon": -104.9909183,
+      "name": "Colorado's Finest",
+      "note": "Colorado's Finest, Centennial"
+    },
+    {
+      "lat": 39.5743544,
+      "lon": -104.9782159,
+      "name": "John Wesley Powell Middle School",
+      "note": "John Wesley Powell Middle School, Centennial"
+    },
+    {
+      "lat": 39.5735555,
+      "lon": -104.9775379,
+      "name": "John Wesley Powell Middle School",
+      "note": "John Wesley Powell Middle School, Centennial"
+    },
+    {
+      "lat": 39.5880116,
+      "lon": -104.981786,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.5983107,
+      "lon": -104.9900851,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.5980682,
+      "lon": -104.9899998,
+      "name": "Options High School",
+      "note": "Options High School, Centennial"
+    },
+    {
+      "lat": 39.5977842,
+      "lon": -104.9798926,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.5979677,
+      "lon": -104.9799356,
+      "name": "Highland Elementary School",
+      "note": "Highland Elementary School, Centennial"
+    },
+    {
+      "lat": 39.6338638,
+      "lon": -104.9860993,
+      "note": "Centennial"
+    },
+    {
+      "lat": 39.6322094,
+      "lon": -104.9937509,
+      "note": "Englewood"
+    },
+    {
+      "lat": 39.626733,
+      "lon": -104.9912207,
+      "note": "Englewood"
+    }
+  ]
+}

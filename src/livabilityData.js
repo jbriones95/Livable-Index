@@ -5,78 +5,156 @@
  *   coffee shop, dinner restaurant, grocery store, nature access, transit stop, healthcare.
  */
 
-import { squareGrid, centroid as turfCentroid, point as turfPoint, booleanPointInPolygon, distance as turfDistance } from '@turf/turf';
-import unifiedData from '../data/unified_list.json';
+import {
+  hexGrid,
+  squareGrid,
+  centroid as turfCentroid,
+  point as turfPoint,
+  booleanPointInPolygon,
+  distance as turfDistance,
+  intersect as turfIntersect,
+  featureCollection as turfFeatureCollection,
+  union as turfUnion,
+  bbox as turfBbox,
+} from '@turf/turf';
+import littletonPois from '../data/pois_littleton.json';
+import centennialPois from '../data/pois_centennial.json';
+import englewoodPois from '../data/pois_englewood.json';
 
-export const LITTLETON_BOUNDS = {
-  north: 39.645, south: 39.580, east: -104.980, west: -105.055,
+export const CITIES = {
+  littleton: {
+    label: 'Littleton',
+    bounds: { north: 39.646, south: 39.562, east: -104.970, west: -105.065 },
+    center: [39.6133, -105.0166],
+    zoom: 13,
+    neighborhoodUrl: 'https://services6.arcgis.com/lJUBf9F1fZJRB4zT/arcgis/rest/services/Neighborhood_Boundary/FeatureServer/70/query?where=1%3D1&outFields=*&outSR=4326&f=geojson',
+    bikeLaneUrl: 'https://ltngiswa.littletonco.gov/server/rest/services/City/LittletonParksTrails/MapServer/1/query?where=1%3D1&outFields=*&outSR=4326&f=geojson',
+    trailUrl: 'https://ltngiswa.littletonco.gov/server/rest/services/City/LittletonParksTrails/MapServer/3/query?where=1%3D1&outFields=*&outSR=4326&f=geojson',
+    schools: [
+      { lat: 39.5970231, lng: -104.9935549 },
+      { lat: 39.6168560, lng: -105.0381960 },
+      { lat: 39.5727920, lng: -104.9781590 },
+      { lat: 39.5843743, lng: -105.0054175 },
+      { lat: 39.6132670, lng: -104.9857200 },
+      { lat: 39.6164866, lng: -105.0291850 },
+      { lat: 39.6190020, lng: -104.9827180 },
+      { lat: 39.6007891, lng: -105.0068349 },
+      { lat: 39.5854940, lng: -104.9988034 },
+      { lat: 39.6025635, lng: -105.0429345 },
+    ],
+  },
+  centennial: {
+    label: 'Centennial',
+    bounds: { north: 39.640, south: 39.564, east: -104.726, west: -104.990 },
+    center: [39.5792, -104.8769],
+    zoom: 12,
+    neighborhoodUrl: null,
+    bikeLaneUrl: null,
+    trailUrl: null,
+    schools: [
+      { lat: 39.573903, lng: -104.909803 },
+      { lat: 39.588120, lng: -104.952792 },
+      { lat: 39.602209, lng: -104.878196 },
+      { lat: 39.618336, lng: -104.856189 },
+      { lat: 39.575708, lng: -104.843237 },
+      { lat: 39.589377, lng: -104.801327 },
+    ],
+  },
+  englewood: {
+    label: 'Englewood',
+    bounds: { north: 39.674, south: 39.617, east: -104.959, west: -105.019 },
+    center: [39.6475, -104.9878],
+    zoom: 13,
+    neighborhoodUrl: null,
+    bikeLaneUrl: null,
+    trailUrl: null,
+    schools: [
+      { lat: 39.655560, lng: -104.987410 },
+      { lat: 39.642060, lng: -104.994100 },
+      { lat: 39.646510, lng: -104.974720 },
+      { lat: 39.635600, lng: -104.980900 },
+    ],
+  },
 };
 
-export const MAP_CENTER = [39.6133, -105.0166];
-export const MAP_ZOOM = 13;
+export function getCityConfig(cityKey = 'littleton') {
+  return CITIES[cityKey] || CITIES.littleton;
+}
+
+function getCityDataContainer(cityKey) {
+  if (typeof window === 'undefined') return null;
+  const key = cityKey || 'littleton';
+  window.__liv_city_data = window.__liv_city_data || {};
+  window.__liv_city_data[key] = window.__liv_city_data[key] || {};
+  return window.__liv_city_data[key];
+}
+
+export const LITTLETON_BOUNDS = CITIES.littleton.bounds;
+export const MAP_CENTER = CITIES.littleton.center;
+export const MAP_ZOOM = CITIES.littleton.zoom;
 
 export const ZONES = [
   {
     id: "downtown",
     name: "Downtown Littleton",
     bounds: [39.606, -105.022, 39.617, -105.010],
-    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0, schools: 0 },
     notes: '',
   },
   {
     id: "littleton_station",
     name: "Littleton / Mineral Station Area",
     bounds: [39.595, -105.017, 39.606, -105.005],
-    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0, schools: 0 },
     notes: '',
   },
   {
     id: "south_broadway_corridor",
     name: "South Broadway Corridor",
     bounds: [39.617, -105.020, 39.635, -105.012],
-    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0, schools: 0 },
     notes: '',
   },
   {
     id: "arapahoe_community_college",
     name: "ACC / Centennial Area",
     bounds: [39.580, -105.010, 39.598, -104.993],
-    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0, schools: 0 },
     notes: '',
   },
   {
     id: "western_residential",
     name: "West Littleton Residential",
     bounds: [39.608, -105.055, 39.635, -105.030],
-    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0, schools: 0 },
     notes: '',
   },
   {
     id: "heritage_gulch",
     name: "Heritage / Gulch Trail Area",
     bounds: [39.620, -105.030, 39.640, -105.015],
-    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0, schools: 0 },
     notes: '',
   },
   {
     id: "river_front",
     name: "Riverfront / Sterne Park",
     bounds: [39.610, -105.040, 39.625, -105.025],
-    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0, schools: 0 },
     notes: '',
   },
   {
     id: "east_littleton",
     name: "East Littleton / Ketring",
     bounds: [39.600, -105.005, 39.618, -104.985],
-    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0, schools: 0 },
     notes: '',
   },
   {
     id: "northeast_commercial",
     name: "NE Commercial / Broadway & Belleview",
     bounds: [39.630, -105.015, 39.645, -105.000],
-    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0 },
+    scores: { coffee: 0, restaurant: 0, grocery: 0, trailhead: 0, busStop: 0, healthcare: 0, schools: 0 },
     notes: '',
   },
 ];
@@ -91,12 +169,15 @@ for (const z of ZONES) {
 }
 
 export const WEIGHTS = {
-  coffee: 0.15,
-  restaurant: 0.15,
-  nature: 0.20,
+  coffee: 0.10,
+  restaurant: 0.10,
+  nature: 0.17,
   healthcare: 0.10,
-  busStop: 0.20,
-  grocery: 0.20,
+  busStop: 0.10,
+  grocery: 0.17,
+  bikeInfra: 0.05,
+  crime: 0.11,
+  schools: 0.10,
 };
 
 export const DIMENSION_LABELS = {
@@ -106,20 +187,51 @@ export const DIMENSION_LABELS = {
   nature: "Nature Access",
   busStop: "Transit Stop",
   healthcare: "Healthcare",
+  bikeInfra: "Bike/Walk Infrastructure",
+  crime: "Public Safety",
+  schools: "Schools",
 };
 
-export function computeScore(scores) {
+export const OVERLAY_OPTIONS = [
+  { key: 'composite', label: 'Composite Livability' },
+  { key: 'coffee', label: 'Coffee Access' },
+  { key: 'restaurant', label: 'Dining Access' },
+  { key: 'grocery', label: 'Grocery Access' },
+  { key: 'nature', label: 'Nature Access' },
+  { key: 'busStop', label: 'Transit Access' },
+  { key: 'healthcare', label: 'Medical Access' },
+  { key: 'bikeInfra', label: 'Bike/Walk Infrastructure' },
+  { key: 'crime', label: 'Public Safety' },
+  { key: 'schools', label: 'School Access' },
+];
+
+export function computeScore(scores, weights = WEIGHTS) {
   return Math.round(
-    Object.entries(WEIGHTS).reduce((sum, [dim, weight]) => sum + (scores[dim] ?? 0) * weight, 0)
+    Object.entries(weights).reduce((sum, [dim, weight]) => sum + (scores[dim] ?? 0) * weight, 0)
   );
 }
 
 export function scoreToColor(score) {
-  if (score >= 75) return "#1a7f2e";
-  if (score >= 60) return "#5ab552";
-  if (score >= 48) return "#c8d44e";
-  if (score >= 35) return "#e8a020";
-  return "#c0392b";
+  const t = Math.max(0, Math.min(100, score));
+  const stops = [
+    { pos: 0, r: 192, g: 57, b: 43 },
+    { pos: 25, r: 230, g: 126, b: 34 },
+    { pos: 50, r: 241, g: 196, b: 15 },
+    { pos: 75, r: 90, g: 181, b: 82 },
+    { pos: 100, r: 26, g: 127, b: 46 },
+  ];
+  let lo = stops[0], hi = stops[stops.length - 1];
+  for (let i = 0; i < stops.length - 1; i++) {
+    if (t >= stops[i].pos && t <= stops[i + 1].pos) {
+      lo = stops[i]; hi = stops[i + 1]; break;
+    }
+  }
+  const span = hi.pos - lo.pos;
+  const frac = span > 0 ? (t - lo.pos) / span : 0;
+  const r = Math.round(lo.r + (hi.r - lo.r) * frac);
+  const g = Math.round(lo.g + (hi.g - lo.g) * frac);
+  const b = Math.round(lo.b + (hi.b - lo.b) * frac);
+  return '#' + [r, g, b].map(c => c.toString(16).padStart(2, '0')).join('');
 }
 
 export function scoreToGrade(score) {
@@ -156,35 +268,108 @@ export function zoneToGeoJSON(zone) {
   };
 }
 
-let _neighborhoodFetch = null;
+function fallbackZoneFeatureCollection(cityKey = 'littleton') {
+  if (cityKey === 'littleton') {
+    return { type: 'FeatureCollection', features: ZONES.map(zoneToGeoJSON) };
+  }
+  const cfg = getCityConfig(cityKey);
+  const b = cfg.bounds;
+  return {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        properties: {
+          id: `${cityKey}-area`,
+          name: cfg.label,
+          notes: '',
+          scores: {},
+          composite: 0,
+        },
+        geometry: {
+          type: 'Polygon',
+          coordinates: [[
+            [b.west, b.south],
+            [b.east, b.south],
+            [b.east, b.north],
+            [b.west, b.north],
+            [b.west, b.south],
+          ]],
+        },
+      },
+    ],
+  };
+}
 
-export function getAllZoneFeatures() {
+function normalizeNeighborhoodFeatures(collection) {
+  if (!collection || collection.type !== 'FeatureCollection' || !Array.isArray(collection.features)) {
+    return null;
+  }
+  collection.features = collection.features.map((feature, index) => {
+    const properties = feature.properties || {};
+    const name = properties.name || properties.Neighborho || properties.Name || `Area ${index + 1}`;
+    return {
+      ...feature,
+      properties: {
+        ...properties,
+        id: properties.id || feature.id || `zone-${index + 1}`,
+        name,
+      },
+    };
+  });
+  return collection;
+}
+
+function getCachedNeighborhoodFeatures(cityKey) {
+  const cityStore = getCityDataContainer(cityKey);
+  if (cityStore && cityStore.neighborhoods) {
+    return normalizeNeighborhoodFeatures(cityStore.neighborhoods);
+  }
+  return null;
+}
+
+async function fetchNeighborhoodFeatures(cityKey) {
+  const config = CITIES[cityKey];
+  if (!config || !config.neighborhoodUrl) return null;
   try {
-    if (typeof window !== 'undefined' && window.__liv_neighborhoods) return window.__liv_neighborhoods;
-  } catch (e) {}
+    const r = await fetch(config.neighborhoodUrl);
+    if (!r.ok) return null;
+    const data = normalizeNeighborhoodFeatures(await r.json());
+    if (data) {
+      const cityStore = getCityDataContainer(cityKey);
+      if (cityStore) cityStore.neighborhoods = data;
+    }
+    return data;
+  } catch (err) {
+    console.warn('Failed to fetch neighborhoods', err && err.message);
+    return null;
+  }
+}
 
-  if (!_neighborhoodFetch) {
-    _neighborhoodFetch = (async () => {
-      try {
-        const url = 'https://services6.arcgis.com/lJUBf9F1fZJRB4zT/arcgis/rest/services/Neighborhood_Boundary/FeatureServer/70/query?where=1%3D1&outFields=*&outSR=4326&f=geojson';
-        const r = await fetch(url);
-        if (!r.ok) return;
-        const nb = await r.json();
-        if (nb && nb.type === 'FeatureCollection') {
-          nb.features = nb.features.map((f) => {
-            f.properties = f.properties || {};
-            if (f.properties.Neighborho && !f.properties.name) f.properties.name = f.properties.Neighborho;
-            return f;
-          });
-          try { if (typeof window !== 'undefined') window.__liv_neighborhoods = nb; } catch (e) {}
-        }
-      } catch (err) {
-        console.warn('Failed to fetch neighborhoods', err && err.message);
-      }
-    })();
+let _neighborhoodFetch = {};
+let _scoredZoneFetch = {};
+
+export function getAllZoneFeatures(cityKey = 'littleton') {
+  const cached = getCachedNeighborhoodFeatures(cityKey);
+  if (cached) return cached;
+
+  if (!_neighborhoodFetch[cityKey]) {
+    _neighborhoodFetch[cityKey] = fetchNeighborhoodFeatures(cityKey);
   }
 
-  return { type: 'FeatureCollection', features: ZONES.map(zoneToGeoJSON) };
+  return fallbackZoneFeatureCollection(cityKey);
+}
+
+export async function getAllZoneFeaturesAsync(cityKey = 'littleton') {
+  const cached = getCachedNeighborhoodFeatures(cityKey);
+  if (cached) return cached;
+
+  if (!_neighborhoodFetch[cityKey]) {
+    _neighborhoodFetch[cityKey] = fetchNeighborhoodFeatures(cityKey);
+  }
+
+  const remote = await _neighborhoodFetch[cityKey];
+  return remote || fallbackZoneFeatureCollection(cityKey);
 }
 
 // Named trails to detect for the trailhead portion of the nature composite (80% weight)
@@ -204,6 +389,9 @@ const MAX_DIST_KM = {
   park: 2.0,
   busStop: 0.5,
   healthcare: 4.5,
+  bikeInfra: 1.5,
+  crime: 2.0,
+  schools: 1.5,
 };
 
 // How many candidate POIs (closest by crow-flies) to route per category
@@ -215,6 +403,7 @@ const ROUTE_CANDIDATES = {
   park: 5,
   busStop: 5,
   healthcare: 5,
+  bikeInfra: 5,
 };
 
 // Routing configuration: try OSRM public endpoint with common profile fallbacks.
@@ -238,6 +427,352 @@ const ORS_PROFILES = {
   walking: ['foot-walking', 'foot-hiking'],
   cycling: ['cycling-regular', 'cycling-road', 'cycling-mountain'],
 };
+
+// Bike infrastructure scoring (from city-specific ArcGIS data)
+const BIKE_LANE_TYPE_WEIGHTS = {
+  'Protected Bike Lane': 1.0,
+  'Cycle Track': 1.0,
+  'Buffered Bike Lane': 0.9,
+  'Bike Lane': 0.8,
+  'Shared Use Path': 0.7,
+  'Sharrows/On-Street Markings': 0.5,
+};
+
+const TRAIL_SURFACE_WEIGHTS = {
+  'Asphalt': 1.0,
+  'Concrete': 1.0,
+  'Gravel': 0.6,
+  'Chunk Wood': 0.4,
+  'Unknown': 0.3,
+};
+
+const BIKE_MAX_KM = 1.5;
+
+function isCyclingFriendlyTrail(props) {
+  if (!props) return true;
+  if (props.ROADCYCLE === 'Yes') return true;
+  if (props.SURFTYPE === 'Concrete' || props.SURFTYPE === 'Asphalt') return true;
+  return false;
+}
+
+function extractGeoJSONCoords(geometry) {
+  if (geometry.type === 'LineString') {
+    return geometry.coordinates;
+  }
+  if (geometry.type === 'MultiLineString') {
+    const all = [];
+    for (const line of geometry.coordinates) {
+      for (const pt of line) all.push(pt);
+    }
+    return all;
+  }
+  return [];
+}
+
+function sampleCoords(coords, maxSamples) {
+  if (coords.length <= maxSamples) return coords;
+  const step = (coords.length - 1) / (maxSamples - 1);
+  const result = [];
+  for (let i = 0; i < maxSamples; i++) {
+    const idx = Math.round(i * step);
+    result.push(coords[Math.min(idx, coords.length - 1)]);
+  }
+  return result;
+}
+
+function haversineKm(lng1, lat1, lng2, lat2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+let _bikeInfraFetch = {};
+let _overpassJsonCache = new Map();
+
+async function fetchOverpassJson(query) {
+  const key = String(query || '');
+  if (!key) return null;
+  if (_overpassJsonCache.has(key)) return _overpassJsonCache.get(key);
+
+  const endpoints = [
+    'https://overpass-api.de/api/interpreter',
+    'https://lz4.overpass-api.de/api/interpreter',
+    'https://maps.mail.ru/osm/tools/overpass/api/interpreter',
+  ];
+
+  for (const endpoint of endpoints) {
+    let timeout = null;
+    try {
+      const controller = new AbortController();
+      timeout = setTimeout(() => controller.abort(), 12000);
+      const body = new URLSearchParams({ data: key }).toString();
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+        body,
+        signal: controller.signal,
+      });
+      if (res.ok) {
+        const data = await res.json();
+        _overpassJsonCache.set(key, data);
+        return data;
+      }
+    } catch (_e) {
+      // try next endpoint
+    } finally {
+      if (timeout) clearTimeout(timeout);
+    }
+  }
+
+  for (const endpoint of endpoints) {
+    let timeout = null;
+    try {
+      const controller = new AbortController();
+      timeout = setTimeout(() => controller.abort(), 12000);
+      const url = `${endpoint}?data=${encodeURIComponent(key)}`;
+      const res = await fetch(url, { signal: controller.signal });
+      if (!res.ok) continue;
+      const data = await res.json();
+      _overpassJsonCache.set(key, data);
+      return data;
+    } catch (_e) {
+      // try next endpoint
+    } finally {
+      if (timeout) clearTimeout(timeout);
+    }
+  }
+
+  return null;
+}
+
+async function fetchBikeInfrastructureData(cityKey) {
+  const cacheKey = cityKey || 'littleton';
+  const cityStore = getCityDataContainer(cacheKey);
+  if (cityStore?.bikeInfra) return cityStore.bikeInfra;
+
+  const config = getCityConfig(cacheKey);
+  const hasBikeData = config && config.bikeLaneUrl && config.trailUrl;
+
+  if (!_bikeInfraFetch[cacheKey] && hasBikeData) {
+    _bikeInfraFetch[cacheKey] = (async () => {
+      const [bikeRes, trailRes] = await Promise.all([
+        fetch(config.bikeLaneUrl).catch(() => null),
+        fetch(config.trailUrl).catch(() => null),
+      ]);
+      const bikeGeoJSON = bikeRes && bikeRes.ok ? await bikeRes.json().catch(() => null) : null;
+      const trailGeoJSON = trailRes && trailRes.ok ? await trailRes.json().catch(() => null) : null;
+
+      const bikePoints = [];
+      if (bikeGeoJSON && Array.isArray(bikeGeoJSON.features)) {
+        for (const f of bikeGeoJSON.features) {
+          const typeWeight = BIKE_LANE_TYPE_WEIGHTS[f.properties?.FACILITY_TYPE] || 0.5;
+          const statusWeight = f.properties?.STATUS === 'Existing' ? 1.0 : 0.3;
+          const weight = typeWeight * statusWeight;
+          const coords = extractGeoJSONCoords(f.geometry);
+          for (const pt of sampleCoords(coords, 8)) {
+            bikePoints.push({ coords: pt, weight });
+          }
+        }
+      }
+
+      const trailPoints = [];
+      if (trailGeoJSON && Array.isArray(trailGeoJSON.features)) {
+        for (const f of trailGeoJSON.features) {
+          if (!isCyclingFriendlyTrail(f.properties)) continue;
+          const surfaceWeight = TRAIL_SURFACE_WEIGHTS[f.properties?.SURFTYPE] || 0.5;
+          const coords = extractGeoJSONCoords(f.geometry);
+          for (const pt of sampleCoords(coords, 6)) {
+            trailPoints.push({ coords: pt, weight: surfaceWeight });
+          }
+        }
+      }
+
+      const data = { bikePoints, trailPoints };
+      if (cityStore) cityStore.bikeInfra = data;
+      return data;
+    })();
+  }
+
+  return _bikeInfraFetch[cacheKey] || null;
+}
+
+async function computeBikeInfraScore(lat, lng, cityKey) {
+  try {
+    const data = await fetchBikeInfrastructureData(cityKey);
+    const bikePoints = data?.bikePoints || [];
+    const trailPoints = data?.trailPoints || [];
+
+    if (bikePoints.length === 0 && trailPoints.length === 0) {
+      const poiPoints = await getCityPoiPoints(cityKey).catch(() => []);
+      let minDist = Infinity;
+      for (const p of poiPoints) {
+        const cats = Array.isArray(p?.properties?.category) ? p.properties.category : [];
+        const highway = String(p?.properties?.highway || '').toLowerCase();
+        const cycleway = String(p?.properties?.cycleway || '').toLowerCase();
+        const route = String(p?.properties?.route || '').toLowerCase();
+        const bicycle = String(p?.properties?.bicycle || '').toLowerCase();
+        const isBikeFriendly = cats.includes('trail') || highway === 'cycleway' || cycleway !== '' || route === 'bicycle' || bicycle === 'designated';
+        if (!isBikeFriendly) continue;
+        const coords = p?.geometry?.coordinates;
+        if (!coords || coords.length < 2) continue;
+        const d = haversineKm(lng, lat, coords[0], coords[1]);
+        if (d < minDist) minDist = d;
+      }
+      if (!isFinite(minDist) || minDist > BIKE_MAX_KM) return 0;
+      return Math.max(0, Math.round((1 - minDist / BIKE_MAX_KM) * 100));
+    }
+
+    let minBikeDist = Infinity;
+    let bestBikeWeight = 0;
+    for (const p of bikePoints) {
+      const d = haversineKm(lng, lat, p.coords[0], p.coords[1]);
+      if (d < minBikeDist) { minBikeDist = d; bestBikeWeight = p.weight; }
+    }
+
+    let minTrailDist = Infinity;
+    let bestTrailWeight = 0;
+    for (const p of trailPoints) {
+      const d = haversineKm(lng, lat, p.coords[0], p.coords[1]);
+      if (d < minTrailDist) { minTrailDist = d; bestTrailWeight = p.weight; }
+    }
+
+    function proximityToScore(km, maxKm) {
+      if (!isFinite(km) || km > maxKm) return 0;
+      return Math.max(0, Math.round((1 - km / maxKm) * 100));
+    }
+
+    const bikeScore = proximityToScore(minBikeDist, BIKE_MAX_KM) * bestBikeWeight;
+    const trailScore = proximityToScore(minTrailDist, BIKE_MAX_KM) * bestTrailWeight;
+
+    return Math.min(100, Math.round(0.6 * bikeScore + 0.4 * trailScore));
+  } catch (err) {
+    console.warn('computeBikeInfraScore failed', err);
+    return 0;
+  }
+}
+
+// Crime / Public Safety dimension — estimated police drive time from nearest station
+const FALLBACK_POLICE_STATIONS_BY_CITY = {
+  littleton: [
+    { lat: 39.6126, lng: -105.0160 },
+  ],
+  centennial: [
+    { lat: 39.5873, lng: -104.8752 },
+  ],
+  englewood: [
+    { lat: 39.6481, lng: -104.9870 },
+  ],
+};
+
+function fallbackPoliceStations(cityKey) {
+  return FALLBACK_POLICE_STATIONS_BY_CITY[cityKey] || FALLBACK_POLICE_STATIONS_BY_CITY.littleton;
+}
+
+function policeOverpassUrl(cityKey) {
+  const cfg = getCityConfig(cityKey || 'littleton');
+  if (!cfg) return '';
+  const pad = 0.08;
+  const south = cfg.bounds.south - pad;
+  const north = cfg.bounds.north + pad;
+  const west = cfg.bounds.west - pad;
+  const east = cfg.bounds.east + pad;
+  return `[out:json][timeout:25];(node["amenity"="police"](${south},${west},${north},${east});way["amenity"="police"](${south},${west},${north},${east});relation["amenity"="police"](${south},${west},${north},${east}););out center;`;
+}
+
+let _policeStationsFetch = {};
+
+async function fetchPoliceStations(cityKey) {
+  const cacheKey = cityKey || 'littleton';
+  const cityStore = getCityDataContainer(cacheKey);
+  if (cityStore?.policeStations) return cityStore.policeStations;
+
+  if (!_policeStationsFetch[cacheKey]) {
+    const query = policeOverpassUrl(cityKey);
+    _policeStationsFetch[cacheKey] = (async () => {
+      if (!query) return fallbackPoliceStations(cacheKey);
+      try {
+        const data = await fetchOverpassJson(query);
+        if (!data || !Array.isArray(data.elements) || data.elements.length === 0) {
+          return fallbackPoliceStations(cacheKey);
+        }
+        const points = data.elements
+          .map((el) => {
+            const lat = el.lat ?? el.center?.lat;
+            const lon = el.lon ?? el.center?.lon;
+            if (lat == null || lon == null) return null;
+            return { lat, lng: lon };
+          })
+          .filter(Boolean);
+        return points.length > 0 ? points : fallbackPoliceStations(cacheKey);
+      } catch (e) {
+        return fallbackPoliceStations(cacheKey);
+      }
+    })();
+  }
+
+  const result = await _policeStationsFetch[cacheKey];
+  if (cityStore) cityStore.policeStations = result;
+  return result;
+}
+
+async function computeCrimeScore(lat, lng, cityKey) {
+  try {
+    const stations = await fetchPoliceStations(cityKey);
+
+    let minDist = Infinity;
+    for (const s of stations) {
+      const d = haversineKm(lng, lat, s.lng, s.lat);
+      if (d < minDist) minDist = d;
+    }
+
+    if (!isFinite(minDist)) return 100;
+
+    // Convert crow-flies km to estimated police driving time:
+    //   road factor ~1.3x crow-flies; avg speed ~40 km/h (urban)
+    //   drivingMin = minDist * 1.3 * 60 / 40 = minDist * 1.95
+    const drivingMin = minDist * 1.95;
+    // 5 min drive = 100; -10 per minute after
+    const score = Math.max(0, 100 - Math.max(0, Math.ceil(drivingMin - 5)) * 10);
+    return score;
+    } catch (err) {
+    console.warn('computeCrimeScore failed', err);
+    return 50;
+  }
+}
+
+async function computeSchoolScore(lat, lng, cityKey) {
+  try {
+    const poiPoints = await getCityPoiPoints(cityKey).catch(() => []);
+    const osmSchools = [];
+    for (const p of poiPoints) {
+      const cats = Array.isArray(p?.properties?.category) ? p.properties.category : [];
+      if (!cats.includes('schools')) continue;
+      const coords = p?.geometry?.coordinates;
+      if (!coords || coords.length < 2) continue;
+      osmSchools.push({ lng: coords[0], lat: coords[1] });
+    }
+
+    const fallbackSchools = getCityConfig(cityKey || 'littleton').schools || [];
+    const schools = osmSchools.length > 0 ? osmSchools : fallbackSchools;
+    if (schools.length === 0) return 50;
+    let minDist = Infinity;
+    for (const s of schools) {
+      const d = haversineKm(lng, lat, s.lng, s.lat);
+      if (d < minDist) minDist = d;
+    }
+
+    if (!isFinite(minDist)) return 50;
+
+    const maxDist = MAX_DIST_KM.schools || 1.5;
+    if (minDist >= maxDist) return 0;
+    return Math.round((1 - minDist / maxDist) * 100);
+  } catch (err) {
+    console.warn('computeSchoolScore failed', err);
+    return 50;
+  }
+}
 
 async function getRouteDistance(fromLon, fromLat, toLon, toLat, modeOrProfiles = []) {
   // modeOrProfiles may be a string 'walking'|'cycling' or an array of OSRM profile names.
@@ -317,16 +852,165 @@ const CATEGORY_MAPPING = {
   medical: 'healthcare',
   busStops: 'busStop',
   busStop: 'busStop',
+  schools: 'schools',
 };
 
-const SUPPLEMENTAL_POINT_OBJS = {};
+const CITY_POINT_DATA = {
+  littleton: littletonPois,
+  centennial: centennialPois,
+  englewood: englewoodPois,
+};
 
-for (const [k, v] of Object.entries(unifiedData)) {
-  const mapped = CATEGORY_MAPPING[k] || k;
-  if (!Array.isArray(v)) continue;
-  SUPPLEMENTAL_POINT_OBJS[mapped] = (SUPPLEMENTAL_POINT_OBJS[mapped] || []).concat(
-    v.map((p) => ({ lon: p.lon, lat: p.lat, name: p.name || p.note || null, note: p.note || null }))
-  );
+let _cityPoiFetch = {};
+
+function inBounds(lat, lon, bounds, pad = 0) {
+  return lat <= bounds.north + pad
+    && lat >= bounds.south - pad
+    && lon <= bounds.east + pad
+    && lon >= bounds.west - pad;
+}
+
+function boundaryToFeatures(boundaryGeo) {
+  if (!boundaryGeo) return [];
+  if (boundaryGeo.type === 'FeatureCollection' && Array.isArray(boundaryGeo.features)) {
+    return boundaryGeo.features.filter((f) => f?.geometry && (f.geometry.type === 'Polygon' || f.geometry.type === 'MultiPolygon'));
+  }
+  if (boundaryGeo.type === 'Feature' && boundaryGeo.geometry && (boundaryGeo.geometry.type === 'Polygon' || boundaryGeo.geometry.type === 'MultiPolygon')) {
+    return [boundaryGeo];
+  }
+  if (boundaryGeo.type === 'Polygon' || boundaryGeo.type === 'MultiPolygon') {
+    return [{ type: 'Feature', properties: {}, geometry: boundaryGeo }];
+  }
+  return [];
+}
+
+function isPointInsideBoundary(lon, lat, boundaryFeatures) {
+  if (!Array.isArray(boundaryFeatures) || boundaryFeatures.length === 0) return false;
+  const pt = turfPoint([lon, lat]);
+  for (const f of boundaryFeatures) {
+    try {
+      if (booleanPointInPolygon(pt, f)) return true;
+    } catch (_e) {
+      continue;
+    }
+  }
+  return false;
+}
+
+function supplementalPointsForCity(cityKey, boundaryFeatures = null) {
+  const cityData = CITY_POINT_DATA[cityKey];
+  if (!cityData) return [];
+  const points = [];
+  const hasBoundary = Array.isArray(boundaryFeatures) && boundaryFeatures.length > 0;
+  for (const [cat, list] of Object.entries(cityData)) {
+    const mapped = CATEGORY_MAPPING[cat] || cat;
+    for (const obj of list) {
+      if (!obj || typeof obj.lat !== 'number' || typeof obj.lon !== 'number') continue;
+      if (hasBoundary && !isPointInsideBoundary(obj.lon, obj.lat, boundaryFeatures)) continue;
+      points.push(turfPoint([obj.lon, obj.lat], {
+        category: [mapped],
+        name: obj.name || null,
+        note: obj.note || null,
+      }));
+    }
+  }
+  // If boundary-based filtering produced zero points (possible when boundary is malformed),
+  // fall back to returning the full city dataset so overlays still render.
+  if (hasBoundary && points.length === 0) {
+    // build unfiltered points
+    for (const [cat, list] of Object.entries(cityData)) {
+      const mapped = CATEGORY_MAPPING[cat] || cat;
+      for (const obj of list) {
+        if (!obj || typeof obj.lat !== 'number' || typeof obj.lon !== 'number') continue;
+        points.push(turfPoint([obj.lon, obj.lat], {
+          category: [mapped],
+          name: obj.name || null,
+          note: obj.note || null,
+        }));
+      }
+    }
+    if (typeof console !== 'undefined' && console.warn) console.warn('Boundary filtering removed all supplemental POIs for', cityKey, '- falling back to unfiltered city POIs');
+  }
+  return points;
+}
+
+function cityOverpassQuery(city) {
+  const { south, west, north, east } = city.bounds;
+  const b = `(${south},${west},${north},${east})`;
+  return `[out:json][timeout:30];(\n`
+    + `node["amenity"~"cafe|restaurant|fast_food|food_court|hospital|clinic|doctors|pharmacy|dentist|school|college|university|kindergarten|bus_station"]${b};\n`
+    + `node["shop"~"supermarket|grocery|convenience|greengrocer"]${b};\n`
+    + `node["highway"="bus_stop"]${b};\n`
+    + `node["public_transport"~"platform|bus_stop|stop_position"]${b};\n`
+    + `node["railway"~"station|tram_stop|halt|light_rail|subway"]${b};\n`
+    + `node["leisure"~"park|nature_reserve|recreation_ground"]${b};\n`
+    + `node["highway"~"path|track|footway|pedestrian|cycleway"]${b};\n`
+    + `node["building"~"school|college|university|kindergarten|hospital|clinic"]${b};\n`
+    + `way["amenity"~"school|college|university|kindergarten|hospital|clinic|doctors|pharmacy|dentist|bus_station"]${b};\n`
+    + `way["shop"~"supermarket|grocery|convenience|greengrocer"]${b};\n`
+    + `way["railway"~"station|tram_stop|halt|light_rail|subway"]${b};\n`
+    + `way["leisure"~"park|nature_reserve|recreation_ground"]${b};\n`
+    + `way["highway"~"path|track|footway|pedestrian|cycleway"]${b};\n`
+    + `way["building"~"school|college|university|kindergarten|hospital|clinic"]${b};\n`
+    + `relation["amenity"~"school|college|university|kindergarten|hospital|clinic|bus_station"]${b};\n`
+    + `relation["railway"~"station|tram_stop|halt|light_rail|subway"]${b};\n`
+    + `relation["leisure"~"park|nature_reserve|recreation_ground"]${b};\n`
+    + `relation["route"="bicycle"]${b};\n`
+    + `);out center;`;
+}
+
+export async function getCityPoiPoints(cityKey = 'littleton') {
+  const cacheKey = cityKey || 'littleton';
+  const cityStore = getCityDataContainer(cacheKey);
+  if (cityStore?.poiPoints) return cityStore.poiPoints;
+
+  if (!_cityPoiFetch[cacheKey]) {
+    _cityPoiFetch[cacheKey] = (async () => {
+      const city = getCityConfig(cacheKey);
+      const cityBoundary = await getCityBoundaryAsync(cacheKey).catch(() => null);
+      const boundaryFeatures = boundaryToFeatures(cityBoundary);
+      const supplemental = supplementalPointsForCity(cacheKey, boundaryFeatures);
+      const hasBoundary = boundaryFeatures.length > 0;
+
+      try {
+        const query = cityOverpassQuery(city);
+        const data = await fetchOverpassJson(query);
+        if (!data) return supplemental;
+        const els = Array.isArray(data?.elements) ? data.elements : [];
+        const points = [];
+        const seen = new Set();
+
+        for (const el of els) {
+          const tags = el?.tags || {};
+          const cats = classifyOSM(tags);
+          if (cats.length === 0) continue;
+
+          const lat = el.lat ?? el.center?.lat;
+          const lon = el.lon ?? el.center?.lon;
+          if (typeof lat !== 'number' || typeof lon !== 'number') continue;
+          if (hasBoundary) {
+            if (!isPointInsideBoundary(lon, lat, boundaryFeatures)) continue;
+          } else if (!inBounds(lat, lon, city.bounds, 0.0)) {
+            continue;
+          }
+
+          const key = `${lat.toFixed(6)},${lon.toFixed(6)}:${cats.slice().sort().join('|')}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          points.push(turfPoint([lon, lat], { ...tags, category: cats }));
+        }
+
+        const merged = points.concat(supplemental);
+        if (cityStore) cityStore.poiPoints = merged;
+        return merged;
+      } catch (_err) {
+        if (cityStore) cityStore.poiPoints = supplemental;
+        return supplemental;
+      }
+    })();
+  }
+
+  return _cityPoiFetch[cacheKey];
 }
 
 function distToScore(d) {
@@ -342,11 +1026,11 @@ function classifyOSM(tags) {
   const results = [];
   const a = (tags.amenity || '').toLowerCase();
   const s = (tags.shop || '').toLowerCase();
+  const b = (tags.building || '').toLowerCase();
   const h = (tags.highway || '').toLowerCase();
   const l = (tags.leisure || '').toLowerCase();
   const pt = tags.public_transport ? String(tags.public_transport).toLowerCase() : '';
   const name = (tags.name || '').toLowerCase();
-  const foot = tags.foot ? String(tags.foot).toLowerCase() : '';
   const cuisine = tags.cuisine ? String(tags.cuisine).toLowerCase() : '';
 
   // broaden category matching to reduce false negatives
@@ -414,13 +1098,20 @@ function classifyOSM(tags) {
   }
 
   // Healthcare
-  if (a === 'hospital' || a === 'clinic' || a === 'doctors' || a === 'pharmacy' || a === 'dentist' || tags.healthcare) results.push('healthcare');
+  if (a === 'hospital' || a === 'clinic' || a === 'doctors' || a === 'pharmacy' || a === 'dentist' || tags.healthcare || b === 'hospital' || b === 'clinic') {
+    results.push('healthcare');
+  }
+
+  // Schools
+  if (a === 'school' || a === 'college' || a === 'university' || a === 'kindergarten' || b === 'school' || b === 'college' || b === 'university' || b === 'kindergarten' || tags.amenity === 'school') {
+    results.push('schools');
+  }
 
   return results;
 }
 
-function nearestAndCounts(poiPoints, pt) {
-  const categories = ['coffee', 'restaurant', 'grocery', 'trail', 'park', 'busStop', 'healthcare'];
+function nearestAndCounts(poiPoints, pt, cityKey = 'littleton') {
+  const categories = ['coffee', 'restaurant', 'grocery', 'trail', 'park', 'busStop', 'healthcare', 'schools'];
   const nearest = {};
   const nearestCoords = {};
   const counts = {};
@@ -444,16 +1135,20 @@ function nearestAndCounts(poiPoints, pt) {
     }
   }
 
-  // Also include supplemental points derived from `data/unified_list.json`.
-  for (const [cat, points] of Object.entries(SUPPLEMENTAL_POINT_OBJS || {})) {
-    for (const obj of points) {
-      const coords = [obj.lon, obj.lat];
-      const sp = turfPoint(coords, { category: cat, name: obj.name, note: obj.note });
+  // Backward-compat fallback for calls without pre-fetched points.
+  if (!Array.isArray(poiPoints) || poiPoints.length === 0) {
+    const localSupplemental = supplementalPointsForCity(cityKey);
+    for (const sp of localSupplemental) {
+      const coords = sp.geometry?.coordinates;
+      if (!coords) continue;
+      const cats = Array.isArray(sp.properties?.category) ? sp.properties.category : [];
       const d = turfDistance(pt, sp, { units: 'kilometers' });
-      if (!Object.prototype.hasOwnProperty.call(nearest, cat)) continue;
-      if (d < nearest[cat]) { nearest[cat] = d; nearestCoords[cat] = coords; }
-      if (d <= MAX_DIST_KM[cat]) counts[cat]++;
-      candidates[cat].push({ coords, dist: d });
+      for (const cat of cats) {
+        if (!Object.prototype.hasOwnProperty.call(nearest, cat)) continue;
+        if (d < nearest[cat]) { nearest[cat] = d; nearestCoords[cat] = coords; }
+        if (d <= MAX_DIST_KM[cat]) counts[cat]++;
+        candidates[cat].push({ coords, dist: d });
+      }
     }
   }
 
@@ -480,7 +1175,7 @@ async function computeScoresFromNearest(nearest, opts = {}) {
     const crowKm = nearest[key];
     walkingKm[key] = isFinite(crowKm) ? crowKm : Infinity;
     bikingKm[key] = isFinite(crowKm) ? crowKm : Infinity;
-    usedCoords[key] = null;
+    usedCoords[key] = nearestCoords[key] || null;
 
     const topCandidates = (candidates[key] || [])
       .slice()
@@ -537,15 +1232,81 @@ function computeNatureComposite(trailScore, parkScore) {
   return Math.round(0.8 * t + 0.2 * p);
 }
 
-export async function computeScoreAtPoint(lat, lng, opts = {}) {
-  const pt = turfPoint([lng, lat]);
-  const { nearest, nearestCoords, candidates } = nearestAndCounts([], pt);
-  const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt, useRouting: true, candidates });
-  const rawScores = scoring.scores;
-  const scores = {
+function normalizeDimensionScores(rawScores = {}) {
+  return {
     ...rawScores,
     nature: computeNatureComposite(rawScores.trail ?? 0, rawScores.park ?? 0),
   };
+}
+
+function buildScoredFeature(feature, scores) {
+  const safeScores = scores || {};
+  return {
+    ...feature,
+    properties: {
+      ...(feature.properties || {}),
+      overlayScores: safeScores,
+      composite: computeScore(safeScores),
+    },
+  };
+}
+
+export async function getScoredZoneFeatures(cityKey = 'littleton') {
+  const cityStore = getCityDataContainer(cityKey);
+  if (cityStore?.scoredZones) return cityStore.scoredZones;
+
+  if (!_scoredZoneFetch[cityKey]) {
+    _scoredZoneFetch[cityKey] = (async () => {
+      const base = await getAllZoneFeaturesAsync(cityKey);
+      const poiPoints = await getCityPoiPoints(cityKey).catch(() => []);
+      const features = Array.isArray(base?.features) ? base.features : [];
+
+      const scoredFeatures = await Promise.all(
+        features.map(async (feature) => {
+          try {
+            const center = turfCentroid(feature);
+            const { nearest, nearestCoords, candidates } = nearestAndCounts(poiPoints, center, cityKey);
+            const scoring = await computeScoresFromNearest(nearest, {
+              nearestCoords,
+              pt: center,
+              useRouting: false,
+              candidates,
+            });
+            const scores = normalizeDimensionScores(scoring.scores);
+            const centerCoords = center.geometry?.coordinates;
+            if (centerCoords) {
+              scores.bikeInfra = await computeBikeInfraScore(centerCoords[1], centerCoords[0], cityKey);
+              scores.crime = await computeCrimeScore(centerCoords[1], centerCoords[0], cityKey);
+              scores.schools = await computeSchoolScore(centerCoords[1], centerCoords[0], cityKey);
+            }
+            return buildScoredFeature(feature, scores);
+          } catch (_err) {
+            const fallback = feature?.properties?.scores || {};
+            return buildScoredFeature(feature, normalizeDimensionScores(fallback));
+          }
+        })
+      );
+
+      const collection = { type: 'FeatureCollection', features: scoredFeatures };
+      if (cityStore) cityStore.scoredZones = collection;
+      return collection;
+    })();
+  }
+
+  return _scoredZoneFetch[cityKey];
+}
+
+export async function computeScoreAtPoint(lat, lng, opts = {}) {
+  const cityKey = opts.cityKey || 'littleton';
+  const poiPoints = await getCityPoiPoints(cityKey).catch(() => []);
+  const pt = turfPoint([lng, lat]);
+  const { nearest, nearestCoords, candidates } = nearestAndCounts(poiPoints, pt, cityKey);
+  const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt, useRouting: true, candidates });
+  const rawScores = scoring.scores;
+  const scores = normalizeDimensionScores(rawScores);
+  scores.bikeInfra = await computeBikeInfraScore(lat, lng, cityKey).catch(() => 0);
+  scores.crime = await computeCrimeScore(lat, lng, cityKey).catch(() => 50);
+  scores.schools = await computeSchoolScore(lat, lng, cityKey).catch(() => 50);
 
   const distances = { ...nearest };
   // Update distances to show routed walking distances (minimum across candidates)
@@ -569,7 +1330,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   }
   routing.nature = routing.trail || routing.park || null;
 
-  const zones = getAllZoneFeatures().features;
+  const zones = getAllZoneFeatures(cityKey).features;
   let matched = null;
   for (const z of zones) {
     try {
@@ -590,7 +1351,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     }
   }
 
-  const composite = computeScore(scores);
+  const composite = computeScore(scores, opts.weights);
   const neighborhood = matched ? matched.properties.name : null;
 
   // Reverse geocode to get a readable address for the clicked point
@@ -625,10 +1386,11 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   };
 }
 
-export function getGridFeatures(cellSizeKm = 0.2) {
-  const bbox = [LITTLETON_BOUNDS.west, LITTLETON_BOUNDS.south, LITTLETON_BOUNDS.east, LITTLETON_BOUNDS.north];
+export function getGridFeatures(cityKey = 'littleton', cellSizeKm = 0.2) {
+  const city = getCityConfig(cityKey);
+  const bbox = [city.bounds.west, city.bounds.south, city.bounds.east, city.bounds.north];
   const grid = squareGrid(bbox, cellSizeKm, { units: 'kilometers' });
-  const zones = getAllZoneFeatures().features;
+  const zones = getAllZoneFeatures(cityKey).features;
 
   for (const cell of grid.features) {
     const c = turfCentroid(cell);
@@ -651,11 +1413,12 @@ export function getGridFeatures(cellSizeKm = 0.2) {
   return grid;
 }
 
-export async function computeGridWithOSM(cellSizeKm = 0.2) {
-  const grid = getGridFeatures(cellSizeKm);
+export async function computeGridWithOSM(cityKey = 'littleton', cellSizeKm = 0.2) {
+  const poiPoints = await getCityPoiPoints(cityKey).catch(() => []);
+  const grid = getGridFeatures(cityKey, cellSizeKm);
   for (const cell of grid.features) {
     const c = turfCentroid(cell);
-    const { nearest, nearestCoords, candidates } = nearestAndCounts([], c);
+    const { nearest, nearestCoords, candidates } = nearestAndCounts(poiPoints, c, cityKey);
     const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt: c, useRouting: true, candidates });
     const rawScores = scoring.scores;
     cell.properties.scores = {
@@ -669,11 +1432,250 @@ export async function computeGridWithOSM(cellSizeKm = 0.2) {
   return grid;
 }
 
-export function isPointInCity(lat, lng) {
+export const HEX_CELL_SIDE_KM = 0.2;
+
+const CACHE_VERSION = 'v3';
+function gridCacheKey(cityKey, cellSideKm) {
+  return `liv_grid_cache_${cityKey}_${cellSideKm}_${CACHE_VERSION}_strictboundary`;
+}
+
+function loadGridCache(cityKey, cellSideKm) {
+  try {
+    const raw = localStorage.getItem(gridCacheKey(cityKey, cellSideKm));
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.type === 'FeatureCollection' && Array.isArray(parsed.features)) {
+        return parsed;
+      }
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function saveGridCache(cityKey, cellSideKm, collection) {
+  try {
+    localStorage.setItem(gridCacheKey(cityKey, cellSideKm), JSON.stringify(collection));
+  } catch (_e) {
+    // localStorage full or unavailable — silently skip
+  }
+}
+
+let _gridOverlayFetch = null;
+let _gridOverlayFetchKey = null;
+
+function isValidOverlayMaskFeature(feature) {
+  if (!feature || !feature.geometry) return false;
+  const type = feature.geometry.type;
+  if (type !== 'Polygon' && type !== 'MultiPolygon') return false;
+  const name = String(feature.properties?.Neighborho || feature.properties?.name || '').toLowerCase();
+  if (name.includes('outside')) return false;
+  return true;
+}
+
+function buildOverlayMask(maskFeatures) {
+  if (!Array.isArray(maskFeatures) || maskFeatures.length === 0) return null;
+  if (maskFeatures.length === 1) return maskFeatures[0];
+  try {
+    const unioned = turfUnion(turfFeatureCollection(maskFeatures));
+    if (unioned && unioned.geometry) return unioned;
+  } catch (_err) {
+    // fall through
+  }
+  return null;
+}
+
+function clipCellsToMask(cells, maskFeatures) {
+  const mask = buildOverlayMask(maskFeatures);
+  if (!mask) return cells;
+
+  const clipped = [];
+  for (const cell of cells) {
+    const centroid = turfCentroid(cell);
+    if (booleanPointInPolygon(centroid, mask)) {
+      clipped.push(cell);
+      continue;
+    }
+
+    let piece = null;
+    try {
+      piece = turfIntersect(turfFeatureCollection([cell, mask]));
+    } catch (_err) {
+      piece = null;
+    }
+    if (!piece || !piece.geometry) continue;
+    const gt = piece.geometry.type;
+    if (gt !== 'Polygon' && gt !== 'MultiPolygon') continue;
+    piece.properties = { ...(cell.properties || {}) };
+    clipped.push(piece);
+  }
+
+  return clipped.length > 0 ? clipped : cells;
+}
+
+let _cityBoundaryFetch = {};
+
+async function fetchCityBoundaryAsync(cityKey = 'littleton') {
+  try {
+    const city = getCityConfig(cityKey);
+    const censusBase = 'https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query';
+    const censusParams = new URLSearchParams({
+      where: `STATE='08' AND BASENAME='${city.label.replace(/'/g, "''")}'`,
+      outFields: 'NAME,BASENAME,STATE',
+      outSR: '4326',
+      f: 'geojson',
+    });
+    const censusUrl = `${censusBase}?${censusParams.toString()}`;
+    const censusRes = await fetch(censusUrl);
+    if (censusRes.ok) {
+      const censusGeo = await censusRes.json();
+      if (censusGeo && censusGeo.type === 'FeatureCollection' && Array.isArray(censusGeo.features) && censusGeo.features.length > 0) {
+        return censusGeo;
+      }
+    }
+
+    // Fallback to Nominatim when TIGER is unavailable.
+    const name = encodeURIComponent(city.label);
+    const q = `https://nominatim.openstreetmap.org/search.php?q=${name}+CO&polygon_geojson=1&format=json&limit=1`;
+    const r = await fetch(q);
+    if (!r.ok) return null;
+    const dat = await r.json();
+    if (!dat || dat.length === 0) return null;
+    const geo = dat[0].geojson;
+    if (!geo) return null;
+    return geo;
+  } catch (err) {
+    console.warn('Failed to fetch city boundary', err && err.message);
+    return null;
+  }
+}
+
+export async function getCityBoundaryAsync(cityKey = 'littleton') {
+  const cityStore = getCityDataContainer(cityKey);
+  if (cityStore?.cityBoundaryGeojson) return cityStore.cityBoundaryGeojson;
+  if (!_cityBoundaryFetch[cityKey]) {
+    _cityBoundaryFetch[cityKey] = fetchCityBoundaryAsync(cityKey);
+  }
+  const result = await _cityBoundaryFetch[cityKey];
+  if (result && cityStore) cityStore.cityBoundaryGeojson = result;
+  return result;
+}
+
+export async function getGridOverlayFeatures(cityKey = 'littleton', cellSideKm = HEX_CELL_SIDE_KM) {
+  const city = getCityConfig(cityKey);
+  const cacheKey = `grid:${cityKey}:${cellSideKm}`;
+  const cityStore = getCityDataContainer(cityKey);
+
+  // Check in-memory cache first
+  if (cityStore?.gridOverlay && cityStore.gridOverlayKey === cacheKey) {
+    return cityStore.gridOverlay;
+  }
+
+  // Check localStorage cache (survives hard refresh)
+  const cached = loadGridCache(cityKey, cellSideKm);
+  if (cached) {
+    if (cityStore) {
+      cityStore.gridOverlay = cached;
+      cityStore.gridOverlayKey = cacheKey;
+    }
+    return cached;
+  }
+
+  if (!_gridOverlayFetch || _gridOverlayFetchKey !== cacheKey) {
+    _gridOverlayFetchKey = cacheKey;
+    _gridOverlayFetch = (async () => {
+      const zoneCollection = await getAllZoneFeaturesAsync(cityKey).catch(() => null);
+      const poiPoints = await getCityPoiPoints(cityKey).catch(() => []);
+      let maskFeatures = city.neighborhoodUrl
+        ? (zoneCollection?.features || []).filter(isValidOverlayMaskFeature)
+        : [];
+
+      // Include the OSM city boundary for a precise city-shaped clip
+      const cityBoundary = await getCityBoundaryAsync(cityKey).catch(() => null);
+      if (cityBoundary) {
+        const boundaryFeatures = [];
+        if (cityBoundary.type === 'Feature') {
+          boundaryFeatures.push(cityBoundary);
+        } else if (cityBoundary.type === 'FeatureCollection') {
+          for (const f of cityBoundary.features) {
+            boundaryFeatures.push(f);
+          }
+        } else if (cityBoundary.type === 'Polygon' || cityBoundary.type === 'MultiPolygon') {
+          boundaryFeatures.push({ type: 'Feature', properties: {}, geometry: cityBoundary });
+        }
+
+        // For Centennial/Englewood (no neighborhood polygons), clip strictly to city boundary.
+        if (!city.neighborhoodUrl) {
+          maskFeatures = boundaryFeatures;
+        } else {
+          maskFeatures.push(...boundaryFeatures);
+        }
+      }
+
+      // For Centennial and Englewood we enforce strict city clipping to avoid spillover.
+      if ((cityKey === 'centennial' || cityKey === 'englewood') && cityBoundary) {
+        const strictBoundary = boundaryToFeatures(cityBoundary);
+        if (strictBoundary.length > 0) {
+          maskFeatures = strictBoundary;
+        }
+      }
+
+      // Use mask bounding box for a tighter grid when available.
+      const mask = buildOverlayMask(maskFeatures);
+      let gridBbox;
+      if (mask) {
+        try { gridBbox = turfBbox(mask); } catch (_e) { gridBbox = null; }
+      }
+      if (!gridBbox) {
+        gridBbox = [city.bounds.west, city.bounds.south, city.bounds.east, city.bounds.north];
+      }
+
+      const grid = hexGrid(gridBbox, cellSideKm, { units: 'kilometers' });
+
+      const overlayCells = clipCellsToMask(grid.features, maskFeatures);
+
+      const scoredCells = await Promise.all(
+        overlayCells.map(async (cell) => {
+          try {
+            const center = turfCentroid(cell);
+            const { nearest, nearestCoords, candidates } = nearestAndCounts(poiPoints, center, cityKey);
+            const scoring = await computeScoresFromNearest(nearest, {
+              nearestCoords, pt: center, useRouting: false, candidates,
+            });
+            const scores = normalizeDimensionScores(scoring.scores);
+            const cc = center.geometry?.coordinates;
+            if (cc) {
+              scores.bikeInfra = await computeBikeInfraScore(cc[1], cc[0], cityKey).catch(() => 0);
+              scores.crime = await computeCrimeScore(cc[1], cc[0], cityKey).catch(() => 50);
+              scores.schools = await computeSchoolScore(cc[1], cc[0], cityKey).catch(() => 50);
+            }
+            return buildScoredFeature(cell, scores);
+          } catch (_err) {
+            return buildScoredFeature(cell, normalizeDimensionScores({}));
+          }
+        })
+      );
+
+      const collection = { type: 'FeatureCollection', features: scoredCells };
+      saveGridCache(cityKey, cellSideKm, collection);
+      if (cityStore) {
+        cityStore.gridOverlay = collection;
+        cityStore.gridOverlayKey = cacheKey;
+      }
+      return collection;
+    })();
+  }
+
+  return _gridOverlayFetch;
+}
+
+export function isPointInCity(lat, lng, cityKey = 'littleton') {
+  const city = getCityConfig(cityKey);
   const pt = turfPoint([lng, lat]);
   try {
-    if (typeof window !== 'undefined' && window.__liv_city_boundary) {
-      const layer = window.__liv_city_boundary;
+    if (typeof window !== 'undefined' && window.__liv_city_boundary_layers_by_city && window.__liv_city_boundary_layers_by_city[cityKey]) {
+      const layer = window.__liv_city_boundary_layers_by_city[cityKey];
       if (typeof layer.toGeoJSON === 'function') {
         const geo = layer.toGeoJSON(); if (geo) {
           if (geo.type === 'FeatureCollection') for (const f of geo.features) if (booleanPointInPolygon(pt, f)) return true;
@@ -683,8 +1685,21 @@ export function isPointInCity(lat, lng) {
       }
     }
   } catch (err) { console.warn('city boundary check failed', err && err.message); }
-  const features = getAllZoneFeatures().features;
+
+  const cityStore = getCityDataContainer(cityKey);
+  const cachedBoundary = boundaryToFeatures(cityStore?.cityBoundaryGeojson);
+  if (cachedBoundary.length > 0) {
+    return isPointInsideBoundary(lng, lat, cachedBoundary);
+  }
+
+  const features = getAllZoneFeatures(cityKey).features;
   for (const f of features) { if (!f || !f.geometry) continue; const name = (f.properties && (f.properties.Neighborho || f.properties.name)) || ''; if (String(name).toLowerCase().includes('outside')) continue; if (booleanPointInPolygon(pt, f)) return true; }
-  if (lat <= LITTLETON_BOUNDS.north && lat >= LITTLETON_BOUNDS.south && lng <= LITTLETON_BOUNDS.east && lng >= LITTLETON_BOUNDS.west) return true;
+  if (lat <= city.bounds.north && lat >= city.bounds.south && lng <= city.bounds.east && lng >= city.bounds.west) return true;
   return false;
+}
+
+export function initDataFetching(cityKey = 'littleton') {
+  getCityPoiPoints(cityKey).catch(() => {});
+  fetchBikeInfrastructureData(cityKey).catch(() => {});
+  fetchPoliceStations(cityKey).catch(() => {});
 }

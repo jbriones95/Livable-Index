@@ -48,7 +48,7 @@ const dmsLines = `
 
 function dmsToDecimal(dms) {
   // expects e.g. 39°35'02.2"N
-  const m = dms.match(/(\d+)[°\s]+(\d+)'?(\d+(?:\.\d+)?)\"?\s*([NSEW])/i)
+  const m = dms.match(/(\d+)[°\s]+(\d+)'?(\d+(?:\.\d+)?)"?\s*([NSEW])/i)
   if (!m) return null
   const deg = Number(m[1])
   const min = Number(m[2])

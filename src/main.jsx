@@ -20,7 +20,7 @@ function showFatalError(message) {
     container.style.fontSize = '12px';
     container.textContent = message;
     document.body.appendChild(container);
-  } catch (e) {
+  } catch {
     // ignore
   }
 }

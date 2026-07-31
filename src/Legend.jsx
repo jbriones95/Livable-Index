@@ -1,4 +1,4 @@
-import { scoreToColor } from "./livabilityData";
+import { OVERLAY_OPTIONS, scoreToColor, WEIGHTS as DEFAULT_WEIGHTS, DIMENSION_LABELS } from "./livabilityData";
 
 const LEGEND_ITEMS = [
   { min: 75, max: 100, label: "Excellent (75–100)" },
@@ -8,10 +8,12 @@ const LEGEND_ITEMS = [
   { min: 0, max: 34, label: "Very Poor (0–34)" },
 ];
 
-export default function Legend() {
+export default function Legend({ overlayMetric = 'composite', weights = DEFAULT_WEIGHTS }) {
+  const activeOverlay = OVERLAY_OPTIONS.find((option) => option.key === overlayMetric) || OVERLAY_OPTIONS[0];
+
   return (
     <div className="legend">
-      <h3 className="legend-title">Livability Score</h3>
+      <h3 className="legend-title">{activeOverlay.label}</h3>
       {LEGEND_ITEMS.map((item) => (
         <div key={item.min} className="legend-item">
           <span
@@ -22,14 +24,13 @@ export default function Legend() {
         </div>
       ))}
       <div className="legend-dimensions">
-        <h4>Proximity Factors</h4>
+        <h4>Weighted Factors</h4>
         <ul>
-          <li>Coffee Shop (15%)</li>
-          <li>Dinner Restaurant (15%)</li>
-          <li>Grocery Store (20%)</li>
-          <li>Nature Access (20%)</li>
-          <li>Transit Stop (20%)</li>
-          <li>Healthcare (10%)</li>
+          {Object.entries(DIMENSION_LABELS).map(([key, label]) => (
+            <li key={key}>
+              {label} ({Math.round((weights[key] ?? 0) * 100)}%)
+            </li>
+          ))}
         </ul>
       </div>
     </div>

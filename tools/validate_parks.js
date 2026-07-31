@@ -34,12 +34,8 @@ function fetchJson(url, opts = {}) {
     }
   }
   args.push(url);
-  try {
-    const out = execFileSync('curl', args, { encoding: 'utf8' });
-    return JSON.parse(out);
-  } catch (err) {
-    throw err;
-  }
+  const out = execFileSync('curl', args, { encoding: 'utf8' });
+  return JSON.parse(out);
 }
 
 function classifyOSM(tags = {}) {
@@ -50,7 +46,6 @@ function classifyOSM(tags = {}) {
   const l = (tags.leisure || '').toLowerCase();
   const pt = tags.public_transport ? String(tags.public_transport).toLowerCase() : '';
   const name = (tags.name || '').toLowerCase();
-  const foot = tags.foot ? String(tags.foot).toLowerCase() : '';
   const cuisine = tags.cuisine ? String(tags.cuisine).toLowerCase() : '';
 
   if (a === 'cafe' || s === 'coffee' || s === 'tea_house' || cuisine.includes('coffee')) results.push('coffee');

@@ -87,7 +87,9 @@ async function main() {
       try {
         if (j.features && j.features[0] && j.features[0].properties && j.features[0].properties.segments && j.features[0].properties.segments[0]) return j.features[0].properties.segments[0];
         if (j.routes && j.routes[0] && j.routes[0].summary) return j.routes[0].summary;
-      } catch (e) {}
+      } catch {
+        return null;
+      }
       return null;
     };
 

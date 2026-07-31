@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function AddressSearch({ onLocate }) {
+export default function AddressSearch({ cityLabel = 'Littleton', onLocate }) {
   const [q, setQ] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -22,7 +22,7 @@ export default function AddressSearch({ onLocate }) {
         const result = data[0];
         onLocate({ lat: parseFloat(result.lat), lng: parseFloat(result.lon), label: result.display_name });
       }
-    } catch (err) {
+    } catch {
       setError('Geocoding failed');
     } finally {
       setLoading(false);
@@ -31,7 +31,7 @@ export default function AddressSearch({ onLocate }) {
 
   return (
     <form className="address-search" onSubmit={lookup}>
-      <input aria-label="Address" placeholder="Enter address in Littleton, CO" value={q} onChange={(e)=>setQ(e.target.value)} />
+      <input aria-label="Address" placeholder={`Enter address in ${cityLabel}, CO`} value={q} onChange={(e)=>setQ(e.target.value)} />
       <button type="submit" disabled={loading}>{loading? 'Locating...' : 'Locate'}</button>
       {error && <div className="search-error">{error}</div>}
     </form>
