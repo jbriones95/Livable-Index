@@ -1,142 +1,46 @@
 {
   "coffee": [
     {
-      "lat": 39.623945,
-      "lon": -104.987877,
-      "name": "South Broadway",
-      "note": "5100 S Broadway, Englewood, CO 80113"
+      "lat": 39.6529176,
+      "lon": -104.9815708,
+      "name": "Starbucks",
+      "note": "500 E Hampden Ave, Englewood, CO 80113"
     },
     {
       "lat": 39.6388421,
       "lon": -104.987431,
-      "name": "Starbucks",
+      "name": "Bad Ass Coffee",
       "note": "4298 S Broadway, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.6642872,
+      "lon": -104.9872065,
+      "name": "Starbucks",
+      "note": "2896 S Broadway, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.6537393,
+      "lon": -104.9606358,
+      "name": "Starbucks",
+      "note": "3495 S University Blvd, Englewood, CO 80113"
+    },
+    {
+      "lat": 39.6344447,
+      "lon": -104.9946007,
+      "name": "Starbucks",
+      "note": "4530 S Fox St, Englewood, CO 80110"
+    },
+    {
+      "lat": 39.6259633,
+      "lon": -105.0246978,
+      "name": "Starbucks",
+      "note": "5050 S Federal Blvd, Englewood, CO 80110"
     },
     {
       "lat": 39.653291,
       "lon": -104.987529,
-      "name": "Coffee at 3498 S Broadway",
+      "name": "Mango Tree Coffee",
       "note": "3498 S Broadway, Englewood, CO 80113"
-    },
-    {
-      "lat": 39.6532191,
-      "lon": -104.980109,
-      "name": "Coffee at 501 E Hampden Ave",
-      "note": "501 E Hampden Ave, Englewood, CO 80113"
-    },
-    {
-      "lat": 39.653055,
-      "lon": -104.976905,
-      "name": "Coffee at 900 E Hampden Ave",
-      "note": "900 E Hampden Ave, Englewood, CO 80113"
-    },
-    {
-      "lat": 39.652757,
-      "lon": -104.970951,
-      "name": "Coffee at 1400 E Hampden Ave",
-      "note": "1400 E Hampden Ave Unit 150, Englewood, CO 80113"
-    },
-    {
-      "lat": 39.6549653,
-      "lon": -104.9969381,
-      "name": "Coffee at 871 Englewood Pkwy",
-      "note": "871 Englewood Pkwy, Englewood, CO 80110"
-    },
-    {
-      "lat": 39.6222204,
-      "lon": -104.987542,
-      "name": "Caribou Coffee",
-      "note": "Caribou Coffee, Centennial"
-    },
-    {
-      "lat": 39.6561756,
-      "lon": -104.9879775,
-      "name": "Cafe 180",
-      "note": "Cafe 180, Englewood"
-    },
-    {
-      "lat": 39.6539519,
-      "lon": -104.9607986,
-      "name": "Starbucks",
-      "note": "Starbucks, Englewood"
-    },
-    {
-      "lat": 39.65297,
-      "lon": -104.970703,
-      "name": "Caribou Coffee",
-      "note": "Caribou Coffee, Englewood"
-    },
-    {
-      "lat": 39.6495861,
-      "lon": -105.005575,
-      "name": "Starbucks",
-      "note": "Starbucks, Englewood"
-    },
-    {
-      "lat": 39.6524621,
-      "lon": -105.010345,
-      "name": "Strawberries Catering & Cafe",
-      "note": "Strawberries Catering & Cafe, Englewood"
-    },
-    {
-      "lat": 39.619867,
-      "lon": -105.0163726,
-      "name": "Lamar's Doughnuts",
-      "note": "Lamar's Doughnuts, Englewood"
-    },
-    {
-      "lat": 39.6731995,
-      "lon": -104.973673,
-      "name": "Green Giraffe Bar",
-      "note": "Green Giraffe Bar, Englewood"
-    },
-    {
-      "lat": 39.6228117,
-      "lon": -105.0188459,
-      "name": "Toast Fine Food & Coffee",
-      "note": "Toast Fine Food & Coffee, Englewood"
-    },
-    {
-      "lat": 39.6236822,
-      "lon": -104.9905539,
-      "name": "Atlas Coffee",
-      "note": "Atlas Coffee, Englewood"
-    },
-    {
-      "lat": 39.6532745,
-      "lon": -104.987416,
-      "name": "Mango Tree",
-      "note": "Mango Tree, Englewood"
-    },
-    {
-      "lat": 39.6527674,
-      "lon": -105.0132987,
-      "name": "Starbucks",
-      "note": "Starbucks, Englewood"
-    },
-    {
-      "lat": 39.6725836,
-      "lon": -104.9595589,
-      "name": "La Belle Rosette",
-      "note": "La Belle Rosette, Englewood"
-    },
-    {
-      "lat": 39.6552149,
-      "lon": -104.9874298,
-      "name": "That's Kava",
-      "note": "That's Kava, Englewood"
-    },
-    {
-      "lat": 39.6502452,
-      "lon": -105.0085737,
-      "name": "Mo Mo Tea",
-      "note": "Mo Mo Tea, Englewood"
-    },
-    {
-      "lat": 39.6720853,
-      "lon": -104.9732266,
-      "name": "lil Coffea",
-      "note": "lil Coffea, Englewood"
     }
   ],
   "grocery": [

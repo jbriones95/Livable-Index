@@ -1,16 +1,6 @@
 import { useState } from 'react';
 import { DIMENSION_LABELS, WEIGHTS as DEFAULT_WEIGHTS } from "./livabilityData";
 
-function normalizeWeights(next) {
-  const others = Object.keys(next);
-  const total = Object.values(next).reduce((s, v) => s + v, 0);
-  if (total !== 100 && others.length > 0) {
-    const sorted = others.sort((a, b) => next[b] - next[a]);
-    next[sorted[0]] += 100 - total;
-  }
-  return next;
-}
-
 export default function WeightEditor({ weights, onChange, onClose }) {
   const [pending, setPending] = useState(() =>
     Object.fromEntries(
@@ -20,35 +10,13 @@ export default function WeightEditor({ weights, onChange, onClose }) {
 
   function handleSlide(key, raw) {
     const newVal = Math.max(0, Math.min(100, parseInt(raw, 10) || 0));
-
-    setPending(prev => {
-      const others = Object.keys(prev).filter(k => k !== key);
-      const otherTotal = others.reduce((s, k) => s + prev[k], 0);
-      const next = { ...prev, [key]: newVal };
-
-      if (others.length > 0) {
-        const remaining = 100 - newVal;
-        if (otherTotal > 0) {
-          for (const k of others) {
-            next[k] = Math.round((prev[k] / otherTotal) * remaining);
-          }
-        } else {
-          const each = Math.floor(remaining / others.length);
-          const rem = remaining - each * others.length;
-          for (let i = 0; i < others.length; i++) {
-            next[others[i]] = each + (i < rem ? 1 : 0);
-          }
-        }
-      }
-
-      return normalizeWeights(next);
-    });
+    setPending(prev => ({ ...prev, [key]: newVal }));
   }
 
   function handleInput(key, raw) {
     const parsed = parseInt(raw, 10);
     if (isNaN(parsed) || parsed < 0 || parsed > 100) return;
-    handleSlide(key, raw);
+    setPending(prev => ({ ...prev, [key]: parsed }));
   }
 
   function handleReset() {
@@ -60,9 +28,8 @@ export default function WeightEditor({ weights, onChange, onClose }) {
   }
 
   function handleApply() {
-    const normalized = normalizeWeights({ ...pending });
     const decimal = {};
-    for (const [k, v] of Object.entries(normalized)) {
+    for (const [k, v] of Object.entries(pending)) {
       decimal[k] = v / 100;
     }
     onChange(decimal);
@@ -70,9 +37,6 @@ export default function WeightEditor({ weights, onChange, onClose }) {
   }
 
   const total = Object.values(pending).reduce((s, v) => s + v, 0);
-  const isUnchanged = Object.entries(weights).every(([k, v]) =>
-    (pending[k] ?? 0) === Math.round(v * 100)
-  );
 
   return (
     <div className="weight-editor">
@@ -81,7 +45,7 @@ export default function WeightEditor({ weights, onChange, onClose }) {
         <button className="weight-editor-close" onClick={onClose} aria-label="Close">&times;</button>
       </div>
       <p className="weight-editor-hint">
-        Drag sliders to set the importance of each factor. Total: <strong>{total}%</strong>
+        Set each weight freely. Total must equal <strong>100%</strong> to apply. Current total: <strong>{total}%</strong>
       </p>
       <div className="weight-sliders">
         {Object.entries(DIMENSION_LABELS).map(([key, label]) => (
@@ -113,7 +77,7 @@ export default function WeightEditor({ weights, onChange, onClose }) {
         <button className="weight-btn weight-btn-reset" onClick={handleReset}>Reset</button>
         <div className="weight-editor-actions-right">
           <button className="weight-btn weight-btn-cancel" onClick={onClose}>Cancel</button>
-          <button className="weight-btn weight-btn-apply" onClick={handleApply} disabled={isUnchanged}>Apply</button>
+          <button className="weight-btn weight-btn-apply" onClick={handleApply} disabled={total !== 100}>Apply</button>
         </div>
       </div>
     </div>

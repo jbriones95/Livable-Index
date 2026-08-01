@@ -1,70 +1,28 @@
 {
   "coffee": [
     {
-      "lat": 39.5833145,
-      "lon": -104.9882493,
-      "name": "South Broadway",
-      "note": "7330 S Broadway, Littleton, CO 80122"
-    },
-    {
-      "lat": 39.5715438,
-      "lon": -104.9889619,
-      "name": "Black Rock Coffee",
-      "note": "7961 S Broadway Ste A, Littleton, CO 80122 (approx)"
-    },
-    {
-      "lat": 39.601217,
-      "lon": -104.9880828,
-      "name": "6500, South Broadway, Littleton, Arapahoe County, Colorado, 80121, United States",
-      "note": "6504 S Broadway, Littleton, CO 80121"
-    },
-    {
-      "lat": 39.6118882,
-      "lon": -104.9886631,
-      "name": "Artemis Tea Coffee",
-      "note": "40 W Littleton Blvd Ste 211, Littleton, CO 80120 (approx)"
-    },
-    {
-      "lat": 39.623945,
-      "lon": -104.987877,
-      "name": "South Broadway",
-      "note": "5100 S Broadway, Englewood, CO 80113"
-    },
-    {
-      "lat": 39.6388421,
-      "lon": -104.987431,
-      "name": "Starbucks",
-      "note": "4298 S Broadway, Englewood, CO 80113"
-    },
-    {
-      "lat": 39.5937103,
-      "lon": -104.9617404,
-      "name": "Coffee at 6751 S York St",
-      "note": "6751 S York St #518, Centennial, CO 80122"
-    },
-    {
-      "lat": 39.6089355,
-      "lon": -104.9236276,
-      "name": "Coffee at 5955 S Holly St",
-      "note": "5955 S Holly St, Centennial, CO 80121"
-    },
-    {
       "lat": 39.5939804,
       "lon": -104.9285515,
       "name": "Starbucks",
       "note": "5070 E Arapahoe Rd, Centennial, CO 80122"
     },
     {
-      "lat": 39.5962704,
-      "lon": -104.8900546,
-      "name": "Coffee at 8575 E Arapahoe Rd",
-      "note": "8575 E Arapahoe Rd Unit G, Greenwood Village, CO 80112"
+      "lat": 39.5954965,
+      "lon": -104.8534864,
+      "name": "Starbucks",
+      "note": "11703 E Arapahoe Rd, Centennial, CO 80112"
     },
     {
-      "lat": 39.5683821,
-      "lon": -104.9031633,
-      "name": "Coffee at 8100 S Quebec St",
-      "note": "8100 S Quebec St # B14, Centennial, CO 80112"
+      "lat": 39.5663627,
+      "lon": -104.9068846,
+      "name": "Starbucks",
+      "note": "8243 S Quebec St, Centennial, CO 80112"
+    },
+    {
+      "lat": 39.5934773,
+      "lon": -104.8655147,
+      "name": "It's Coffee",
+      "note": "10639 E Briarwood Ave Unit C1, Centennial, CO 80112"
     },
     {
       "lat": 39.5672074,
@@ -73,250 +31,16 @@
       "note": "8283 S Akron St #170, Centennial, CO 80112"
     },
     {
-      "lat": 39.5934773,
-      "lon": -104.8655147,
-      "name": "Coffee at 10639 E Briarwood Ave",
-      "note": "10639 E Briarwood Ave Unit C1, Centennial, CO 80112"
-    },
-    {
-      "lat": 39.5947255,
-      "lon": -104.8781283,
-      "name": "Milano's Coffee",
-      "note": "9602 E Arapahoe Rd Ste a, Greenwood Village, CO 80112"
-    },
-    {
-      "lat": 39.5803322,
-      "lon": -104.9618782,
-      "name": "Zell's Panini & Crepes",
-      "note": "Zell's Panini & Crepes, Centennial"
-    },
-    {
-      "lat": 39.6222204,
-      "lon": -104.987542,
-      "name": "Caribou Coffee",
-      "note": "Caribou Coffee, Centennial"
-    },
-    {
-      "lat": 39.6231965,
-      "lon": -104.897368,
+      "lat": 39.5954415,
+      "lon": -104.8043931,
       "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.5670833,
-      "lon": -104.902213,
-      "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.5646999,
-      "lon": -104.8871412,
-      "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.591389,
-      "lon": -104.9639861,
-      "name": "The O. Coffee Company",
-      "note": "The O. Coffee Company, Centennial"
-    },
-    {
-      "lat": 39.5928742,
-      "lon": -104.9617982,
-      "name": "Corner Bakery",
-      "note": "Corner Bakery, Centennial"
-    },
-    {
-      "lat": 39.6088613,
-      "lon": -104.9573685,
-      "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.5917519,
-      "lon": -104.8046838,
-      "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.5999526,
-      "lon": -104.8029659,
-      "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.6099917,
-      "lon": -104.8964013,
-      "name": "Cafe De Paris",
-      "note": "Cafe De Paris, Centennial"
-    },
-    {
-      "lat": 39.6265166,
-      "lon": -104.901354,
-      "name": "Front Range Trading Post",
-      "note": "Front Range Trading Post, Centennial"
-    },
-    {
-      "lat": 39.6252677,
-      "lon": -104.900042,
-      "name": "Caribou Coffee",
-      "note": "Caribou Coffee, Centennial"
-    },
-    {
-      "lat": 39.6318105,
-      "lon": -104.8839631,
-      "name": "Greenwood Village Cafe",
-      "note": "Greenwood Village Cafe, Centennial"
-    },
-    {
-      "lat": 39.6100668,
-      "lon": -104.889388,
-      "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.6263912,
-      "lon": -104.8845663,
-      "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.624909,
-      "lon": -104.8834573,
-      "name": "The Sen Tea House",
-      "note": "The Sen Tea House, Centennial"
-    },
-    {
-      "lat": 39.6318202,
-      "lon": -104.88468,
-      "name": "Tea+",
-      "note": "Tea+, Centennial"
-    },
-    {
-      "lat": 39.6323065,
-      "lon": -104.8846604,
-      "name": "The French Press",
-      "note": "The French Press, Centennial"
-    },
-    {
-      "lat": 39.6303575,
-      "lon": -104.8984421,
-      "name": "Perks",
-      "note": "Perks, Centennial"
-    },
-    {
-      "lat": 39.6248948,
-      "lon": -104.9071748,
-      "name": "Corvus Coffee Roasters",
-      "note": "Corvus Coffee Roasters, Centennial"
-    },
-    {
-      "lat": 39.5953525,
-      "lon": -104.8042502,
-      "name": "Starbucks",
-      "note": "Starbucks, Centennial"
+      "note": "15795 E Arapahoe Rd, Centennial, CO 80016"
     },
     {
       "lat": 39.5787109,
       "lon": -104.9608938,
       "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.5795267,
-      "lon": -104.871097,
-      "name": "Esmè Café",
-      "note": "Esmè Café, Centennial"
-    },
-    {
-      "lat": 39.5955568,
-      "lon": -104.8470637,
-      "name": "My Favorite Muffin",
-      "note": "My Favorite Muffin, Centennial"
-    },
-    {
-      "lat": 39.5953283,
-      "lon": -104.798257,
-      "name": "Dunkin'",
-      "note": "Dunkin', Centennial"
-    },
-    {
-      "lat": 39.6009307,
-      "lon": -104.9860438,
-      "name": "Atlas Coffee",
-      "note": "Atlas Coffee, Centennial"
-    },
-    {
-      "lat": 39.5935738,
-      "lon": -104.9617389,
-      "name": "Huckleberry Roasters",
-      "note": "Huckleberry Roasters, Centennial"
-    },
-    {
-      "lat": 39.5944053,
-      "lon": -104.876604,
-      "name": "Happy Lemon",
-      "note": "Happy Lemon, Centennial"
-    },
-    {
-      "lat": 39.6375275,
-      "lon": -104.788645,
-      "name": "Endless Grind Coffee",
-      "note": "Endless Grind Coffee, Centennial"
-    },
-    {
-      "lat": 39.595555,
-      "lon": -104.8774767,
-      "name": "Dunkin'",
-      "note": "Dunkin', Centennial"
-    },
-    {
-      "lat": 39.6111694,
-      "lon": -104.7525699,
-      "name": "Kung Fu Tea",
-      "note": "Kung Fu Tea, Centennial"
-    },
-    {
-      "lat": 39.5940391,
-      "lon": -104.8090278,
-      "name": "Gong Cha",
-      "note": "Gong Cha, Centennial"
-    },
-    {
-      "lat": 39.6192415,
-      "lon": -104.9001856,
-      "name": "Monk & Mongoose Coffee",
-      "note": "Monk & Mongoose Coffee, Centennial"
-    },
-    {
-      "lat": 39.5786549,
-      "lon": -104.9596336,
-      "name": "Happy Lemon",
-      "note": "Happy Lemon, Centennial"
-    },
-    {
-      "lat": 39.5673749,
-      "lon": -104.9209375,
-      "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.5663672,
-      "lon": -104.9068773,
-      "name": "Starbucks",
-      "note": "Starbucks, Centennial"
-    },
-    {
-      "lat": 39.5956657,
-      "lon": -104.8929008,
-      "name": "Desert Donut",
-      "note": "Desert Donut, Centennial"
-    },
-    {
-      "lat": 39.6282414,
-      "lon": -104.8975608,
-      "name": "Black Rock Coffee",
-      "note": "Black Rock Coffee, Centennial"
+      "note": "7575 S University Blvd, Centennial, CO 80122"
     }
   ],
   "grocery": [
