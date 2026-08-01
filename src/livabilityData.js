@@ -16,10 +16,14 @@ import {
   featureCollection as turfFeatureCollection,
   union as turfUnion,
   bbox as turfBbox,
+  pointToLineDistance as turfPointToLineDistance,
+  nearestPointOnLine as turfNearestPointOnLine,
 } from '@turf/turf';
+import { lineString as turfLineString } from '@turf/helpers';
 import littletonPois from '../data/pois_littleton.json';
 import centennialPois from '../data/pois_centennial.json';
 import englewoodPois from '../data/pois_englewood.json';
+import highlineCanal from '../data/highline_canal.json';
 
 export const CITIES = {
   littleton: {
@@ -394,6 +398,21 @@ const MAX_DIST_KM = {
   schools: 1.5,
 };
 
+// Authoritative trail polylines used to score distance-to-trail precisely.
+// Represented as [lon, lat] coordinate pairs, matching the turf convention.
+const TRAIL_POLYLINES = [
+  {
+    name: 'Highline Canal Trail',
+    coords: highlineCanal.coords,
+  },
+];
+
+// Pre-build turf LineStrings for distance calculations.
+const TRAIL_LINES = TRAIL_POLYLINES.map((t) => ({
+  ...t,
+  line: turfLineString(t.coords),
+}));
+
 // How many candidate POIs (closest by crow-flies) to route per category
 const ROUTE_CANDIDATES = {
   coffee: 5,
@@ -486,6 +505,27 @@ function haversineKm(lng1, lat1, lng2, lat2) {
   const dLon = (lng2 - lng1) * Math.PI / 180;
   const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+// Compute the straight-line distance (km) from a [lon,lat] point to the
+// nearest authoritative trail polyline, plus the closest coordinates on it.
+function nearestTrailPolylineDistance(lon, lat) {
+  let bestKm = Infinity;
+  let bestCoords = null;
+  const pt = turfPoint([lon, lat]);
+  for (const t of TRAIL_LINES) {
+    try {
+      const km = turfPointToLineDistance(pt, t.line, { units: 'kilometers' });
+      if (km < bestKm) {
+        bestKm = km;
+        const nearest = turfNearestPointOnLine(pt, t.line, { units: 'kilometers' });
+        bestCoords = nearest?.geometry?.coordinates || null;
+      }
+    } catch (_err) {
+      // skip malformed line
+    }
+  }
+  return { km: bestKm, coords: bestCoords };
 }
 
 let _bikeInfraFetch = {};
@@ -1152,6 +1192,22 @@ function nearestAndCounts(poiPoints, pt, cityKey = 'littleton') {
     }
   }
 
+  // Use authoritative trail polylines so houses along a linear trail are
+  // credited with their true distance to the trail rather than the nearest
+  // sparse sample point.
+  if (Object.prototype.hasOwnProperty.call(nearest, 'trail')) {
+    const ptCoords = pt?.geometry?.coordinates;
+    if (ptCoords && Array.isArray(ptCoords) && ptCoords.length >= 2) {
+      const poly = nearestTrailPolylineDistance(ptCoords[0], ptCoords[1]);
+      if (poly.km < nearest.trail) {
+        nearest.trail = poly.km;
+        nearestCoords.trail = poly.coords;
+      }
+      if (poly.km <= MAX_DIST_KM.trail) counts.trail++;
+      if (poly.coords) candidates.trail.push({ coords: poly.coords, dist: poly.km });
+    }
+  }
+
   return { nearest, counts, nearestCoords, candidates };
 }
 
@@ -1434,7 +1490,7 @@ export async function computeGridWithOSM(cityKey = 'littleton', cellSizeKm = 0.2
 
 export const HEX_CELL_SIDE_KM = 0.2;
 
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 function gridCacheKey(cityKey, cellSideKm) {
   return `liv_grid_cache_${cityKey}_${cellSideKm}_${CACHE_VERSION}_strictboundary`;
 }
