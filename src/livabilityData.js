@@ -26,6 +26,7 @@ import englewoodPois from '../data/pois_englewood.json';
 import highlineCanal from '../data/highline_canal.json';
 import southPlatteRiver from '../data/south_platte_river.json';
 import leeGulch from '../data/lee_gulch.json';
+import twoBrands from '../data/two_brands.json';
 
 export const CITIES = {
   littleton: {
@@ -385,6 +386,7 @@ const NAMED_TRAILS = [
   'mary carter greenway trail',
   'littleton community trail',
   'south platte river trail',
+  'two brands trail',
 ];
 
 const MAX_DIST_KM = {
@@ -415,6 +417,10 @@ const TRAIL_POLYLINES = [
   {
     name: 'Lee Gulch Trail',
     coords: leeGulch.coords,
+  },
+  {
+    name: 'Two Brands Trail',
+    coords: twoBrands.coords,
   },
 ];
 

@@ -2937,6 +2937,18 @@
       "lon": -105.0027907,
       "name": "Pirates Cove Water Park",
       "note": "Pirates Cove Water Park, Englewood"
+    },
+    {
+      "lat": 39.5398307,
+      "lon": -105.1019627,
+      "name": "Hogback Hill Park",
+      "note": "8892 W Trailmark Pkwy, Littleton"
+    },
+    {
+      "lat": 39.5378381,
+      "lon": -105.0976228,
+      "name": "TrailMark Park",
+      "note": "8490 W Trailmark Pkwy, Littleton"
     }
   ],
   "trailheads": [
