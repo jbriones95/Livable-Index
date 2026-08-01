@@ -24,6 +24,8 @@ import littletonPois from '../data/pois_littleton.json';
 import centennialPois from '../data/pois_centennial.json';
 import englewoodPois from '../data/pois_englewood.json';
 import highlineCanal from '../data/highline_canal.json';
+import southPlatteRiver from '../data/south_platte_river.json';
+import leeGulch from '../data/lee_gulch.json';
 
 export const CITIES = {
   littleton: {
@@ -382,6 +384,7 @@ const NAMED_TRAILS = [
   'lee gulch trail',
   'mary carter greenway trail',
   'littleton community trail',
+  'south platte river trail',
 ];
 
 const MAX_DIST_KM = {
@@ -404,6 +407,14 @@ const TRAIL_POLYLINES = [
   {
     name: 'Highline Canal Trail',
     coords: highlineCanal.coords,
+  },
+  {
+    name: 'South Platte River Trail',
+    coords: southPlatteRiver.coords,
+  },
+  {
+    name: 'Lee Gulch Trail',
+    coords: leeGulch.coords,
   },
 ];
 
