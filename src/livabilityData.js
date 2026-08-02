@@ -991,8 +991,33 @@ function supplementalPointsForCity(cityKey, boundaryFeatures = null) {
   return points;
 }
 
-function cityOverpassQuery(city) {
-  const { south, west, north, east } = city.bounds;
+// Query bbox for the OSM POI fetch. Prefer the real city boundary (which can
+// extend well beyond the fallback rectangle, e.g. Littleton's Trailmark area
+// is south of the fallback bounds), padded slightly, so all in-city amenities
+// are included. Falls back to the configured bounds when no boundary is known.
+function osmQueryBbox(city, boundaryFeatures) {
+  const pad = 0.01; // ~1.1 km, enough to catch amenities just outside the line
+  if (Array.isArray(boundaryFeatures) && boundaryFeatures.length > 0) {
+    try {
+      const bbox = turfBbox(turfFeatureCollection(boundaryFeatures));
+      if (bbox && bbox.length === 4) {
+        return {
+          south: bbox[1] - pad,
+          west: bbox[0] - pad,
+          north: bbox[3] + pad,
+          east: bbox[2] + pad,
+        };
+      }
+    } catch (_err) {
+      // fall through to configured bounds
+    }
+  }
+  return city.bounds;
+}
+
+function cityOverpassQuery(city, bbox) {
+  const bboxOpts = bbox || city.bounds;
+  const { south, west, north, east } = bboxOpts;
   const b = `(${south},${west},${north},${east})`;
   return `[out:json][timeout:30];(\n`
     + `node["amenity"~"cafe|restaurant|fast_food|food_court|hospital|clinic|doctors|pharmacy|dentist|school|college|university|kindergarten|bus_station"]${b};\n`
@@ -1030,7 +1055,7 @@ export async function getCityPoiPoints(cityKey = 'littleton') {
       const hasBoundary = boundaryFeatures.length > 0;
 
       try {
-        const query = cityOverpassQuery(city);
+        const query = cityOverpassQuery(city, osmQueryBbox(city, boundaryFeatures));
         const data = await fetchOverpassJson(query);
         if (!data) return supplemental;
         const els = Array.isArray(data?.elements) ? data.elements : [];
