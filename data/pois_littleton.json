@@ -1,12 +1,6 @@
 {
   "coffee": [
     {
-      "lat": 39.6148589,
-      "lon": -105.016027,
-      "name": "Mango Tree Coffee",
-      "note": "5624 S Prince St, Littleton, CO 80120"
-    },
-    {
       "lat": 39.6124867,
       "lon": -105.0175238,
       "name": "Dirt Coffee",
@@ -79,34 +73,64 @@
       "note": "4298 S Broadway, Englewood, CO 80113"
     },
     {
-      "lat": 39.6222204,
-      "lon": -104.987542,
-      "name": "Caribou Coffee",
-      "note": "Caribou Coffee, Centennial"
+      "lat": 39.587839893254,
+      "lon": -105.02281092435,
+      "name": "Copper Door Coffee Roasters",
+      "note": "7301 S Santa Fe Dr, Littleton, CO"
     },
     {
-      "lat": 39.6009307,
-      "lon": -104.9860438,
+      "lat": 39.613159122835,
+      "lon": -105.001815566863,
+      "name": "Lost Coffee Cafe & Coffee Roastery",
+      "note": "1190 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.609763303538,
+      "lon": -105.034955487008,
+      "name": "Enchanted Grounds Coffeehouse",
+      "note": "3615 W Bowles Ave, Littleton, CO"
+    },
+    {
+      "lat": 39.601929068375,
+      "lon": -105.02034428096,
+      "name": "Nixon's Coffee House",
+      "note": "6399 S Santa Fe Dr, Littleton, CO"
+    },
+    {
+      "lat": 39.601929068375,
+      "lon": -105.02034428096,
+      "name": "Wild Goose Coffee in Denver Seminary",
+      "note": "6399 S Santa Fe Dr, Littleton, CO"
+    },
+    {
+      "lat": 39.572012346891,
+      "lon": -104.988573187187,
+      "name": "Black Rock Coffee Bar - Broadway",
+      "note": "7961 S Broadway, Littleton, CO"
+    },
+    {
+      "lat": 39.613670304499,
+      "lon": -105.016658397343,
+      "name": "iN-TEA",
+      "note": "2440 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.612670038113,
+      "lon": -105.017442489718,
+      "name": "DIRT Coffee Bar",
+      "note": "2506 W Alamo Ave, Littleton, CO"
+    },
+    {
+      "lat": 39.601206284263,
+      "lon": -104.988114043862,
       "name": "Atlas Coffee",
-      "note": "Atlas Coffee, Centennial"
+      "note": "6504 S Broadway, Littleton, CO"
     },
     {
-      "lat": 39.619867,
-      "lon": -105.0163726,
-      "name": "Lamar's Doughnuts",
-      "note": "Lamar's Doughnuts, Englewood"
-    },
-    {
-      "lat": 39.6228117,
-      "lon": -105.0188459,
-      "name": "Toast Fine Food & Coffee",
-      "note": "Toast Fine Food & Coffee, Englewood"
-    },
-    {
-      "lat": 39.6236822,
-      "lon": -104.9905539,
-      "name": "Atlas Coffee",
-      "note": "Atlas Coffee, Englewood"
+      "lat": 39.614887275532,
+      "lon": -105.016108581273,
+      "name": "Mango Tree Coffee",
+      "note": "5624 S Prince St, Littleton, CO"
     }
   ],
   "grocery": [
@@ -139,42 +163,6 @@
       "lat": 39.5748722,
       "lon": -104.9918813,
       "note": "181 W Mineral Ave"
-    },
-    {
-      "lat": 39.6121539,
-      "lon": -104.989793,
-      "name": "King Soopers",
-      "note": "King Soopers, Centennial"
-    },
-    {
-      "lat": 39.6333579,
-      "lon": -104.9873807,
-      "name": "Corner Store",
-      "note": "Corner Store, Centennial"
-    },
-    {
-      "lat": 39.6328713,
-      "lon": -104.988428,
-      "name": "7-Eleven",
-      "note": "7-Eleven, Centennial"
-    },
-    {
-      "lat": 39.624371,
-      "lon": -104.988367,
-      "name": "Sprouts Farmers Market",
-      "note": "Sprouts Farmers Market, Centennial"
-    },
-    {
-      "lat": 39.5803026,
-      "lon": -104.9878322,
-      "name": "Sinclair",
-      "note": "Sinclair, Centennial"
-    },
-    {
-      "lat": 39.5991485,
-      "lon": -104.9889646,
-      "name": "Mobil Mart",
-      "note": "Mobil Mart, Centennial"
     }
   ],
   "park": [
@@ -649,72 +637,6 @@
       "note": "Ridgewood Park Upper"
     },
     {
-      "lat": 39.6099,
-      "lon": -104.9765,
-      "name": "Horsemans Park",
-      "note": "Horsemans Park, Centennial"
-    },
-    {
-      "lat": 39.5684489,
-      "lon": -104.988397,
-      "name": "South Broadway & Southpark Drive",
-      "note": "South Broadway & Southpark Drive, Centennial"
-    },
-    {
-      "lat": 39.5931388,
-      "lon": -104.988147,
-      "name": "South Broadway & West Sterne Parkway",
-      "note": "South Broadway & West Sterne Parkway, Centennial"
-    },
-    {
-      "lat": 39.5925648,
-      "lon": -104.9884601,
-      "name": "South Broadway & West Sterne Parkway",
-      "note": "South Broadway & West Sterne Parkway, Centennial"
-    },
-    {
-      "lat": 39.5676303,
-      "lon": -104.9887168,
-      "name": "South Broadway & Southpark Drive",
-      "note": "South Broadway & Southpark Drive, Centennial"
-    },
-    {
-      "lat": 39.58332,
-      "lon": -104.9729222,
-      "name": "Clarkson Park Path",
-      "note": "Clarkson Park Path, Centennial"
-    },
-    {
-      "lat": 39.5755968,
-      "lon": -104.9776284,
-      "name": "Puma Park",
-      "note": "Puma Park, Centennial"
-    },
-    {
-      "lat": 39.5832422,
-      "lon": -104.9730121,
-      "name": "Clarkson Park",
-      "note": "Clarkson Park, Centennial"
-    },
-    {
-      "lat": 39.6290614,
-      "lon": -104.9814997,
-      "name": "Elsie Duncan Dog Park",
-      "note": "Elsie Duncan Dog Park, Centennial"
-    },
-    {
-      "lat": 39.6282205,
-      "lon": -105.0050913,
-      "name": "Englewood Unleashed Dog Park",
-      "note": "Englewood Unleashed Dog Park, Englewood"
-    },
-    {
-      "lat": 39.625227,
-      "lon": -105.0027907,
-      "name": "Pirates Cove Water Park",
-      "note": "Pirates Cove Water Park, Englewood"
-    },
-    {
       "lat": 39.5398307,
       "lon": -105.1019627,
       "name": "Hogback Hill Park",
@@ -935,618 +857,6 @@
       "lat": 39.61102777777778,
       "lon": -105.01036111111111,
       "note": "39°36'39.7\"N 105°00'37.3\"W"
-    },
-    {
-      "lat": 39.6249622,
-      "lon": -104.9715842,
-      "name": "Recreational Trail",
-      "note": "Recreational Trail, Centennial"
-    },
-    {
-      "lat": 39.5790682,
-      "lon": -104.990416,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.5786188,
-      "lon": -104.9898284,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.5773818,
-      "lon": -104.9893829,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.61791,
-      "lon": -104.9847181,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Centennial"
-    },
-    {
-      "lat": 39.6207844,
-      "lon": -104.9887368,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Centennial"
-    },
-    {
-      "lat": 39.6207788,
-      "lon": -104.9891984,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Centennial"
-    },
-    {
-      "lat": 39.6207442,
-      "lon": -104.9896524,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Centennial"
-    },
-    {
-      "lat": 39.6211056,
-      "lon": -104.9915132,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Centennial"
-    },
-    {
-      "lat": 39.5692714,
-      "lon": -104.9729095,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.640603,
-      "lon": -104.9784252,
-      "name": "Clarkson St MUP",
-      "note": "Clarkson St MUP, Centennial"
-    },
-    {
-      "lat": 39.6235209,
-      "lon": -104.9785226,
-      "name": "Clarkson Multi-Use Path",
-      "note": "Clarkson Multi-Use Path, Centennial"
-    },
-    {
-      "lat": 39.571887,
-      "lon": -104.9748031,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.573786,
-      "lon": -104.976691,
-      "name": "Bridge to Powell Middle School",
-      "note": "Bridge to Powell Middle School, Centennial"
-    },
-    {
-      "lat": 39.58332,
-      "lon": -104.9729222,
-      "name": "Clarkson Park Path",
-      "note": "Clarkson Park Path, Centennial"
-    },
-    {
-      "lat": 39.5773902,
-      "lon": -104.9844414,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.5753522,
-      "lon": -104.9781351,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.6350228,
-      "lon": -104.9726334,
-      "name": "East Stanford Avenue",
-      "note": "East Stanford Avenue, Centennial"
-    },
-    {
-      "lat": 39.5648312,
-      "lon": -104.9751417,
-      "name": "C-470 Trail",
-      "note": "C-470 Trail, Centennial"
-    },
-    {
-      "lat": 39.5762117,
-      "lon": -104.9884758,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.5906938,
-      "lon": -104.9883315,
-      "name": "High Line Canal Trail",
-      "note": "High Line Canal Trail, Centennial"
-    },
-    {
-      "lat": 39.5872591,
-      "lon": -104.9915173,
-      "name": "High Line Canal Trail",
-      "note": "High Line Canal Trail, Centennial"
-    },
-    {
-      "lat": 39.5924572,
-      "lon": -104.9848572,
-      "name": "High Line Canal Trail",
-      "note": "High Line Canal Trail, Centennial"
-    },
-    {
-      "lat": 39.5943938,
-      "lon": -104.9882918,
-      "name": "High Line Canal Trail",
-      "note": "High Line Canal Trail, Centennial"
-    },
-    {
-      "lat": 39.6027751,
-      "lon": -104.9881483,
-      "name": "High Line Canal Trail",
-      "note": "High Line Canal Trail, Centennial"
-    },
-    {
-      "lat": 39.5998887,
-      "lon": -104.988963,
-      "name": "High Line Canal Trail",
-      "note": "High Line Canal Trail, Centennial"
-    },
-    {
-      "lat": 39.6019673,
-      "lon": -104.9763637,
-      "name": "High Line Canal Trail",
-      "note": "High Line Canal Trail, Centennial"
-    },
-    {
-      "lat": 39.5767891,
-      "lon": -104.9805457,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.5766677,
-      "lon": -104.9806057,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.6283956,
-      "lon": -104.9785255,
-      "name": "Clarkson Multi-Use Path",
-      "note": "Clarkson Multi-Use Path, Centennial"
-    },
-    {
-      "lat": 39.6180804,
-      "lon": -104.9786022,
-      "name": "Clarkson Multi-Use Path",
-      "note": "Clarkson Multi-Use Path, Centennial"
-    },
-    {
-      "lat": 39.6198392,
-      "lon": -104.9785579,
-      "name": "Clarkson Multi-Use Path",
-      "note": "Clarkson Multi-Use Path, Centennial"
-    },
-    {
-      "lat": 39.6168457,
-      "lon": -104.9786182,
-      "name": "Clarkson Multi-Use Path",
-      "note": "Clarkson Multi-Use Path, Centennial"
-    },
-    {
-      "lat": 39.5629106,
-      "lon": -104.9929317,
-      "name": "C-470 Trail",
-      "note": "C-470 Trail, Centennial"
-    },
-    {
-      "lat": 39.5651339,
-      "lon": -104.9880575,
-      "name": "C-470 Trail",
-      "note": "C-470 Trail, Centennial"
-    },
-    {
-      "lat": 39.5649731,
-      "lon": -104.9883413,
-      "name": "C-470 Trail",
-      "note": "C-470 Trail, Centennial"
-    },
-    {
-      "lat": 39.5649202,
-      "lon": -104.9886696,
-      "name": "C-470 Trail",
-      "note": "C-470 Trail, Centennial"
-    },
-    {
-      "lat": 39.5956609,
-      "lon": -104.9889603,
-      "name": "High Line Canal Trail",
-      "note": "High Line Canal Trail, Centennial"
-    },
-    {
-      "lat": 39.5685498,
-      "lon": -104.9718367,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.5969466,
-      "lon": -104.9894837,
-      "name": "High Line Canal Trail",
-      "note": "High Line Canal Trail, Centennial"
-    },
-    {
-      "lat": 39.5766689,
-      "lon": -104.980757,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.576668,
-      "lon": -104.9806876,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.576215,
-      "lon": -104.9882233,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.6341642,
-      "lon": -104.9870021,
-      "name": "470 Trail",
-      "note": "470 Trail, Centennial"
-    },
-    {
-      "lat": 39.6034844,
-      "lon": -104.9783606,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Centennial"
-    },
-    {
-      "lat": 39.5834587,
-      "lon": -104.998042,
-      "name": "Lee Gulch Trail",
-      "note": "Lee Gulch Trail, Centennial"
-    },
-    {
-      "lat": 39.6310677,
-      "lon": -105.0167169,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6353769,
-      "lon": -105.0184162,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6308565,
-      "lon": -105.0150412,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6240553,
-      "lon": -105.0004385,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6289805,
-      "lon": -105.007091,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6283592,
-      "lon": -105.005323,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6292459,
-      "lon": -105.0092049,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6291639,
-      "lon": -105.0080653,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6291588,
-      "lon": -105.0100388,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6292065,
-      "lon": -105.0095951,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6307854,
-      "lon": -105.0146365,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6299324,
-      "lon": -105.0122747,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6228162,
-      "lon": -104.9990565,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6213117,
-      "lon": -104.9927933,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.621752,
-      "lon": -104.9935419,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6395994,
-      "lon": -105.0169355,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6437032,
-      "lon": -105.0150853,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6277434,
-      "lon": -105.0034814,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6250623,
-      "lon": -105.0164858,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.630451,
-      "lon": -105.0142731,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6306395,
-      "lon": -105.0141306,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6216498,
-      "lon": -105.0006136,
-      "name": "Loop Trail",
-      "note": "Loop Trail, Englewood"
-    },
-    {
-      "lat": 39.6216388,
-      "lon": -105.0027437,
-      "name": "Loop Trail",
-      "note": "Loop Trail, Englewood"
-    },
-    {
-      "lat": 39.6215143,
-      "lon": -105.0015815,
-      "name": "Loop Trail",
-      "note": "Loop Trail, Englewood"
-    },
-    {
-      "lat": 39.6218447,
-      "lon": -105.0007581,
-      "name": "Loop Trail",
-      "note": "Loop Trail, Englewood"
-    },
-    {
-      "lat": 39.6224181,
-      "lon": -105.0012239,
-      "name": "Loop Trail",
-      "note": "Loop Trail, Englewood"
-    },
-    {
-      "lat": 39.6223677,
-      "lon": -105.0059649,
-      "name": "Loop Trail",
-      "note": "Loop Trail, Englewood"
-    },
-    {
-      "lat": 39.6211095,
-      "lon": -105.0040915,
-      "name": "Loop Trail",
-      "note": "Loop Trail, Englewood"
-    },
-    {
-      "lat": 39.6205961,
-      "lon": -105.0059715,
-      "name": "Loop Trail",
-      "note": "Loop Trail, Englewood"
-    },
-    {
-      "lat": 39.6231305,
-      "lon": -105.0036904,
-      "name": "Loop Trail",
-      "note": "Loop Trail, Englewood"
-    },
-    {
-      "lat": 39.6259399,
-      "lon": -105.0017281,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6439697,
-      "lon": -105.014443,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6211977,
-      "lon": -105.0066152,
-      "name": "Loop Trail",
-      "note": "Loop Trail, Englewood"
-    },
-    {
-      "lat": 39.6218826,
-      "lon": -104.9964817,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6216845,
-      "lon": -104.9976345,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.622276,
-      "lon": -104.9952447,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6221679,
-      "lon": -104.9945724,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6307831,
-      "lon": -105.0140594,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6189501,
-      "lon": -105.0105803,
-      "name": "Littleton Community Trail",
-      "note": "Littleton Community Trail, Englewood"
-    },
-    {
-      "lat": 39.6173713,
-      "lon": -105.0105632,
-      "name": "Littleton Community Trail",
-      "note": "Littleton Community Trail, Englewood"
-    },
-    {
-      "lat": 39.6172187,
-      "lon": -105.0107135,
-      "name": "Littleton Community Trail",
-      "note": "Littleton Community Trail, Englewood"
-    },
-    {
-      "lat": 39.6153131,
-      "lon": -105.0120884,
-      "name": "Littleton Community Trail",
-      "note": "Littleton Community Trail, Englewood"
-    },
-    {
-      "lat": 39.643217,
-      "lon": -105.0145998,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.643471,
-      "lon": -105.0145269,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6427997,
-      "lon": -105.0147266,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6209797,
-      "lon": -105.0202604,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6170556,
-      "lon": -105.0203244,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6366744,
-      "lon": -105.0158637,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6308939,
-      "lon": -105.0140629,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.617167,
-      "lon": -105.0093183,
-      "name": "Littleton Community Trail",
-      "note": "Littleton Community Trail, Englewood"
-    },
-    {
-      "lat": 39.6210381,
-      "lon": -104.9922074,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6437852,
-      "lon": -105.0146047,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6439718,
-      "lon": -105.0145364,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6211121,
-      "lon": -104.9924662,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6211625,
-      "lon": -104.9925092,
-      "name": "Big Dry Creek Trail",
-      "note": "Big Dry Creek Trail, Englewood"
-    },
-    {
-      "lat": 39.6135645,
-      "lon": -105.0234057,
-      "name": "Mary Carter Greenway Trail",
-      "note": "Mary Carter Greenway Trail, Englewood"
     }
   ],
   "healthcare": [
@@ -1591,90 +901,6 @@
       "lon": -104.9951523,
       "name": "609 West Littleton Boulevard",
       "note": "609 W Littleton Blvd #100, Littleton, CO 80120 (approx)"
-    },
-    {
-      "lat": 39.6245626,
-      "lon": -104.986719,
-      "name": "Walgreens",
-      "note": "Walgreens, Centennial"
-    },
-    {
-      "lat": 39.5742571,
-      "lon": -104.9890177,
-      "name": "Comfort Dental",
-      "note": "Comfort Dental, Centennial"
-    },
-    {
-      "lat": 39.5834695,
-      "lon": -104.9877341,
-      "name": "Dentists of Littleton",
-      "note": "Dentists of Littleton, Centennial"
-    },
-    {
-      "lat": 39.567457,
-      "lon": -104.9890094,
-      "name": "Planned Parenthood",
-      "note": "Planned Parenthood, Centennial"
-    },
-    {
-      "lat": 39.609928,
-      "lon": -104.9863915,
-      "name": "Orchard Creek Dentistry",
-      "note": "Orchard Creek Dentistry, Centennial"
-    },
-    {
-      "lat": 39.5773409,
-      "lon": -104.9870114,
-      "name": "Morris Family Dentistry",
-      "note": "Morris Family Dentistry, Centennial"
-    },
-    {
-      "lat": 39.5748717,
-      "lon": -104.9880861,
-      "name": "Southbridge Dentistry",
-      "note": "Southbridge Dentistry, Centennial"
-    },
-    {
-      "lat": 39.5772882,
-      "lon": -104.9870932,
-      "name": "Arapahoe Medical Plaza I",
-      "note": "Arapahoe Medical Plaza I, Centennial"
-    },
-    {
-      "lat": 39.5762658,
-      "lon": -104.9860914,
-      "name": "AdventHealth Littleton Hospital",
-      "note": "AdventHealth Littleton Hospital, Centennial"
-    },
-    {
-      "lat": 39.5753567,
-      "lon": -104.9855266,
-      "name": "Arapahoe Medical Plaza III",
-      "note": "Arapahoe Medical Plaza III, Centennial"
-    },
-    {
-      "lat": 39.5753873,
-      "lon": -104.9864086,
-      "name": "Arapahoe Medical Plaza II",
-      "note": "Arapahoe Medical Plaza II, Centennial"
-    },
-    {
-      "lat": 39.5758126,
-      "lon": -104.9860355,
-      "name": "AdventHealth Littleton Hospital",
-      "note": "AdventHealth Littleton Hospital, Centennial"
-    },
-    {
-      "lat": 39.5767757,
-      "lon": -104.9867644,
-      "name": "SurgiCenter",
-      "note": "SurgiCenter, Centennial"
-    },
-    {
-      "lat": 39.6441544,
-      "lon": -105.006401,
-      "name": "Costco Pharmacy",
-      "note": "Costco Pharmacy, Englewood"
     }
   ],
   "busStop": [
@@ -2230,156 +1456,6 @@
       "lon": -105.024882,
       "name": "Littleton - Mineral",
       "note": "Littleton - Mineral"
-    },
-    {
-      "lat": 39.5733269,
-      "lon": -104.987622,
-      "name": "E Mineral Ave & S Broadway",
-      "note": "E Mineral Ave & S Broadway, Centennial"
-    },
-    {
-      "lat": 39.5736308,
-      "lon": -104.9889914,
-      "name": "W Mineral Ave & S Broadway",
-      "note": "W Mineral Ave & S Broadway, Centennial"
-    },
-    {
-      "lat": 39.5657689,
-      "lon": -104.988352,
-      "name": "South Broadway & County Line Road",
-      "note": "South Broadway & County Line Road, Centennial"
-    },
-    {
-      "lat": 39.5684489,
-      "lon": -104.988397,
-      "name": "South Broadway & Southpark Drive",
-      "note": "South Broadway & Southpark Drive, Centennial"
-    },
-    {
-      "lat": 39.5711506,
-      "lon": -104.988355,
-      "name": "South Broadway & South Grant Way",
-      "note": "South Broadway & South Grant Way, Centennial"
-    },
-    {
-      "lat": 39.5738398,
-      "lon": -104.988343,
-      "name": "South Broadway & Mineral Avenue",
-      "note": "South Broadway & Mineral Avenue, Centennial"
-    },
-    {
-      "lat": 39.5756808,
-      "lon": -104.988321,
-      "name": "South Broadway & Jamison Avenue",
-      "note": "South Broadway & Jamison Avenue, Centennial"
-    },
-    {
-      "lat": 39.5758356,
-      "lon": -104.9886553,
-      "name": "South Broadway & West Jamison Avenue",
-      "note": "South Broadway & West Jamison Avenue, Centennial"
-    },
-    {
-      "lat": 39.5729329,
-      "lon": -104.9886681,
-      "name": "South Broadway & West Mineral Avenue",
-      "note": "South Broadway & West Mineral Avenue, Centennial"
-    },
-    {
-      "lat": 39.57058,
-      "lon": -104.9886895,
-      "name": "South Broadway & South Grant Way",
-      "note": "South Broadway & South Grant Way, Centennial"
-    },
-    {
-      "lat": 39.5676303,
-      "lon": -104.9887168,
-      "name": "South Broadway & Southpark Drive",
-      "note": "South Broadway & Southpark Drive, Centennial"
-    },
-    {
-      "lat": 39.6455572,
-      "lon": -104.9879169,
-      "name": "South Broadway & West Mansfield Avenue",
-      "note": "South Broadway & West Mansfield Avenue, Englewood"
-    },
-    {
-      "lat": 39.6421928,
-      "lon": -105.0050696,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6241388,
-      "lon": -105.0104162,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6263108,
-      "lon": -105.0098329,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6307287,
-      "lon": -105.0085447,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6372763,
-      "lon": -105.0065096,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6371664,
-      "lon": -105.0066245,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6421874,
-      "lon": -105.0051629,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.643519,
-      "lon": -105.0045703,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6418257,
-      "lon": -105.0053001,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6188284,
-      "lon": -105.0121128,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6182553,
-      "lon": -105.0125098,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.628517,
-      "lon": -105.0091991,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6285278,
-      "lon": -105.0092519,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
     }
   ],
   "restaurant": [
@@ -2388,12 +1464,6 @@
       "lon": -104.9892309,
       "name": "Mannings",
       "note": "51 W Dry Creek Ct, Littleton, CO 80120"
-    },
-    {
-      "lat": 39.5728139,
-      "lon": -104.9885967,
-      "name": "Ninja Sushi",
-      "note": "7923 S Broadway, Littleton, CO 80122"
     },
     {
       "lat": 39.5662016,
@@ -2438,12 +1508,6 @@
       "note": "2609 Main St, Littleton, CO 80120"
     },
     {
-      "lat": 39.613808,
-      "lon": -105.016035,
-      "name": "Pho Real",
-      "note": "2399 Main St, Littleton, CO 80120"
-    },
-    {
       "lat": 39.6123386,
       "lon": -105.0062238,
       "name": "Santa Fe Grill",
@@ -2466,18 +1530,6 @@
       "lon": -104.9978888,
       "name": "Cherry Cricket",
       "note": "819 W Littleton Blvd, Littleton, CO 80120"
-    },
-    {
-      "lat": 39.613263,
-      "lon": -104.996055,
-      "name": "Latke Love",
-      "note": "699 W Littleton Blvd, Littleton, CO 80120"
-    },
-    {
-      "lat": 39.6134151,
-      "lon": -104.9922798,
-      "name": "Pho Littleton",
-      "note": "389 W Littleton Blvd, Littleton, CO 80120"
     },
     {
       "lat": 39.613308,
@@ -2528,12 +1580,6 @@
       "note": "5302 S Federal Cir, Littleton, CO 80123"
     },
     {
-      "lat": 39.611115,
-      "lon": -105.036575,
-      "name": "Santiagos",
-      "note": "5826 S Lowell Blvd, Littleton, CO 80123"
-    },
-    {
       "lat": 39.608809,
       "lon": -105.036769,
       "name": "Colore",
@@ -2558,274 +1604,611 @@
       "note": "2660 W Belleview Ave, Littleton, CO 80123"
     },
     {
-      "lat": 39.6229477,
-      "lon": -104.98841,
-      "name": "Wendy's",
-      "note": "Wendy's, Centennial"
+      "lat": 39.582355540719,
+      "lon": -104.98546494688,
+      "name": "Social Bar & Lounge",
+      "note": "240 Village Park Dr Ste 100, Littleton, CO"
     },
     {
-      "lat": 39.6237637,
-      "lon": -104.98882,
-      "name": "Del Taco",
-      "note": "Del Taco, Centennial"
+      "lat": 39.614207796107,
+      "lon": -105.017368853405,
+      "name": "Kate's Wine Bar",
+      "note": "5671 S Nevada St, Littleton, CO"
     },
     {
-      "lat": 39.6237204,
-      "lon": -104.9873507,
-      "name": "McDonald's",
-      "note": "McDonald's, Centennial"
+      "lat": 39.612207879137,
+      "lon": -105.019952009435,
+      "name": "Tonic Zero Proof Bar",
+      "note": "5767 S Rapp St, Littleton, CO"
     },
     {
-      "lat": 39.6231563,
-      "lon": -104.987413,
-      "name": "Black-eyed Pea",
-      "note": "Black-eyed Pea, Centennial"
+      "lat": 39.612298138675,
+      "lon": -105.019957701467,
+      "name": "Honnibrook Mead Cottage",
+      "note": "5757 S Rapp St, Littleton, CO"
     },
     {
-      "lat": 39.6224415,
-      "lon": -104.987551,
-      "name": "Qdoba",
-      "note": "Qdoba, Centennial"
+      "lat": 39.613670304569,
+      "lon": -105.017666238985,
+      "name": "Jake's Brew Bar",
+      "note": "2530 Main St, Littleton, CO"
     },
     {
-      "lat": 39.6223237,
-      "lon": -104.987543,
-      "name": "Papa John's",
-      "note": "Papa John's, Centennial"
+      "lat": 39.613784895859,
+      "lon": -105.016345499563,
+      "name": "Denver Beer Co. Littleton",
+      "note": "2409 Main St, Littleton, CO"
     },
     {
-      "lat": 39.575387,
-      "lon": -104.9898093,
-      "name": "The Shack",
-      "note": "The Shack, Centennial"
+      "lat": 39.614610036719,
+      "lon": -105.014976880766,
+      "name": "Comet Brews",
+      "note": "5642 S Sycamore St, Littleton, CO"
     },
     {
-      "lat": 39.6273583,
-      "lon": -104.9884121,
-      "name": "Burger King",
-      "note": "Burger King, Centennial"
+      "lat": 39.61395434203,
+      "lon": -105.014982501081,
+      "name": "Ned Kelly's Irish Pub",
+      "note": "5686 S Sycamore St, Littleton, CO"
     },
     {
-      "lat": 39.5711298,
-      "lon": -104.9879102,
-      "name": "Wendy's",
-      "note": "Wendy's, Centennial"
+      "lat": 39.613273658207,
+      "lon": -105.001810916377,
+      "name": "Littleton Brewing Company",
+      "note": "1201 W Littleton Blvd, Littleton, CO"
     },
     {
-      "lat": 39.5704749,
-      "lon": -104.9890597,
-      "name": "McDonald's",
-      "note": "McDonald's, Centennial"
+      "lat": 39.604244365899,
+      "lon": -105.020402310652,
+      "name": "Colorado Pinball Pub",
+      "note": "6209 S Santa Fe Dr, Littleton, CO"
     },
     {
-      "lat": 39.5745803,
-      "lon": -104.9890265,
-      "name": "Sunflower Asian Cafe",
-      "note": "Sunflower Asian Cafe, Centennial"
+      "lat": 39.594234084855,
+      "lon": -105.023341787195,
+      "name": "Breckenridge Brewery",
+      "note": "2890 Brewery Lane, Littleton, CO"
     },
     {
-      "lat": 39.5744766,
-      "lon": -104.9890265,
-      "name": "Jimmy John's",
-      "note": "Jimmy John's, Centennial"
+      "lat": 39.613670304596,
+      "lon": -105.018055524459,
+      "name": "Lazy Greyhound",
+      "note": "2570 Main St, Littleton, CO"
     },
     {
-      "lat": 39.5744209,
-      "lon": -104.989024,
-      "name": "Domino's",
-      "note": "Domino's, Centennial"
+      "lat": 39.608864950091,
+      "lon": -105.037741609786,
+      "name": "Locavore Beer Works",
+      "note": "5950 S Platte Canyon Rd, Littleton, CO"
     },
     {
-      "lat": 39.6160335,
-      "lon": -104.988352,
-      "name": "Sipp Soda Bar",
-      "note": "Sipp Soda Bar, Centennial"
+      "lat": 39.623008788436,
+      "lon": -105.03489553446,
+      "name": "Zymos Brewing",
+      "note": "5180 S Lowell Blvd, Littleton, CO"
     },
     {
-      "lat": 39.5960183,
-      "lon": -104.9886602,
-      "name": "Pho Broadway",
-      "note": "Pho Broadway, Centennial"
+      "lat": 39.619413869192,
+      "lon": -105.017130344093,
+      "name": "Los Portales Mexican Restaurant",
+      "note": "5350 S Santa Fe Dr, Littleton, CO"
     },
     {
-      "lat": 39.5948003,
-      "lon": -104.9879302,
-      "name": "Wang's",
-      "note": "Wang's, Centennial"
+      "lat": 39.613184824414,
+      "lon": -105.005611946847,
+      "name": "El Lucero Salvadoran & Mexican Restaurant",
+      "note": "1500 W Littleton Blvd #110 A, Littleton, CO"
     },
     {
-      "lat": 39.6199208,
-      "lon": -105.0163794,
-      "name": "The Lost Cajun",
-      "note": "The Lost Cajun, Englewood"
+      "lat": 39.609676645313,
+      "lon": -105.035286125766,
+      "name": "Don Juan's Mexican Grill",
+      "note": "3625 W Bowles Ave, Littleton, CO"
     },
     {
-      "lat": 39.6197885,
-      "lon": -105.0163779,
-      "name": "Wing Slingers",
-      "note": "Wing Slingers, Englewood"
+      "lat": 39.613834,
+      "lon": -105.0159399,
+      "name": "Cencalli Taqueria",
+      "note": "Littleton CO 80120, Littleton, CO"
     },
     {
-      "lat": 39.6195469,
-      "lon": -105.0163607,
+      "lat": 39.566174900598,
+      "lon": -104.989588407754,
+      "name": "Mi Cocina Express - Broadway",
+      "note": "137 W County Line Road, Littleton, CO"
+    },
+    {
+      "lat": 39.613184824414,
+      "lon": -105.005611946847,
+      "name": "Old Santa Fe Express Mexican Grille",
+      "note": "1500 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.600627806686,
+      "lon": -104.988270926222,
+      "name": "Mama Sol Cafe",
+      "note": "6439 S Broadway, Littleton, CO"
+    },
+    {
+      "lat": 39.608864950091,
+      "lon": -105.037741609786,
+      "name": "4G's at Columbine",
+      "note": "5950 S Platte Canyon Road, Littleton, CO"
+    },
+    {
+      "lat": 39.613670304486,
+      "lon": -105.016462836239,
+      "name": "The Alley: Mountain Mexican",
+      "note": "2420 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.613784896006,
+      "lon": -105.018480309339,
+      "name": "Palenque Cocina Y Agaveria",
+      "note": "2609 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.613165139185,
+      "lon": -105.004096048009,
+      "name": "Taco House",
+      "note": "1390 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.600813083732,
+      "lon": -104.988268699313,
+      "name": "Chenton's Tacos",
+      "note": "6429 S Broadway, Littleton, CO"
+    },
+    {
+      "lat": 39.613163402015,
+      "lon": -105.002387544633,
+      "name": "Chinelo's Mexican Food",
+      "note": "1228 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.613162700265,
+      "lon": -105.003744847039,
+      "name": "Los Compitas",
+      "note": "1360 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.613226894286,
+      "lon": -104.992417030922,
+      "name": "Old Fashioned Italian Deli",
+      "note": "395 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.572592442852,
+      "lon": -105.008369854603,
+      "name": "The Garlic Knot Pizza & Pasta",
+      "note": "1621 W Canal Circle, Littleton, CO"
+    },
+    {
+      "lat": 39.611035475587,
+      "lon": -104.988141796733,
+      "name": "Big Daddy's Pizza",
+      "note": "5829 S Broadway, Littleton, CO"
+    },
+    {
+      "lat": 39.619413869192,
+      "lon": -105.017130344093,
       "name": "Piccino Wood Oven Pizza",
-      "note": "Piccino Wood Oven Pizza, Englewood"
+      "note": "5350 S Santa Fe Dr, Littleton, CO"
     },
     {
-      "lat": 39.6196585,
-      "lon": -105.016696,
-      "name": "Panda Express",
-      "note": "Panda Express, Englewood"
+      "lat": 39.613878483974,
+      "lon": -105.006749474404,
+      "name": "Romano's Italian Restaurant & Pizzeria",
+      "note": "5666 S Windermere St, Littleton, CO"
     },
     {
-      "lat": 39.6420246,
-      "lon": -104.987335,
-      "name": "Pizza Hut",
-      "note": "Pizza Hut, Englewood"
+      "lat": 39.62281770857,
+      "lon": -105.034898281636,
+      "name": "Walter's 303 Pizzeria & Publik House",
+      "note": "5194 S Lowell Blvd, Littleton, CO"
     },
     {
-      "lat": 39.6432272,
-      "lon": -105.012473,
-      "name": "The Broken Tee Grill",
-      "note": "The Broken Tee Grill, Englewood"
+      "lat": 39.624092303211,
+      "lon": -105.018841807726,
+      "name": "Anthony's Pizza & Pasta",
+      "note": "2610 W Belleview Ave, Littleton, CO"
     },
     {
-      "lat": 39.6195288,
-      "lon": -105.016689,
-      "name": "Bruegger's Bagels",
-      "note": "Bruegger's Bagels, Englewood"
+      "lat": 39.592179,
+      "lon": -105.0230258,
+      "name": "Angelo's Taverna",
+      "note": "6685 S Santa Fe Dr, Littleton, CO"
     },
     {
-      "lat": 39.623248,
-      "lon": -105.0186498,
-      "name": "The Pint Room",
-      "note": "The Pint Room, Englewood"
+      "lat": 39.608864950091,
+      "lon": -105.037741609786,
+      "name": "Colore Italian",
+      "note": "5950 S Platte Canyon Rd # A1, Littleton, CO"
     },
     {
-      "lat": 39.6438848,
-      "lon": -104.9881949,
-      "name": "Asuka Ramen",
-      "note": "Asuka Ramen, Englewood"
+      "lat": 39.613184824414,
+      "lon": -105.005611946847,
+      "name": "Capitol Pizza",
+      "note": "1500 W Littleton Blvd Ste 126, Littleton, CO"
     },
     {
-      "lat": 39.6237382,
-      "lon": -104.9905493,
-      "name": "C Burger",
-      "note": "C Burger, Englewood"
+      "lat": 39.609676645313,
+      "lon": -105.035286125766,
+      "name": "Gambino's Restaurant",
+      "note": "3625 W Bowles Ave Unit 8, Littleton, CO"
+    },
+    {
+      "lat": 39.613670304479,
+      "lon": -105.016365055687,
+      "name": "Olde Towne Tavern",
+      "note": "2410 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.571498522483,
+      "lon": -104.988577571413,
+      "name": "Alibi's Bar & Grill",
+      "note": "7983 S Broadway, Littleton, CO"
+    },
+    {
+      "lat": 39.567413058532,
+      "lon": -104.998181709635,
+      "name": "Celly's Bar and Grill in the Ice Ranch",
+      "note": "841 Southpark Dr, Littleton, CO"
+    },
+    {
+      "lat": 39.613251151934,
+      "lon": -104.997516080121,
+      "name": "Cherry Cricket - Littleton",
+      "note": "819 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.595895019771,
+      "lon": -104.988343263782,
+      "name": "The Castle Bar & Grill",
+      "note": "6657 S Broadway, Littleton, CO"
+    },
+    {
+      "lat": 39.566173534509,
+      "lon": -104.985782029732,
+      "name": "The Rusty Tapp Colorado BBQ & Catering",
+      "note": "311 E County Line Road, Littleton, CO"
+    },
+    {
+      "lat": 39.608864950091,
+      "lon": -105.037741609786,
+      "name": "Brad's Pit BBQ",
+      "note": "5950 S Platte Canyon Road, Littleton, CO"
+    },
+    {
+      "lat": 39.587839893254,
+      "lon": -105.02281092435,
+      "name": "Ted's Montana Grill",
+      "note": "7301 S Santa Fe Dr Ste 610, Littleton, CO"
+    },
+    {
+      "lat": 39.613670304663,
+      "lon": -105.019029834588,
+      "name": "ViewHouse Littleton",
+      "note": "2680 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.613784896009,
+      "lon": -105.018523609757,
+      "name": "The Melting Pot",
+      "note": "2707 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.624092303225,
+      "lon": -105.019049330865,
+      "name": "Bistro 36 Drinkery and Eatery",
+      "note": "2620 W Belleview Ave, Littleton, CO"
+    },
+    {
+      "lat": 39.579427667124,
+      "lon": -104.989546065435,
+      "name": "Manning's Steaks and Spirits",
+      "note": "51 W Dry Creek Ct, Littleton, CO"
+    },
+    {
+      "lat": 39.614539684757,
+      "lon": -105.018467602959,
+      "name": "Cafe Terracotta",
+      "note": "5649 S Curtice St, Littleton, CO"
+    },
+    {
+      "lat": 39.613784895879,
+      "lon": -105.01663884122,
+      "name": "Black+Haus Tavern Littleton",
+      "note": "2439 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.613775895766,
+      "lon": -105.01498452506,
+      "name": "Grande Station: A Social Bistro",
+      "note": "2299 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.619413869192,
+      "lon": -105.017130344093,
+      "name": "The 49th Food & Spirits - Littleton",
+      "note": "5350 S Santa Fe Dr, Littleton, CO"
+    },
+    {
+      "lat": 39.595049305094,
+      "lon": -104.98795595091,
+      "name": "Wang's Gourmet",
+      "note": "12 E Arapahoe Road, Littleton, CO"
+    },
+    {
+      "lat": 39.573534854798,
+      "lon": -104.989818078707,
+      "name": "Sunflower Asian Cafe",
+      "note": "91 W Mineral Ave, Littleton, CO"
+    },
+    {
+      "lat": 39.613234980268,
+      "lon": -104.993153862841,
+      "name": "Wild Ginger Thai Restaurant",
+      "note": "399 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.613152444223,
+      "lon": -105.001046796595,
+      "name": "Yummy Station",
+      "note": "1140 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.624092303239,
+      "lon": -105.019256854004,
+      "name": "Beyond Thai",
+      "note": "2630 W Belleview Ave Ste 150, Littleton, CO"
+    },
+    {
+      "lat": 39.572012346891,
+      "lon": -104.988573187187,
+      "name": "Hibachi V Express",
+      "note": "7961B S Broadway, Littleton, CO"
+    },
+    {
+      "lat": 39.613130304829,
+      "lon": -105.020357773673,
+      "name": "Sushi Basho",
+      "note": "2700 W Bowles Ave, Littleton, CO"
+    },
+    {
+      "lat": 39.608864950091,
+      "lon": -105.037741609786,
+      "name": "Makizushico",
+      "note": "5950 S Platte Canyon Rd D23, Littleton, CO"
+    },
+    {
+      "lat": 39.619881359148,
+      "lon": -105.027914855307,
+      "name": "JP Nori Sushi & Asian Cuisine",
+      "note": "5302 S Federal Circle, Littleton, CO"
+    },
+    {
+      "lat": 39.572899861778,
+      "lon": -104.988565614433,
+      "name": "Ninja Sushi",
+      "note": "7923 S Broadway, Littleton, CO"
+    },
+    {
+      "lat": 39.61378489598,
+      "lon": -105.018094452993,
+      "name": "Smokin Fins - Littleton",
+      "note": "2575 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.573539233763,
+      "lon": -104.990656639388,
+      "name": "PokeCo",
+      "note": "151 W Mineral Ave, Littleton, CO"
+    },
+    {
+      "lat": 39.61329113664,
+      "lon": -105.004589972372,
+      "name": "Momma's Kitchen",
+      "note": "1409 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.624092303239,
+      "lon": -105.019256854004,
+      "name": "Toast Fine Food & Coffee",
+      "note": "2630 W Belleview Ave, Littleton, CO"
+    },
+    {
+      "lat": 39.566229549967,
+      "lon": -105.026304212041,
+      "name": "NoNo's Cafe",
+      "note": "3005 W County Line Road, Littleton, CO"
+    },
+    {
+      "lat": 39.613203284608,
+      "lon": -105.012646026661,
+      "name": "Bacon Social House",
+      "note": "2100 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.613184824414,
+      "lon": -105.005611946847,
+      "name": "Louis' Diner",
+      "note": "1500 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.611099057305,
+      "lon": -105.036619156659,
+      "name": "Santiago's",
+      "note": "5826 S Lowell Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.591166355083,
+      "lon": -104.988359091691,
+      "name": "Manna Bakery & Deli",
+      "note": "6905 S Broadway, Littleton, CO"
+    },
+    {
+      "lat": 39.613670304589,
+      "lon": -105.01795820309,
+      "name": "The Chocolate Therapist",
+      "note": "2560 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.587839893254,
+      "lon": -105.02281092435,
+      "name": "Butterscotch Grove Bakery",
+      "note": "7301 S Santa Fe Dr #625, Littleton, CO"
+    },
+    {
+      "lat": 39.615111949413,
+      "lon": -105.018312377234,
+      "name": "Hearth Bakery",
+      "note": "5610 S Curtice St, Littleton, CO"
+    },
+    {
+      "lat": 39.613670304576,
+      "lon": -105.017763560353,
+      "name": "Born2Bake",
+      "note": "2540 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.610629450779,
+      "lon": -105.036850491735,
+      "name": "Chez Lizeth Creperie",
+      "note": "5856 S Lowell Blvd #28, Littleton, CO"
+    },
+    {
+      "lat": 39.613784895886,
+      "lon": -105.016736621772,
+      "name": "Little Man Ice Cream",
+      "note": "2449 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.614440210972,
+      "lon": -105.016112413306,
+      "name": "Inside Scoop Creamery",
+      "note": "5654 S Prince St, Littleton, CO"
+    },
+    {
+      "lat": 39.604320920321,
+      "lon": -105.020407354926,
+      "name": "Sweet Sundaes Ice Cream",
+      "note": "6205 S Santa Fe Dr, Littleton, CO"
+    },
+    {
+      "lat": 39.609676645313,
+      "lon": -105.035286125766,
+      "name": "Fresas Mexican Ice Cream",
+      "note": "3625 W Bowles Ave Unit 17, Littleton, CO"
+    },
+    {
+      "lat": 39.613162700265,
+      "lon": -105.003744847039,
+      "name": "Neveria Juarez",
+      "note": "1360 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.613130302648,
+      "lon": -104.988722575108,
+      "name": "Port of Subs",
+      "note": "40 W Littleton Blvd #204A, Littleton, CO"
+    },
+    {
+      "lat": 39.613130304829,
+      "lon": -105.020357773673,
+      "name": "Snarf's Sandwiches",
+      "note": "2700 W Bowles Ave Suite B, Littleton, CO"
+    },
+    {
+      "lat": 39.613184824414,
+      "lon": -105.005611946847,
+      "name": "Harley's: A Hot Dog Revolution",
+      "note": "1500 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.587839893254,
+      "lon": -105.02281092435,
+      "name": "Call Your Mother Lil' Deli",
+      "note": "7301 S Santa Fe Dr, Littleton, CO"
+    },
+    {
+      "lat": 39.613670304533,
+      "lon": -105.017147300104,
+      "name": "Playa Bowls",
+      "note": "2490 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.613235894541,
+      "lon": -104.996138530053,
+      "name": "Latke Love",
+      "note": "699 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.619413869192,
+      "lon": -105.017130344093,
+      "name": "Taj Mahal Indian Cuisine",
+      "note": "5350 S Santa Fe Dr C, Littleton, CO"
+    },
+    {
+      "lat": 39.573539233763,
+      "lon": -104.990656639388,
+      "name": "Zaika Indian Cuisine",
+      "note": "151 W Mineral Ave, Littleton, CO"
+    },
+    {
+      "lat": 39.566173925163,
+      "lon": -104.985868167514,
+      "name": "Haveli Indian Cuisine",
+      "note": "301 E County Line Road, Littleton, CO"
+    },
+    {
+      "lat": 39.613784302559,
+      "lon": -105.016117762543,
+      "name": "Pho Real",
+      "note": "2399 W Main St, Littleton, CO"
+    },
+    {
+      "lat": 39.613226894282,
+      "lon": -104.992363908541,
+      "name": "Pho Littleton",
+      "note": "389 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.566174900396,
+      "lon": -104.986643854529,
+      "name": "Pho 99 Vietnamese Noodles & Grill",
+      "note": "211 E County Line Road, Littleton, CO"
+    },
+    {
+      "lat": 39.596103602938,
+      "lon": -104.988338100809,
+      "name": "Pho Broadway",
+      "note": "6645 S Broadway, Littleton, CO"
+    },
+    {
+      "lat": 39.613184824414,
+      "lon": -105.005611946847,
+      "name": "VinaMeals",
+      "note": "1500 W Littleton Blvd #110 A, Littleton, CO"
+    },
+    {
+      "lat": 39.624212724553,
+      "lon": -105.022278345489,
+      "name": "Hujra Kebab & Gyros",
+      "note": "2897 W Belleview Ave A, Littleton, CO"
+    },
+    {
+      "lat": 39.613280376297,
+      "lon": -105.004188360746,
+      "name": "Gyros Town Grill",
+      "note": "1399 W Littleton Blvd, Littleton, CO"
+    },
+    {
+      "lat": 39.613184824414,
+      "lon": -105.005611946847,
+      "name": "Fresh Market & Community Kitchen",
+      "note": "1500 W Littleton Blvd, Littleton, CO"
     }
   ],
-  "schools": [
-    {
-      "lat": 39.5916547,
-      "lon": -104.9760931,
-      "name": "Gilpin School",
-      "note": "Gilpin School, Centennial"
-    },
-    {
-      "lat": 39.6339991,
-      "lon": -104.9860623,
-      "name": "Cherrelyn Elementary School",
-      "note": "Cherrelyn Elementary School, Centennial"
-    },
-    {
-      "lat": 39.5880436,
-      "lon": -104.9819266,
-      "name": "Hopkins Elementary School",
-      "note": "Hopkins Elementary School, Centennial"
-    },
-    {
-      "lat": 39.6188766,
-      "lon": -104.9830375,
-      "name": "Field Elementary School",
-      "note": "Field Elementary School, Centennial"
-    },
-    {
-      "lat": 39.5903,
-      "lon": -104.9704,
-      "name": "Twain Elementary School",
-      "note": "Twain Elementary School, Centennial"
-    },
-    {
-      "lat": 39.5904536,
-      "lon": -104.9870869,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.6141231,
-      "lon": -104.9843794,
-      "name": "Littleton High School",
-      "note": "Littleton High School, Centennial"
-    },
-    {
-      "lat": 39.6141561,
-      "lon": -104.9850016,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.6265522,
-      "lon": -104.9824278,
-      "name": "All Souls Catholic School",
-      "note": "All Souls Catholic School, Centennial"
-    },
-    {
-      "lat": 39.6267713,
-      "lon": -104.9909183,
-      "name": "Colorado's Finest",
-      "note": "Colorado's Finest, Centennial"
-    },
-    {
-      "lat": 39.5743544,
-      "lon": -104.9782159,
-      "name": "John Wesley Powell Middle School",
-      "note": "John Wesley Powell Middle School, Centennial"
-    },
-    {
-      "lat": 39.5735555,
-      "lon": -104.9775379,
-      "name": "John Wesley Powell Middle School",
-      "note": "John Wesley Powell Middle School, Centennial"
-    },
-    {
-      "lat": 39.5880116,
-      "lon": -104.981786,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.5983107,
-      "lon": -104.9900851,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.5980682,
-      "lon": -104.9899998,
-      "name": "Options High School",
-      "note": "Options High School, Centennial"
-    },
-    {
-      "lat": 39.5977842,
-      "lon": -104.9798926,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.5979677,
-      "lon": -104.9799356,
-      "name": "Highland Elementary School",
-      "note": "Highland Elementary School, Centennial"
-    },
-    {
-      "lat": 39.6338638,
-      "lon": -104.9860993,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.6322094,
-      "lon": -104.9937509,
-      "note": "Englewood"
-    },
-    {
-      "lat": 39.626733,
-      "lon": -104.9912207,
-      "note": "Englewood"
-    }
-  ]
+  "schools": []
 }
