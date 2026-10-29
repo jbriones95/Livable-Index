@@ -1,0 +1,96 @@
+{
+  "city": "Denver",
+  "generated": "2026-10-29",
+  "overture": {
+    "release": "2026-10-21.0",
+    "dataset": "theme=places/type=place",
+    "license": "CDLA-Permissive-2.0",
+    "queryBbox": [
+      -105.12,
+      39.6,
+      -104.55,
+      39.95
+    ],
+    "openNamedPlacesInDenver": 45477
+  },
+  "neighborhoods": {
+    "source": "City and County of Denver Statistical Neighborhood",
+    "count": 78,
+    "totalSqMi": 154.7
+  },
+  "pois": {
+    "total": 17665,
+    "byCategory": {
+      "coffee": 302,
+      "restaurant": 3516,
+      "grocery": 578,
+      "parks": 6299,
+      "healthcare": 4416,
+      "schools": 472,
+      "busStops": 2082
+    }
+  },
+  "licenses": {
+    "source": "Denver Active Business Licenses",
+    "total": 56423,
+    "commercial": 7207,
+    "liquor": 121,
+    "foodBusiness": 4972,
+    "note": "Commercial counts exclude Residential Rental and Short Term Rental licenses."
+  },
+  "trails": {
+    "source": "Denver Parks & Recreation DPR_Trails_General_2020",
+    "segments": 78
+  },
+  "sources": [
+    {
+      "name": "Overture Maps Places",
+      "url": "https://overturemaps.org/download/",
+      "license": "CDLA-Permissive-2.0"
+    },
+    {
+      "name": "Denver Open Data - Statistical Neighborhood",
+      "url": "https://data.denvergov.org/"
+    },
+    {
+      "name": "Denver Open Data - Active Business Licenses",
+      "url": "https://data.denvergov.org/"
+    },
+    {
+      "name": "Denver Open Data - Food Retail Locations",
+      "url": "https://data.denvergov.org/"
+    },
+    {
+      "name": "Denver Open Data - Liquor Licenses",
+      "url": "https://data.denvergov.org/"
+    },
+    {
+      "name": "Denver Open Data - Public and Non-Public Schools",
+      "url": "https://data.denvergov.org/"
+    },
+    {
+      "name": "Denver Open Data - Health Facilities / Hospitals / FQHCs",
+      "url": "https://data.denvergov.org/"
+    },
+    {
+      "name": "Denver Open Data - Parkland",
+      "url": "https://data.denvergov.org/"
+    },
+    {
+      "name": "Denver Open Data - RTD Bus Stops and Rail Stations",
+      "url": "https://data.denvergov.org/"
+    },
+    {
+      "name": "Denver Open Data - DPR Trails",
+      "url": "https://data.denvergov.org/"
+    },
+    {
+      "name": "Denver Open Data - Bicycle Facilities",
+      "url": "https://data.denvergov.org/"
+    },
+    {
+      "name": "Denver Open Data - Police Stations",
+      "url": "https://data.denvergov.org/"
+    }
+  ]
+}

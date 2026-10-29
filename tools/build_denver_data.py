@@ -31,7 +31,7 @@ Outputs (all under data/denver/)
 Run with:
     python tools/build_denver_data.py
 
-Requires: duckdb (with the spatial + httpfs extensions) and Python 3.10+.
+Requires: duckdb (with the spatial + httpfs extensions) and Python 3.9+.
 """
 
 from __future__ import annotations
@@ -330,7 +330,9 @@ def build() -> None:
         "LOAD httpfs",
         "INSTALL spatial",
         "LOAD spatial",
-        "SET geometry_always_xy = true",
+        # Newer spatial builds follow each CRS's authority axis order (EPSG:4326
+        # is lat/lon). We keep all source geometries in OGC:CRS84 (lon/lat) so
+        # they line up with the GeoJSON output and the app's [lon, lat] arrays.
         "SET s3_region = 'us-west-2'",
     ):
         con.execute(statement)
@@ -351,7 +353,7 @@ def build() -> None:
         CREATE TABLE nb_pts AS
         SELECT *,
                ST_PointOnSurface(geom) AS pt,
-               ST_Area(ST_Transform(geom, 'EPSG:4326', 'EPSG:26913')) / 2589988.11 AS sqmi
+               ST_Area(ST_Transform(geom, 'OGC:CRS84', 'EPSG:26913')) / 2589988.11 AS sqmi
         FROM nb
         """
     )
@@ -371,7 +373,7 @@ def build() -> None:
                taxonomy.primary AS cat,
                confidence,
                addresses[1].freeform AS address,
-               ST_Transform(ST_Centroid(geometry), 'OGC:CRS84', 'EPSG:4326') AS geom
+               ST_Centroid(geometry) AS geom
         FROM read_parquet('{OVERTURE_SRC}')
         WHERE {OVERTURE_BBOX}
           AND operating_status = 'open'
@@ -480,8 +482,8 @@ def build() -> None:
                   FROM points p
                   WHERE p.category IN ({cat_list})
                     AND ST_DWithin(
-                        ST_Transform(a.geom, 'EPSG:4326', 'EPSG:26913'),
-                        ST_Transform(p.geom, 'EPSG:4326', 'EPSG:26913'),
+                        ST_Transform(a.geom, 'OGC:CRS84', 'EPSG:26913'),
+                        ST_Transform(p.geom, 'OGC:CRS84', 'EPSG:26913'),
                         {dedupe_m}
                     )
               )
@@ -570,10 +572,7 @@ def build() -> None:
         "denver_parkland",
         """
         SELECT name, NULL AS address,
-               ST_SetCRS(
-                   ST_GeomFromText('POINT(' || lon || ' ' || lat || ')'),
-                   'EPSG:4326'
-               ) AS geom
+               ST_GeomFromText('POINT(' || lon || ' ' || lat || ')') AS geom
         FROM park_raw
         """,
         dedupe_m=100,
@@ -653,7 +652,7 @@ def build() -> None:
     con.execute(
         """
         CREATE TABLE points_m AS
-        SELECT *, ST_Transform(geom, 'EPSG:4326', 'EPSG:26913') AS geom_m
+        SELECT *, ST_Transform(geom, 'OGC:CRS84', 'EPSG:26913') AS geom_m
         FROM points_nb
         """
     )
@@ -661,8 +660,8 @@ def build() -> None:
         """
         CREATE TABLE nb_m AS
         SELECT *,
-               ST_Transform(pt, 'EPSG:4326', 'EPSG:26913') AS pt_m,
-               ST_Transform(geom, 'EPSG:4326', 'EPSG:26913') AS geom_m
+               ST_Transform(pt, 'OGC:CRS84', 'EPSG:26913') AS pt_m,
+               ST_Transform(geom, 'OGC:CRS84', 'EPSG:26913') AS geom_m
         FROM nb_pts
         """
     )
@@ -670,7 +669,7 @@ def build() -> None:
         """
         CREATE TABLE trails_m AS
         SELECT name, TYPE_CLASS,
-               ST_Transform(geom, 'EPSG:4326', 'EPSG:26913') AS geom_m
+               ST_Transform(geom, 'OGC:CRS84', 'EPSG:26913') AS geom_m
         FROM trails
         """
     )
@@ -790,10 +789,7 @@ def build() -> None:
         """
         CREATE TABLE lic AS
         SELECT license_type, license_sub_type, license_status,
-               ST_Transform(
-                   ST_SetCRS(ST_Point(x, y), 'EPSG:2232'),
-                   'EPSG:4326'
-               ) AS geom
+               ST_Transform(ST_Point(x, y), 'EPSG:2232', 'OGC:CRS84') AS geom
         FROM lic_raw
         """
     )
@@ -918,7 +914,8 @@ def build() -> None:
     log("assembling neighborhood scores and metrics")
     nbhd_rows = con.execute(
         """
-        SELECT NBHD_ID, NBHD_NAME, TYPOLOGY, sqmi, pt, geom,
+        SELECT NBHD_ID, NBHD_NAME, TYPOLOGY, sqmi,
+               ST_X(pt) AS pt_lng, ST_Y(pt) AS pt_lat,
                ST_AsGeoJSON(ST_Simplify(geom, 0.00001)) AS geom_json
         FROM nb_pts
         ORDER BY NBHD_ID
@@ -959,7 +956,7 @@ def build() -> None:
     }
 
     features = []
-    for nbhd_id, name, typology, sqmi, pt, geom, geom_json in nbhd_rows:
+    for nbhd_id, name, typology, sqmi, pt_lng, pt_lat, geom_json in nbhd_rows:
         nearest = nearest_rows.get(nbhd_id)
         if nearest is None:
             nearest = (nbhd_id,) + (None,) * 8
@@ -993,8 +990,6 @@ def build() -> None:
         if licenses is None:
             licenses = (nbhd_id, 0, 0, 0)
         _, active_business, liquor_count, food_business = licenses
-
-        pt_lng, pt_lat = pt["coordinates"][0], pt["coordinates"][1]
 
         scores = {
             "coffee": dist_to_score(coffee_km),
