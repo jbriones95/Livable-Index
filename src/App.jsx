@@ -6,7 +6,7 @@ import WeightEditor from "./WeightEditor";
 import { CITIES, OVERLAY_OPTIONS, WEIGHTS as DEFAULT_WEIGHTS, initDataFetching } from "./livabilityData";
 import "./App.css";
 
-const ALPHA_CITIES = new Set(['centennial', 'englewood']);
+const ALPHA_CITIES = new Set(['centennial', 'englewood', 'denver']);
 const STORAGE_KEY = 'liv_weights';
 
 function loadWeights() {

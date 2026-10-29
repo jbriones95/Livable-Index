@@ -82,6 +82,20 @@ export const CITIES = {
       { lat: 39.635600, lng: -104.980900 },
     ],
   },
+  denver: {
+    label: 'Denver',
+    bounds: { north: 39.915, south: 39.614, east: -104.600, west: -105.110 },
+    center: [39.7392, -104.9903],
+    zoom: 11,
+    neighborhoodUrl: null,
+    bikeLaneUrl: null,
+    trailUrl: null,
+    schools: [],
+    // Denver ships a precomputed dataset (tools/build_denver_data.py): the 78
+    // statistical neighborhoods already carry overlayScores, and the POI
+    // arrays are bundled locally instead of being fetched from Overpass.
+    bundledData: 'denver',
+  },
 };
 
 export function getCityConfig(cityKey = 'littleton') {
@@ -337,7 +351,17 @@ function getCachedNeighborhoodFeatures(cityKey) {
 
 async function fetchNeighborhoodFeatures(cityKey) {
   const config = CITIES[cityKey];
-  if (!config || !config.neighborhoodUrl) return null;
+  if (!config) return null;
+  if (config.bundledData) {
+    const bundled = await loadBundledCityData(cityKey);
+    const data = normalizeNeighborhoodFeatures(bundled?.neighborhoods || null);
+    if (data) {
+      const cityStore = getCityDataContainer(cityKey);
+      if (cityStore) cityStore.neighborhoods = data;
+    }
+    return data;
+  }
+  if (!config.neighborhoodUrl) return null;
   try {
     const r = await fetch(config.neighborhoodUrl);
     if (!r.ok) return null;
@@ -429,6 +453,24 @@ const TRAIL_LINES = TRAIL_POLYLINES.map((t) => ({
   ...t,
   line: turfLineString(t.coords),
 }));
+
+// City-specific trail polylines (e.g. Denver's bundled trail network). These are
+// registered lazily when a city's bundled dataset finishes loading.
+const CITY_TRAIL_LINES = {};
+
+function registerCityTrailLines(cityKey, trailFeatures) {
+  if (!Array.isArray(trailFeatures) || trailFeatures.length === 0) return;
+  const lines = [];
+  for (const t of trailFeatures) {
+    if (!t || !Array.isArray(t.coords) || t.coords.length < 2) continue;
+    try {
+      lines.push({ name: t.name || 'Trail', coords: t.coords, line: turfLineString(t.coords) });
+    } catch (_err) {
+      // skip malformed line
+    }
+  }
+  if (lines.length > 0) CITY_TRAIL_LINES[cityKey] = lines;
+}
 
 // How many candidate POIs (closest by crow-flies) to route per category
 const ROUTE_CANDIDATES = {
@@ -526,11 +568,12 @@ function haversineKm(lng1, lat1, lng2, lat2) {
 
 // Compute the straight-line distance (km) from a [lon,lat] point to the
 // nearest authoritative trail polyline, plus the closest coordinates on it.
-function nearestTrailPolylineDistance(lon, lat) {
+function nearestTrailPolylineDistance(lon, lat, cityKey = 'littleton') {
   let bestKm = Infinity;
   let bestCoords = null;
   const pt = turfPoint([lon, lat]);
-  for (const t of TRAIL_LINES) {
+  const lines = CITY_TRAIL_LINES[cityKey] || TRAIL_LINES;
+  for (const t of lines) {
     try {
       const km = turfPointToLineDistance(pt, t.line, { units: 'kilometers' });
       if (km < bestKm) {
@@ -918,6 +961,62 @@ const CITY_POINT_DATA = {
   englewood: englewoodPois,
 };
 
+// Bundled city datasets are code-split so the initial bundle stays small; they
+// are only downloaded when that city is selected. Denver's dataset replaces the
+// live Overpass pipeline with precomputed neighborhood scores and POI arrays.
+const _bundledCityData = {};
+
+export function isBundledCity(cityKey = 'littleton') {
+  return Boolean(CITIES[cityKey]?.bundledData);
+}
+
+function loadBundledCityData(cityKey = 'littleton') {
+  const config = CITIES[cityKey];
+  if (!config?.bundledData) return Promise.resolve(null);
+  if (!_bundledCityData[cityKey]) {
+    _bundledCityData[cityKey] = (async () => {
+      if (config.bundledData === 'denver') {
+        const [neighborhoods, pois, trails] = await Promise.all([
+          import('../data/denver/neighborhoods.json'),
+          import('../data/denver/pois_denver.json'),
+          import('../data/denver/trails.json'),
+        ]);
+        return {
+          neighborhoods: neighborhoods.default || neighborhoods,
+          pois: pois.default || pois,
+          trails: trails.default || trails,
+        };
+      }
+      return null;
+    })().catch((err) => {
+      console.warn('Failed to load bundled data for', cityKey, err && err.message);
+      delete _bundledCityData[cityKey];
+      return null;
+    });
+  }
+  return _bundledCityData[cityKey];
+}
+
+// Convert a bundled { category: [{ lat, lon, name }] } object into turf points
+// tagged the same way supplemental POIs are, so the shared scoring code works.
+function bundledPointsToTurf(poiData) {
+  const points = [];
+  if (!poiData) return points;
+  for (const [cat, list] of Object.entries(poiData)) {
+    if (!Array.isArray(list)) continue;
+    const mapped = CATEGORY_MAPPING[cat] || cat;
+    for (const obj of list) {
+      if (!obj || typeof obj.lat !== 'number' || typeof obj.lon !== 'number') continue;
+      points.push(turfPoint([obj.lon, obj.lat], {
+        category: [mapped],
+        name: obj.name || null,
+        note: obj.address || null,
+      }));
+    }
+  }
+  return points;
+}
+
 let _cityPoiFetch = {};
 
 function inBounds(lat, lon, bounds, pad = 0) {
@@ -1045,6 +1144,20 @@ export async function getCityPoiPoints(cityKey = 'littleton') {
   const cacheKey = cityKey || 'littleton';
   const cityStore = getCityDataContainer(cacheKey);
   if (cityStore?.poiPoints) return cityStore.poiPoints;
+
+  // Bundled cities use their own POI arrays and never hit Overpass.
+  if (isBundledCity(cacheKey)) {
+    if (!_cityPoiFetch[cacheKey]) {
+      _cityPoiFetch[cacheKey] = (async () => {
+        const bundled = await loadBundledCityData(cacheKey);
+        registerCityTrailLines(cacheKey, bundled?.trails);
+        const points = bundledPointsToTurf(bundled?.pois);
+        if (cityStore) cityStore.poiPoints = points;
+        return points;
+      })();
+    }
+    return _cityPoiFetch[cacheKey];
+  }
 
   if (!_cityPoiFetch[cacheKey]) {
     _cityPoiFetch[cacheKey] = (async () => {
@@ -1240,7 +1353,7 @@ function nearestAndCounts(poiPoints, pt, cityKey = 'littleton') {
   if (Object.prototype.hasOwnProperty.call(nearest, 'trail')) {
     const ptCoords = pt?.geometry?.coordinates;
     if (ptCoords && Array.isArray(ptCoords) && ptCoords.length >= 2) {
-      const poly = nearestTrailPolylineDistance(ptCoords[0], ptCoords[1]);
+      const poly = nearestTrailPolylineDistance(ptCoords[0], ptCoords[1], cityKey);
       if (poly.km < nearest.trail) {
         nearest.trail = poly.km;
         nearestCoords.trail = poly.coords;
@@ -1353,6 +1466,24 @@ export async function getScoredZoneFeatures(cityKey = 'littleton') {
   const cityStore = getCityDataContainer(cityKey);
   if (cityStore?.scoredZones) return cityStore.scoredZones;
 
+  // Bundled cities ship precomputed scores on the neighborhood polygons, so no
+  // POI lookups or routing calls are needed here.
+  if (isBundledCity(cityKey)) {
+    if (!_scoredZoneFetch[cityKey]) {
+      _scoredZoneFetch[cityKey] = (async () => {
+        const base = await getAllZoneFeaturesAsync(cityKey);
+        const features = (base?.features || []).map((feature) => {
+          const props = feature.properties || {};
+          return buildScoredFeature(feature, normalizeDimensionScores(props.overlayScores || props.scores || {}));
+        });
+        const collection = { type: 'FeatureCollection', features };
+        if (cityStore) cityStore.scoredZones = collection;
+        return collection;
+      })();
+    }
+    return _scoredZoneFetch[cityKey];
+  }
+
   if (!_scoredZoneFetch[cityKey]) {
     _scoredZoneFetch[cityKey] = (async () => {
       const base = await getAllZoneFeaturesAsync(cityKey);
@@ -1394,6 +1525,26 @@ export async function getScoredZoneFeatures(cityKey = 'littleton') {
   return _scoredZoneFetch[cityKey];
 }
 
+async function findNeighborhoodScores(lat, lng, cityKey) {
+  try {
+    const zones = (await getScoredZoneFeatures(cityKey))?.features || [];
+    const pt = turfPoint([lng, lat]);
+    for (const zone of zones) {
+      if (!zone || !zone.geometry) continue;
+      try {
+        if (booleanPointInPolygon(pt, zone)) {
+          return zone.properties?.overlayScores || null;
+        }
+      } catch (_err) {
+        // skip malformed polygon
+      }
+    }
+  } catch (_err) {
+    // fall through
+  }
+  return null;
+}
+
 export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const cityKey = opts.cityKey || 'littleton';
   const poiPoints = await getCityPoiPoints(cityKey).catch(() => []);
@@ -1402,9 +1553,18 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt, useRouting: true, candidates });
   const rawScores = scoring.scores;
   const scores = normalizeDimensionScores(rawScores);
-  scores.bikeInfra = await computeBikeInfraScore(lat, lng, cityKey).catch(() => 0);
-  scores.crime = await computeCrimeScore(lat, lng, cityKey).catch(() => 50);
-  scores.schools = await computeSchoolScore(lat, lng, cityKey).catch(() => 50);
+  if (isBundledCity(cityKey)) {
+    // Reuse the neighborhood's precomputed context scores instead of issuing
+    // city-wide Overpass queries for bike lanes, police, and schools.
+    const neighborhoodScores = await findNeighborhoodScores(lat, lng, cityKey);
+    scores.bikeInfra = neighborhoodScores?.bikeInfra ?? 0;
+    scores.crime = neighborhoodScores?.crime ?? 50;
+    scores.schools = neighborhoodScores?.schools ?? 50;
+  } else {
+    scores.bikeInfra = await computeBikeInfraScore(lat, lng, cityKey).catch(() => 0);
+    scores.crime = await computeCrimeScore(lat, lng, cityKey).catch(() => 50);
+    scores.schools = await computeSchoolScore(lat, lng, cityKey).catch(() => 50);
+  }
 
   const distances = { ...nearest };
   // Update distances to show routed walking distances (minimum across candidates)
@@ -1670,6 +1830,22 @@ export async function getGridOverlayFeatures(cityKey = 'littleton', cellSideKm =
     return cityStore.gridOverlay;
   }
 
+  // Bundled cities render their neighborhood polygons directly; the scores are
+  // already computed by the offline build, so no hex grid or Overpass calls.
+  if (isBundledCity(cityKey)) {
+    const zones = await getAllZoneFeaturesAsync(cityKey);
+    const features = (zones?.features || []).map((feature) => {
+      const props = feature.properties || {};
+      return buildScoredFeature(feature, normalizeDimensionScores(props.overlayScores || props.scores || {}));
+    });
+    const collection = { type: 'FeatureCollection', features };
+    if (cityStore) {
+      cityStore.gridOverlay = collection;
+      cityStore.gridOverlayKey = cacheKey;
+    }
+    return collection;
+  }
+
   // Check localStorage cache (survives hard refresh)
   const cached = loadGridCache(cityKey, cellSideKm);
   if (cached) {
@@ -1798,6 +1974,7 @@ export function isPointInCity(lat, lng, cityKey = 'littleton') {
 
 export function initDataFetching(cityKey = 'littleton') {
   getCityPoiPoints(cityKey).catch(() => {});
+  if (isBundledCity(cityKey)) return; // bundled data needs no live enrichment
   fetchBikeInfrastructureData(cityKey).catch(() => {});
   fetchPoliceStations(cityKey).catch(() => {});
 }
