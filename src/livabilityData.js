@@ -1017,6 +1017,41 @@ function bundledPointsToTurf(poiData) {
   return points;
 }
 
+// Street-level detail cells for bundled cities, loaded only when the map is
+// zoomed in far enough to need them.
+let _detailGridPromise = null;
+
+async function getBundledDetailGrid(cityKey) {
+  if (cityKey !== 'denver') return null;
+  if (!_detailGridPromise) {
+    _detailGridPromise = import('../data/denver/grid.json')
+      .then((module) => {
+        const grid = module.default || module;
+        const features = (grid?.features || []).map((feature) => {
+          const props = feature.properties || {};
+          return buildScoredFeature(feature, normalizeDimensionScores(props.overlayScores || {}));
+        });
+        return { type: 'FeatureCollection', features };
+      })
+      .catch((err) => {
+        console.warn('Failed to load Denver detail grid', err && err.message);
+        _detailGridPromise = null;
+        return null;
+      });
+  }
+  return _detailGridPromise;
+}
+
+// Choose the overlay geometry for the current zoom: neighborhood polygons at
+// city scale, detail cells once the user zooms past the street-level threshold.
+export async function getZoomOverlayFeatures(cityKey = 'littleton', detail = false) {
+  if (detail) {
+    const grid = await getBundledDetailGrid(cityKey);
+    if (grid) return grid;
+  }
+  return getGridOverlayFeatures(cityKey);
+}
+
 let _cityPoiFetch = {};
 
 function inBounds(lat, lon, bounds, pad = 0) {

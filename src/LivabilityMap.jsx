@@ -5,13 +5,15 @@ import {
   computeScore,
   computeScoreAtPoint,
   getCityConfig,
-  getGridOverlayFeatures,
+  getZoomOverlayFeatures,
   getCityBoundaryAsync,
   isPointInCity,
   scoreToColor,
   WEIGHTS,
 } from "./livabilityData";
 import ScorePanel from "./ScorePanel";
+
+const DETAIL_ZOOM = 13;
 
 function getOverlayScore(feature, overlayMetric, weights = WEIGHTS) {
   const props = feature?.properties || {};
@@ -32,11 +34,13 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
   const [overlayFeatures, setOverlayFeatures] = useState(null);
   const [selectedZone, setSelectedZone] = useState(null);
   const [computing, setComputing] = useState(false);
+  const [zoom, setZoom] = useState(getCityConfig(cityKey).zoom);
   const cityKeyRef = useRef(cityKey);
   const weightsRef = useRef(weights);
   const computingRef = useRef(false);
   const lastComputeTs = useRef(0);
   const locateIdRef = useRef(0);
+  const detailActive = cityKey === 'denver' && zoom >= DETAIL_ZOOM;
 
   useEffect(() => { cityKeyRef.current = cityKey; }, [cityKey]);
   useEffect(() => { weightsRef.current = weights; }, [weights]);
@@ -51,8 +55,13 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
       center: initialCity.center,
       zoom: initialCity.zoom,
       zoomControl: true,
+      preferCanvas: true,
     });
     leafletMap.current = map;
+
+    map.on('zoomend', () => {
+      setZoom(map.getZoom());
+    });
 
     // OpenStreetMap tile layer
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -129,6 +138,7 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
     if (!map) return;
     const city = getCityConfig(cityKey);
     map.setView(city.center, city.zoom, { animate: false });
+    setZoom(city.zoom);
     setSelectedZone(null);
     setOverlayFeatures(null);
     if (overlayLayerRef.current && map.hasLayer(overlayLayerRef.current)) {
@@ -172,10 +182,14 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
   }, [cityKey]);
 
   useEffect(() => {
+    const map = leafletMap.current;
+    // Read the live map zoom so a city switch cannot briefly load the detail
+    // grid using the previous city's zoom level.
+    const detail = cityKey === 'denver' && Boolean(map) && map.getZoom() >= DETAIL_ZOOM;
     let cancelled = false;
     (async () => {
-      const features = await getGridOverlayFeatures(cityKey).catch((err) => {
-        console.error('Failed to build grid overlay features', err);
+      const features = await getZoomOverlayFeatures(cityKey, detail).catch((err) => {
+        console.error('Failed to build overlay features', err);
         return null;
       });
       if (!cancelled && features) {
@@ -186,7 +200,7 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
     return () => {
       cancelled = true;
     };
-  }, [cityKey]);
+  }, [cityKey, zoom]);
 
   useEffect(() => {
     const map = leafletMap.current;
@@ -202,6 +216,14 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
       interactive: false,
       style: (feature) => {
         const score = getOverlayScore(feature, overlayMetric, weights);
+        if (detailActive) {
+          return {
+            color: 'rgba(20,30,40,0.45)',
+            weight: 0.6,
+            fillColor: scoreToColor(score),
+            fillOpacity: 0.5,
+          };
+        }
         return {
           color: scoreToColor(score),
           weight: 0,
@@ -221,7 +243,7 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
         overlayLayerRef.current = null;
       }
     };
-  }, [overlayFeatures, overlayMetric, weights]);
+  }, [overlayFeatures, overlayMetric, weights, detailActive]);
 
   // respond to external locate requests: { lat, lng, label }
   useEffect(() => {
