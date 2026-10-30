@@ -343,12 +343,18 @@ function normalizeNeighborhoodFeatures(collection) {
       const properties = feature.properties || {};
       const name = properties.name || properties.Neighborho || properties.Name || `Area ${index + 1}`;
       const id = properties.id ?? feature.id ?? `zone-${index + 1}`;
+      const rawNotes = properties.notes;
+      const notes = typeof rawNotes === 'string'
+        && /City of Littleton Neighborhood Boundary service/i.test(rawNotes)
+        ? ''
+        : rawNotes;
       return {
         ...feature,
         properties: {
           ...properties,
           id: String(id),
           name: String(name),
+          ...(notes !== undefined ? { notes } : {}),
         },
       };
     });
@@ -2005,29 +2011,122 @@ function getCachedNeighborhoodScores(lat, lng, cityKey) {
   return null;
 }
 
-async function fetchReverseAddress(lat, lng) {
+const GEO_CACHE_KEY = 'liv_geocode_v1';
+const GEO_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+const GEO_NEGATIVE_TTL_MS = 24 * 60 * 60 * 1000;
+const GEO_MAX = 300;
+const GEO_PRECISION = 5;
+let _geoStore = null;
+const _geoInFlight = new Map();
+
+function loadGeoStore() {
+  if (_geoStore) return _geoStore;
   try {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 2500);
-    const rev = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&limit=1`,
-      { headers: { 'User-Agent': 'LivableIndex/1.0' }, signal: controller.signal }
-    );
-    clearTimeout(timer);
-    if (!rev.ok) return null;
-    const revData = await rev.json();
-    if (revData?.display_name) {
-      const parts = revData.display_name.split(', ');
-      return parts.slice(0, Math.min(3, parts.length)).join(', ');
-    }
-  } catch (_err) {
-    // reverse geocode failed; the neighborhood name is used instead
+    const raw = localStorage.getItem(GEO_CACHE_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    _geoStore = parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    _geoStore = {};
   }
-  return null;
+  return _geoStore;
+}
+
+function saveGeoStore() {
+  const store = loadGeoStore();
+  const keys = Object.keys(store);
+  if (keys.length > GEO_MAX) {
+    keys
+      .sort((a, b) => (store[a]?.t || 0) - (store[b]?.t || 0))
+      .slice(0, keys.length - GEO_MAX)
+      .forEach((key) => { delete store[key]; });
+  }
+  try {
+    localStorage.setItem(GEO_CACHE_KEY, JSON.stringify(store));
+  } catch {
+    // storage quota or unavailable
+  }
+}
+
+async function fetchReverseAddress(lat, lng) {
+  const store = loadGeoStore();
+  const key = `${lat.toFixed(GEO_PRECISION)},${lng.toFixed(GEO_PRECISION)}`;
+  const hit = store[key];
+  if (hit) {
+    const ttl = hit.a ? GEO_TTL_MS : GEO_NEGATIVE_TTL_MS;
+    if (Date.now() - (hit.t || 0) < ttl) return hit.a || null;
+  }
+  if (_geoInFlight.has(key)) return _geoInFlight.get(key);
+
+  const promise = (async () => {
+    let address = null;
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 2500);
+      const rev = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&limit=1`,
+        { headers: { 'User-Agent': 'LivableIndex/1.0' }, signal: controller.signal }
+      );
+      clearTimeout(timer);
+      if (rev.ok) {
+        const revData = await rev.json();
+        if (revData?.display_name) {
+          const parts = revData.display_name.split(', ');
+          address = parts.slice(0, Math.min(3, parts.length)).join(', ');
+        }
+      }
+    } catch (_err) {
+      // reverse geocode failed; the neighborhood name is used instead
+    }
+    store[key] = { a: address, t: Date.now() };
+    saveGeoStore();
+    return address;
+  })().finally(() => {
+    _geoInFlight.delete(key);
+  });
+
+  _geoInFlight.set(key, promise);
+  return promise;
+}
+
+const SCORE_CACHE_VERSION = 'v1';
+const SCORE_CACHE_TTL_MS = 15 * 60 * 1000;
+const SCORE_CACHE_DEGRADED_TTL_MS = 60 * 1000;
+const SCORE_CACHE_MAX = 200;
+const SCORE_CACHE_PRECISION = 4;
+const scoreCache = new Map();
+
+function scoreCacheKey(lat, lng, cityKey) {
+  return `${cityKey}|${lat.toFixed(SCORE_CACHE_PRECISION)},${lng.toFixed(SCORE_CACHE_PRECISION)}|${SCORE_CACHE_VERSION}`;
+}
+
+function readScoreCache(key) {
+  const hit = scoreCache.get(key);
+  if (!hit) return null;
+  const ttl = hit.ttl || SCORE_CACHE_TTL_MS;
+  if (Date.now() - hit.at > ttl) {
+    scoreCache.delete(key);
+    return null;
+  }
+  scoreCache.delete(key);
+  scoreCache.set(key, hit);
+  return hit.value;
+}
+
+function writeScoreCache(key, value, ttlMs = SCORE_CACHE_TTL_MS) {
+  scoreCache.set(key, { at: Date.now(), ttl: ttlMs, value });
+  while (scoreCache.size > SCORE_CACHE_MAX) {
+    scoreCache.delete(scoreCache.keys().next().value);
+  }
 }
 
 export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const cityKey = opts.cityKey || 'littleton';
+  const cacheKey = scoreCacheKey(lat, lng, cityKey);
+  const cachedResult = readScoreCache(cacheKey);
+  if (cachedResult) {
+    return { ...cachedResult, composite: computeScore(cachedResult.scores, opts.weights) };
+  }
+  const startedAt = Date.now();
   const addressPromise = fetchReverseAddress(lat, lng);
   const poiPoints = await getCityPoiPoints(cityKey).catch(() => []);
   const pt = turfPoint([lng, lat]);
@@ -2045,6 +2144,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     3500,
     null
   );
+  const routingTimedOut = !scoring;
   if (!scoring) {
     // Routing took too long; return the straight-line score and label it.
     scoring = await computeScoresFromNearest(nearest, {
@@ -2199,9 +2299,13 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const composite = computeScore(scores, opts.weights);
   const neighborhood = matched ? matched.properties.name : null;
 
-  const address = await withTimeout(addressPromise, 900, null);
+  const address = await withTimeout(
+    addressPromise,
+    Math.max(0, 900 - (Date.now() - startedAt)),
+    null
+  );
 
-  return {
+  const result = {
     name: address || neighborhood || 'Local area',
     scores,
     composite,
@@ -2215,6 +2319,12 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     estimatedBikeDistances,
     zoneId: matched ? matched.properties.id : null,
   };
+
+  const finiteKeys = Object.keys(distances).filter((key) => isFinite(distances[key]));
+  const allEstimated = finiteKeys.length > 0 && finiteKeys.every((key) => estimatedDistances[key]);
+  const degraded = routingTimedOut || allEstimated;
+  writeScoreCache(cacheKey, result, degraded ? SCORE_CACHE_DEGRADED_TTL_MS : SCORE_CACHE_TTL_MS);
+  return result;
 }
 
 export function getGridFeatures(cityKey = 'littleton', cellSizeKm = 0.2) {

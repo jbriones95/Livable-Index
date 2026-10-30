@@ -116,7 +116,7 @@ export default function ScorePanel({ zone, weights, onClose }) {
         </div>
       </div>
 
-      <p className="zone-notes">{zone.notes}</p>
+      {zone.notes && <p className="zone-notes">{zone.notes}</p>}
 
       <h3 className="breakdown-title">Score Breakdown</h3>
       <div className="dimensions">

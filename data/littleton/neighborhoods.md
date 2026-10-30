@@ -22,10 +22,10 @@ The service returned **35 features**. The city limits layer
    - **Southbridge** — 2 features merged into one MultiPolygon.
 4. Normalized names (`Wolhurst landing` → `Wolhurst Landing`) and generated URL-safe slugs.
 5. Repaired **Ketring Park**, whose source rings touch at a point (invalid OGC MultiPolygon), with a 0.01 mm buffer. Area change is negligible (<2 m²).
-6. Wrote minimal properties: `{ id, name, notes }`. No source attributes are exposed.
+6. Wrote minimal properties: `{ id, name, notes }`. No source attributes are exposed. Source `City of Littleton Neighborhood Boundary service …` notes are stripped at load time so they are not shown in the app.
 7. Validated with Node + `@turf/turf` (see below).
 
-## Zones (24 shown; Sterne Park hidden)
+## Zones (25)
 
 | id | name | area (km²) |
 |---|---|---:|
@@ -47,7 +47,7 @@ The service returned **35 features**. The city limits layer
 | santa-fe-park | Santa Fe Park | 0.13 |
 | southbridge | Southbridge | 1.61 |
 | southpark | Southpark | 2.36 |
-| sterne-park | Sterne Park *(hidden in app)* | 2.26 |
+| sterne-park | Sterne Park | 2.26 |
 | sunset-heights | Sunset Heights | 0.02 |
 | the-hamlet-at-columbine | The Hamlet at Columbine | 0.20 |
 | the-polo-reserve-pole-ridge-farms | The Polo Reserve - Pole Ridge Farms | 0.43 |
@@ -57,7 +57,7 @@ The service returned **35 features**. The city limits layer
 
 ## Validation results
 
-- 25 source features, all `Polygon` or `MultiPolygon`; **24 are shown** after the Sterne Park `hidden` flag.
+- 25 features, all `Polygon` or `MultiPolygon`.
 - All geometries pass `turf.booleanValid`; all rings are closed; all coordinates are in the Littleton range.
 - Sum of feature areas = union area = **23.95 km²** (no meaningful overlaps).
 - Largest pairwise overlap is **0.0004 km²** (Aberdeen Village / Ketring Park, ~400 m²); total overlap is under 0.001 km². These are source-data boundary slivers and were left as-is to avoid creating gaps.
