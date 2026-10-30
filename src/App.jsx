@@ -3,7 +3,7 @@ import LivabilityMap from "./LivabilityMap";
 import Legend from "./Legend";
 import AddressSearch from "./AddressSearch";
 import WeightEditor from "./WeightEditor";
-import { CITIES, OVERLAY_OPTIONS, WEIGHTS as DEFAULT_WEIGHTS, initDataFetching } from "./livabilityData";
+import { CITIES, OVERLAY_OPTIONS, WEIGHTS as DEFAULT_WEIGHTS, getAllZoneFeaturesAsync, initDataFetching } from "./livabilityData";
 import "./App.css";
 
 const ALPHA_CITIES = new Set(['centennial', 'englewood', 'denver']);
@@ -38,10 +38,31 @@ export default function App() {
   const [overlayMetric, setOverlayMetric] = useState('composite');
   const [weights, setWeights] = useState(loadWeights);
   const [showWeights, setShowWeights] = useState(false);
+  const [neighborhoods, setNeighborhoods] = useState([]);
+  const [focusNeighborhood, setFocusNeighborhood] = useState('');
   const cityLabel = CITIES[cityKey]?.label || 'Littleton';
 
   // Kick off background data fetches as early as possible
   useEffect(() => { initDataFetching(cityKey); }, [cityKey]);
+
+  // Offer a neighborhood focus picker for cities that ship neighborhood polygons.
+  useEffect(() => {
+    if (cityKey !== 'denver') return undefined;
+    let cancelled = false;
+    getAllZoneFeaturesAsync(cityKey)
+      .then((geo) => {
+        if (cancelled) return;
+        const items = (geo?.features || [])
+          .map((f) => ({ id: f.properties?.id, name: f.properties?.name }))
+          .filter((n) => n.id && n.name)
+          .sort((a, b) => a.name.localeCompare(b.name));
+        setNeighborhoods(items);
+      })
+      .catch(() => {
+        if (!cancelled) setNeighborhoods([]);
+      });
+    return () => { cancelled = true; };
+  }, [cityKey]);
 
   const handleWeightsChange = useCallback((next) => {
     setWeights(next);
@@ -71,6 +92,8 @@ export default function App() {
               onChange={(e) => {
                 setCityKey(e.target.value);
                 setLocate(null);
+                setFocusNeighborhood('');
+                setNeighborhoods([]);
               }}
             >
               {Object.entries(CITIES).map(([key, city]) => (
@@ -80,6 +103,21 @@ export default function App() {
               ))}
             </select>
           </label>
+          {neighborhoods.length > 0 && (
+            <label className="overlay-select" htmlFor="neighborhood-select">
+              <span>Neighborhood</span>
+              <select
+                id="neighborhood-select"
+                value={focusNeighborhood}
+                onChange={(e) => setFocusNeighborhood(e.target.value)}
+              >
+                <option value="">All {cityLabel}</option>
+                {neighborhoods.map((n) => (
+                  <option key={n.id} value={n.id}>{n.name}</option>
+                ))}
+              </select>
+            </label>
+          )}
           <label className="overlay-select" htmlFor="overlay-select">
             <span>Overlay</span>
             <select
@@ -105,7 +143,7 @@ export default function App() {
         </div>
       </header>
       <main className="app-main">
-        <LivabilityMap cityKey={cityKey} locate={locate} overlayMetric={overlayMetric} weights={weights} />
+        <LivabilityMap cityKey={cityKey} locate={locate} overlayMetric={overlayMetric} weights={weights} focusNeighborhood={focusNeighborhood} />
         <Legend overlayMetric={overlayMetric} weights={weights} />
         {showWeights && (
           <WeightEditor

@@ -5,6 +5,7 @@ import {
   computeScore,
   computeScoreAtPoint,
   getCityConfig,
+  getAllZoneFeaturesAsync,
   getZoomOverlayFeatures,
   getCityBoundaryAsync,
   isPointInCity,
@@ -25,12 +26,13 @@ function getOverlayScore(feature, overlayMetric, weights = WEIGHTS) {
   return typeof metricScore === "number" ? metricScore : 0;
 }
 
-export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMetric, weights }) {
+export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMetric, weights, focusNeighborhood = '' }) {
   const mapRef = useRef(null);
   const leafletMap = useRef(null);
   const markerRef = useRef(null);
   const overlayLayerRef = useRef(null);
   const boundaryLayerRef = useRef(null);
+  const highlightLayerRef = useRef(null);
   const [overlayFeatures, setOverlayFeatures] = useState(null);
   const [selectedZone, setSelectedZone] = useState(null);
   const [computing, setComputing] = useState(false);
@@ -124,6 +126,10 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
       map.createPane('livability-overlay-pane');
       map.getPane('livability-overlay-pane').style.zIndex = '340';
     }
+    if (!map.getPane('livability-highlight-pane')) {
+      map.createPane('livability-highlight-pane');
+      map.getPane('livability-highlight-pane').style.zIndex = '360';
+    }
 
     return () => {
       console.log('[LivabilityMap] cleanup: removing map');
@@ -149,6 +155,10 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
       map.removeLayer(boundaryLayerRef.current);
       boundaryLayerRef.current = null;
     }
+    if (highlightLayerRef.current && map.hasLayer(highlightLayerRef.current)) {
+      map.removeLayer(highlightLayerRef.current);
+    }
+    highlightLayerRef.current = null;
     if (markerRef.current) {
       markerRef.current.setLatLng(city.center);
       if (markerRef.current._map) {
@@ -156,6 +166,48 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
       }
     }
   }, [cityKey]);
+
+  // Zoom to the selected neighborhood and outline it; clearing the selection
+  // returns the map to the full-city view.
+  useEffect(() => {
+    const map = leafletMap.current;
+    if (!map) return undefined;
+    setSelectedZone(null);
+    const city = getCityConfig(cityKey);
+    if (!focusNeighborhood) {
+      if (highlightLayerRef.current && map.hasLayer(highlightLayerRef.current)) {
+        map.removeLayer(highlightLayerRef.current);
+      }
+      highlightLayerRef.current = null;
+      map.setView(city.center, city.zoom, { animate: true });
+      return undefined;
+    }
+
+    let cancelled = false;
+    (async () => {
+      const zones = await getAllZoneFeaturesAsync(cityKey).catch(() => null);
+      if (cancelled || !zones) return;
+      const feature = (zones.features || []).find(
+        (f) => f?.properties?.id === focusNeighborhood || f?.properties?.name === focusNeighborhood
+      );
+      if (!feature) return;
+      const bounds = L.geoJSON(feature).getBounds();
+      if (!bounds.isValid()) return;
+      map.fitBounds(bounds, { padding: [30, 30], maxZoom: 15, animate: true });
+      if (highlightLayerRef.current && map.hasLayer(highlightLayerRef.current)) {
+        map.removeLayer(highlightLayerRef.current);
+      }
+      highlightLayerRef.current = L.geoJSON(feature, {
+        pane: 'livability-highlight-pane',
+        interactive: false,
+        style: { color: '#5bc8f5', weight: 3, opacity: 0.9, fillOpacity: 0.04 },
+      }).addTo(map);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [focusNeighborhood, cityKey]);
 
   useEffect(() => {
     const map = leafletMap.current;
