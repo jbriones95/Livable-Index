@@ -7,52 +7,20 @@
       "note": "2506 W Alamo Ave, Littleton, CO 80120"
     },
     {
-      "lat": 39.600551,
-      "lon": -105.0223652,
-      "name": "Harold and Virginia Simpson Leadership Center",
-      "note": "6399 S Santa Fe Dr, Littleton, CO 80120"
-    },
-    {
       "lat": 39.6032026,
       "lon": -105.0229385,
-      "name": "6115, South Santa Fe Drive, Littleton, Arapahoe County, Colorado, 80120, United States",
       "note": "6115 S Santa Fe Dr, Littleton, CO 80120"
-    },
-    {
-      "lat": 39.5862955,
-      "lon": -105.023923,
-      "name": "claire's",
-      "note": "7301 S Santa Fe Dr Ste 310, Littleton, CO 80120 (approx)"
     },
     {
       "lat": 39.5833145,
       "lon": -104.9882493,
-      "name": "South Broadway",
       "note": "7330 S Broadway, Littleton, CO 80122"
-    },
-    {
-      "lat": 39.5715438,
-      "lon": -104.9889619,
-      "name": "Black Rock Coffee",
-      "note": "7961 S Broadway Ste A, Littleton, CO 80122 (approx)"
-    },
-    {
-      "lat": 39.601217,
-      "lon": -104.9880828,
-      "name": "6500, South Broadway, Littleton, Arapahoe County, Colorado, 80121, United States",
-      "note": "6504 S Broadway, Littleton, CO 80121"
     },
     {
       "lat": 39.6118882,
       "lon": -104.9886631,
       "name": "Artemis Tea Coffee",
       "note": "40 W Littleton Blvd Ste 211, Littleton, CO 80120 (approx)"
-    },
-    {
-      "lat": 39.623945,
-      "lon": -104.987877,
-      "name": "South Broadway",
-      "note": "5100 S Broadway, Englewood, CO 80113"
     },
     {
       "lat": 39.609973,
@@ -67,39 +35,15 @@
       "note": "1190 W Littleton Blvd, Littleton, CO 80120"
     },
     {
-      "lat": 39.6388421,
-      "lon": -104.987431,
-      "name": "Starbucks",
-      "note": "4298 S Broadway, Englewood, CO 80113"
-    },
-    {
       "lat": 39.587839893254,
       "lon": -105.02281092435,
       "name": "Copper Door Coffee Roasters",
       "note": "7301 S Santa Fe Dr, Littleton, CO"
     },
     {
-      "lat": 39.613159122835,
-      "lon": -105.001815566863,
-      "name": "Lost Coffee Cafe & Coffee Roastery",
-      "note": "1190 W Littleton Blvd, Littleton, CO"
-    },
-    {
-      "lat": 39.609763303538,
-      "lon": -105.034955487008,
-      "name": "Enchanted Grounds Coffeehouse",
-      "note": "3615 W Bowles Ave, Littleton, CO"
-    },
-    {
       "lat": 39.601929068375,
       "lon": -105.02034428096,
       "name": "Nixon's Coffee House",
-      "note": "6399 S Santa Fe Dr, Littleton, CO"
-    },
-    {
-      "lat": 39.601929068375,
-      "lon": -105.02034428096,
-      "name": "Wild Goose Coffee in Denver Seminary",
       "note": "6399 S Santa Fe Dr, Littleton, CO"
     },
     {
@@ -113,12 +57,6 @@
       "lon": -105.016658397343,
       "name": "iN-TEA",
       "note": "2440 W Main St, Littleton, CO"
-    },
-    {
-      "lat": 39.612670038113,
-      "lon": -105.017442489718,
-      "name": "DIRT Coffee Bar",
-      "note": "2506 W Alamo Ave, Littleton, CO"
     },
     {
       "lat": 39.601206284263,
@@ -891,12 +829,6 @@
       "note": "2200 W Berry Ave, Littleton, CO 80120"
     },
     {
-      "lat": 39.6227409,
-      "lon": -104.990493,
-      "name": "Chuze Fitness",
-      "note": "200 W Belleview Ave Ste 170, Englewood, CO 80110 (approx)"
-    },
-    {
       "lat": 39.6132573,
       "lon": -104.9951523,
       "name": "609 West Littleton Boulevard",
@@ -1460,22 +1392,10 @@
   ],
   "restaurant": [
     {
-      "lat": 39.5803533,
-      "lon": -104.9892309,
-      "name": "Mannings",
-      "note": "51 W Dry Creek Ct, Littleton, CO 80120"
-    },
-    {
       "lat": 39.5662016,
       "lon": -104.9895914,
       "name": "Mi Cocina",
       "note": "137 W County Line Rd, Littleton, CO 80129"
-    },
-    {
-      "lat": 39.5664201,
-      "lon": -104.9841213,
-      "name": "Haveli",
-      "note": "301 E County Line Rd, Littleton, CO 80122"
     },
     {
       "lat": 39.5674392,
@@ -1490,40 +1410,16 @@
       "note": "7301 S Santa Fe Dr #730, Littleton, CO 80120"
     },
     {
-      "lat": 39.5936072,
-      "lon": -105.0250773,
-      "name": "Breck Brew",
-      "note": "2990 Brewery Ln, Littleton, CO 80120"
-    },
-    {
       "lat": 39.6078006,
       "lon": -105.0214588,
       "name": "Platte River Bar and Grill",
       "note": "5995 S Santa Fe Dr, Littleton, CO 80120"
     },
     {
-      "lat": 39.6139482,
-      "lon": -105.0186128,
-      "name": "Palenque",
-      "note": "2609 Main St, Littleton, CO 80120"
-    },
-    {
       "lat": 39.6123386,
       "lon": -105.0062238,
       "name": "Santa Fe Grill",
       "note": "1500 W Littleton Blvd, Littleton, CO 80120"
-    },
-    {
-      "lat": 39.6135645,
-      "lon": -105.0038911,
-      "name": "Gyro’s",
-      "note": "1399 W Littleton Blvd, Littleton, CO 80120"
-    },
-    {
-      "lat": 39.613299,
-      "lon": -105.001862,
-      "name": "Littleton Brewing Co",
-      "note": "1201 W Littleton Blvd, Littleton, CO 80120"
     },
     {
       "lat": 39.6135381,
@@ -1544,12 +1440,6 @@
       "note": "6439 S Broadway, Littleton, CO 80121"
     },
     {
-      "lat": 39.5959087,
-      "lon": -104.9883753,
-      "name": "Castle Bar",
-      "note": "6657 S Broadway, Littleton, CO 80121"
-    },
-    {
       "lat": 39.619724,
       "lon": -104.988126,
       "name": "Dubbs Pub",
@@ -1560,36 +1450,6 @@
       "lon": -105.007129,
       "name": "Mi Cocina 2",
       "note": "1600 W Belleview Ave, Littleton, CO 80120"
-    },
-    {
-      "lat": 39.619711,
-      "lon": -105.016383,
-      "name": "49th Food",
-      "note": "5350 S Santa Fe Dr F Suite, Littleton, CO 80120"
-    },
-    {
-      "lat": 39.622812,
-      "lon": -105.018846,
-      "name": "Toast Fine",
-      "note": "2630 W Belleview Ave #100, Littleton, CO 80123"
-    },
-    {
-      "lat": 39.619458,
-      "lon": -105.028599,
-      "name": "JP Nori Sushi",
-      "note": "5302 S Federal Cir, Littleton, CO 80123"
-    },
-    {
-      "lat": 39.608809,
-      "lon": -105.036769,
-      "name": "Colore",
-      "note": "5950 S Platte Canyon Rd # A1, Littleton, CO 80123"
-    },
-    {
-      "lat": 39.622556,
-      "lon": -105.034662,
-      "name": "Walters",
-      "note": "5194 S Lowell Blvd, Littleton, CO 80123"
     },
     {
       "lat": 39.624251,
@@ -1712,22 +1572,10 @@
       "note": "Littleton CO 80120, Littleton, CO"
     },
     {
-      "lat": 39.566174900598,
-      "lon": -104.989588407754,
-      "name": "Mi Cocina Express - Broadway",
-      "note": "137 W County Line Road, Littleton, CO"
-    },
-    {
       "lat": 39.613184824414,
       "lon": -105.005611946847,
       "name": "Old Santa Fe Express Mexican Grille",
       "note": "1500 W Littleton Blvd, Littleton, CO"
-    },
-    {
-      "lat": 39.600627806686,
-      "lon": -104.988270926222,
-      "name": "Mama Sol Cafe",
-      "note": "6439 S Broadway, Littleton, CO"
     },
     {
       "lat": 39.608864950091,
@@ -1848,18 +1696,6 @@
       "lon": -104.988577571413,
       "name": "Alibi's Bar & Grill",
       "note": "7983 S Broadway, Littleton, CO"
-    },
-    {
-      "lat": 39.567413058532,
-      "lon": -104.998181709635,
-      "name": "Celly's Bar and Grill in the Ice Ranch",
-      "note": "841 Southpark Dr, Littleton, CO"
-    },
-    {
-      "lat": 39.613251151934,
-      "lon": -104.997516080121,
-      "name": "Cherry Cricket - Littleton",
-      "note": "819 W Littleton Blvd, Littleton, CO"
     },
     {
       "lat": 39.595895019771,
@@ -2210,5 +2046,66 @@
       "note": "1500 W Littleton Blvd, Littleton, CO"
     }
   ],
-  "schools": []
+  "schools": [
+    {
+      "lat": 39.5970231,
+      "lon": -104.9935549,
+      "name": "Euclid Middle School",
+      "note": "Littleton school (city config)"
+    },
+    {
+      "lat": 39.616856,
+      "lon": -105.038196,
+      "name": "Goddard Middle School",
+      "note": "Littleton school (city config)"
+    },
+    {
+      "lat": 39.572792,
+      "lon": -104.978159,
+      "name": "John Wesley Powell Middle School",
+      "note": "Littleton school (city config)"
+    },
+    {
+      "lat": 39.5843743,
+      "lon": -105.0054175,
+      "name": "Heritage High School",
+      "note": "Littleton school (city config)"
+    },
+    {
+      "lat": 39.613267,
+      "lon": -104.98572,
+      "name": "Littleton High School",
+      "note": "Littleton school (city config)"
+    },
+    {
+      "lat": 39.6164866,
+      "lon": -105.029185,
+      "name": "Centennial Elementary School",
+      "note": "Littleton school (city config)"
+    },
+    {
+      "lat": 39.619002,
+      "lon": -104.982718,
+      "name": "Field Elementary School",
+      "note": "Littleton school (city config)"
+    },
+    {
+      "lat": 39.6007891,
+      "lon": -105.0068349,
+      "name": "Little Raven Elementary School",
+      "note": "Littleton school (city config)"
+    },
+    {
+      "lat": 39.585494,
+      "lon": -104.9988034,
+      "name": "School",
+      "note": "Littleton school (city config)"
+    },
+    {
+      "lat": 39.6025635,
+      "lon": -105.0429345,
+      "name": "Wilder Elementary School",
+      "note": "Littleton school (city config)"
+    }
+  ]
 }

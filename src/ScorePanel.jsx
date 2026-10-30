@@ -6,9 +6,10 @@ import {
   DIMENSION_LABELS,
   WEIGHTS as DEFAULT_WEIGHTS,
 } from "./livabilityData";
+import { POI_META, poiIconSvg } from "./poiIcons";
 
 function formatDist(km) {
-  if (!isFinite(km)) return '';
+  if (typeof km !== 'number' || !isFinite(km)) return '';
   if (km < 0.1) return `${Math.round(km * 1000)} m`;
   return `${km.toFixed(2)} km`;
 }
@@ -110,6 +111,37 @@ export default function ScorePanel({ zone, weights, onClose }) {
           />
         ))}
       </div>
+
+      {Array.isArray(zone.places) && zone.places.length > 0 && (
+        <>
+          <h3 className="breakdown-title nearby-title">Nearby Places</h3>
+          <ul className="nearby-places">
+            {zone.places.map((place) => {
+              const meta = POI_META[place.key];
+              if (!meta) return null;
+              const distance = formatDist(place.distanceKm);
+              const walk = typeof place.walkMin === 'number' && place.walkMin > 0
+                ? `${place.walkMin} min walk`
+                : '';
+              const details = [meta.label, distance, walk].filter(Boolean).join(' · ');
+              return (
+                <li key={place.key} className="nearby-place">
+                  <span
+                    className="nearby-place-icon"
+                    style={{ backgroundColor: meta.color }}
+                    aria-hidden="true"
+                    dangerouslySetInnerHTML={{ __html: poiIconSvg(meta) }}
+                  />
+                  <span className="nearby-place-text">
+                    <span className="nearby-place-name">{place.name || meta.label}</span>
+                    <span className="nearby-place-meta">{details}</span>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
     </div>
   );
 }

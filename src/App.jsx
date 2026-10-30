@@ -4,6 +4,7 @@ import Legend from "./Legend";
 import AddressSearch from "./AddressSearch";
 import WeightEditor from "./WeightEditor";
 import { CITIES, OVERLAY_OPTIONS, WEIGHTS as DEFAULT_WEIGHTS, getAllZoneFeaturesAsync, initDataFetching } from "./livabilityData";
+import { BASEMAP_OPTIONS } from "./mapStyles";
 import "./App.css";
 
 const ALPHA_CITIES = new Set(['centennial', 'englewood', 'denver']);
@@ -36,6 +37,7 @@ export default function App() {
   const [locate, setLocate] = useState(null);
   const [cityKey, setCityKey] = useState('littleton');
   const [overlayMetric, setOverlayMetric] = useState('composite');
+  const [basemap, setBasemap] = useState('osm');
   const [weights, setWeights] = useState(loadWeights);
   const [showWeights, setShowWeights] = useState(false);
   const [neighborhoods, setNeighborhoods] = useState([]);
@@ -45,16 +47,26 @@ export default function App() {
   // Kick off background data fetches as early as possible
   useEffect(() => { initDataFetching(cityKey); }, [cityKey]);
 
-  // Offer a neighborhood focus picker for cities that ship neighborhood polygons.
+  // Offer a neighborhood focus picker for any city that ships real
+  // neighborhood polygons. The single fallback "city area" feature is hidden.
   useEffect(() => {
-    if (cityKey !== 'denver') return undefined;
     let cancelled = false;
     getAllZoneFeaturesAsync(cityKey)
       .then((geo) => {
         if (cancelled) return;
-        const items = (geo?.features || [])
-          .map((f) => ({ id: f.properties?.id, name: f.properties?.name }))
-          .filter((n) => n.id && n.name)
+        const features = (geo?.features || []).filter((feature) => {
+          const props = feature?.properties || {};
+          if (!props.id || !props.name) return false;
+          if (String(props.id).endsWith('-area')) return false;
+          if (String(props.name).toLowerCase().includes('outside')) return false;
+          return true;
+        });
+        if (features.length <= 1) {
+          setNeighborhoods([]);
+          return;
+        }
+        const items = features
+          .map((f) => ({ id: f.properties.id, name: f.properties.name }))
           .sort((a, b) => a.name.localeCompare(b.name));
         setNeighborhoods(items);
       })
@@ -132,6 +144,19 @@ export default function App() {
               ))}
             </select>
           </label>
+          <div className="basemap-switch" role="group" aria-label="Map style">
+            {BASEMAP_OPTIONS.map((option) => (
+              <button
+                key={option.key}
+                type="button"
+                className={basemap === option.key ? 'active' : ''}
+                aria-pressed={basemap === option.key}
+                onClick={() => setBasemap(option.key)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
           <button
             className={`weights-toggle ${showWeights ? 'active' : ''}`}
             onClick={() => setShowWeights(v => !v)}
@@ -143,7 +168,14 @@ export default function App() {
         </div>
       </header>
       <main className="app-main">
-        <LivabilityMap cityKey={cityKey} locate={locate} overlayMetric={overlayMetric} weights={weights} focusNeighborhood={focusNeighborhood} />
+        <LivabilityMap
+          cityKey={cityKey}
+          locate={locate}
+          overlayMetric={overlayMetric}
+          weights={weights}
+          focusNeighborhood={focusNeighborhood}
+          basemap={basemap}
+        />
         <Legend overlayMetric={overlayMetric} weights={weights} />
         {showWeights && (
           <WeightEditor

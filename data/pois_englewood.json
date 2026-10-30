@@ -222,18 +222,6 @@
       "note": "South Elati Street & Englewood Parkway, Englewood"
     },
     {
-      "lat": 39.6557111,
-      "lon": -104.993637,
-      "name": "South Elati Street & Englewood Parkway",
-      "note": "South Elati Street & Englewood Parkway, Englewood"
-    },
-    {
-      "lat": 39.6548396,
-      "lon": -104.989261,
-      "name": "Englewood Parkway & South Acoma Street",
-      "note": "Englewood Parkway & South Acoma Street, Englewood"
-    },
-    {
       "lat": 39.6730939,
       "lon": -104.9793011,
       "name": "Harvard Gulch Park",
@@ -364,22 +352,10 @@
   ],
   "healthcare": [
     {
-      "lat": 39.6227409,
-      "lon": -104.990493,
-      "name": "Chuze Fitness",
-      "note": "200 W Belleview Ave Ste 170, Englewood, CO 80110 (approx)"
-    },
-    {
       "lat": 39.6245626,
       "lon": -104.986719,
       "name": "Walgreens",
       "note": "Walgreens, Centennial"
-    },
-    {
-      "lat": 39.6508267,
-      "lon": -104.98261,
-      "name": "Office Bldg",
-      "note": "Office Bldg, Englewood"
     },
     {
       "lat": 39.6539035,
@@ -532,20 +508,8 @@
       "note": "AdventHealth Porter ICU, Englewood"
     },
     {
-      "lat": 39.6699454,
-      "lon": -104.9758624,
-      "name": "AdventHealth Porter Hospital",
-      "note": "AdventHealth Porter Hospital, Englewood"
-    },
-    {
       "lat": 39.6541545,
       "lon": -104.980971,
-      "name": "Swedish Medical Center",
-      "note": "Swedish Medical Center, Englewood"
-    },
-    {
-      "lat": 39.6540609,
-      "lon": -104.9802372,
       "name": "Swedish Medical Center",
       "note": "Swedish Medical Center, Englewood"
     },
@@ -1352,12 +1316,6 @@
       "note": "RTD D Line, Englewood"
     },
     {
-      "lat": 39.6421874,
-      "lon": -105.0051629,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
       "lat": 39.6601644,
       "lon": -104.9980243,
       "name": "RTD D Line",
@@ -1624,12 +1582,6 @@
       "note": "Englewood"
     },
     {
-      "lat": 39.6601657,
-      "lon": -104.9980818,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
       "lat": 39.6582107,
       "lon": -104.9988199,
       "name": "RTD D Line",
@@ -1680,12 +1632,6 @@
     {
       "lat": 39.628517,
       "lon": -105.0091991,
-      "name": "RTD D Line",
-      "note": "RTD D Line, Englewood"
-    },
-    {
-      "lat": 39.6285278,
-      "lon": -105.0092519,
       "name": "RTD D Line",
       "note": "RTD D Line, Englewood"
     }
@@ -2474,12 +2420,6 @@
       "note": "East Harvard Gulch Trail, Englewood"
     },
     {
-      "lat": 39.654182,
-      "lon": -104.9782785,
-      "name": "Sky Bridge",
-      "note": "Sky Bridge, Englewood"
-    },
-    {
       "lat": 39.6259399,
       "lon": -105.0017281,
       "name": "Big Dry Creek Trail",
@@ -2496,12 +2436,6 @@
       "lon": -105.014443,
       "name": "Mary Carter Greenway Trail",
       "note": "Mary Carter Greenway Trail, Englewood"
-    },
-    {
-      "lat": 39.6739364,
-      "lon": -104.9600347,
-      "name": "South University Boulevard Sidwalk for Newman Center",
-      "note": "South University Boulevard Sidwalk for Newman Center, Englewood"
     },
     {
       "lat": 39.6211977,
@@ -2800,36 +2734,6 @@
       "note": "Saint Mary's Academy, Centennial"
     },
     {
-      "lat": 39.633822,
-      "lon": -104.9607468,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.6332608,
-      "lon": -104.9606035,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.633365,
-      "lon": -104.961483,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.6338274,
-      "lon": -104.9614914,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.6344007,
-      "lon": -104.961448,
-      "note": "Centennial"
-    },
-    {
-      "lat": 39.6338638,
-      "lon": -104.9860993,
-      "note": "Centennial"
-    },
-    {
       "lat": 39.6565718,
       "lon": -104.9859737,
       "name": "Saint Louis Catholic School",
@@ -2842,20 +2746,10 @@
       "note": "Englewood High School, Englewood"
     },
     {
-      "lat": 39.6555133,
-      "lon": -104.9860823,
-      "note": "Englewood"
-    },
-    {
       "lat": 39.6462095,
       "lon": -104.9966568,
       "name": "Englewood Early Childhood Education (ECE) Program at Maddox",
       "note": "Englewood Early Childhood Education (ECE) Program at Maddox, Englewood"
-    },
-    {
-      "lat": 39.6565627,
-      "lon": -104.9855285,
-      "note": "Englewood"
     },
     {
       "lat": 39.6734714,
@@ -2888,11 +2782,6 @@
       "note": "Metallurgy Building, Englewood"
     },
     {
-      "lat": 39.6663589,
-      "lon": -104.9608262,
-      "note": "Englewood"
-    },
-    {
       "lat": 39.6668418,
       "lon": -104.9612014,
       "name": "Saint Anne's Episcopal School",
@@ -2909,28 +2798,8 @@
       "note": "Englewood"
     },
     {
-      "lat": 39.6565716,
-      "lon": -104.986114,
-      "note": "Englewood"
-    },
-    {
-      "lat": 39.6471912,
-      "lon": -104.9809977,
-      "note": "Englewood"
-    },
-    {
-      "lat": 39.6467057,
-      "lon": -104.99678,
-      "note": "Englewood"
-    },
-    {
       "lat": 39.6322094,
       "lon": -104.9937509,
-      "note": "Englewood"
-    },
-    {
-      "lat": 39.626733,
-      "lon": -104.9912207,
       "note": "Englewood"
     },
     {
@@ -2944,11 +2813,6 @@
       "lon": -104.9614275,
       "name": "Academic Office Annex",
       "note": "Academic Office Annex, Englewood"
-    },
-    {
-      "lat": 39.6725252,
-      "lon": -104.9614716,
-      "note": "Englewood"
     },
     {
       "lat": 39.6726263,
@@ -2981,26 +2845,10 @@
       "note": "Maddox Early Childhood Education Center, Englewood"
     },
     {
-      "lat": 39.6469525,
-      "lon": -104.9818672,
-      "name": "Englwood High School",
-      "note": "Englwood High School, Englewood"
-    },
-    {
-      "lat": 39.6597278,
-      "lon": -104.9929329,
-      "note": "Englewood"
-    },
-    {
       "lat": 39.6595267,
       "lon": -104.992932,
       "name": "Bishop Elementary School",
       "note": "Bishop Elementary School, Englewood"
-    },
-    {
-      "lat": 39.6462893,
-      "lon": -104.9967053,
-      "note": "Englewood"
     }
   ]
 }

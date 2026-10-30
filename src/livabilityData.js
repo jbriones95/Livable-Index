@@ -31,9 +31,12 @@ import twoBrands from '../data/two_brands.json';
 export const CITIES = {
   littleton: {
     label: 'Littleton',
-    bounds: { north: 39.646, south: 39.562, east: -104.970, west: -105.065 },
+    // Includes the Trailmark area west/south of the old viewport.
+    bounds: { north: 39.646, south: 39.532, east: -104.970, west: -105.115 },
     center: [39.6133, -105.0166],
     zoom: 13,
+    detailZoom: 15,
+    bundledPois: true,
     neighborhoodUrl: 'https://services6.arcgis.com/lJUBf9F1fZJRB4zT/arcgis/rest/services/Neighborhood_Boundary/FeatureServer/70/query?where=1%3D1&outFields=*&outSR=4326&f=geojson',
     bikeLaneUrl: 'https://ltngiswa.littletonco.gov/server/rest/services/City/LittletonParksTrails/MapServer/1/query?where=1%3D1&outFields=*&outSR=4326&f=geojson',
     trailUrl: 'https://ltngiswa.littletonco.gov/server/rest/services/City/LittletonParksTrails/MapServer/3/query?where=1%3D1&outFields=*&outSR=4326&f=geojson',
@@ -55,6 +58,8 @@ export const CITIES = {
     bounds: { north: 39.640, south: 39.564, east: -104.726, west: -104.990 },
     center: [39.5792, -104.8769],
     zoom: 12,
+    detailZoom: 14,
+    bundledPois: true,
     neighborhoodUrl: null,
     bikeLaneUrl: null,
     trailUrl: null,
@@ -69,9 +74,12 @@ export const CITIES = {
   },
   englewood: {
     label: 'Englewood',
-    bounds: { north: 39.674, south: 39.617, east: -104.959, west: -105.019 },
+    // Slightly wider than the old viewport to include the full city boundary.
+    bounds: { north: 39.679, south: 39.616, east: -104.959, west: -105.036 },
     center: [39.6475, -104.9878],
     zoom: 13,
+    detailZoom: 15,
+    bundledPois: true,
     neighborhoodUrl: null,
     bikeLaneUrl: null,
     trailUrl: null,
@@ -87,6 +95,7 @@ export const CITIES = {
     bounds: { north: 39.915, south: 39.614, east: -104.600, west: -105.110 },
     center: [39.7392, -104.9903],
     zoom: 11,
+    detailZoom: 13,
     neighborhoodUrl: null,
     bikeLaneUrl: null,
     trailUrl: null,
@@ -329,12 +338,13 @@ function normalizeNeighborhoodFeatures(collection) {
   collection.features = collection.features.map((feature, index) => {
     const properties = feature.properties || {};
     const name = properties.name || properties.Neighborho || properties.Name || `Area ${index + 1}`;
+    const id = properties.id ?? feature.id ?? `zone-${index + 1}`;
     return {
       ...feature,
       properties: {
         ...properties,
-        id: properties.id || feature.id || `zone-${index + 1}`,
-        name,
+        id: String(id),
+        name: String(name),
       },
     };
   });
@@ -349,9 +359,42 @@ function getCachedNeighborhoodFeatures(cityKey) {
   return null;
 }
 
+// Local neighborhood GeoJSON for the non-Denver cities. Using a glob keeps the
+// build valid even before a city's boundary file has been added.
+const _bundledNeighborhoodModules = import.meta.glob([
+  '../data/littleton/neighborhoods.json',
+  '../data/centennial/neighborhoods.json',
+  '../data/englewood/neighborhoods.json',
+]);
+
+async function loadBundledNeighborhoods(cityKey) {
+  const loader = _bundledNeighborhoodModules[`../data/${cityKey}/neighborhoods.json`];
+  if (!loader) return null;
+  try {
+    const module = await loader();
+    return module.default || module;
+  } catch (err) {
+    console.warn('Failed to load bundled neighborhoods for', cityKey, err && err.message);
+    return null;
+  }
+}
+
 async function fetchNeighborhoodFeatures(cityKey) {
   const config = CITIES[cityKey];
   if (!config) return null;
+
+  // Prefer local boundaries so the picker and overlay work without a network
+  // request (Littleton, Centennial, Englewood).
+  const bundledNeighborhoods = await loadBundledNeighborhoods(cityKey);
+  if (bundledNeighborhoods) {
+    const data = normalizeNeighborhoodFeatures(bundledNeighborhoods);
+    if (data) {
+      const cityStore = getCityDataContainer(cityKey);
+      if (cityStore) cityStore.neighborhoods = data;
+      return data;
+    }
+  }
+
   if (config.bundledData) {
     const bundled = await loadBundledCityData(cityKey);
     const data = normalizeNeighborhoodFeatures(bundled?.neighborhoods || null);
@@ -426,6 +469,19 @@ const MAX_DIST_KM = {
   crime: 2.0,
   schools: 1.5,
 };
+
+// Amenity categories that get a pin on the map once a point is scored. The
+// order also controls the order of the "Nearby Places" list in the panel.
+const NEARBY_PLACE_KEYS = [
+  'coffee',
+  'restaurant',
+  'grocery',
+  'trail',
+  'park',
+  'busStop',
+  'healthcare',
+  'schools',
+];
 
 // Authoritative trail polylines used to score distance-to-trail precisely.
 // Represented as [lon, lat] coordinate pairs, matching the turf convention.
@@ -571,6 +627,7 @@ function haversineKm(lng1, lat1, lng2, lat2) {
 function nearestTrailPolylineDistance(lon, lat, cityKey = 'littleton') {
   let bestKm = Infinity;
   let bestCoords = null;
+  let bestName = null;
   const pt = turfPoint([lon, lat]);
   const lines = CITY_TRAIL_LINES[cityKey] || TRAIL_LINES;
   for (const t of lines) {
@@ -578,14 +635,15 @@ function nearestTrailPolylineDistance(lon, lat, cityKey = 'littleton') {
       const km = turfPointToLineDistance(pt, t.line, { units: 'kilometers' });
       if (km < bestKm) {
         bestKm = km;
-        const nearest = turfNearestPointOnLine(pt, t.line, { units: 'kilometers' });
+        bestName = t.name || null;
+        const nearest = turfNearestPointOnLine(t.line, pt, { units: 'kilometers' });
         bestCoords = nearest?.geometry?.coordinates || null;
       }
     } catch (_err) {
       // skip malformed line
     }
   }
-  return { km: bestKm, coords: bestCoords };
+  return { km: bestKm, coords: bestCoords, name: bestName };
 }
 
 let _bikeInfraFetch = {};
@@ -1010,7 +1068,7 @@ function bundledPointsToTurf(poiData) {
       points.push(turfPoint([obj.lon, obj.lat], {
         category: [mapped],
         name: obj.name || null,
-        note: obj.address || null,
+        note: obj.note || obj.address || null,
       }));
     }
   }
@@ -1046,8 +1104,19 @@ async function getBundledDetailGrid(cityKey) {
 // city scale, detail cells once the user zooms past the street-level threshold.
 export async function getZoomOverlayFeatures(cityKey = 'littleton', detail = false) {
   if (detail) {
+    // Denver ships a precomputed street-level grid; other cities fall back to
+    // the locally built hex grid.
     const grid = await getBundledDetailGrid(cityKey);
     if (grid) return grid;
+    return getGridOverlayFeatures(cityKey);
+  }
+
+  // At city scale, prefer neighborhood polygons (the Denver-style view) when
+  // the city has real neighborhoods. Cities with only the single fallback
+  // "city area" polygon keep using the hex overlay.
+  const neighborhoods = await getScoredZoneFeatures(cityKey).catch(() => null);
+  if (neighborhoods && Array.isArray(neighborhoods.features) && neighborhoods.features.length > 1) {
+    return neighborhoods;
   }
   return getGridOverlayFeatures(cityKey);
 }
@@ -1180,13 +1249,22 @@ export async function getCityPoiPoints(cityKey = 'littleton') {
   const cityStore = getCityDataContainer(cacheKey);
   if (cityStore?.poiPoints) return cityStore.poiPoints;
 
-  // Bundled cities use their own POI arrays and never hit Overpass.
-  if (isBundledCity(cacheKey)) {
+  // Bundled cities use their own POI arrays and never hit Overpass. The
+  // Littleton/Centennial/Englewood files are the audited local datasets.
+  if (isBundledCity(cacheKey) || CITIES[cacheKey]?.bundledPois) {
     if (!_cityPoiFetch[cacheKey]) {
       _cityPoiFetch[cacheKey] = (async () => {
-        const bundled = await loadBundledCityData(cacheKey);
-        registerCityTrailLines(cacheKey, bundled?.trails);
-        const points = bundledPointsToTurf(bundled?.pois);
+        if (isBundledCity(cacheKey)) {
+          const bundled = await loadBundledCityData(cacheKey);
+          registerCityTrailLines(cacheKey, bundled?.trails);
+          const points = bundledPointsToTurf(bundled?.pois);
+          if (cityStore) cityStore.poiPoints = points;
+          return points;
+        }
+        // Filter the regional local extracts to the real city boundary.
+        const cityBoundary = await getCityBoundaryAsync(cacheKey).catch(() => null);
+        const boundaryFeatures = boundaryToFeatures(cityBoundary);
+        const points = supplementalPointsForCity(cacheKey, boundaryFeatures);
         if (cityStore) cityStore.poiPoints = points;
         return points;
       })();
@@ -1353,10 +1431,11 @@ function nearestAndCounts(poiPoints, pt, cityKey = 'littleton') {
   const categories = ['coffee', 'restaurant', 'grocery', 'trail', 'park', 'busStop', 'healthcare', 'schools'];
   const nearest = {};
   const nearestCoords = {};
+  const nearestPois = {};
   const counts = {};
   const candidates = {};
   for (const c of categories) {
-    nearest[c] = Infinity; nearestCoords[c] = null; counts[c] = 0; candidates[c] = [];
+    nearest[c] = Infinity; nearestCoords[c] = null; nearestPois[c] = null; counts[c] = 0; candidates[c] = [];
   }
   // Process any POI points (if supplied) — these might be turf points with `.properties`.
   for (const p of poiPoints) {
@@ -1366,11 +1445,16 @@ function nearestAndCounts(poiPoints, pt, cityKey = 'littleton') {
     // prefer that to OSM classification.
     const cats = props.category ? (Array.isArray(props.category) ? props.category : [props.category]) : classifyOSM(props);
     const coords = p.geometry && p.geometry.coordinates ? p.geometry.coordinates : null; // [lon, lat]
+    const name = props.name || props.note || null;
     for (const cat of cats) {
       if (!Object.prototype.hasOwnProperty.call(nearest, cat)) continue;
-      if (d < nearest[cat]) { nearest[cat] = d; nearestCoords[cat] = coords; }
+      if (d < nearest[cat]) {
+        nearest[cat] = d;
+        nearestCoords[cat] = coords;
+        nearestPois[cat] = { name, category: cat };
+      }
       if (d <= MAX_DIST_KM[cat]) counts[cat]++;
-      if (coords) candidates[cat].push({ coords, dist: d });
+      if (coords) candidates[cat].push({ coords, dist: d, name });
     }
   }
 
@@ -1381,12 +1465,17 @@ function nearestAndCounts(poiPoints, pt, cityKey = 'littleton') {
       const coords = sp.geometry?.coordinates;
       if (!coords) continue;
       const cats = Array.isArray(sp.properties?.category) ? sp.properties.category : [];
+      const name = sp.properties?.name || sp.properties?.note || null;
       const d = turfDistance(pt, sp, { units: 'kilometers' });
       for (const cat of cats) {
         if (!Object.prototype.hasOwnProperty.call(nearest, cat)) continue;
-        if (d < nearest[cat]) { nearest[cat] = d; nearestCoords[cat] = coords; }
+        if (d < nearest[cat]) {
+          nearest[cat] = d;
+          nearestCoords[cat] = coords;
+          nearestPois[cat] = { name, category: cat };
+        }
         if (d <= MAX_DIST_KM[cat]) counts[cat]++;
-        candidates[cat].push({ coords, dist: d });
+        candidates[cat].push({ coords, dist: d, name });
       }
     }
   }
@@ -1401,23 +1490,25 @@ function nearestAndCounts(poiPoints, pt, cityKey = 'littleton') {
       if (poly.km < nearest.trail) {
         nearest.trail = poly.km;
         nearestCoords.trail = poly.coords;
+        nearestPois.trail = { name: poly.name, category: 'trail' };
       }
       if (poly.km <= MAX_DIST_KM.trail) counts.trail++;
-      if (poly.coords) candidates.trail.push({ coords: poly.coords, dist: poly.km });
+      if (poly.coords) candidates.trail.push({ coords: poly.coords, dist: poly.km, name: poly.name });
     }
   }
 
-  return { nearest, counts, nearestCoords, candidates };
+  return { nearest, counts, nearestCoords, nearestPois, candidates };
 }
 
 async function computeScoresFromNearest(nearest, opts = {}) {
-  const { nearestCoords = {}, pt = null, useRouting = false, candidates = {} } = opts;
+  const { nearestCoords = {}, nearestPois = {}, pt = null, useRouting = false, candidates = {} } = opts;
   const walking = {};
   const biking = {};
   const walkingKm = {};
   const bikingKm = {};
   const combined = {};
   const usedCoords = {}; // [lon,lat] of the chosen candidate per category (for UI)
+  const usedPois = {}; // name/metadata for the chosen candidate per category
 
   // Accept pt either as turf point or coordinate array [lon, lat]
   let ptCoords = null;
@@ -1431,6 +1522,7 @@ async function computeScoresFromNearest(nearest, opts = {}) {
     walkingKm[key] = isFinite(crowKm) ? crowKm : Infinity;
     bikingKm[key] = isFinite(crowKm) ? crowKm : Infinity;
     usedCoords[key] = nearestCoords[key] || null;
+    usedPois[key] = nearestPois[key] || null;
 
     const topCandidates = (candidates[key] || [])
       .slice()
@@ -1449,6 +1541,7 @@ async function computeScoresFromNearest(nearest, opts = {}) {
         if (typeof d === 'number' && d < walkingKm[key]) {
           walkingKm[key] = d;
           usedCoords[key] = topCandidates[i].coords;
+          usedPois[key] = { name: topCandidates[i].name || null, category: key };
         }
       }
 
@@ -1463,7 +1556,10 @@ async function computeScoresFromNearest(nearest, opts = {}) {
         if (typeof d === 'number' && d < bikingKm[key]) {
           bikingKm[key] = d;
           // prefer walking candidate for UI coords, but fall back to biking
-          if (!usedCoords[key]) usedCoords[key] = topCandidates[i].coords;
+          if (!usedCoords[key]) {
+            usedCoords[key] = topCandidates[i].coords;
+            usedPois[key] = { name: topCandidates[i].name || null, category: key };
+          }
         }
       }
     }
@@ -1477,7 +1573,7 @@ async function computeScoresFromNearest(nearest, opts = {}) {
     combined[key] = Math.round(comb);
   }
 
-  return { scores: combined, walking, biking, walkingKm, bikingKm, usedCoords };
+  return { scores: combined, walking, biking, walkingKm, bikingKm, usedCoords, usedPois };
 }
 
 // Combine trail (80%) and park (20%) scores into the nature dimension
@@ -1593,8 +1689,14 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const cityKey = opts.cityKey || 'littleton';
   const poiPoints = await getCityPoiPoints(cityKey).catch(() => []);
   const pt = turfPoint([lng, lat]);
-  const { nearest, nearestCoords, candidates } = nearestAndCounts(poiPoints, pt, cityKey);
-  const scoring = await computeScoresFromNearest(nearest, { nearestCoords, pt, useRouting: true, candidates });
+  const { nearest, nearestCoords, nearestPois, candidates } = nearestAndCounts(poiPoints, pt, cityKey);
+  const scoring = await computeScoresFromNearest(nearest, {
+    nearestCoords,
+    nearestPois,
+    pt,
+    useRouting: true,
+    candidates,
+  });
   const rawScores = scoring.scores;
   const scores = normalizeDimensionScores(rawScores);
   if (isBundledCity(cityKey)) {
@@ -1631,6 +1733,60 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     }
   }
   routing.nature = routing.trail || routing.park || null;
+
+  // Nearest amenity per category, used to drop small icons on the map around
+  // the selected point.
+  const places = NEARBY_PLACE_KEYS.map((key) => {
+    const coords = scoring.usedCoords[key] || nearestCoords[key];
+    if (!Array.isArray(coords) || coords.length < 2) return null;
+    const poi = scoring.usedPois[key] || nearestPois[key] || null;
+    const km = distances[key];
+    return {
+      key,
+      name: poi?.name || null,
+      lat: coords[1],
+      lng: coords[0],
+      distanceKm: typeof km === 'number' && isFinite(km) ? km : null,
+      walkMin: routing[key]?.walk ?? null,
+      bikeMin: routing[key]?.bike ?? null,
+    };
+  }).filter(Boolean);
+
+  // Some cities only ship school coordinates in their config (no OSM school
+  // POIs), so add the nearest configured school to the pin list as a fallback.
+  if (!places.some((place) => place.key === 'schools')) {
+    const fallbackSchools = getCityConfig(cityKey).schools || [];
+    let nearestSchool = null;
+    let nearestSchoolKm = Infinity;
+    for (const school of fallbackSchools) {
+      if (typeof school.lat !== 'number' || typeof school.lng !== 'number') continue;
+      const d = haversineKm(lng, lat, school.lng, school.lat);
+      if (d < nearestSchoolKm) {
+        nearestSchoolKm = d;
+        nearestSchool = school;
+      }
+    }
+    if (nearestSchool && isFinite(nearestSchoolKm)) {
+      places.push({
+        key: 'schools',
+        name: 'School',
+        lat: nearestSchool.lat,
+        lng: nearestSchool.lng,
+        distanceKm: nearestSchoolKm,
+        walkMin: Math.round(nearestSchoolKm * 12),
+        bikeMin: Math.round(nearestSchoolKm * 4),
+      });
+      if (!isFinite(distances.schools)) {
+        distances.schools = nearestSchoolKm;
+      }
+      if (!routing.schools) {
+        routing.schools = {
+          walk: Math.round(nearestSchoolKm * 12),
+          bike: Math.round(nearestSchoolKm * 4),
+        };
+      }
+    }
+  }
 
   const zones = getAllZoneFeatures(cityKey).features;
   let matched = null;
@@ -1684,6 +1840,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     address,
     distances,
     routing,
+    places,
     zoneId: matched ? matched.properties.id : null,
   };
 }
