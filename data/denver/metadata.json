@@ -19,13 +19,13 @@
     "totalSqMi": 154.7
   },
   "pois": {
-    "total": 17665,
+    "total": 11465,
     "byCategory": {
       "coffee": 302,
-      "restaurant": 3516,
+      "restaurant": 1636,
       "grocery": 578,
       "parks": 6299,
-      "healthcare": 4416,
+      "healthcare": 96,
       "schools": 472,
       "busStops": 2082
     }

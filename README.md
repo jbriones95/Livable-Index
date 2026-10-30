@@ -16,6 +16,9 @@ Denver data
 - Regenerate with `python tools/build_denver_data.py` (requires `duckdb` with the `spatial` and `httpfs` extensions).
 - Outputs to `data/denver/`: `pois_denver.json`, `neighborhoods.json`, `trails.json`, `metadata.json`.
 - Sources: Overture Maps Places plus City and County of Denver open data (neighborhoods, business licenses, food retail, liquor, schools, health facilities, parkland, RTD stops, trails, bike facilities, police stations).
+- Restaurants are limited to table-service places and corroborated against active Denver Retail Food and hotel/restaurant liquor licenses; quick-service chains, bakeries, coffee shops, food courts, and legal-entity names are excluded.
+- Healthcare counts only in-person, no-referral medical care: CDPHE-licensed hospitals, freestanding EDs, community clinics/FQHCs, and dialysis, plus name-verified urgent and primary care from Overture. Dental, vision, behavioral health, alternative medicine, labs, and home-care agencies are excluded.
+- Healthcare scores use the full 4.5 km access horizon rather than the 1.3 km falloff used by the denser dimensions.
 
 Local
 - npm install

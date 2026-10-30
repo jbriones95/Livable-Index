@@ -216,6 +216,53 @@ def fetch_json(url: str, params: dict | None = None, timeout: int = 120):
         return json.load(response)
 
 
+def fetch_business_licenses() -> list[tuple]:
+    """Page through every active business license (ArcGIS caps at 2000 rows)."""
+    rows: list[tuple] = []
+    offset = 0
+    page_size = 2000
+    fields = (
+        "LICENSE_TYPE,LICENSE_SUB_TYPE,LICENSE_STATUS,X_COORD,Y_COORD,"
+        "TRADE_NAME,ENTITY_NAME,ADDRESS"
+    )
+    while True:
+        page = fetch_json(
+            BUSINESS_LICENSE_URL,
+            {
+                "where": "1=1",
+                "outFields": fields,
+                "returnGeometry": "false",
+                "resultOffset": str(offset),
+                "resultRecordCount": str(page_size),
+                "f": "json",
+            },
+        )
+        features = page.get("features") or []
+        for feature in features:
+            attrs = feature.get("attributes") or {}
+            x = attrs.get("X_COORD")
+            y = attrs.get("Y_COORD")
+            if x is None or y is None:
+                continue
+            rows.append(
+                (
+                    attrs.get("LICENSE_TYPE"),
+                    attrs.get("LICENSE_SUB_TYPE"),
+                    attrs.get("LICENSE_STATUS"),
+                    float(x),
+                    float(y),
+                    attrs.get("TRADE_NAME"),
+                    attrs.get("ENTITY_NAME"),
+                    attrs.get("ADDRESS"),
+                )
+            )
+        log(f"  {len(rows):,} licenses fetched")
+        if not page.get("exceededTransferLimit") or not features:
+            break
+        offset += page_size
+    return rows
+
+
 def haversine_km(lng1: float, lat1: float, lng2: float, lat2: float) -> float:
     radius = 6371.0
     d_lat = math.radians(lat2 - lat1)
@@ -229,11 +276,16 @@ def haversine_km(lng1: float, lat1: float, lng2: float, lat2: float) -> float:
     return radius * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
 
-def dist_to_score(km: float | None) -> int:
+def dist_to_score(km: float | None, max_km: float | None = None) -> int:
     if km is None or not math.isfinite(km):
         return 0
     if km <= 0.3:
         return 100
+    if max_km is not None:
+        if km >= max_km:
+            return 0
+        # Linear falloff from the 300 m plateau to the dimension's access horizon.
+        return max(0, round(100 * (1 - (km - 0.3) / (max_km - 0.3))))
     extra_m = (km - 0.3) * 1000.0
     steps = math.ceil(extra_m / 100.0)
     return max(0, 100 - steps * 10)
@@ -368,11 +420,17 @@ def build() -> None:
     con.execute(
         f"""
         CREATE TABLE ov AS
-        SELECT names.primary AS name,
+        SELECT id,
+               names.primary AS name,
                basic_category AS basic,
                taxonomy.primary AS cat,
+               taxonomy.hierarchy AS hier,
+               brand.names.primary AS brand,
                confidence,
                addresses[1].freeform AS address,
+               websites,
+               phones,
+               list_transform(sources, x -> x.dataset) AS src_datasets,
                ST_Centroid(geometry) AS geom
         FROM read_parquet('{OVERTURE_SRC}')
         WHERE {OVERTURE_BBOX}
@@ -392,12 +450,6 @@ def build() -> None:
     log(f"  {overture_count:,} open named places inside Denver")
 
     coffee_expr = "(cat = 'coffee_shop' OR basic = 'coffee_shop')"
-    restaurant_expr = (
-        "(basic IN ('restaurant', 'casual_eatery') "
-        "OR (cat LIKE '%restaurant%' AND cat NOT LIKE '%equipment%' AND cat NOT LIKE '%supply%') "
-        "OR cat IN ('casual_eatery', 'sandwich_shop', 'food_court', 'diner', 'bakery', "
-        "'bar_and_grill_restaurant'))"
-    )
     grocery_expr = (
         "(cat IN ('grocery_store', 'supermarket', 'convenience_store', "
         "'specialty_food_store', 'butcher_shop', 'farmers_market', 'health_food_store', "
@@ -405,20 +457,6 @@ def build() -> None:
         "OR basic IN ('grocery_store', 'supermarket', 'convenience_store')) "
         "AND NOT regexp_matches(lower(name), "
         "'liquor|wine|spirit|tobacco|vape|smoke shop|vitamin|supplement|cbd|nutrition')"
-    )
-    health_expr = (
-        "(basic IN ('health_care', 'dental_clinic', 'diagnostics_imaging_or_lab_service', "
-        "'behavioral_or_mental_health_clinic', 'outpatient_care_facility', "
-        "'primary_care_or_general_clinic', 'physical_medicine_and_rehabilitation', "
-        "'complementary_and_alternative_medicine') "
-        "OR cat IN ('health_care', 'doctors_office', 'dental_clinic', 'pharmacy', "
-        "'medical_clinic', 'hospital', 'optometrist', 'physical_therapy', 'chiropractic', "
-        "'behavioral_or_mental_health_clinic', 'counseling', 'psychotherapy', 'psychology', "
-        "'public_health_clinic', 'outpatient_care_facility', "
-        "'primary_care_or_general_clinic', 'urgent_care_center', 'medical_lab', "
-        "'acupuncture', 'naturopathic')) "
-        "AND COALESCE(cat, '') NOT IN ('home_health_care', 'cannabis_clinic') "
-        "AND NOT regexp_matches(lower(name), 'home health|cannabis|dispensary')"
     )
     school_expr = (
         "(basic IN ('elementary_school', 'middle_school', 'high_school', 'preschool') "
@@ -429,6 +467,9 @@ def build() -> None:
     )
     park_expr = "(basic = 'park' OR cat = 'park')"
 
+    # Restaurants and healthcare are curated separately below: both categories
+    # are too noisy to classify from Overture alone (chains/fast food for
+    # restaurants; dental/vision/home-care noise for healthcare).
     con.execute(
         f"""
         CREATE TABLE points AS
@@ -437,9 +478,7 @@ def build() -> None:
             SELECT *,
                    CASE
                        WHEN {coffee_expr} THEN 'coffee'
-                       WHEN {restaurant_expr} THEN 'restaurant'
                        WHEN {grocery_expr} THEN 'grocery'
-                       WHEN {health_expr} THEN 'healthcare'
                        WHEN {school_expr} THEN 'schools'
                        WHEN {park_expr} THEN 'parks'
                        ELSE NULL
@@ -453,6 +492,357 @@ def build() -> None:
         "SELECT category, count(*) FROM points GROUP BY category ORDER BY category"
     ).fetchall():
         log(f"  Overture {category}: {count:,}")
+
+    # ------------------------------------------------------------------
+    # 3. Curated restaurants: license-gated, fast food excluded
+    # ------------------------------------------------------------------
+    con.execute(
+        """
+        CREATE OR REPLACE MACRO norm_name(s) AS
+          trim(regexp_replace(regexp_replace(lower(coalesce(s, '')), '[^a-z0-9 ]', ' ', 'g'), ' +', ' ', 'g'));
+        """
+    )
+    con.execute(
+        """
+        CREATE OR REPLACE MACRO norm_addr(s) AS
+          trim(regexp_replace(regexp_replace(lower(coalesce(s, '')), '[^a-z0-9 ]', ' ', 'g'), ' +', ' ', 'g'));
+        """
+    )
+
+    log("downloading active business licenses (paginated)")
+    license_rows = fetch_business_licenses()
+    con.execute(
+        """
+        CREATE TEMP TABLE lic_raw(
+            license_type VARCHAR, license_sub_type VARCHAR, license_status VARCHAR,
+            x DOUBLE, y DOUBLE, trade_name VARCHAR, entity_name VARCHAR, address VARCHAR
+        )
+        """
+    )
+    if license_rows:
+        con.executemany("INSERT INTO lic_raw VALUES (?, ?, ?, ?, ?, ?, ?, ?)", license_rows)
+    con.execute(
+        """
+        CREATE TABLE lic AS
+        SELECT license_type, license_sub_type, license_status,
+               trade_name, entity_name, address,
+               ST_Transform(ST_Point(x, y), 'EPSG:2232', 'OGC:CRS84') AS geom
+        FROM lic_raw
+        """
+    )
+    con.execute(
+        """
+        CREATE TEMP TABLE rf AS
+        SELECT norm_name(coalesce(trade_name, entity_name)) AS nm,
+               coalesce(trade_name, entity_name) AS trade,
+               address,
+               ST_Transform(ST_Point(x, y), 'EPSG:2232', 'EPSG:26913') AS g_m
+        FROM lic_raw
+        WHERE license_type = 'Retail Food'
+        """
+    )
+    con.execute(
+        f"""
+        CREATE TEMP TABLE lic_hr AS
+        SELECT norm_name(BUS_PROF_NAME) AS nm, BUS_PROF_NAME AS trade,
+               ST_Transform(ST_Centroid(geom), 'OGC:CRS84', 'EPSG:26913') AS g_m
+        FROM ST_Read('{LIQUOR_URL}')
+        WHERE LICENSES LIKE '%HOTEL AND RESTAURANT%'
+           OR LICENSES LIKE '%VINTNER%'
+        """
+    )
+    log(
+        "  retail food licenses: "
+        f"{con.execute('SELECT count(*) FROM rf').fetchone()[0]:,}; "
+        "hotel/restaurant liquor licenses: "
+        f"{con.execute('SELECT count(*) FROM lic_hr').fetchone()[0]:,}"
+    )
+
+    # Brands that are quick-service/fast-casual rather than a sit-down dinner.
+    # Full-service chains are intentionally kept as valid dinner options.
+    qsr_brands = [
+        "subway", "mcdonald", "burger king", "wendy", "taco bell", "kfc",
+        "popeyes", "arby", "hardee", "carl s jr", "jack in the box", "sonic",
+        "dairy queen", "culver", "five guys", "shake shack", "chipotle",
+        "qdoba", "panera", "jimmy john", "jersey mike", "firehouse subs",
+        "wingstop", "little caesars", "papa john", "papa murphy", "domino",
+        "pizza hut", "sbarro", "auntie anne", "wetzel", "cinnabon", "baskin",
+        "cold stone", "smoothie king", "jamba", "starbucks", "dunkin",
+        "dutch bros", "caribou", "insomnia cookies", "nothing bundt",
+        "voodoo doughnut", "krispy kreme", "potbelly", "quiznos",
+        "which wich", "noodles company", "smashburger", "good times",
+        "mod pizza", "blaze pizza", "cava", "sweetgreen", "torchy",
+        "panda express", "churchs", "jason s deli", "mcalister",
+        "schlotzsky", "charleys", "long john silver", "captain d", "denny",
+        "ihop", "village inn", "perkins", "waffle house", "krispy krunchy",
+        "marco s pizza", "daves hot chicken", "starbird", "pei wei",
+        "freddy", "zenshi", "snowfox",
+    ]
+    con.execute("CREATE TEMP TABLE qsr(brand VARCHAR)")
+    con.executemany("INSERT INTO qsr VALUES (?)", [(brand,) for brand in qsr_brands])
+
+    con.execute(
+        """
+        CREATE TEMP TABLE rest_cand AS
+        WITH base AS (
+            SELECT o.*,
+                   norm_name(o.name) AS nm,
+                   norm_name(o.brand) AS bm,
+                   ST_Transform(o.geom, 'OGC:CRS84', 'EPSG:26913') AS g_m
+            FROM ov_clip o
+            WHERE o.hier[1] = 'food_and_drink'
+              AND (
+                    o.basic = 'restaurant'
+                    OR (o.basic = 'casual_eatery'
+                        AND o.cat IN ('diner', 'gastropub', 'bar_and_grill_restaurant',
+                                      'tapas_bar', 'bistro', 'fondue_restaurant'))
+                  )
+              AND coalesce(o.cat, '') NOT IN (
+                    'fast_food_restaurant', 'food_court', 'food_truck_stand', 'cafeteria',
+                    'food_delivery_service', 'bakery', 'sandwich_shop', 'delicatessen',
+                    'coffee_shop', 'cafe', 'dessert_shop', 'ice_cream_shop', 'donut_shop',
+                    'bagel_shop', 'candy_store', 'chocolatier', 'cupcake_shop',
+                    'frozen_yogurt_shop', 'gelato_shop', 'pretzel_shop', 'popcorn_shop',
+                    'acai_bowls', 'smoothie_juice_bar'
+                  )
+              AND NOT EXISTS (
+                    SELECT 1 FROM qsr q
+                    WHERE strpos(norm_name(o.name), q.brand) > 0
+                       OR strpos(norm_name(o.brand), q.brand) > 0
+                  )
+              AND NOT regexp_matches(norm_name(o.name),
+                    'llc| inc| corp| ltd| dba |towing|welding|granite|reprographics|'
+                    'marketing|realty|insurance|salon|barber|spa|gym|fitness|storage|'
+                    'printing|auto repair|cleaners|laundry|parking|church|temple|'
+                    'academy|daycare|preschool|library|museum|theater|arena|stadium|'
+                    'school|college|university|hotel|motel|suites|hilton|marriott|'
+                    'hyatt|holiday inn|hampton|residence inn|fairfield|towneplace|'
+                    'springhill|comfort inn|best western|days inn|la quinta|'
+                    'commissary|catering|vending|dispensary|cannabis|tobacco|vape|'
+                    'smoke shop|pharmacy|clinic|dental|hospital|medical center|'
+                    'nutrition|supplement|vitamin|consulting|design|solutions|'
+                    'services|enterprises|holdings|group|concepts|fuel|gas station|'
+                    'conoco|exxon|shell|chevron|circle k|7 eleven|mall')
+        )
+        SELECT *,
+               EXISTS (
+                   SELECT 1 FROM rf r
+                   WHERE ST_DWithin(base.g_m, r.g_m, 50)
+                     AND greatest(
+                           jaro_winkler_similarity(base.nm, r.nm),
+                           jaro_winkler_similarity(base.bm, r.nm)
+                         ) >= 0.6
+               ) AS has_rf,
+               EXISTS (
+                   SELECT 1 FROM lic_hr l
+                   WHERE ST_DWithin(base.g_m, l.g_m, 50)
+                     AND jaro_winkler_similarity(base.nm, l.nm) >= 0.6
+               ) AS has_lic
+        FROM base
+        """
+    )
+    con.execute(
+        """
+        CREATE TEMP TABLE rest_final AS
+        SELECT * FROM rest_cand c
+        WHERE c.has_rf
+           OR c.has_lic
+           OR (
+                c.websites IS NOT NULL AND len(c.websites) > 0
+                AND c.phones IS NOT NULL AND len(c.phones) > 0
+                AND NOT list_contains(c.src_datasets, 'BrightQuery')
+                AND (
+                      c.cat <> 'restaurant'
+                      OR regexp_matches(c.nm,
+                         'restaurant|grill|kitchen|bistro|cafe|eatery|diner|pub|'
+                         'tavern|taco|pizza|sushi|ramen|pho|thai|mexican|burger|'
+                         'deli|bbq|barbecue|steakhouse|seafood|noodle|dumpling|'
+                         'empanada|pupusa|burrito|wings|breakfast|brunch')
+                    )
+              )
+        """
+    )
+    con.execute(
+        """
+        INSERT INTO points
+        SELECT 'restaurant', f.name, f.address, f.geom, 'overture' AS source
+        FROM rest_final f
+        WHERE NOT EXISTS (
+            SELECT 1 FROM rest_final d
+            WHERE d.id <> f.id
+              AND ST_DWithin(f.g_m, d.g_m, 40)
+              AND (
+                    jaro_winkler_similarity(f.nm, d.nm) >= 0.92
+                    OR (f.brand IS NOT NULL AND f.brand = d.brand)
+                  )
+              AND (
+                    d.confidence > f.confidence
+                    OR (d.confidence = f.confidence AND d.id < f.id)
+                  )
+        )
+        """
+    )
+    rest_count = con.execute(
+        "SELECT count(*) FROM points WHERE category = 'restaurant'"
+    ).fetchone()[0]
+    rest_cand_count = con.execute("SELECT count(*) FROM rest_cand").fetchone()[0]
+    rest_licensed = con.execute(
+        "SELECT count(*) FROM rest_final WHERE has_rf OR has_lic"
+    ).fetchone()[0]
+    log(
+        f"  restaurants kept: {rest_count:,} "
+        f"(candidates {rest_cand_count:,}, license-corroborated {rest_licensed:,})"
+    )
+
+    # ------------------------------------------------------------------
+    # 4. Curated healthcare: physical, no-referral medical facilities
+    # ------------------------------------------------------------------
+    con.execute(
+        f"""
+        CREATE TEMP TABLE auth_health AS
+        SELECT Facility_Name AS name,
+               Address_Full AS address,
+               geom,
+               CASE
+                   WHEN Facility_Type = 'Hospital' THEN 'hospital'
+                   WHEN Facility_Type_Detail = 'FREESTANDING EMERGENCY DEPARTMENT' THEN 'urgent'
+                   WHEN Facility_Type_Detail = 'FEDERALLY QHC' THEN 'primary'
+                   WHEN Facility_Type = 'Community Clinic'
+                        AND NOT regexp_matches(lower(Facility_Name),
+                              'correctional|reception|infirmary|dispensary') THEN 'primary'
+                   WHEN lower(Facility_Name) LIKE '%dialysis%' THEN 'dialysis'
+               END AS tier
+        FROM ST_Read('{HEALTH_URL}')
+        WHERE COALESCE(OPERATING_STATUS, '') = 'Active'
+        """
+    )
+    con.execute(
+        """
+        DELETE FROM auth_health
+        WHERE tier IS NULL
+           OR regexp_matches(lower(name), 'eating recovery|behavioral|mental health hospital')
+        """
+    )
+    con.execute(
+        """
+        CREATE TEMP TABLE auth_health_d AS
+        SELECT DISTINCT ON (norm_name(name), norm_addr(address)) *
+        FROM auth_health
+        """
+    )
+
+    con.execute(
+        """
+        CREATE TEMP TABLE ov_health AS
+        WITH base AS (
+            SELECT name, address, geom, cat, basic, confidence,
+                   lower(coalesce(name, '')) AS lname
+            FROM ov_clip
+            WHERE confidence >= 0.7
+              AND address IS NOT NULL
+        )
+        SELECT name, address, geom, confidence,
+               CASE
+                   WHEN regexp_matches(lname,
+                     'urgent care|urgent-care|after ?hours|walk-?in clinic|immediate care|'
+                     'emergency room|emergency center|emergency department|freestanding er|standalone er')
+                     THEN 'urgent'
+                   ELSE 'primary'
+               END AS tier
+        FROM base b
+        WHERE NOT regexp_matches(b.lname,
+                'dental|dentist|orthodont|endodont|periodont|vision|eye |optical|optometr|ophthalm|'
+                'hearing|audiology|chiro|physical therap|physiotherap|behavioral|mental|psych|counsel|'
+                'therap|acupunct|naturopath|massage|wellness|spa|dermatolog|skin|cosmetic|plastic|'
+                'aesthetic|hair|laser|surg|imaging|radiology|laborator|lab |patholog|pharmac|home health|'
+                'home care|hospice|veterinar|pet |animal|cannabis|marijuana|dispensary|canna|allgreens|'
+                'herbal|garden|research|trials|foundation|association|insurance|billing|staffing|recruit|'
+                'consult|telehealth|telemedicine|virtual|online|mobile|medical supply|equipment|ambulance|'
+                'paramedic|hotel|motel|inn |resort|school|university|college|student|salon|barber|'
+                'fitness|yoga|gym|retina|arthritis|rheumat|spine|pain|orthoped|foot|ankle|podiatr|vein|'
+                'vascular|cardio|heart|neuro|gastro|endoscop|oncology|cancer|hematolog|fertility|ivf|'
+                'testosterone|men.s health|suboxone|addiction|rehab|sleep|allergy|asthma|pulmon|kidney|'
+                'nephro|urolog|endocrin|infectious|travel|occupational|sports medicine|anesthesia|'
+                'eating disorder|weight|functional|integrative|holistic|longevity|regenerative|'
+                'hospitalist|advocacy|voice|kidstreet|performance')
+          AND NOT regexp_matches(b.lname,
+                ',\\s*(md|do|np|pa|m\\.d\\.)|dr\\.|m\\.d\\.| lcsw| lpc| lmft| lpcc| msw| psyd| phd| rn| md$')
+          AND regexp_matches(b.lname,
+                'clinic|medical|health center|health centre|family medicine|family practice|family health|'
+                'family care|primary care|urgent care|urgent-care|pediatric|internal medicine|'
+                'women s health|ob gyn|obstetric|gynecolog|physician|doctor|hospital|kaiser|zoomcare|uchealth|'
+                'u chealth|healthone|adventhealth|centura|concentra|carenow|afc |guardian urgent|'
+                'metro urgent|rocky mountain urgent|denver health|onpoint')
+          AND (
+                regexp_matches(b.lname,
+                  'urgent care|urgent-care|after ?hours|walk-?in clinic|immediate care|'
+                  'emergency room|emergency center|emergency department|freestanding er|standalone er')
+                OR (
+                    (b.cat IN ('primary_care_or_general_clinic', 'family_practice',
+                               'internal_medicine', 'public_health_clinic', 'community_clinic',
+                               'medical_clinic', 'pediatric_clinic', 'general_practice',
+                               'geriatrics', 'nurse_practitioner')
+                     OR b.basic IN ('primary_care_or_general_clinic', 'pediatric_clinic',
+                                    'public_health_clinic'))
+                    AND NOT regexp_matches(b.lname, 'urgent care|after ?hours|walk.?in|immediate care')
+                  )
+              )
+        """
+    )
+
+    con.execute(
+        """
+        CREATE TEMP TABLE health_cand AS
+        SELECT name, address, geom, tier, source_rank, confidence,
+               norm_name(name) AS nm,
+               norm_addr(address) AS an,
+               ST_Transform(geom, 'OGC:CRS84', 'EPSG:26913') AS g_m
+        FROM (
+            SELECT name, address, geom, tier, 0 AS source_rank, 1.0 AS confidence FROM auth_health_d
+            UNION ALL
+            SELECT name, address, geom, tier, 2 AS source_rank, confidence FROM ov_health
+        )
+        """
+    )
+    con.execute(
+        """
+        CREATE TEMP TABLE health_final AS
+        SELECT * FROM health_cand c
+        WHERE NOT EXISTS (
+            SELECT 1 FROM health_cand p
+            WHERE p.tier = c.tier
+              AND (p.source_rank < c.source_rank
+                   OR (p.source_rank = c.source_rank AND p.confidence > c.confidence)
+                   OR (p.source_rank = c.source_rank AND p.confidence = c.confidence
+                       AND p.name < c.name))
+              AND ST_DWithin(c.g_m, p.g_m, 150)
+              AND (c.an = p.an OR jaro_winkler_similarity(c.nm, p.nm) >= 0.80)
+        )
+        AND NOT EXISTS (
+            SELECT 1 FROM health_cand h
+            WHERE h.tier = 'hospital'
+              AND c.tier <> 'hospital'
+              AND ST_DWithin(c.g_m, h.g_m, 250)
+        )
+        """
+    )
+    con.execute(
+        """
+        INSERT INTO points
+        SELECT 'healthcare', name, address, geom,
+               CASE WHEN source_rank = 0 THEN 'denver_health_facilities' ELSE 'overture' END
+        FROM health_final
+        """
+    )
+    health_count = con.execute(
+        "SELECT count(*) FROM points WHERE category = 'healthcare'"
+    ).fetchone()[0]
+    cdphe_count = con.execute("SELECT count(*) FROM auth_health_d").fetchone()[0]
+    ov_health_count = con.execute("SELECT count(*) FROM ov_health").fetchone()[0]
+    log(
+        f"  healthcare kept: {health_count:,} "
+        f"(CDPHE {cdphe_count:,}, Overture {ov_health_count:,})"
+    )
 
     # ------------------------------------------------------------------
     # 3. Authoritative Denver layers (dedupe against Overture)
@@ -496,18 +886,6 @@ def build() -> None:
 
     log("merging authoritative Denver layers")
     merge_auth(
-        "restaurant",
-        "denver_liquor",
-        f"""
-        SELECT BUS_PROF_NAME AS name, FULL_ADDRESS AS address, geom
-        FROM ST_Read('{LIQUOR_URL}')
-        WHERE LICENSES LIKE '%HOTEL AND RESTAURANT%'
-           OR LICENSES LIKE '%TAVERN%'
-           OR LICENSES LIKE '%BREW PUB%'
-           OR LICENSES LIKE '%FERMENTED MALT%'
-        """,
-    )
-    merge_auth(
         "grocery",
         "denver_food_retail",
         f"""
@@ -531,20 +909,6 @@ def build() -> None:
         FROM ST_Read('{PRIVATE_SCHOOLS_URL}')
         """,
     )
-    for source, url in (
-        ("denver_health_facilities", HEALTH_URL),
-        ("denver_hospitals", HOSPITAL_URL),
-        ("denver_fqhc", FQHC_URL),
-    ):
-        merge_auth(
-            "healthcare",
-            source,
-            f"""
-            SELECT Facility_Name AS name, Address_Full AS address, geom
-            FROM ST_Read('{url}')
-            WHERE COALESCE(OPERATING_STATUS, '') NOT ILIKE '%closed%'
-            """,
-        )
 
     # Parkland polygons: sample boundary vertices so distance-to-park reflects
     # the park edge, not a single centroid.
@@ -733,66 +1097,8 @@ def build() -> None:
     )
 
     # ------------------------------------------------------------------
-    # 6. Active business licenses (authoritative neighborhood businesses)
+    # 6. Active business licenses (already downloaded in step 3)
     # ------------------------------------------------------------------
-    log("downloading active business licenses (paginated)")
-    license_rows = []
-    offset = 0
-    page_size = 2000
-    while True:
-        page = fetch_json(
-            BUSINESS_LICENSE_URL,
-            {
-                "where": "1=1",
-                "outFields": "LICENSE_TYPE,LICENSE_SUB_TYPE,LICENSE_STATUS,X_COORD,Y_COORD",
-                "returnGeometry": "false",
-                "resultOffset": str(offset),
-                "resultRecordCount": str(page_size),
-                "f": "json",
-            },
-        )
-        features = page.get("features") or []
-        for feature in features:
-            attrs = feature.get("attributes") or {}
-            x = attrs.get("X_COORD")
-            y = attrs.get("Y_COORD")
-            if x is None or y is None:
-                continue
-            license_rows.append(
-                (
-                    attrs.get("LICENSE_TYPE"),
-                    attrs.get("LICENSE_SUB_TYPE"),
-                    attrs.get("LICENSE_STATUS"),
-                    float(x),
-                    float(y),
-                )
-            )
-        log(f"  {len(license_rows):,} licenses fetched")
-        if not page.get("exceededTransferLimit") or not features:
-            break
-        offset += page_size
-
-    con.execute(
-        """
-        CREATE TEMP TABLE lic_raw(
-            license_type VARCHAR,
-            license_sub_type VARCHAR,
-            license_status VARCHAR,
-            x DOUBLE,
-            y DOUBLE
-        )
-        """
-    )
-    if license_rows:
-        con.executemany("INSERT INTO lic_raw VALUES (?, ?, ?, ?, ?)", license_rows)
-    con.execute(
-        """
-        CREATE TABLE lic AS
-        SELECT license_type, license_sub_type, license_status,
-               ST_Transform(ST_Point(x, y), 'EPSG:2232', 'OGC:CRS84') AS geom
-        FROM lic_raw
-        """
-    )
     con.execute(
         """
         CREATE TABLE lic_nb AS
@@ -998,7 +1304,7 @@ def build() -> None:
             "trail": dist_to_score(trail_km),
             "park": dist_to_score(parks_km),
             "busStop": dist_to_score(busStops_km),
-            "healthcare": dist_to_score(healthcare_km),
+            "healthcare": dist_to_score(healthcare_km, MAX_DIST_KM["healthcare"]),
             "schools": school_score(schools_km),
             "bikeInfra": bike_infra_score(pt_lng, pt_lat),
             "crime": crime_score(pt_lng, pt_lat),
