@@ -1208,13 +1208,22 @@ export async function getCityPoiPoints(cityKey = 'littleton') {
   return _cityPoiFetch[cacheKey];
 }
 
-function distToScore(d) {
+function distToScore(d, maxKm) {
   if (!isFinite(d)) return 0;
   if (d <= 0.3) return 100;
+  if (maxKm) {
+    if (d >= maxKm) return 0;
+    // Linear falloff from the 300 m plateau to the dimension's access horizon.
+    return Math.max(0, Math.round(100 * (1 - (d - 0.3) / (maxKm - 0.3))));
+  }
   const extraMeters = (d - 0.3) * 1000;
   const steps = Math.ceil(extraMeters / 100);
   return Math.max(0, 100 - steps * 10);
 }
+
+// Health facilities are sparse enough that the default 1.3 km falloff would
+// zero out most neighborhoods; use the full 4.5 km access horizon instead.
+const SCORE_MAX_KM = { healthcare: 4.5 };
 
 function classifyOSM(tags) {
   if (!tags) return [];
@@ -1424,8 +1433,8 @@ async function computeScoresFromNearest(nearest, opts = {}) {
       }
     }
 
-    walking[key] = distToScore(walkingKm[key]);
-    biking[key] = distToScore(bikingKm[key]);
+    walking[key] = distToScore(walkingKm[key], SCORE_MAX_KM[key]);
+    biking[key] = distToScore(bikingKm[key], SCORE_MAX_KM[key]);
 
     const wScore = walking[key] || 0;
     const bScore = biking[key] || 0;
