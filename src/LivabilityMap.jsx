@@ -8,6 +8,7 @@ import {
   getAllZoneFeaturesAsync,
   getZoomOverlayFeatures,
   getCityBoundaryAsync,
+  getNeighborhoodGapFeatures,
   isPointInCity,
   scoreToColor,
   WEIGHTS,
@@ -59,6 +60,7 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
   const leafletMap = useRef(null);
   const markerRef = useRef(null);
   const overlayLayerRef = useRef(null);
+  const gapLayerRef = useRef(null);
   const boundaryLayerRef = useRef(null);
   const highlightLayerRef = useRef(null);
   const poiLayerRef = useRef(null);
@@ -173,6 +175,10 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
       zIndexOffset: 1200,
     });
 
+    if (!map.getPane('livability-gap-pane')) {
+      map.createPane('livability-gap-pane');
+      map.getPane('livability-gap-pane').style.zIndex = '330';
+    }
     if (!map.getPane('livability-overlay-pane')) {
       map.createPane('livability-overlay-pane');
       map.getPane('livability-overlay-pane').style.zIndex = '340';
@@ -190,6 +196,7 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
       console.log('[LivabilityMap] cleanup: removing map');
       try { map.remove(); } catch (err) { console.error('Error removing map', err); }
       overlayLayerRef.current = null;
+      gapLayerRef.current = null;
       boundaryLayerRef.current = null;
       highlightLayerRef.current = null;
       poiLayerRef.current = null;
@@ -247,6 +254,10 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
     if (overlayLayerRef.current && map.hasLayer(overlayLayerRef.current)) {
       map.removeLayer(overlayLayerRef.current);
       overlayLayerRef.current = null;
+    }
+    if (gapLayerRef.current && map.hasLayer(gapLayerRef.current)) {
+      map.removeLayer(gapLayerRef.current);
+      gapLayerRef.current = null;
     }
     if (boundaryLayerRef.current && map.hasLayer(boundaryLayerRef.current)) {
       map.removeLayer(boundaryLayerRef.current);
@@ -419,6 +430,58 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
       }
     };
   }, [overlayFeatures, overlayMetric, weights, detailActive]);
+
+  // Fill the gaps between official neighborhood polygons (parks, golf,
+  // open space) with a muted city-average colour so the city view has no
+  // blank holes.
+  useEffect(() => {
+    const map = leafletMap.current;
+    if (!map) return undefined;
+
+    if (gapLayerRef.current) {
+      map.removeLayer(gapLayerRef.current);
+      gapLayerRef.current = null;
+    }
+    if (detailActive || !overlayFeatures || !Array.isArray(overlayFeatures.features) || overlayFeatures.features.length <= 1) {
+      return undefined;
+    }
+    const hasNeighborhoodScores = overlayFeatures.features.some(
+      (feature) => feature?.properties?.overlayScores || feature?.properties?.scores
+    );
+    if (!hasNeighborhoodScores) return undefined;
+
+    const scores = overlayFeatures.features
+      .map((feature) => getOverlayScore(feature, overlayMetric, weights))
+      .filter((score) => typeof score === 'number' && isFinite(score));
+    const averageScore = scores.length > 0
+      ? Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length)
+      : 50;
+
+    let cancelled = false;
+    (async () => {
+      const gaps = await getNeighborhoodGapFeatures(cityKey).catch(() => null);
+      if (cancelled || !gaps || !Array.isArray(gaps.features) || gaps.features.length === 0) return;
+      const layer = L.geoJSON(gaps, {
+        pane: 'livability-gap-pane',
+        interactive: false,
+        style: {
+          color: 'transparent',
+          weight: 0,
+          fillColor: scoreToColor(averageScore),
+          fillOpacity: 0.34,
+        },
+      }).addTo(map);
+      gapLayerRef.current = layer;
+    })();
+
+    return () => {
+      cancelled = true;
+      if (gapLayerRef.current && map.hasLayer(gapLayerRef.current)) {
+        map.removeLayer(gapLayerRef.current);
+      }
+      gapLayerRef.current = null;
+    };
+  }, [cityKey, overlayFeatures, overlayMetric, weights, detailActive]);
 
   // Small amenity pins around the selected location.
   useEffect(() => {

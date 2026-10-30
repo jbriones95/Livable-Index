@@ -13,6 +13,8 @@ import {
   booleanPointInPolygon,
   distance as turfDistance,
   intersect as turfIntersect,
+  difference as turfDifference,
+  area as turfArea,
   featureCollection as turfFeatureCollection,
   union as turfUnion,
   bbox as turfBbox,
@@ -444,6 +446,72 @@ export async function getAllZoneFeaturesAsync(cityKey = 'littleton') {
 
   const remote = await _neighborhoodFetch[cityKey];
   return remote || fallbackZoneFeatureCollection(cityKey);
+}
+
+// Areas inside the city but outside the official neighborhood polygons (parks,
+// golf courses, open space). The map fills these with a muted city-average
+// colour so the city-scale overlay has no blank holes.
+export async function getNeighborhoodGapFeatures(cityKey = 'littleton') {
+  const cityStore = getCityDataContainer(cityKey);
+  if (cityStore && cityStore.neighborhoodGaps !== undefined) {
+    return cityStore.neighborhoodGaps;
+  }
+
+  const [boundaryGeo, zones] = await Promise.all([
+    getCityBoundaryAsync(cityKey).catch(() => null),
+    getAllZoneFeaturesAsync(cityKey).catch(() => null),
+  ]);
+  const boundaryFeatures = boundaryToFeatures(boundaryGeo);
+  const zoneFeatures = (zones?.features || []).filter((feature) => {
+    const id = String(feature?.properties?.id || '');
+    return Boolean(feature?.geometry) && !id.endsWith('-area');
+  });
+
+  if (boundaryFeatures.length === 0 || zoneFeatures.length <= 1) {
+    if (cityStore) cityStore.neighborhoodGaps = null;
+    return null;
+  }
+
+  try {
+    const cityUnion = boundaryFeatures.length === 1
+      ? boundaryFeatures[0]
+      : turfUnion(turfFeatureCollection(boundaryFeatures));
+    const zoneUnion = zoneFeatures.length === 1
+      ? zoneFeatures[0]
+      : turfUnion(turfFeatureCollection(zoneFeatures));
+    if (!cityUnion || !zoneUnion) {
+      if (cityStore) cityStore.neighborhoodGaps = null;
+      return null;
+    }
+    const gaps = turfDifference(turfFeatureCollection([cityUnion, zoneUnion]));
+    if (!gaps || !gaps.geometry) {
+      if (cityStore) cityStore.neighborhoodGaps = null;
+      return null;
+    }
+    const gapArea = turfArea(gaps) / 1e6;
+    if (!isFinite(gapArea) || gapArea < 0.001) {
+      if (cityStore) cityStore.neighborhoodGaps = null;
+      return null;
+    }
+    const collection = {
+      type: 'FeatureCollection',
+      features: [{
+        ...gaps,
+        properties: {
+          ...(gaps.properties || {}),
+          id: `${cityKey}-outside-neighborhoods`,
+          name: 'Outside neighborhood boundaries',
+          noData: true,
+        },
+      }],
+    };
+    if (cityStore) cityStore.neighborhoodGaps = collection;
+    return collection;
+  } catch (err) {
+    console.warn('Failed to build neighborhood gap layer', err);
+    if (cityStore) cityStore.neighborhoodGaps = null;
+    return null;
+  }
 }
 
 // Named trails to detect for the trailhead portion of the nature composite (80% weight)
