@@ -618,6 +618,11 @@ const ROUTE_SERVICE = {
 };
 
 const ROUTING_WEIGHTS = { walking: 0.8, biking: 0.2 };
+// Travel-time assumptions used for the walk/bike estimates in the UI.
+const WALK_KMH = 3.2;
+const BIKE_KMH = 15;
+const WALK_MIN_PER_KM = 60 / WALK_KMH;
+const BIKE_MIN_PER_KM = 60 / BIKE_KMH;
 const routeCache = new Map();
 
 // Prefer OpenRouteService when an API key is provided via environment.
@@ -1788,15 +1793,15 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     }
   }
 
-  // Walking (5 km/h) and biking (15 km/h) time estimates in minutes
+  // Walking (3.2 km/h) and biking (15 km/h) time estimates in minutes
   const routing = {};
   for (const key of Object.keys(scoring.walkingKm)) {
     const walkKm = scoring.walkingKm[key];
     const bikeKm = scoring.bikingKm[key];
     if (isFinite(walkKm) && isFinite(bikeKm)) {
       routing[key] = {
-        walk: Math.round(walkKm * 12),
-        bike: Math.round(bikeKm * 4),
+        walk: Math.round(walkKm * WALK_MIN_PER_KM),
+        bike: Math.round(bikeKm * BIKE_MIN_PER_KM),
       };
     }
   }
@@ -1841,16 +1846,16 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
         lat: nearestSchool.lat,
         lng: nearestSchool.lng,
         distanceKm: nearestSchoolKm,
-        walkMin: Math.round(nearestSchoolKm * 12),
-        bikeMin: Math.round(nearestSchoolKm * 4),
+        walkMin: Math.round(nearestSchoolKm * WALK_MIN_PER_KM),
+        bikeMin: Math.round(nearestSchoolKm * BIKE_MIN_PER_KM),
       });
       if (!isFinite(distances.schools)) {
         distances.schools = nearestSchoolKm;
       }
       if (!routing.schools) {
         routing.schools = {
-          walk: Math.round(nearestSchoolKm * 12),
-          bike: Math.round(nearestSchoolKm * 4),
+          walk: Math.round(nearestSchoolKm * WALK_MIN_PER_KM),
+          bike: Math.round(nearestSchoolKm * BIKE_MIN_PER_KM),
         };
       }
     }
