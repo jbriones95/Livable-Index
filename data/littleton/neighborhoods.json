@@ -10100,7 +10100,8 @@
       "properties": {
         "id": "sterne-park",
         "name": "Sterne Park",
-        "notes": "City of Littleton Neighborhood Boundary service, feature OBJECTID 807."
+        "notes": "City of Littleton Neighborhood Boundary service, feature OBJECTID 807.",
+        "hidden": true
       },
       "geometry": {
         "type": "Polygon",

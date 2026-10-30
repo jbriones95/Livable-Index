@@ -337,19 +337,21 @@ function normalizeNeighborhoodFeatures(collection) {
   if (!collection || collection.type !== 'FeatureCollection' || !Array.isArray(collection.features)) {
     return null;
   }
-  collection.features = collection.features.map((feature, index) => {
-    const properties = feature.properties || {};
-    const name = properties.name || properties.Neighborho || properties.Name || `Area ${index + 1}`;
-    const id = properties.id ?? feature.id ?? `zone-${index + 1}`;
-    return {
-      ...feature,
-      properties: {
-        ...properties,
-        id: String(id),
-        name: String(name),
-      },
-    };
-  });
+  collection.features = collection.features
+    .filter((feature) => !feature?.properties?.hidden)
+    .map((feature, index) => {
+      const properties = feature.properties || {};
+      const name = properties.name || properties.Neighborho || properties.Name || `Area ${index + 1}`;
+      const id = properties.id ?? feature.id ?? `zone-${index + 1}`;
+      return {
+        ...feature,
+        properties: {
+          ...properties,
+          id: String(id),
+          name: String(name),
+        },
+      };
+    });
   return collection;
 }
 

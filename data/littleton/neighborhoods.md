@@ -25,7 +25,7 @@ The service returned **35 features**. The city limits layer
 6. Wrote minimal properties: `{ id, name, notes }`. No source attributes are exposed.
 7. Validated with Node + `@turf/turf` (see below).
 
-## Zones (25)
+## Zones (24 shown; Sterne Park hidden)
 
 | id | name | area (km²) |
 |---|---|---:|
@@ -47,7 +47,7 @@ The service returned **35 features**. The city limits layer
 | santa-fe-park | Santa Fe Park | 0.13 |
 | southbridge | Southbridge | 1.61 |
 | southpark | Southpark | 2.36 |
-| sterne-park | Sterne Park | 2.26 |
+| sterne-park | Sterne Park *(hidden in app)* | 2.26 |
 | sunset-heights | Sunset Heights | 0.02 |
 | the-hamlet-at-columbine | The Hamlet at Columbine | 0.20 |
 | the-polo-reserve-pole-ridge-farms | The Polo Reserve - Pole Ridge Farms | 0.43 |
@@ -57,7 +57,7 @@ The service returned **35 features**. The city limits layer
 
 ## Validation results
 
-- 25 features, all `Polygon` or `MultiPolygon`.
+- 25 source features, all `Polygon` or `MultiPolygon`; **24 are shown** after the Sterne Park `hidden` flag.
 - All geometries pass `turf.booleanValid`; all rings are closed; all coordinates are in the Littleton range.
 - Sum of feature areas = union area = **23.95 km²** (no meaningful overlaps).
 - Largest pairwise overlap is **0.0004 km²** (Aberdeen Village / Ketring Park, ~400 m²); total overlap is under 0.001 km². These are source-data boundary slivers and were left as-is to avoid creating gaps.
