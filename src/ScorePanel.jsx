@@ -15,31 +15,50 @@ function formatDist(km) {
 }
 
 function formatTime(min) {
-  if (typeof min !== 'number' || !isFinite(min) || min < 1) return '';
-  if (min < 60) return `${min} min`;
-  return `${Math.floor(min / 60)}h ${min % 60}m`;
+  if (typeof min !== 'number' || !isFinite(min) || min <= 0) return '';
+  if (min < 1) return '<1 min';
+  if (min < 60) return `${Math.round(min)} min`;
+  const hours = Math.floor(min / 60);
+  const mins = Math.round(min % 60);
+  if (mins === 60) return `${hours + 1}h`;
+  return `${hours}h ${mins}m`;
 }
 
-function formatMiddle(key, distances, routing) {
+function formatDistWithMode(km, estimated) {
+  const formatted = formatDist(km);
+  if (!formatted) return '';
+  return estimated ? `${formatted} (est.)` : formatted;
+}
+
+function formatMiddle(key, distances, routing, estimated = {}, estimatedBike = {}) {
   const parts = [];
   if (key === 'nature' && distances) {
     const trail = distances.trail;
     const park = distances.park;
-    const trailStr = isFinite(trail) ? `trail ${formatDist(trail)}` : '';
-    const parkStr = isFinite(park) ? `park ${formatDist(park)}` : '';
+    const trailStr = isFinite(trail) ? `trail ${formatDistWithMode(trail, estimated.trail)}` : '';
+    const parkStr = isFinite(park) ? `park ${formatDistWithMode(park, estimated.park)}` : '';
     parts.push([trailStr, parkStr].filter(Boolean).join(', '));
     const rt = routing?.nature;
-    if (rt && (rt.walk || rt.bike)) {
-      parts.push(`walk ${formatTime(rt.walk)}`);
-      parts.push(`bike ${formatTime(rt.bike)}`);
+    if (rt) {
+      const natureKey = (isFinite(trail) && (!isFinite(park) || trail <= park)) ? 'trail' : 'park';
+      const walkTime = formatTime(rt.walk);
+      const bikeTime = formatTime(rt.bike);
+      if (walkTime) parts.push(`walk ${walkTime}`);
+      if (bikeTime) {
+        parts.push(`bike ${bikeTime}${estimatedBike[natureKey] && !estimated[natureKey] ? ' (est.)' : ''}`);
+      }
     }
   } else {
     const dist = distances?.[key];
-    parts.push(isFinite(dist) ? formatDist(dist) : 'N/A');
+    parts.push(isFinite(dist) ? formatDistWithMode(dist, estimated[key]) : 'N/A');
     const rt = routing?.[key];
-    if (rt && (rt.walk || rt.bike)) {
-      parts.push(`walk ${formatTime(rt.walk)}`);
-      parts.push(`bike ${formatTime(rt.bike)}`);
+    if (rt) {
+      const walkTime = formatTime(rt.walk);
+      const bikeTime = formatTime(rt.bike);
+      if (walkTime) parts.push(`walk ${walkTime}`);
+      if (bikeTime) {
+        parts.push(`bike ${bikeTime}${estimatedBike[key] && !estimated[key] ? ' (est.)' : ''}`);
+      }
     }
   }
   return parts.filter(Boolean).join(' · ');
@@ -107,7 +126,7 @@ export default function ScorePanel({ zone, weights, onClose }) {
             label={label}
             score={zone.scores[key] ?? 0}
             weight={activeWeights[key]}
-            middle={formatMiddle(key, zone.distances, zone.routing)}
+            middle={formatMiddle(key, zone.distances, zone.routing, zone.estimatedDistances, zone.estimatedBikeDistances)}
           />
         ))}
       </div>
@@ -120,10 +139,10 @@ export default function ScorePanel({ zone, weights, onClose }) {
               const meta = POI_META[place.key];
               if (!meta) return null;
               const distance = formatDist(place.distanceKm);
-              const walk = typeof place.walkMin === 'number' && place.walkMin > 0
-                ? `${place.walkMin} min walk`
-                : '';
-              const details = [meta.label, distance, walk].filter(Boolean).join(' · ');
+              const distanceLabel = distance && place.estimated ? `${distance} (est.)` : distance;
+              const walkTime = formatTime(place.walkMin);
+              const walk = walkTime ? `${walkTime} walk` : '';
+              const details = [meta.label, distanceLabel, walk].filter(Boolean).join(' · ');
               return (
                 <li key={place.key} className="nearby-place">
                   <span

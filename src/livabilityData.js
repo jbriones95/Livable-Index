@@ -608,13 +608,24 @@ const ROUTE_CANDIDATES = {
   bikeInfra: 5,
 };
 
-// Routing configuration: try OSRM public endpoint with common profile fallbacks.
-// Walking is prioritized over biking in the combined score via `ROUTING_WEIGHTS`.
+// Routing configuration. The OSM Germany OSRM instances are keyless, support
+// CORS, and expose foot/bike table queries, so one request can return distances
+// to every candidate. The legacy OSRM demo endpoint remains as a fallback.
 const ROUTE_SERVICE = {
+  foot: {
+    baseUrl: 'https://routing.openstreetmap.de/routed-foot',
+    profile: 'foot',
+  },
+  bike: {
+    baseUrl: 'https://routing.openstreetmap.de/routed-bike',
+    profile: 'bike',
+  },
   baseUrl: 'https://router.project-osrm.org',
   walkingProfiles: ['walking', 'foot'],
   cyclingProfiles: ['cycling', 'bike'],
   orsBaseUrl: 'https://api.openrouteservice.org',
+  routeTimeoutMs: 4000,
+  tableTimeoutMs: 3500,
 };
 
 const ROUTING_WEIGHTS = { walking: 0.8, biking: 0.2 };
@@ -623,7 +634,11 @@ const WALK_KMH = 3.2;
 const BIKE_KMH = 15;
 const WALK_MIN_PER_KM = 60 / WALK_KMH;
 const BIKE_MIN_PER_KM = 60 / BIKE_KMH;
+// Used only when routing is unavailable: a straight line understates the
+// real street distance by roughly this factor.
+const ROUTE_DETOUR_FACTOR = 1.25;
 const routeCache = new Map();
+const routeInFlight = new Map();
 
 // Prefer OpenRouteService when an API key is provided via environment.
 const ORS_API_KEY = (typeof process !== 'undefined' && process.env && process.env.OPENROUTESERVICE_API_KEY)
@@ -948,9 +963,11 @@ async function fetchPoliceStations(cityKey) {
   return result;
 }
 
-async function computeCrimeScore(lat, lng, cityKey) {
+async function computeCrimeScore(lat, lng, cityKey, opts = {}) {
   try {
-    const stations = await fetchPoliceStations(cityKey);
+    const stations = opts.preferFallback
+      ? fallbackPoliceStations(cityKey)
+      : await fetchPoliceStations(cityKey);
 
     let minDist = Infinity;
     for (const s of stations) {
@@ -1005,71 +1022,160 @@ async function computeSchoolScore(lat, lng, cityKey) {
   }
 }
 
-async function getRouteDistance(fromLon, fromLat, toLon, toLat, modeOrProfiles = []) {
-  // modeOrProfiles may be a string 'walking'|'cycling' or an array of OSRM profile names.
-  let mode = null;
-  if (typeof modeOrProfiles === 'string') mode = modeOrProfiles;
-  else if (Array.isArray(modeOrProfiles) && modeOrProfiles.length > 0) {
-    const p0 = String(modeOrProfiles[0]).toLowerCase();
-    if (p0.includes('walk') || p0 === 'foot') mode = 'walking';
-    else mode = 'cycling';
-  } else {
-    mode = 'walking';
+function routeMode(modeOrProfiles) {
+  if (typeof modeOrProfiles === 'string') {
+    const value = modeOrProfiles.toLowerCase();
+    return value.includes('bike') || value.includes('cycl') ? 'cycling' : 'walking';
   }
+  if (Array.isArray(modeOrProfiles) && modeOrProfiles.length > 0) {
+    const value = String(modeOrProfiles[0]).toLowerCase();
+    return value.includes('walk') || value === 'foot' ? 'walking' : 'cycling';
+  }
+  return 'walking';
+}
 
-  // Try OpenRouteService first when key is available
-  if (ORS_API_KEY) {
-    const candidates = ORS_PROFILES[mode] || [];
-    for (const prof of candidates) {
-      const key = `ors:${prof}:${fromLon},${fromLat}->${toLon},${toLat}`;
-      if (routeCache.has(key)) return routeCache.get(key);
-      const url = `${ROUTE_SERVICE.orsBaseUrl}/v2/directions/${prof}?start=${fromLon},${fromLat}&end=${toLon},${toLat}`;
+function routeCacheKey(fromLon, fromLat, toLon, toLat, mode) {
+  return `${mode}:${Number(fromLon).toFixed(6)},${Number(fromLat).toFixed(6)}->${Number(toLon).toFixed(6)},${Number(toLat).toFixed(6)}`;
+}
+
+function coordKey(coords) {
+  return `${Number(coords[0]).toFixed(6)},${Number(coords[1]).toFixed(6)}`;
+}
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = ROUTE_SERVICE.routeTimeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function getRouteDistance(fromLon, fromLat, toLon, toLat, modeOrProfiles = [], timeoutMs = ROUTE_SERVICE.routeTimeoutMs) {
+  const mode = routeMode(modeOrProfiles);
+  const cacheKey = routeCacheKey(fromLon, fromLat, toLon, toLat, mode);
+  if (routeCache.has(cacheKey)) return routeCache.get(cacheKey);
+  if (routeInFlight.has(cacheKey)) return routeInFlight.get(cacheKey);
+
+  const promise = (async () => {
+    // OpenRouteService when a key is configured.
+    if (ORS_API_KEY) {
+      const profiles = ORS_PROFILES[mode] || [];
+      for (const profile of profiles) {
+        try {
+          const url = `${ROUTE_SERVICE.orsBaseUrl}/v2/directions/${profile}?start=${fromLon},${fromLat}&end=${toLon},${toLat}`;
+          const res = await fetchWithTimeout(url, {
+            headers: { Accept: 'application/json', Authorization: ORS_API_KEY },
+          }, timeoutMs);
+          if (!res.ok) continue;
+          const data = await res.json();
+          const meters = data?.routes?.[0]?.summary?.distance;
+          if (typeof meters === 'number' && isFinite(meters)) {
+            const km = meters / 1000;
+            routeCache.set(cacheKey, km);
+            return km;
+          }
+        } catch (_err) {
+          // try the next profile
+        }
+      }
+    }
+
+    // Keyless OSM Germany OSRM instance.
+    const service = mode === 'walking' ? ROUTE_SERVICE.foot : ROUTE_SERVICE.bike;
+    try {
+      const url = `${service.baseUrl}/route/v1/${service.profile}/${fromLon},${fromLat};${toLon},${toLat}?overview=false&alternatives=false&steps=false`;
+      const res = await fetchWithTimeout(url, {}, timeoutMs);
+      if (res.ok) {
+        const data = await res.json();
+        const meters = data?.routes?.[0]?.distance;
+        if (typeof meters === 'number' && isFinite(meters)) {
+          const km = meters / 1000;
+          routeCache.set(cacheKey, km);
+          return km;
+        }
+      }
+    } catch (_err) {
+      // fall through to the legacy endpoint
+    }
+
+    // Legacy OSRM demo endpoint (one attempt per profile, no retry sleep).
+    const profiles = mode === 'walking' ? ROUTE_SERVICE.walkingProfiles : ROUTE_SERVICE.cyclingProfiles;
+    for (const profile of profiles) {
       try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 5000);
-        const res = await fetch(url, { headers: { Accept: 'application/json', Authorization: ORS_API_KEY }, signal: controller.signal });
-        clearTimeout(timeout);
+        const url = `${ROUTE_SERVICE.baseUrl}/route/v1/${profile}/${fromLon},${fromLat};${toLon},${toLat}?overview=false&alternatives=false&steps=false`;
+        const res = await fetchWithTimeout(url, {}, Math.min(timeoutMs, 4000));
         if (!res.ok) continue;
         const data = await res.json();
-        if (data && data.routes && data.routes[0] && data.routes[0].summary && typeof data.routes[0].summary.distance === 'number') {
-          const km = data.routes[0].summary.distance / 1000;
-          routeCache.set(key, km);
+        const meters = data?.routes?.[0]?.distance;
+        if (typeof meters === 'number' && isFinite(meters)) {
+          const km = meters / 1000;
+          routeCache.set(cacheKey, km);
           return km;
         }
-      } catch (err) {
-        continue;
+      } catch (_err) {
+        // try the next profile
       }
     }
-  }
 
-  // Fallback to OSRM profiles (single endpoint, retry once on failure)
-  const osrmProfiles = mode === 'walking' ? ROUTE_SERVICE.walkingProfiles : ROUTE_SERVICE.cyclingProfiles;
-  const tryProfiles = Array.isArray(modeOrProfiles) && modeOrProfiles.length > 0 ? modeOrProfiles : osrmProfiles;
-  for (const profile of tryProfiles) {
-    const key = `osrm:${profile}:${fromLon},${fromLat}->${toLon},${toLat}`;
-    if (routeCache.has(key)) return routeCache.get(key);
-    const url = `${ROUTE_SERVICE.baseUrl}/route/v1/${profile}/${fromLon},${fromLat};${toLon},${toLat}?overview=false&alternatives=false&steps=false`;
-    for (let attempt = 0; attempt < 2; attempt++) {
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 5000);
-        const res = await fetch(url, { signal: controller.signal });
-        clearTimeout(timeout);
-        if (!res.ok) { await new Promise(r => setTimeout(r, 1000)); continue; }
-        const data = await res.json();
-        if (data && data.routes && data.routes[0] && typeof data.routes[0].distance === 'number') {
-          const km = data.routes[0].distance / 1000;
-          routeCache.set(key, km);
-          return km;
-        }
-      } catch (err) {
-        await new Promise(r => setTimeout(r, 1000));
-        continue;
-      }
+    routeCache.set(cacheKey, null);
+    return null;
+  })().finally(() => {
+    routeInFlight.delete(cacheKey);
+  });
+
+  routeInFlight.set(cacheKey, promise);
+  return promise;
+}
+
+async function getRouteDistancesBatch(fromLon, fromLat, destinations, mode) {
+  if (!Array.isArray(destinations) || destinations.length === 0) return new Map();
+
+  const unique = new Map();
+  for (const destination of destinations) {
+    const coords = destination?.coords;
+    if (!Array.isArray(coords) || coords.length < 2) continue;
+    const key = coordKey(coords);
+    if (!unique.has(key)) unique.set(key, coords);
+  }
+  if (unique.size === 0) return new Map();
+
+  const result = new Map();
+  const missing = [];
+  for (const [key, coords] of unique.entries()) {
+    const cacheKey = routeCacheKey(fromLon, fromLat, coords[0], coords[1], mode);
+    if (routeCache.has(cacheKey)) {
+      result.set(key, routeCache.get(cacheKey));
+    } else {
+      missing.push({ key, coords });
     }
   }
+  if (missing.length === 0) return result;
 
-  return null;
+  const service = mode === 'walking' ? ROUTE_SERVICE.foot : ROUTE_SERVICE.bike;
+  const coordString = [[fromLon, fromLat], ...missing.map((item) => item.coords)]
+    .map(([lon, lat]) => `${lon},${lat}`)
+    .join(';');
+  const url = `${service.baseUrl}/table/v1/${service.profile}/${coordString}?sources=0&annotations=distance`;
+
+  try {
+    const res = await fetchWithTimeout(url, {}, ROUTE_SERVICE.tableTimeoutMs);
+    if (!res.ok) return result;
+    const data = await res.json();
+    const distances = data?.distances?.[0];
+    if (!Array.isArray(distances)) return result;
+    for (let i = 0; i < missing.length; i++) {
+      const meters = distances[i + 1];
+      const km = typeof meters === 'number' && isFinite(meters) ? meters / 1000 : null;
+      result.set(missing[i].key, km);
+      const cacheKey = routeCacheKey(fromLon, fromLat, missing[i].coords[0], missing[i].coords[1], mode);
+      routeCache.set(cacheKey, km);
+    }
+  } catch (_err) {
+    // caller falls back to crow distances for missing entries
+  }
+  return result;
 }
 
 // Build supplemental point arrays from the unified POI list (bundled at build time)
@@ -1518,7 +1624,8 @@ function nearestAndCounts(poiPoints, pt, cityKey = 'littleton') {
     // prefer that to OSM classification.
     const cats = props.category ? (Array.isArray(props.category) ? props.category : [props.category]) : classifyOSM(props);
     const coords = p.geometry && p.geometry.coordinates ? p.geometry.coordinates : null; // [lon, lat]
-    const name = props.name || props.note || null;
+    const note = props.note || null;
+    const name = props.name || (note && !/^\d+°/.test(note) ? note : null);
     for (const cat of cats) {
       if (!Object.prototype.hasOwnProperty.call(nearest, cat)) continue;
       if (d < nearest[cat]) {
@@ -1538,7 +1645,8 @@ function nearestAndCounts(poiPoints, pt, cityKey = 'littleton') {
       const coords = sp.geometry?.coordinates;
       if (!coords) continue;
       const cats = Array.isArray(sp.properties?.category) ? sp.properties.category : [];
-      const name = sp.properties?.name || sp.properties?.note || null;
+      const note = sp.properties?.note || null;
+      const name = sp.properties?.name || (note && !/^\d+°/.test(note) ? note : null);
       const d = turfDistance(pt, sp, { units: 'kilometers' });
       for (const cat of cats) {
         if (!Object.prototype.hasOwnProperty.call(nearest, cat)) continue;
@@ -1564,6 +1672,11 @@ function nearestAndCounts(poiPoints, pt, cityKey = 'littleton') {
         nearest.trail = poly.km;
         nearestCoords.trail = poly.coords;
         nearestPois.trail = { name: poly.name, category: 'trail' };
+      } else {
+        const currentTrailName = nearestPois.trail?.name;
+        if (poly.name && (!currentTrailName || /^\d+°/.test(currentTrailName))) {
+          nearestPois.trail = { name: poly.name, category: 'trail' };
+        }
       }
       if (poly.km <= MAX_DIST_KM.trail) counts.trail++;
       if (poly.coords) candidates.trail.push({ coords: poly.coords, dist: poly.km, name: poly.name });
@@ -1582,6 +1695,8 @@ async function computeScoresFromNearest(nearest, opts = {}) {
   const combined = {};
   const usedCoords = {}; // [lon,lat] of the chosen candidate per category (for UI)
   const usedPois = {}; // name/metadata for the chosen candidate per category
+  const estimated = {};
+  const estimatedBike = {};
 
   // Accept pt either as turf point or coordinate array [lon, lat]
   let ptCoords = null;
@@ -1590,53 +1705,139 @@ async function computeScoresFromNearest(nearest, opts = {}) {
     else if (pt.geometry && Array.isArray(pt.geometry.coordinates)) ptCoords = pt.geometry.coordinates;
   }
 
-  for (const key of Object.keys(MAX_DIST_KM)) {
+  const keys = Object.keys(MAX_DIST_KM);
+  const candidatesByKey = {};
+
+  for (const key of keys) {
     const crowKm = nearest[key];
     walkingKm[key] = isFinite(crowKm) ? crowKm : Infinity;
     bikingKm[key] = isFinite(crowKm) ? crowKm : Infinity;
     usedCoords[key] = nearestCoords[key] || null;
     usedPois[key] = nearestPois[key] || null;
-
-    const topCandidates = (candidates[key] || [])
+    estimated[key] = false;
+    estimatedBike[key] = false;
+    candidatesByKey[key] = (candidates[key] || [])
+      .filter((candidate) => Array.isArray(candidate?.coords) && candidate.coords.length >= 2)
       .slice()
       .sort((a, b) => a.dist - b.dist)
       .slice(0, ROUTE_CANDIDATES[key] || 3);
+  }
 
-    if (useRouting && topCandidates.length > 0 && ptCoords) {
-      const walkResults = await Promise.all(
-        topCandidates.map(c =>
-          getRouteDistance(ptCoords[0], ptCoords[1], c.coords[0], c.coords[1], 'walking')
-            .catch(() => null)
-        )
-      );
-      for (let i = 0; i < walkResults.length; i++) {
-        const d = walkResults[i];
-        if (typeof d === 'number' && d < walkingKm[key]) {
-          walkingKm[key] = d;
-          usedCoords[key] = topCandidates[i].coords;
-          usedPois[key] = { name: topCandidates[i].name || null, category: key };
-        }
+  if (useRouting && ptCoords) {
+    const destinations = [];
+    for (const key of keys) {
+      for (const candidate of candidatesByKey[key]) {
+        destinations.push({ coords: candidate.coords });
       }
+    }
 
-      const bikeResults = await Promise.all(
-        topCandidates.map(c =>
-          getRouteDistance(ptCoords[0], ptCoords[1], c.coords[0], c.coords[1], 'cycling')
-            .catch(() => null)
-        )
+    const walkRoutes = await getRouteDistancesBatch(
+      ptCoords[0],
+      ptCoords[1],
+      destinations,
+      'walking'
+    ).catch(() => new Map());
+
+    // If the walking table failed entirely, try the nearest candidate per
+    // category individually before falling back to straight-line distances.
+    if (walkRoutes.size === 0) {
+      const fallback = await Promise.all(
+        keys
+          .map((key) => {
+            const candidate = candidatesByKey[key][0];
+            return candidate ? { key, candidate } : null;
+          })
+          .filter(Boolean)
+          .map(async ({ candidate }) => {
+            const walkKm = await getRouteDistance(
+              ptCoords[0],
+              ptCoords[1],
+              candidate.coords[0],
+              candidate.coords[1],
+              'walking',
+              2000
+            ).catch(() => null);
+            return { candidate, walkKm };
+          })
       );
-      for (let i = 0; i < bikeResults.length; i++) {
-        const d = bikeResults[i];
-        if (typeof d === 'number' && d < bikingKm[key]) {
-          bikingKm[key] = d;
-          // prefer walking candidate for UI coords, but fall back to biking
-          if (!usedCoords[key]) {
-            usedCoords[key] = topCandidates[i].coords;
-            usedPois[key] = { name: topCandidates[i].name || null, category: key };
-          }
+      for (const item of fallback) {
+        if (typeof item.walkKm === 'number') {
+          walkRoutes.set(coordKey(item.candidate.coords), item.walkKm);
         }
       }
     }
 
+    const chosenByKey = {};
+    for (const key of keys) {
+      const top = candidatesByKey[key];
+      let bestWalk = Infinity;
+      let bestWalkIdx = -1;
+      for (let i = 0; i < top.length; i++) {
+        const walkKm = walkRoutes.get(coordKey(top[i].coords));
+        if (typeof walkKm === 'number' && walkKm < bestWalk) {
+          bestWalk = walkKm;
+          bestWalkIdx = i;
+        }
+      }
+
+      if (bestWalkIdx >= 0) {
+        walkingKm[key] = bestWalk;
+        usedCoords[key] = top[bestWalkIdx].coords;
+        usedPois[key] = {
+          name: top[bestWalkIdx].name || nearestPois[key]?.name || null,
+          category: key,
+        };
+        chosenByKey[key] = top[bestWalkIdx];
+      } else if (isFinite(nearest[key])) {
+        walkingKm[key] = nearest[key];
+        estimated[key] = true;
+        chosenByKey[key] = top[0] || null;
+      }
+    }
+
+    // Bike routes are requested individually for the chosen amenity per
+    // category. The bike table is much slower than the route endpoint.
+    const bikeJobs = keys
+      .map((key) => (chosenByKey[key] ? { key, candidate: chosenByKey[key] } : null))
+      .filter(Boolean);
+    const bikeResults = await Promise.all(
+      bikeJobs.map(async ({ key, candidate }) => {
+        const bikeKm = await getRouteDistance(
+          ptCoords[0],
+          ptCoords[1],
+          candidate.coords[0],
+          candidate.coords[1],
+          'cycling',
+          3000
+        ).catch(() => null);
+        return { key, bikeKm };
+      })
+    );
+    const bikeByKey = new Map(bikeResults.map((item) => [item.key, item.bikeKm]));
+    for (const key of keys) {
+      if (!isFinite(nearest[key])) continue;
+      const bikeKm = bikeByKey.get(key);
+      if (typeof bikeKm === 'number') {
+        bikingKm[key] = bikeKm;
+        // If the foot profile failed, use the real bike route as the walking
+        // estimate; it is far better than a straight line.
+        if (estimated[key]) {
+          walkingKm[key] = bikeKm;
+        }
+      } else if (estimated[key]) {
+        walkingKm[key] = nearest[key] * ROUTE_DETOUR_FACTOR;
+      }
+
+      if (typeof bikeKm !== 'number') {
+        bikingKm[key] = isFinite(walkingKm[key])
+          ? walkingKm[key]
+          : nearest[key] * ROUTE_DETOUR_FACTOR;
+        estimatedBike[key] = true;
+      }
+    }
+  }
+
+  for (const key of keys) {
     walking[key] = distToScore(walkingKm[key], SCORE_MAX_KM[key]);
     biking[key] = distToScore(bikingKm[key], SCORE_MAX_KM[key]);
 
@@ -1646,7 +1847,7 @@ async function computeScoresFromNearest(nearest, opts = {}) {
     combined[key] = Math.round(comb);
   }
 
-  return { scores: combined, walking, biking, walkingKm, bikingKm, usedCoords, usedPois };
+  return { scores: combined, walking, biking, walkingKm, bikingKm, usedCoords, usedPois, estimated, estimatedBike };
 }
 
 // Combine trail (80%) and park (20%) scores into the nature dimension
@@ -1717,9 +1918,23 @@ export async function getScoredZoneFeatures(cityKey = 'littleton') {
             const scores = normalizeDimensionScores(scoring.scores);
             const centerCoords = center.geometry?.coordinates;
             if (centerCoords) {
-              scores.bikeInfra = await computeBikeInfraScore(centerCoords[1], centerCoords[0], cityKey);
-              scores.crime = await computeCrimeScore(centerCoords[1], centerCoords[0], cityKey);
-              scores.schools = await computeSchoolScore(centerCoords[1], centerCoords[0], cityKey);
+              const fallbackCrime = await computeCrimeScore(
+                centerCoords[1],
+                centerCoords[0],
+                cityKey,
+                { preferFallback: true }
+              ).catch(() => 50);
+              scores.bikeInfra = await withTimeout(
+                computeBikeInfraScore(centerCoords[1], centerCoords[0], cityKey),
+                1500,
+                0
+              );
+              scores.crime = await withTimeout(
+                computeCrimeScore(centerCoords[1], centerCoords[0], cityKey),
+                1500,
+                fallbackCrime
+              );
+              scores.schools = await computeSchoolScore(centerCoords[1], centerCoords[0], cityKey).catch(() => 50);
             }
             return buildScoredFeature(feature, scores);
           } catch (_err) {
@@ -1758,18 +1973,93 @@ async function findNeighborhoodScores(lat, lng, cityKey) {
   return null;
 }
 
+function withTimeout(promise, ms, fallback) {
+  let timer = null;
+  return Promise.race([
+    promise.catch(() => fallback),
+    new Promise((resolve) => {
+      timer = setTimeout(() => resolve(fallback), ms);
+    }),
+  ]).finally(() => {
+    if (timer) clearTimeout(timer);
+  });
+}
+
+function getCachedNeighborhoodScores(lat, lng, cityKey) {
+  const cityStore = getCityDataContainer(cityKey);
+  const zones = cityStore?.scoredZones?.features;
+  if (!Array.isArray(zones) || zones.length === 0) return null;
+  const pt = turfPoint([lng, lat]);
+  for (const zone of zones) {
+    if (!zone?.geometry) continue;
+    try {
+      if (booleanPointInPolygon(pt, zone)) {
+        return zone.properties?.overlayScores || null;
+      }
+    } catch (_err) {
+      // skip malformed polygon
+    }
+  }
+  return null;
+}
+
+async function fetchReverseAddress(lat, lng) {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 2500);
+    const rev = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&limit=1`,
+      { headers: { 'User-Agent': 'LivableIndex/1.0' }, signal: controller.signal }
+    );
+    clearTimeout(timer);
+    if (!rev.ok) return null;
+    const revData = await rev.json();
+    if (revData?.display_name) {
+      const parts = revData.display_name.split(', ');
+      return parts.slice(0, Math.min(3, parts.length)).join(', ');
+    }
+  } catch (_err) {
+    // reverse geocode failed; the neighborhood name is used instead
+  }
+  return null;
+}
+
 export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const cityKey = opts.cityKey || 'littleton';
+  const addressPromise = fetchReverseAddress(lat, lng);
   const poiPoints = await getCityPoiPoints(cityKey).catch(() => []);
   const pt = turfPoint([lng, lat]);
   const { nearest, nearestCoords, nearestPois, candidates } = nearestAndCounts(poiPoints, pt, cityKey);
-  const scoring = await computeScoresFromNearest(nearest, {
-    nearestCoords,
-    nearestPois,
-    pt,
-    useRouting: true,
-    candidates,
-  });
+  const estimatedDistances = {};
+  const estimatedBikeDistances = {};
+  let scoring = await withTimeout(
+    computeScoresFromNearest(nearest, {
+      nearestCoords,
+      nearestPois,
+      pt,
+      useRouting: true,
+      candidates,
+    }),
+    3500,
+    null
+  );
+  if (!scoring) {
+    // Routing took too long; return the straight-line score and label it.
+    scoring = await computeScoresFromNearest(nearest, {
+      nearestCoords,
+      nearestPois,
+      pt,
+      useRouting: false,
+      candidates,
+    });
+    for (const key of Object.keys(scoring.walkingKm)) {
+      if (isFinite(scoring.walkingKm[key])) estimatedDistances[key] = true;
+      if (isFinite(scoring.bikingKm[key])) estimatedBikeDistances[key] = true;
+    }
+  } else {
+    Object.assign(estimatedDistances, scoring.estimated || {});
+    Object.assign(estimatedBikeDistances, scoring.estimatedBike || {});
+  }
   const rawScores = scoring.scores;
   const scores = normalizeDimensionScores(rawScores);
   if (isBundledCity(cityKey)) {
@@ -1779,6 +2069,19 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     scores.bikeInfra = neighborhoodScores?.bikeInfra ?? 0;
     scores.crime = neighborhoodScores?.crime ?? 50;
     scores.schools = neighborhoodScores?.schools ?? 50;
+  } else if (CITIES[cityKey]?.bundledPois) {
+    // Use the city-scale neighborhood context when it is already cached.
+    // Otherwise use fast local/fallback values; the overlay continues to
+    // compute the richer context in the background.
+    const cached = getCachedNeighborhoodScores(lat, lng, cityKey);
+    if (cached) {
+      scores.bikeInfra = cached.bikeInfra ?? 0;
+      scores.crime = cached.crime ?? 50;
+    } else {
+      scores.bikeInfra = await withTimeout(computeBikeInfraScore(lat, lng, cityKey), 1200, 0);
+      scores.crime = await computeCrimeScore(lat, lng, cityKey, { preferFallback: true }).catch(() => 50);
+    }
+    scores.schools = await computeSchoolScore(lat, lng, cityKey).catch(() => 50);
   } else {
     scores.bikeInfra = await computeBikeInfraScore(lat, lng, cityKey).catch(() => 0);
     scores.crime = await computeCrimeScore(lat, lng, cityKey).catch(() => 50);
@@ -1800,12 +2103,15 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     const bikeKm = scoring.bikingKm[key];
     if (isFinite(walkKm) && isFinite(bikeKm)) {
       routing[key] = {
-        walk: Math.round(walkKm * WALK_MIN_PER_KM),
-        bike: Math.round(bikeKm * BIKE_MIN_PER_KM),
+        walk: walkKm * WALK_MIN_PER_KM,
+        bike: bikeKm * BIKE_MIN_PER_KM,
       };
     }
   }
-  routing.nature = routing.trail || routing.park || null;
+  const natureKey = (isFinite(scoring.walkingKm.trail) && (!isFinite(scoring.walkingKm.park) || scoring.walkingKm.trail <= scoring.walkingKm.park))
+    ? 'trail'
+    : 'park';
+  routing.nature = routing[natureKey] || routing.trail || routing.park || null;
 
   // Nearest amenity per category, used to drop small icons on the map around
   // the selected point.
@@ -1822,6 +2128,8 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
       distanceKm: typeof km === 'number' && isFinite(km) ? km : null,
       walkMin: routing[key]?.walk ?? null,
       bikeMin: routing[key]?.bike ?? null,
+      estimated: Boolean(estimatedDistances[key]),
+      estimatedBike: Boolean(estimatedBikeDistances[key]),
     };
   }).filter(Boolean);
 
@@ -1846,16 +2154,20 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
         lat: nearestSchool.lat,
         lng: nearestSchool.lng,
         distanceKm: nearestSchoolKm,
-        walkMin: Math.round(nearestSchoolKm * WALK_MIN_PER_KM),
-        bikeMin: Math.round(nearestSchoolKm * BIKE_MIN_PER_KM),
+        walkMin: nearestSchoolKm * WALK_MIN_PER_KM,
+        bikeMin: nearestSchoolKm * BIKE_MIN_PER_KM,
+        estimated: true,
+        estimatedBike: true,
       });
+      estimatedDistances.schools = true;
+      estimatedBikeDistances.schools = true;
       if (!isFinite(distances.schools)) {
         distances.schools = nearestSchoolKm;
       }
       if (!routing.schools) {
         routing.schools = {
-          walk: Math.round(nearestSchoolKm * WALK_MIN_PER_KM),
-          bike: Math.round(nearestSchoolKm * BIKE_MIN_PER_KM),
+          walk: nearestSchoolKm * WALK_MIN_PER_KM,
+          bike: nearestSchoolKm * BIKE_MIN_PER_KM,
         };
       }
     }
@@ -1885,24 +2197,7 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
   const composite = computeScore(scores, opts.weights);
   const neighborhood = matched ? matched.properties.name : null;
 
-  // Reverse geocode to get a readable address for the clicked point
-  let address = null;
-  try {
-    const rev = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&limit=1`,
-      { headers: { 'User-Agent': 'LivableIndex/1.0' } }
-    );
-    if (rev.ok) {
-      const revData = await rev.json();
-      if (revData && revData.display_name) {
-        const parts = revData.display_name.split(', ');
-        // Take the first 2-3 parts: e.g. "7330 S Broadway, Littleton"
-        address = parts.slice(0, Math.min(3, parts.length)).join(', ');
-      }
-    }
-  } catch (err) {
-    // reverse geocode failed – fall back to neighborhood name only
-  }
+  const address = await withTimeout(addressPromise, 900, null);
 
   return {
     name: address || neighborhood || 'Local area',
@@ -1914,6 +2209,8 @@ export async function computeScoreAtPoint(lat, lng, opts = {}) {
     distances,
     routing,
     places,
+    estimatedDistances,
+    estimatedBikeDistances,
     zoneId: matched ? matched.properties.id : null,
   };
 }
@@ -2194,8 +2491,22 @@ export async function getGridOverlayFeatures(cityKey = 'littleton', cellSideKm =
             const scores = normalizeDimensionScores(scoring.scores);
             const cc = center.geometry?.coordinates;
             if (cc) {
-              scores.bikeInfra = await computeBikeInfraScore(cc[1], cc[0], cityKey).catch(() => 0);
-              scores.crime = await computeCrimeScore(cc[1], cc[0], cityKey).catch(() => 50);
+              const fallbackCrime = await computeCrimeScore(
+                cc[1],
+                cc[0],
+                cityKey,
+                { preferFallback: true }
+              ).catch(() => 50);
+              scores.bikeInfra = await withTimeout(
+                computeBikeInfraScore(cc[1], cc[0], cityKey),
+                1500,
+                0
+              );
+              scores.crime = await withTimeout(
+                computeCrimeScore(cc[1], cc[0], cityKey),
+                1500,
+                fallbackCrime
+              );
               scores.schools = await computeSchoolScore(cc[1], cc[0], cityKey).catch(() => 50);
             }
             return buildScoredFeature(cell, scores);
