@@ -18,6 +18,11 @@
     "count": 78,
     "totalSqMi": 154.7
   },
+  "grid": {
+    "cellMeters": 250,
+    "cells": 6424,
+    "note": "Street-level detail cells, clipped to statistical neighborhoods."
+  },
   "pois": {
     "total": 11465,
     "byCategory": {

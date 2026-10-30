@@ -26,6 +26,7 @@ Outputs (all under data/denver/)
 * trails.json            simplified trail polylines
 * neighborhoods.json     the 78 statistical neighborhoods with precomputed
                          livability scores and business metrics
+* grid.json              250 m detail cells for street-level zoom views
 * metadata.json          provenance, release, and row counts
 
 Run with:
@@ -1262,6 +1263,7 @@ def build() -> None:
     }
 
     features = []
+    nbhd_scores = {}
     for nbhd_id, name, typology, sqmi, pt_lng, pt_lat, geom_json in nbhd_rows:
         nearest = nearest_rows.get(nbhd_id)
         if nearest is None:
@@ -1310,6 +1312,7 @@ def build() -> None:
             "crime": crime_score(pt_lng, pt_lat),
         }
         scores["nature"] = nature_score(scores["trail"], scores["park"])
+        nbhd_scores[nbhd_id] = scores
 
         composite = round(
             sum(scores[key] * weight for key, weight in WEIGHTS.items())
@@ -1370,7 +1373,142 @@ def build() -> None:
     )
 
     # ------------------------------------------------------------------
-    # 9. Write bundled POI arrays
+    # 9. Detail grid (street-level cells shown when the map is zoomed in)
+    # ------------------------------------------------------------------
+    log("building 250 m detail grid")
+    cell_m = 250.0
+    lon_step = cell_m / (111_320.0 * math.cos(math.radians(39.76)))
+    lat_step = cell_m / 110_574.0
+    west, south, east, north = -105.110, 39.614, -104.600, 39.915
+    nx = int(math.ceil((east - west) / lon_step))
+    ny = int(math.ceil((north - south) / lat_step))
+    cell_rows = []
+    cell_id = 0
+    for ix in range(nx):
+        lon = west + ix * lon_step
+        for iy in range(ny):
+            lat = south + iy * lat_step
+            wkt = (
+                f"POLYGON(({lon:.6f} {lat:.6f},{lon + lon_step:.6f} {lat:.6f},"
+                f"{lon + lon_step:.6f} {lat + lat_step:.6f},"
+                f"{lon:.6f} {lat + lat_step:.6f},{lon:.6f} {lat:.6f}))"
+            )
+            cell_rows.append((cell_id, wkt))
+            cell_id += 1
+    log(f"  {len(cell_rows):,} candidate cells")
+
+    con.execute("CREATE TEMP TABLE cell_raw(id INTEGER, wkt VARCHAR)")
+    con.executemany("INSERT INTO cell_raw VALUES (?, ?)", cell_rows)
+    con.execute(
+        """
+        CREATE TABLE cells AS
+        SELECT c.id,
+               n.NBHD_ID,
+               n.NBHD_NAME,
+               ST_Intersection(c.geom, n.geom) AS geom,
+               ST_Centroid(c.geom) AS pt,
+               ST_Transform(ST_Centroid(c.geom), 'OGC:CRS84', 'EPSG:26913') AS pt_m
+        FROM (SELECT id, ST_MakeValid(ST_GeomFromText(wkt)) AS geom FROM cell_raw) c
+        JOIN (SELECT NBHD_ID, NBHD_NAME, ST_MakeValid(geom) AS geom FROM nb) n
+          ON ST_Contains(n.geom, ST_Centroid(c.geom))
+        """
+    )
+    cell_count = con.execute("SELECT count(*) FROM cells").fetchone()[0]
+    log(f"  {cell_count:,} cells inside Denver")
+
+    con.execute(
+        """
+        CREATE TABLE cell_d AS
+        SELECT c.id,
+               (min(ST_Distance(c.pt_m, p.geom_m)) FILTER (WHERE p.category = 'coffee')) / 1000.0 AS coffee_km,
+               (min(ST_Distance(c.pt_m, p.geom_m)) FILTER (WHERE p.category = 'restaurant')) / 1000.0 AS restaurant_km,
+               (min(ST_Distance(c.pt_m, p.geom_m)) FILTER (WHERE p.category = 'grocery')) / 1000.0 AS grocery_km,
+               (min(ST_Distance(c.pt_m, p.geom_m)) FILTER (WHERE p.category = 'parks')) / 1000.0 AS parks_km,
+               (min(ST_Distance(c.pt_m, p.geom_m)) FILTER (WHERE p.category = 'healthcare')) / 1000.0 AS healthcare_km,
+               (min(ST_Distance(c.pt_m, p.geom_m)) FILTER (WHERE p.category = 'schools')) / 1000.0 AS schools_km,
+               (min(ST_Distance(c.pt_m, p.geom_m)) FILTER (WHERE p.category = 'busStops')) / 1000.0 AS busStops_km
+        FROM cells c
+        JOIN points_m p ON ST_DWithin(c.pt_m, p.geom_m, 4500)
+        GROUP BY c.id
+        """
+    )
+    con.execute(
+        """
+        CREATE TABLE cell_t AS
+        SELECT c.id, min(ST_Distance(c.pt_m, t.geom_m)) / 1000.0 AS trail_km
+        FROM cells c
+        JOIN trails_m t ON ST_DWithin(c.pt_m, t.geom_m, 4500)
+        GROUP BY c.id
+        """
+    )
+    grid_rows = con.execute(
+        """
+        SELECT c.id, c.NBHD_ID, c.NBHD_NAME, ST_AsGeoJSON(c.geom),
+               d.coffee_km, d.restaurant_km, d.grocery_km, d.parks_km,
+               d.healthcare_km, d.schools_km, d.busStops_km, t.trail_km
+        FROM cells c
+        LEFT JOIN cell_d d ON d.id = c.id
+        LEFT JOIN cell_t t ON t.id = c.id
+        ORDER BY c.id
+        """
+    ).fetchall()
+
+    grid_features = []
+    for (
+        cid,
+        nb_id,
+        nb_name,
+        geom_json,
+        coffee_km,
+        restaurant_km,
+        grocery_km,
+        parks_km,
+        healthcare_km,
+        schools_km,
+        busStops_km,
+        trail_km,
+    ) in grid_rows:
+        parent = nbhd_scores.get(nb_id, {})
+        cell_scores = {
+            "coffee": dist_to_score(coffee_km),
+            "restaurant": dist_to_score(restaurant_km),
+            "grocery": dist_to_score(grocery_km),
+            "trail": dist_to_score(trail_km),
+            "park": dist_to_score(parks_km),
+            "busStop": dist_to_score(busStops_km),
+            "healthcare": dist_to_score(healthcare_km, MAX_DIST_KM["healthcare"]),
+            "schools": school_score(schools_km),
+            "bikeInfra": parent.get("bikeInfra", 0),
+            "crime": parent.get("crime", 50),
+        }
+        cell_scores["nature"] = nature_score(cell_scores["trail"], cell_scores["park"])
+        grid_features.append(
+            {
+                "type": "Feature",
+                "properties": {
+                    "id": f"denver-cell-{cid}",
+                    "name": nb_name,
+                    "NBHD_ID": nb_id,
+                    "cell": cid,
+                    "overlayScores": cell_scores,
+                    "composite": round(
+                        sum(cell_scores[key] * weight for key, weight in WEIGHTS.items())
+                    ),
+                },
+                "geometry": json.loads(geom_json),
+            }
+        )
+    (OUT_DIR / "grid.json").write_text(
+        json.dumps(
+            {"type": "FeatureCollection", "features": grid_features},
+            separators=(",", ":"),
+        ),
+        encoding="utf-8",
+    )
+    log(f"  wrote {len(grid_features):,} detail cells")
+
+    # ------------------------------------------------------------------
+    # 10. Write bundled POI arrays
     # ------------------------------------------------------------------
     log("writing POI arrays")
     poi_output = {}
@@ -1425,6 +1563,11 @@ def build() -> None:
             "source": "City and County of Denver Statistical Neighborhood",
             "count": nbhd_count,
             "totalSqMi": round(total_sqmi, 1),
+        },
+        "grid": {
+            "cellMeters": 250,
+            "cells": len(grid_features),
+            "note": "Street-level detail cells, clipped to statistical neighborhoods.",
         },
         "pois": {
             "total": point_total,
