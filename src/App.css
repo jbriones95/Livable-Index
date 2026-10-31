@@ -677,35 +677,65 @@ body {
 }
 
 @media (max-width: 700px) {
-  .app-header { flex-direction: column; align-items: stretch; gap: 8px; }
-  .header-right { justify-content: flex-end; flex-wrap: wrap; }
-  .overlay-select { width: 100%; justify-content: space-between; }
-  .overlay-select select { min-width: 0; width: 100%; }
-  .basemap-switch { width: 100%; justify-content: space-between; }
-  .basemap-switch button { flex: 1; }
-  .map-hint { display: none; }
-  .address-search { width: 100%; justify-content: flex-end; }
+  .app-header { flex-direction: column; align-items: stretch; gap: 6px; padding: 8px 10px; }
+  /* Compact controls into a three-column grid so the map keeps room for the
+     score panel below it. */
+  .header-right {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+  }
+  .overlay-select {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1px;
+  }
+  .overlay-select span { font-size: 0.6rem; }
+  .overlay-select select { min-width: 0; width: 100%; padding: 6px 5px; font-size: 0.78rem; }
+  .basemap-switch { grid-column: 1 / -1; width: 100%; justify-content: space-between; }
+  .basemap-switch button { flex: 1; padding: 4px 6px; font-size: 0.66rem; }
+  .weights-toggle { grid-column: auto; align-self: stretch; }
+  .address-search { grid-column: span 2; width: 100%; justify-content: stretch; }
   .address-search input { width: 100%; min-width: 0; }
+  .map-hint { display: none; }
+  /* Stack the score panel under the map instead of covering it. */
+  .app-main { overflow: visible; }
+  .map-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .leaflet-container-map {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 120px;
+  }
   .score-panel {
-    position: fixed;
-    left: 8px;
-    right: 8px;
-    bottom: 12px;
+    /* Keep it in normal flow below the map, but anchor the close button. */
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
     top: auto;
     width: auto;
-    /* Use a dynamic unit to account for mobile browser chrome; leave space
-       so the keyboard or address bar don't push content off-screen. */
-    max-height: calc(100dvh - 120px);
-    border-radius: 12px 12px 8px 8px;
+    margin: 8px;
+    /* Keep the map visible above the panel: the panel takes at most 40% of
+       the viewport and scrolls internally when the breakdown is long. */
+    max-height: 40dvh;
+    border-radius: 12px;
     padding: 14px;
+    flex: 0 0 auto;
     animation: slideUp 0.22s ease-out;
   }
   .close-btn { top: 8px; right: 10px; }
+  .panel-header { padding-right: 26px; }
   .legend { display: none; }
 }
 
 @media (max-width: 420px) {
-  .score-panel { padding: 12px; max-height: calc(100dvh - 96px); }
+  .score-panel { padding: 12px; max-height: 40dvh; }
   .composite-score { min-width: 60px; }
   .score-number { font-size: 1.5rem; }
   .header-content h1 { font-size: 1.05rem; }

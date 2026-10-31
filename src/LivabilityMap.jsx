@@ -96,6 +96,16 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
     });
     leafletMap.current = map;
 
+    // Keep Leaflet in sync when the container changes size (for example when
+    // the score panel opens below the map on mobile).
+    let resizeObserver = null;
+    if (typeof ResizeObserver !== 'undefined' && mapRef.current) {
+      resizeObserver = new ResizeObserver(() => {
+        map.invalidateSize({ animate: false });
+      });
+      resizeObserver.observe(mapRef.current);
+    }
+
     // Keep the map chrome out of the way of the score panel: zoom and scale
     // live in the bottom-right corner and are styled by App.css.
     L.control.zoom({ position: 'bottomright' }).addTo(map);
@@ -194,6 +204,7 @@ export default function LivabilityMap({ cityKey = 'littleton', locate, overlayMe
 
     return () => {
       console.log('[LivabilityMap] cleanup: removing map');
+      if (resizeObserver) resizeObserver.disconnect();
       try { map.remove(); } catch (err) { console.error('Error removing map', err); }
       overlayLayerRef.current = null;
       gapLayerRef.current = null;
