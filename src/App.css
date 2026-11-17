@@ -2,7 +2,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Finlandica Variable', 'Finlandica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #0f1923;
   color: #e8edf2;
   /* Allow the page to scroll on mobile when the browser chrome changes size.
@@ -33,6 +33,7 @@ body {
 }
 
 .header-content h1 {
+  white-space: nowrap;
   font-size: 1.5rem;
   font-weight: 700;
   color: #5bc8f5;
@@ -67,7 +68,9 @@ body {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 /* Basemap style switch */
@@ -116,12 +119,16 @@ body {
 .overlay-select select {
   border: 1px solid #2a4a6a;
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 7px 8px;
   background: rgba(255,255,255,0.05);
   color: #e8f6ff;
-  font-size: 0.86rem;
-  min-width: 170px;
+  font-size: 0.82rem;
+  min-width: 150px;
 }
+
+#city-select { max-width: 140px; }
+#neighborhood-select { max-width: 170px; }
+#overlay-select { max-width: 200px; }
 
 .address-search {
   display: flex;
@@ -130,12 +137,12 @@ body {
 }
 
 .address-search input {
-  padding: 10px 12px; /* slightly larger touch target */
+  padding: 9px 10px; /* slightly larger touch target */
   border-radius: 8px;
   border: 1px solid #2a4a6a;
   background: rgba(255,255,255,0.03);
   color: #e8f6ff;
-  min-width: 220px;
+  min-width: 160px;
 }
 
 .address-search button {
@@ -663,7 +670,7 @@ body {
   border-radius: 10px;
   padding: 14px 16px;
   z-index: 900;
-  min-width: 190px;
+  min-width: 160px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.5);
 }
 
@@ -694,7 +701,8 @@ body {
     gap: 1px;
   }
   .overlay-select span { font-size: 0.6rem; }
-  .overlay-select select { min-width: 0; width: 100%; padding: 6px 5px; font-size: 0.78rem; }
+  .overlay-select select { min-width: 0; width: 100%; max-width: none; padding: 6px 5px; font-size: 0.78rem; }
+  #city-select, #neighborhood-select, #overlay-select { max-width: none; }
   .basemap-switch { grid-column: 1 / -1; width: 100%; justify-content: space-between; }
   .basemap-switch button { flex: 1; padding: 4px 6px; font-size: 0.66rem; }
   .weights-toggle { grid-column: auto; align-self: stretch; }
