@@ -7,6 +7,7 @@ import {
   WEIGHTS as DEFAULT_WEIGHTS,
 } from "./livabilityData";
 import { POI_META, poiIconSvg } from "./poiIcons";
+import closeIcon from '@phosphor-icons/core/assets/regular/x.svg?raw';
 
 function formatDist(km) {
   if (typeof km !== 'number' || !isFinite(km)) return '';
@@ -94,9 +95,12 @@ export default function ScorePanel({ zone, weights, onClose }) {
 
   return (
     <div className="score-panel">
-      <button className="close-btn" onClick={onClose} aria-label="Close">
-        ×
-      </button>
+      <button
+        className="close-btn"
+        onClick={onClose}
+        aria-label="Close"
+        dangerouslySetInnerHTML={{ __html: closeIcon }}
+      />
 
       <div className="panel-header">
         <div className="zone-name">

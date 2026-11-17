@@ -439,6 +439,7 @@ body {
   transition: color 0.15s, background 0.15s;
 }
 .close-btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
+.close-btn svg { width: 16px; height: 16px; display: block; }
 
 .panel-header {
   display: flex;
